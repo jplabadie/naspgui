@@ -1,0 +1,13 @@
+{"Remote Settings":
+[],
+  "curremconfig":"default",
+
+  "default":{
+    "configname":"default",
+    "username":"jlabadie",
+    "url":"aspen.tgen.org",
+    "port":22,"jobmgr":"PBS",
+    "remdirs":["/home/jlabadie"]
+  }
+
+}
