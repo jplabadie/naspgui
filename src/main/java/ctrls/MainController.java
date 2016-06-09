@@ -336,10 +336,10 @@ public class MainController implements Initializable{
      */
     private class RemoteTreeItem extends TreeItem<Path>{
 
-        public RemoteTreeItem(Path path){
+        RemoteTreeItem(Path path){
             super.setValue(path);
         }
-        public RemoteTreeItem(){}
+        RemoteTreeItem(){}
 
         // We cache whether the File is a leaf or not. A File is a leaf if
         // it is not a directory and does not have any files contained within

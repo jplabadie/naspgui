@@ -171,7 +171,6 @@ public class JobTabMainController implements Initializable {
     private JobRecord jobrec;
     private RemoteNetUtil rem_network;
 
-    private ResourceBundle resources;
     /**
      * This is the root Object which represents the Job XML
      */
@@ -187,7 +186,6 @@ public class JobTabMainController implements Initializable {
      */
     @Override
     public void initialize(final URL fxmlFileLocation, ResourceBundle resources) {
-        this.resources = resources;
 
         // The lists of all ListViews, CheckBoxes, and TitledPanes are created to add drag, and toggle functionality iteratively
         TextField[] textFieldArray = {inputFastaExternalGen, jobOutputDir};
