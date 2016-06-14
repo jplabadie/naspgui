@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<NaspInputData>
+    <Options>
+        <RunName>nasp_results3</RunName>
+        <OutputFolder>/home/jlabadie/nasp_results3</OutputFolder>
+        <Reference name="reference" path="/home/dlemmer/NASP/examples/example_1/reference.fasta">
+            <FindDups>True</FindDups>
+        </Reference>
+        <Filters>
+            <ProportionFilter>0.9</ProportionFilter>
+            <CoverageFilter>10</CoverageFilter>
+        </Filters>
+        <JobSubmitter>PBS</JobSubmitter>
+    </Options>
+    <Files>
+        <ReadFolder path="/home/dlemmer/NASP/examples/example_1">
+            <ReadPair sample="example_1_L001">
+                <Read1Filename>example_1_L001_R1_001.fastq.gz</Read1Filename>
+                <Read2Filename>example_1_L001_R2_001.fastq.gz</Read2Filename>
+            </ReadPair>
+        </ReadFolder>
+        <AssemblyFolder path="/home/dlemmer/NASP/examples/example_1">
+            <Assembly sample="example_1">example_1.fasta</Assembly>
+        </AssemblyFolder>
+    </Files>
+    <ExternalApplications>
+        <Index name="Index" path="/home/dlemmer/bin">
+            <AdditionalArguments/>
+            <JobParameters name="nasp_index">
+                <MemRequested>2</MemRequested>
+                <NumCPUs>1</NumCPUs>
+                <Walltime>4</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Index>
+        <MatrixGenerator name="MatrixGenerator" path="/home/dlemmer/NASP/nasp/nasptool_linux_64">
+            <AdditionalArguments/>
+            <JobParameters name="nasp_matrix">
+                <MemRequested>8</MemRequested>
+                <NumCPUs>8</NumCPUs>
+                <Walltime>48</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </MatrixGenerator>
+        <Picard name="Picard" path="/packages/tnorth/bin">
+            <AdditionalArguments/>
+        </Picard>
+        <Samtools name="Samtools" path="/packages/tnorth/bin/samtools">
+            <AdditionalArguments/>
+        </Samtools>
+        <DupFinder name="DupFinder" path="/packages/tnorth/bin/nucmer">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>4</MemRequested>
+                <NumCPUs>1</NumCPUs>
+                <Walltime>4</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </DupFinder>
+        <AssemblyImporter name="AssemblyImporter" path="/packages/tnorth/bin/delta-filter">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>4</MemRequested>
+                <NumCPUs>1</NumCPUs>
+                <Walltime>4</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </AssemblyImporter>
+        <Aligner name="BWA-mem" path="/packages/tnorth/bin/bwa">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Aligner>
+        <Aligner name="Bowtie2" path="/packages/tnorth/bin/bowtie2">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Aligner>
+        <Aligner name="Novoalign" path="/packages/tnorth/bin/novoalign">
+            <AdditionalArguments>-r all</AdditionalArguments>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Aligner>
+        <Aligner name="SNAP" path="/packages/tnorth/bin/snap">
+            <AdditionalArguments>-M</AdditionalArguments>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Aligner>
+        <SNPCaller name="GATK" path="/packages/tnorth/bin/GenomeAnalysisTK.jar">
+            <AdditionalArguments>-stand_call_conf 100 -stand_emit_conf 100 -ploidy 1</AdditionalArguments>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </SNPCaller>
+        <SNPCaller name="SolSNP" path="/packages/tnorth/bin/SolSNP.jar">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </SNPCaller>
+        <SNPCaller name="VarScan" path="/packages/tnorth/bin/VarScan.jar">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </SNPCaller>
+        <SNPCaller name="SAMtools" path="/packages/tnorth/bin/bcftools">
+            <AdditionalArguments/>
+            <JobParameters name="">
+                <MemRequested>10</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>36</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </SNPCaller>
+    </ExternalApplications>
+</NaspInputData>
