@@ -2,6 +2,7 @@ package ctrls;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import utils.*;
 import xmlbinds.NaspInputData;
@@ -20,6 +21,9 @@ public class JobController implements Initializable{
 
     @FXML
     public AnchorPane jobAnchorPane;
+    public TitledPane assemblyImporterPane;
+    public TitledPane requiredApplicationsPane;
+    public TitledPane dupFinderPane;
 
     private NaspInputData NASP_DATA;
     private RemoteNetUtil REM_NETWORK;
@@ -45,7 +49,7 @@ public class JobController implements Initializable{
      * Initialize the view to the Default Job setting (a pre-defined xml)
      */
     public void loadDefaultJob(){
-        initJobView(null);
+        loadJobView(null);
     }
 
     /**
@@ -54,10 +58,10 @@ public class JobController implements Initializable{
      */
     public void loadSavedJob(String path){
         File loadedJobXml = new File (path);
-        initJobView(loadedJobXml);
+        loadJobView(loadedJobXml);
     }
 
-    private void initJobView(File jobXML){
+    private void loadJobView(File jobXML){
         if( jobXML == null ) {
             /**
              * Create the form using a default job template
