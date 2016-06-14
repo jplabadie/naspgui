@@ -1,17 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="jobAnchorPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.JobController">
+<AnchorPane fx:id="jobAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.JobController">
     <children>
-        <ScrollPane>
-
-        </ScrollPane>
+        <ScrollPane prefHeight="390.0" prefWidth="592.0">
+         <content>
+            <Accordion prefHeight="383.0" prefWidth="586.0">
+              <panes>
+                <TitledPane animated="false" text="Options">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </TitledPane>
+                <TitledPane animated="false" text="Files">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </TitledPane>
+                  <TitledPane fx:id="requiredApplicationsPane" animated="false" text="Required Applications">
+                    <content>
+                        <ScrollPane prefViewportHeight="464.0" prefViewportWidth="564.0">
+                           <content>
+                              <Accordion layoutY="214.0" prefHeight="229.0" prefWidth="202.0">
+                                 <panes>
+                                    <TitledPane fx:id="assemblyImporterPane" animated="false" text="Assembly Importer">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="dupFinderPane" animated="false" text="DupFinder">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="samToolsPane" animated="false" text="Samtools">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                  <TitledPane fx:id="indexPane" animated="false" prefHeight="208.0" prefWidth="138.0" text="Index">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </TitledPane>
+                                    <TitledPane fx:id="matrixGeneratorPane" animated="false" text="Matrix Generator">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane fx:id="picardPane" animated="false" text="Picard">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                 </panes>
+                                 <padding>
+                                    <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Accordion>
+                           </content>
+                        </ScrollPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane fx:id="alignersPane" animated="false" text="Aligners">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </TitledPane>
+                  <TitledPane fx:id="snpCallersPane" animated="false" text="SNP Callers">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </TitledPane>
+              </panes>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Accordion>
+         </content></ScrollPane>
 
     </children>
 </AnchorPane>
-
