@@ -1,8 +1,10 @@
 package widgets;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * Project naspgui.
@@ -10,10 +12,23 @@ import static org.junit.Assert.*;
  *
  * @Author jlabadie
  */
-public class ApplicationGridPaneFactoryTest {
-    @Test
-    public void getNewGridPane() throws Exception {
 
+public class ApplicationGridPaneFactoryTest extends Application {
+    public static void main(String[] args) {
+        launch(args);
     }
 
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Hello World!");
+        ApplicationGridPaneFactory agpf = new ApplicationGridPaneFactory();
+
+        GridPane gp = agpf.getNewGridPane("GATK");
+
+        StackPane root = new StackPane();
+        root.getChildren().add(gp);
+        primaryStage.setScene(new Scene(root,400,300));
+        primaryStage.show();
+    }
 }
+
