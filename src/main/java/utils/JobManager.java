@@ -33,7 +33,7 @@ public class JobManager {
      */
     public void startNewRemoteJob(File nasp_xml, String usrname, String password, String url, Integer port, String remote_path){
 
-        log.info("JM: Remote Job Requested by "+ usrname +" at " +url+":"+port+" using "+remote_path);
+        log.info(null, null, "JM: Remote Job Requested by "+ usrname +" at " +url+":"+port+" using "+remote_path);
         JobRecord dc = new JobRecord(usrname,url, port,remote_path,remote_path );
         saveJobRecord(dc);
 
@@ -62,10 +62,10 @@ public class JobManager {
         try (FileWriter file = new FileWriter(path)) {
             file.write(obj.toJSONString());
 
-            log.info("JM: Job Dispatch Configuration logged to file: " + path);
+            log.info(null, null, "JM: Job Dispatch Configuration logged to file: " + path);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("JM: Failed to log Job Dispatch Configuration to file: " + path + "\nReason:\n" + e.getMessage());
+            log.error(null, null, "JM: Failed to log Job Dispatch Configuration to file: " + path + "\nReason:\n" + e.getMessage());
         }
     }
 }

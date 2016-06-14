@@ -18,7 +18,7 @@ public class JobSaveLoadManager {
     private static LogManager lm = LogManager.getInstance();
 
     private JobSaveLoadManager(){
-        lm.info("JSLM: JSLM Singleton Initialized");
+        lm.info(null, null, "JSLM: JSLM Singleton Initialized");
     }
 
     /**
@@ -32,10 +32,10 @@ public class JobSaveLoadManager {
             JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             NaspInputData naspData = ((NaspInputData) unmarshaller.unmarshal(xml_path));
-            lm.info("JSLM: Job XML loaded and converted to objects from: "+xml_path.getPath());
+            lm.info(null, null, "JSLM: Job XML loaded and converted to objects from: "+xml_path.getPath());
             return naspData;
         } catch (JAXBException e) {
-            lm.error("JSLM: Job XML failed to load from: " + xml_path.getPath() + "\nError occured:\n" + e.getMessage());
+            lm.error(null, null, "JSLM: Job XML failed to load from: " + xml_path.getPath() + "\nError occured:\n" + e.getMessage());
         }
         return null;
     }
@@ -60,13 +60,13 @@ public class JobSaveLoadManager {
             output_path = setFileTagsToXml(output_path);
             // Write to File
             m.marshal(input_for_conversion, new File(output_path));
-            lm.info("JSLM: Job XML converted from objects and saved to XML at: "+output_path);
+            lm.info(null, null, "JSLM: Job XML converted from objects and saved to XML at: "+output_path);
         } catch (JAXBException e) {
             String temp ="";
             for( StackTraceElement x : e.getStackTrace()){
                 temp+= "\t"+ x.toString()+"\n";
             }
-            lm.error("JSLM: Job objects failed to convert or save as XML to: " + output_path + "\nError occured:\n"
+            lm.error(null, null, "JSLM: Job objects failed to convert or save as XML to: " + output_path + "\nError occured:\n"
                     + temp);
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class JobSaveLoadManager {
             path = path.substring(0,dot);
             path += xmltag;
         }
-        lm.info("JSLM: .xml tag missing, was automatically added to Job XML save name: "+ path);
+        lm.info(null, null, "JSLM: .xml tag missing, was automatically added to Job XML save name: "+ path);
         return path;
     }
 

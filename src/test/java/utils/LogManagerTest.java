@@ -34,7 +34,7 @@ public class LogManagerTest {
 
     @Test
     public void testInfo() throws Exception {
-        lm.info("Testing Info");
+        lm.info(null, null, "Testing Info");
     }
 
     @Test

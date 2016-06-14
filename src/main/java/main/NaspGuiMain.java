@@ -22,10 +22,12 @@ public class NaspGuiMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("main/NASPGuiMainLayout.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("NASPGuiMainLayout.fxml"));
         primaryStage.setTitle("NASP GUI Beta");
         Scene scene = new Scene(root, 1024, 800);
-        scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());
+
+        // Loading in this method seems to fail here
+        //scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());
 
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {

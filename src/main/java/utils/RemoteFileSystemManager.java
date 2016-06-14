@@ -49,7 +49,7 @@ public class RemoteFileSystemManager {
             uri = new URI("ssh.unix://" + dsf.getUsername() + "@" + dsf.getHostname() + ":"
                     + dsf.getPort() + "/home/" + dsf.getUsername());
         } catch (URISyntaxException e) {
-            log.error("RFSM - Init Failed: Cannot Initialize - Bad URI: \n" + e.getMessage());
+            log.error(null, null, "RFSM - Init Failed: Cannot Initialize - Bad URI: \n" + e.getMessage());
             return;
         }
 
@@ -57,13 +57,13 @@ public class RemoteFileSystemManager {
         try {
             sshfs = FileSystems.newFileSystem(uri, environment);
         } catch (IOException e) {
-            log.warn("RFSM - Init Step Failed: Could Not Load Default Provider. \n" + e.getMessage());
-            log.info("RFSM - Init Step Recovery: Attempting to Load UNIX Provider.");
+            log.warn(null, null, "RFSM - Init Step Failed: Could Not Load Default Provider. \n" + e.getMessage());
+            log.info(null, null, "RFSM - Init Step Recovery: Attempting to Load UNIX Provider.");
 
             try {
                 FileSystems.getFileSystem(uri).close();
             } catch (IOException ioe) {
-                log.info("RFSM - Optional Init Recovery Step Failed: " +
+                log.info(null, null, "RFSM - Optional Init Recovery Step Failed: " +
                         "Cannot Close FileSystem - Never Initialized: \n" + ioe.getMessage());
             }
 
@@ -71,10 +71,10 @@ public class RemoteFileSystemManager {
             try {
                 UnixSshFileSystemProvider ussh = new UnixSshFileSystemProvider();
                 sshfs = FileSystems.newFileSystem(uri, environment, ussh.getClass().getClassLoader());
-                log.info("RFSM - Init Recovery Successful.");
+                log.info(null, null, "RFSM - Init Recovery Successful.");
 
             } catch (IOException ioe2) {
-                log.error("RFSM - Init Recovery Failed: Loading UNIX Provider Failed or Other Failure:" +
+                log.error(null, null, "RFSM - Init Recovery Failed: Loading UNIX Provider Failed or Other Failure:" +
                         " \n" + ioe2.getMessage());
 
             }
@@ -129,9 +129,9 @@ public class RemoteFileSystemManager {
         Path specific_path = sshfs.getPath(dir);
 
         if(specific_path != null)
-            log.info("RFSM: Remote path found: " + specific_path.toString());
+            log.info(null, null, "RFSM: Remote path found: " + specific_path.toString());
         else
-            log.error("RFSM: Remote path root unset");
+            log.error(null, null, "RFSM: Remote path root unset");
 
         return specific_path;
     }
@@ -169,7 +169,7 @@ public class RemoteFileSystemManager {
         try {
             sshfs.close();
         } catch (IOException e) {
-            log.info("FileSystemManager - Closing FileSystem Failed: \n" + e.getMessage());
+            log.info(null, null, "FileSystemManager - Closing FileSystem Failed: \n" + e.getMessage());
         }
     }
 }

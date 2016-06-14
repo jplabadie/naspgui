@@ -33,7 +33,7 @@ public class MainController implements Initializable{
     @FXML    private MenuItem newJobBtn;
     @FXML    private MenuItem loadJobBtn;
     @FXML    private MenuItem settingsBtn;
-    @FXML   private MenuItem menuItemLogin;
+    @FXML    private MenuItem menuItemLogin;
     @FXML    private MenuItem menuItemQuit;
     @FXML    private MenuItem activeJobsBtn;
     @FXML    private AnchorPane centerPane;
@@ -92,7 +92,7 @@ public class MainController implements Initializable{
             alert.setHeaderText("Login Failed");
             alert.setContentText("You are not logged in.");
             alert.showAndWait();
-            log.warn("MainController: Login Failed");
+            log.warn(null, null, "MainController: Login Failed");
         }
         ld.close();
     }
@@ -103,7 +103,7 @@ public class MainController implements Initializable{
     }
 
     private void gracefulQuit(){
-        log.info("Quiting: Application Closing By Request.");
+        log.info(null, null, "Quiting: Application Closing By Request.");
         rfsm.close();
         Platform.exit();
     }
@@ -239,7 +239,7 @@ public class MainController implements Initializable{
         {
             try {
                 String default_rem_dir = UserSettingsManager.getDefaultRemoteDirs();
-                log.info("RPBT: Init at root: " + default_rem_dir);
+                log.info(null, null, "RPBT: Init at root: " + default_rem_dir);
                 rti = new RemoteTreeItem(rfsm.getDirAsPath(default_rem_dir));
 
                 rti.buildChildren(rti);
@@ -396,7 +396,7 @@ public class MainController implements Initializable{
                     return children;
 
                 } catch (IOException e) {
-                    log.error("RTB: Error while building remote directory tree: " + e);
+                    log.error(null, null, "RTB: Error while building remote directory tree: " + e);
                 }
             }
             return FXCollections.emptyObservableList();

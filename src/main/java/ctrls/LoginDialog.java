@@ -10,7 +10,7 @@ import utils.*;
 /**
  * @author Jean-Paul Labadie
  */
-public class LoginDialog extends Dialog<Pair<String,String>>{
+class LoginDialog extends Dialog<Pair<String,String>>{
 
     private RemoteFileSystemManager rfsm = RemoteFileSystemManager.getInstance();
     private RemoteNetUtil nm = RemoteNetUtilFactoryMaker.getFactory().createRemoteNetUtil();
@@ -19,7 +19,7 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
     /**
      * Creates a custom JavaFX Dialog for capturing a login
      */
-    public LoginDialog(){
+    LoginDialog(){
 
         this.setTitle("Login");
         this.setHeaderText("NASP GUI Login");
@@ -72,7 +72,7 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
         this.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
-        Platform.runLater(() -> username.requestFocus());
+        Platform.runLater(username::requestFocus);
 
 
         /**
@@ -90,12 +90,12 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
                             host.getText(), Integer.valueOf(port.getText()));
                 }
                 catch(RuntimeException re){
-                    log.error("Login Failed - Unable to connect or authenticate: \n"+ re.getMessage());
+                    log.error(null, null, "Login Failed - Unable to connect or authenticate: \n"+ re.getMessage());
                     return null;
                 }
 
                 if(!rfsm.isConnected() || !nm.isInitialized()){
-                    log.error("Login Failed: RFSM and/or NM failed to initialize.");
+                    log.error(null, null, "Login Failed: RFSM and/or NM failed to initialize.");
                     return null;
                 }
                 return new Pair<>(username.getText(), password.getText());

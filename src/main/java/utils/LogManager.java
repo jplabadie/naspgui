@@ -21,7 +21,7 @@ import java.util.logging.SimpleFormatter;
 public class LogManager implements Logger{
 
     private static FileHandler fh;
-    private static Hashtable<Integer, String> name=new Hashtable<>();
+    private static Hashtable<Integer, String> name = new Hashtable<>();
 
     private static LogManager instance = null;
 
@@ -46,7 +46,7 @@ public class LogManager implements Logger{
             fh.setFormatter(formatter);
 
             // the following statement is used to log any messages
-            this.info("LM: Logger initialized.");
+            this.info(null, null, "LM: Logger initialized.");
 
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
@@ -74,39 +74,51 @@ public class LogManager implements Logger{
 
         LogRecord record = new LogRecord(Level.parse(name.get(level)),message);
         fh.publish(record);
-        System.err.print(name.get(new Integer(level))+": "); //echo the message to System.err
+        System.err.print( name.get( level )+": " ); //echo the message to System.err
         System.err.println(message);
     }
 
     /**
      * Wrapper for INFO logs
+     * @param sourceClass the class in which the log was called
+     * @param sourceMethod the method in the class in which the log was called
      * @param message log message for INFO events
      */
-    public void info(String message){
-        log(INFO,message);
+    public void info(String sourceClass, String sourceMethod, String message){
+
+        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
+        log(INFO,message + origin);
     }
 
     /**
      * Wrapper for WARN logs
+     * @param sourceClass the class in which the log was called
+     * @param sourceMethod the method in the class in which the log was called
      * @param message log message for WARN events
      */
-    public void warn(String message){
-        log(WARN,message);
+    public void warn(String sourceClass, String sourceMethod, String message){
+
+        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
+        log(WARN,message + origin);
     }
 
     /**
      * Wrapper for ERROR logs
+     * @param sourceClass the class in which the log was called
+     * @param sourceMethod the method in the class in which the log was called
      * @param message log messages for ERROR events
      */
-    public void error(String message){
-        log(ERROR,message);
+    public void error(String sourceClass, String sourceMethod, String message){
+
+        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
+        log(ERROR,message + origin);
     }
 
     /**
      *
      * @return the current time as a formatted string
      */
-    protected static String getTimestamp(){
+    static String getTimestamp(){
 
         Date date = new Date(System.currentTimeMillis());
         DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-HH_mm_ss");

@@ -213,8 +213,6 @@ public class JobTabMainController implements Initializable {
                 samtoolsPane
         };
 
-        //cbInputAdvNucmer;
-
         AbstractRemoteNetUtilFactory arnuf = RemoteNetUtilFactoryMaker.getFactory();
         rem_network = arnuf.createRemoteNetUtil();
 
@@ -422,16 +420,16 @@ public class JobTabMainController implements Initializable {
     }
 
     private boolean gracefulJobStart() {
-        LogManager.getInstance().info("JTMC: User Requesting Job Start.");
+        LogManager.getInstance().info(null, null, "JTMC: User Requesting Job Start.");
         File file = saveFormState();
         if (file != null) {
-            LogManager.getInstance().info("JTMC: Job Saved. Building Job Record.");
+            LogManager.getInstance().info(null, null, "JTMC: Job Saved. Building Job Record.");
             URI remote;
             try {
                 remote = new URI(NASP_DATA.getOptions().getOutputFolder());
 
             } catch (URISyntaxException e) {
-                LogManager.getInstance().error("JTMC: Job Start failed. Could not create remote path -"+
+                LogManager.getInstance().error(null, null, "JTMC: Job Start failed. Could not create remote path -"+
                 e.getMessage());
                 return false;
             }
@@ -447,24 +445,24 @@ public class JobTabMainController implements Initializable {
                 jm.saveJobRecord(jobrec);
             }
             catch (Exception e){
-                LogManager.getInstance().error("JTMC: Saving job record failed.");
+                LogManager.getInstance().error(null, null, "JTMC: Saving job record failed.");
             }
-                LogManager.getInstance().info("JTMC: Remote upload path set to: "+jobrec.getRemoteXmlPath());
-            LogManager.getInstance().info("JTMC: Local XML path set to: "+jobrec.getLocalXmlPath());
-            LogManager.getInstance().info("JTMC: Job Record Created. Starting job XML upload.");
+                LogManager.getInstance().info(null, null, "JTMC: Remote upload path set to: "+jobrec.getRemoteXmlPath());
+            LogManager.getInstance().info(null, null, "JTMC: Local XML path set to: "+jobrec.getLocalXmlPath());
+            LogManager.getInstance().info(null, null, "JTMC: Job Record Created. Starting job XML upload.");
             File temp = new File(jobrec.getLocalXmlPath());
             if(!temp.exists()){
-                LogManager.getInstance().error("JTMC: Job Start failed. Could not load local XML.");
+                LogManager.getInstance().error(null, null, "JTMC: Job Start failed. Could not load local XML.");
                 return false;
             }
-            LogManager.getInstance().info("JTMC: Starting Job XML upload.");
+            LogManager.getInstance().info(null, null, "JTMC: Starting Job XML upload.");
             rem_network.upload(temp, jobrec.getRemoteXmlPath());
-            LogManager.getInstance().info("JTMC: Job XML upload completed. Attempting to run NASP.");
+            LogManager.getInstance().info(null, null, "JTMC: Job XML upload completed. Attempting to run NASP.");
             String go = remote.getPath() +"/"+file.getName();
             rem_network.runNaspJob(go);
             return true; //should also return false if any checks fail
         }
-        LogManager.getInstance().warn("JTMC: Job Start failed - Job not saved locally.");
+        LogManager.getInstance().warn(null, null, "JTMC: Job Start failed - Job not saved locally.");
         return false; // could not save
     }
 
@@ -496,7 +494,7 @@ public class JobTabMainController implements Initializable {
                 return outfile;
             }
             catch (Exception e){
-                LogManager.getInstance().error("Failed to save NASP data to XML");
+                LogManager.getInstance().error(null, null, "Failed to save NASP data to XML");
             }
         }
 
@@ -842,7 +840,7 @@ public class JobTabMainController implements Initializable {
             inputRefFastaPath.setText(opts.getReference().getPath());
         }
         catch (NullPointerException e){
-            LogManager.getInstance().error("JTMC: Failed to load Options data");
+            LogManager.getInstance().error(null, null, "JTMC: Failed to load Options data");
         }
         // load Files from the saved XML and init Inputs Form
         try {
@@ -862,7 +860,7 @@ public class JobTabMainController implements Initializable {
             inputReadFiles.setItems(read);
         }
         catch (Exception e){
-            LogManager.getInstance().error("JTMC: Failed to load Files data");
+            LogManager.getInstance().error(null, null, "JTMC: Failed to load Files data");
         }
 
         // load Aligner

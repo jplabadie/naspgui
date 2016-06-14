@@ -46,7 +46,7 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             }
         }
         catch (NullPointerException e){
-            LogManager.getInstance().error("DTC: TreeCell Item: "+text+ ", was null: " +e);
+            LogManager.getInstance().error(null, null, "DTC: TreeCell Item: "+text+ ", was null: " +e);
 
             e.printStackTrace();
         }

@@ -76,10 +76,10 @@ public class UserSettingsManager {
     public static JSONObject getCurrentRemoteSettings(){
         if (!remote_settings.containsKey(CURREMCONFIG))
         {
-            log.error("Failed to set Current Remote: specified remote settings not found");
+            log.error(null, null, "Failed to set Current Remote: specified remote settings not found");
             return null;
         }
-        log.info("Current Remote Settings successfully returned.");
+        log.info(null, null, "Current Remote Settings successfully returned.");
         String current_remote_id = (String) remote_settings.get(CURREMCONFIG);
         return (JSONObject) remote_settings.get(current_remote_id);
     }
@@ -94,18 +94,18 @@ public class UserSettingsManager {
     public static void setCurrentRemote(String settings_name){
 
         if(settings_name == null) {
-            log.error("Failed to set Current Remote: given remote settings name was null");
+            log.error(null, null, "Failed to set Current Remote: given remote settings name was null");
             return;
         }
         else if (!remote_settings.containsKey(settings_name))
         {
-            log.error("Failed to set Current Remote: specified remote settings not found");
+            log.error(null, null, "Failed to set Current Remote: specified remote settings not found");
             return;
         }
 
         general_settings.put(CURREMCONFIG,settings_name);
         writeSettings(general_config_dir +"general_settings.json",general_settings);
-        log.info("Current Remote Settings successfully modified in runtime and local media: " + settings_name);
+        log.info(null, null, "Current Remote Settings successfully modified in runtime and local media: " + settings_name);
     }
 
     /**
@@ -136,7 +136,7 @@ public class UserSettingsManager {
 
         remote_settings.put(settings_name,json);
         writeSettings(remote_config_dir ,remote_settings);
-        log.info("Remote Settings successfully added to runtime and local media: " + settings_name);
+        log.info(null, null, "Remote Settings successfully added to runtime and local media: " + settings_name);
     }
 
     /**
@@ -147,7 +147,7 @@ public class UserSettingsManager {
     public static void removeRemoteSettings(String settings_name){
 
         if(settings_name == null){
-            log.error("Failed to remove Remote Settings: given path was null");
+            log.error(null, null, "Failed to remove Remote Settings: given path was null");
             return;
         }
 
@@ -156,12 +156,12 @@ public class UserSettingsManager {
             assert json != null;
         }
         catch (Exception e){
-            log.error("Failed to remove Remote Settings: given path was null");
+            log.error(null, null, "Failed to remove Remote Settings: given path was null");
             return;
         }
 
         writeSettings(remote_config_dir ,remote_settings);
-        log.info("Remote Settings successfully removed: " + settings_name);
+        log.info(null, null, "Remote Settings successfully removed: " + settings_name);
     }
 
     /**
@@ -171,16 +171,16 @@ public class UserSettingsManager {
     private static void writeSettings(String path, JSONObject json){
 
         if(path == null){
-            log.error("Failed to save Settings to local file: given path was null");
+            log.error(null, null, "Failed to save Settings to local file: given path was null");
             return;
         }
 
         try (FileWriter fw = new FileWriter(path)) {
             fw.write(json.toJSONString());
-            log.info("Settings successfully saved to local file: " + path);
+            log.info(null, null, "Settings successfully saved to local file: " + path);
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("Failed to save Settings to local file: " + path + "\nReason:\n" + e.getMessage());
+            log.error(null, null, "Failed to save Settings to local file: " + path + "\nReason:\n" + e.getMessage());
         }
     }
 
@@ -191,18 +191,18 @@ public class UserSettingsManager {
     private static JSONObject readSettings(String path){
 
         if(path == null){
-            log.error("USM: Failed to load Settings from local file: given path was null");
+            log.error(null, null, "USM: Failed to load Settings from local file: given path was null");
             return null;
         }
         JSONParser parser = new JSONParser();
 
         try {
             Object obj = parser.parse(new FileReader(path));
-            log.info("USM: Settings successfully loaded from local file: " + path);
+            log.info(null, null, "USM: Settings successfully loaded from local file: " + path);
             return (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();
-            log.error("USM: Failed to load Settings from local file: " + path + "\nReason:\n" + e.getMessage());
+            log.error(null, null, "USM: Failed to load Settings from local file: " + path + "\nReason:\n" + e.getMessage());
         }
         return null;
     }
