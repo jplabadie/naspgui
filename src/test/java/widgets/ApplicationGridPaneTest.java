@@ -2,7 +2,6 @@ package widgets;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -13,7 +12,7 @@ import javafx.stage.Stage;
  * @Author jlabadie
  */
 
-public class ApplicationGridPaneFactoryTest extends Application {
+public class ApplicationGridPaneTest extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -21,12 +20,10 @@ public class ApplicationGridPaneFactoryTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Hello World!");
-        ApplicationGridPaneFactory agpf = new ApplicationGridPaneFactory();
-
-        GridPane gp = agpf.getNewGridPane("GATK");
+        ApplicationGridPane agpf = new ApplicationGridPane("GATK", "/scratch/bin/gatk");
 
         StackPane root = new StackPane();
-        root.getChildren().add(gp);
+        root.getChildren().add(agpf);
         primaryStage.setScene(new Scene(root,400,300));
         primaryStage.show();
     }
