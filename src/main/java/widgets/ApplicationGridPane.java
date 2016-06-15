@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- * A GridPane wrapper which is preconfigured to represent optional application input fields.
+ * A GridPane wrapper which is pre-configured to represent optional application input fields.
  *
  * Also provides getters and setters for these important variables.
  *

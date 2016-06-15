@@ -19,7 +19,7 @@ public class ApplicationGridPaneTest extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Applications GridPane Test!");
         ApplicationGridPane agpf = new ApplicationGridPane("GATK", "/scratch/bin/gatk");
 
         StackPane root = new StackPane();
