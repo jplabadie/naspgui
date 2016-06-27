@@ -2,7 +2,8 @@ package widgets;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -21,8 +22,14 @@ public class ReadFolderGridPaneTest extends Application {
         primaryStage.setTitle( "ReadFolder GridPane Test!" );
         ReadFolderGridPane rfgp = new ReadFolderGridPane();
 
-        StackPane root = new StackPane();
-        root.getChildren().add( rfgp );
+        ScrollPane sp = new ScrollPane();
+        sp.setVbarPolicy( ScrollPane.ScrollBarPolicy.ALWAYS );
+        sp.setPrefSize( 500, 500 );
+        sp.setContent( rfgp );
+
+        VBox root = new VBox();
+
+        root.getChildren().add( sp );
         primaryStage.setScene( new Scene(root,400,300) );
         primaryStage.show();
     }

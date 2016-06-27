@@ -2,7 +2,7 @@ package widgets;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import xmlbinds.Aligner;
@@ -26,6 +26,7 @@ public class JobPaneIntegrationTest extends Application {
         primaryStage.setTitle( "JobTab Integration Test" );
 
         VBox vb = new VBox();
+        vb.setPrefSize( 620, 480);
 
         ApplicationGridPane ap = new ApplicationGridPane( "Test", "Testing" );
         OptionsGridPane op  = new OptionsGridPane();
@@ -38,9 +39,9 @@ public class JobPaneIntegrationTest extends Application {
 
         vb.getChildren().addAll( op, rf, ap );
 
-        StackPane root = new StackPane();
-        root.getChildren().add( vb );
-        primaryStage.setScene( new Scene( root,400,600 ) );
+        ScrollPane root = new ScrollPane();
+        root.setContent( vb );
+        primaryStage.setScene( new Scene( root, 800, 600 ) );
         primaryStage.show();
 
 
@@ -48,6 +49,4 @@ public class JobPaneIntegrationTest extends Application {
             System.out.println(t.getName());
         }
     }
-
-
 }
