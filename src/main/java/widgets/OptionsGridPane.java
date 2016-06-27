@@ -18,26 +18,26 @@ import javafx.scene.text.FontWeight;
  */
 public class OptionsGridPane extends GridPane {
 
-    private static Label CORE_SETTINGS = new Label("Core Settings");
-    private static Label RUN_NAME = new Label("Run Name");
-    private static Label OUTPUT_PATH = new Label("Remote Output Path");
-    private static Label REFERENCE = new Label( "Reference" );
-    private static Label REFERENCE_NAME = new Label("Reference Name");
-    private static Label REFERENCE_PATH = new Label("Reference Path");
-    private static Label FIND_DUPLICATES = new Label("Find Duplicates");
-    private static Label FILTERS = new Label( "Filters" );
-    private static Label PROPORTION_FILTER = new Label("Proportion Filter");
-    private static Label COVERAGE_FILTER = new Label("Coverage Filter");
-    private static Label JOB_SUBMITTER = new Label("Job Submitter");
+    private Label CORE_SETTINGS = new Label("Core Settings");
+    private Label RUN_NAME = new Label("Run Name");
+    private Label OUTPUT_PATH = new Label("Remote Output Path");
+    private Label REFERENCE = new Label( "Reference" );
+    private Label REFERENCE_NAME = new Label("Reference Name");
+    private Label REFERENCE_PATH = new Label("Reference Path");
+    private Label FIND_DUPLICATES = new Label("Find Duplicates");
+    private Label FILTERS = new Label( "Filters" );
+    private Label PROPORTION_FILTER = new Label("Proportion Filter");
+    private Label COVERAGE_FILTER = new Label("Coverage Filter");
+    private Label JOB_SUBMITTER = new Label("Job Submitter");
 
-    private static Tooltip RUN_NAME_TIP = new Tooltip("The name you would like to call this NASP job run");
-    private static Tooltip OUTPUT_PATH_TIP = new Tooltip("The remote path where you would like to save output from this run");
-    private static Tooltip REFERENCE_NAME_TIP = new Tooltip("The name you would like to give this reference");
-    private static Tooltip REFERENCE_PATH_TIP = new Tooltip("The remote path where this reference can be found");
-    private static Tooltip FIND_DUPLICATES_TIP = new Tooltip("Set to true if you do want duplicate regions to be recorded");
-    private static Tooltip PROPORTION_FILTER_TIP = new Tooltip("The setting for the proportion filter");
-    private static Tooltip COVERAGE_FILTER_TIP = new Tooltip("The setting for the coverage filter");
-    private static Tooltip JOB_SUBMITTER_TIP = new Tooltip("The Job manager/submitter you would like to use on this run");
+    private Tooltip RUN_NAME_TIP = new Tooltip("The name you would like to call this NASP job run");
+    private Tooltip OUTPUT_PATH_TIP = new Tooltip("The remote path where you would like to save output from this run");
+    private Tooltip REFERENCE_NAME_TIP = new Tooltip("The name you would like to give this reference");
+    private Tooltip REFERENCE_PATH_TIP = new Tooltip("The remote path where this reference can be found");
+    private Tooltip FIND_DUPLICATES_TIP = new Tooltip("Set to true if you do want duplicate regions to be recorded");
+    private Tooltip PROPORTION_FILTER_TIP = new Tooltip("The setting for the proportion filter");
+    private Tooltip COVERAGE_FILTER_TIP = new Tooltip("The setting for the coverage filter");
+    private Tooltip JOB_SUBMITTER_TIP = new Tooltip("The Job manager/submitter you would like to use on this run");
 
     private TextField run_name = new TextField();
     private TextField output_path = new TextField();
@@ -82,10 +82,10 @@ public class OptionsGridPane extends GridPane {
         this.setHgap( 4 );
         this.setVgap( 4 );
         //Define column behavior (min_size, preferred_size, max_size)
-        ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 150, 200 );
-        ColumnConstraints c3 = new ColumnConstraints( 25, 50, 150 );
+        ColumnConstraints c0 = new ColumnConstraints( 25, 60, 120 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 60, 120 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 60, 120 );
+        ColumnConstraints c3 = new ColumnConstraints( 25, 60, 120 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );
         c2.setHgrow( Priority.ALWAYS );
@@ -182,6 +182,4 @@ public class OptionsGridPane extends GridPane {
     void setJobSubmitterOptions(ObservableList<String> options){
         job_submitter.setItems(options);
     }
-
-
 }

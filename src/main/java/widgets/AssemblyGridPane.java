@@ -29,7 +29,6 @@ public class AssemblyGridPane extends GridPane {
 
     AssemblyGridPane(){
 
-
         SAMPLE_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         FILE_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
 
