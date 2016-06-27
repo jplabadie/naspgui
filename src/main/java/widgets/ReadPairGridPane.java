@@ -1,22 +1,27 @@
 package widgets;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.ReadPair;
+
+import java.util.ArrayList;
 
 /**
  * Project naspgui.
  * Created by jlabadie on 6/16/16.
  *
- * @Author jlabadie
+ * @author jlabadie
  */
-public class ReadPairGridPane extends GridPane {
+class ReadPairGridPane extends JobGridPane {
 
     private Label READ_PAIR = new Label( "Read Pair" );
     private Label SAMPLE_NAME = new Label( "Sample Name" );
@@ -30,6 +35,10 @@ public class ReadPairGridPane extends GridPane {
     private TextField sample_name = new TextField();
     private TextField read_file_a = new TextField();
     private TextField read_file_b = new TextField();
+
+    private ReadPair rp;
+
+    private ObservableList<TextField> elements;
 
     ReadPairGridPane( String name, String read_a, String read_b ){
         sample_name.setText( name );
@@ -82,6 +91,25 @@ public class ReadPairGridPane extends GridPane {
         this.add( read_file_a, 2, 2, 3, 1 );
         this.add( read_file_b, 2, 3, 3, 1 );
 
+        ArrayList<TextField> temp = new ArrayList<>();
+        elements = FXCollections.observableArrayList(temp);
+
+        elements.addAll(sample_name, read_file_a, read_file_b);
+
+        elements.addListener(new ListChangeListener<TextField>() {
+            @Override
+            public void onChanged(Change<? extends TextField> c) {
+                if(rp == null){
+                    rp = new ReadPair();
+                }
+                while( c.next() ){
+                    //Hacky, any change will save all fields to the xmlbind
+                    rp.setSample( sample_name.getText() );
+                    rp.setRead1Filename( read_file_a.getText() );
+                    rp.setRead2Filename( read_file_b.getText() );
+                }
+            }
+        });
     }
 
     String getSampleName(){
@@ -103,5 +131,23 @@ public class ReadPairGridPane extends GridPane {
     }
     void setReadFileB( String file ){
         read_file_b.setText( file );
+    }
+
+    @Override
+    void setTitle(String title) {
+
+    }
+
+    void clear() {
+        setReadFileA( "" );
+        setReadFileB( "" );
+        setSampleName( "" );
+    }
+
+    void setXMLBind( ReadPair readpair ){
+        rp = readpair;
+        sample_name.setText( readpair.getSample() );
+        read_file_a.setText( readpair.getRead1Filename() );
+        read_file_b.setText( readpair.getRead2Filename() );
     }
 }
