@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Range Selector</title>
+    <base href="/Users/jlabadie/Workspace/naspgui/src/main/java/webview/RangeSelectorView.html">
+    </base>
+
+</head>
+<body>
+
+HO
+<div id="check" style="width:600px; height:400px;"></div>
+<div id="check2" style="width:600px; height:400px;"></div>
+<script type="text/javascript">
+
+    document.write("<h1>Hello</h1>h1>");
+    g1 = new Dygraph(
+            document.getElementById("check"),
+            "croe_run.csv",
+            {
+                customBars: true,
+                title: 'Daily Temperatures in New York vs. San Francisco',
+                ylabel: 'Temperature (F)',
+                legend: 'always',
+                labelsDivStyles: { 'textAlign': 'right' },
+                showRangeSelector: true
+            }
+    );
+    g2 = new Dygraph(
+            document.getElementById("check2"),
+            "croe_run.csv",
+            {
+                rollPeriod: 14,
+                showRoller: true,
+                customBars: true,
+                title: 'Daily Temperatures in New York vs. San Francisco',
+                ylabel: 'Temperature (F)',
+                legend: 'always',
+                labelsDivStyles: { 'textAlign': 'right' },
+                showRangeSelector: true,
+                rangeSelectorHeight: 30,
+                rangeSelectorPlotStrokeColor: 'yellow',
+                rangeSelectorPlotFillColor: 'lightyellow'
+            });
+
+
+
+</script>
+</body>
+</html>
