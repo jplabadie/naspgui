@@ -40,13 +40,14 @@ public class DefaultVisualization extends Application {
         final WebEngine webEngine = browser.getEngine();
 
         RSView() throws MalformedURLException {
+            webEngine.setJavaScriptEnabled(true);
             //apply the styles
             //getStyleClass().add("browser");
             // load the web page
             //String x = getClass().getClassLoader().getResource("RangeSelectorView.html").toExternalForm();
            // webEngine.load(x);
 
-            webEngine.load("http://dygraphs.com/gallery/#g/annotations");
+            webEngine.load("http://d3js.org");
             //add the web view to the scene
             getChildren().add(browser);
 
