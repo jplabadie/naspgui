@@ -24,8 +24,8 @@ import java.util.ArrayList;
 class AssemblyGridPane extends JobGridPane {
 
     private Label ASSEMBLY = new Label( "Assembly" );
-    private Label ASSEMBLY_NAME = new Label( "Assembly Name" );
-    private Label ASSEMBLY_PATH = new Label( "Assembly Path" );
+    private Label ASSEMBLY_NAME = new Label( "Name" );
+    private Label ASSEMBLY_PATH = new Label( "Path" );
 
     private Tooltip ASSEMBLY_NAME_TIP = new Tooltip( "The name given to this assembly" );
     private Tooltip ASSEMBLY_PATH_TIP = new Tooltip( "The path (file name) of this assembly" );

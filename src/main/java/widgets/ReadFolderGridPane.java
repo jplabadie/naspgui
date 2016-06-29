@@ -157,6 +157,7 @@ class ReadFolderGridPane extends GridPane {
                 }
             }
         });
+        this.addReadPair();
     }
 
 
@@ -168,5 +169,9 @@ class ReadFolderGridPane extends GridPane {
     void addReadPair( ){
         ReadPairGridPane rp = new ReadPairGridPane();
         read_pairs_gridpanes.add( rp );
+    }
+
+    void clear(){
+        read_pairs_gridpanes.clear();
     }
 }

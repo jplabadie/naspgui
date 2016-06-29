@@ -157,8 +157,8 @@ class AssemblyFolderGridPane extends GridPane {
                 }
             }
         });
+        this.addAssembly();
     }
-
 
     void addAssembly(String sample_name, String sample_path ){
         AssemblyGridPane ap = new AssemblyGridPane( sample_name, sample_path );
@@ -168,5 +168,17 @@ class AssemblyFolderGridPane extends GridPane {
     void addAssembly( ){
         AssemblyGridPane ap = new AssemblyGridPane();
         assembly_gridpanes.add( ap );
+    }
+
+    void setFolderPath( String text ){
+        assembly_folder_path.setText( text );
+    }
+
+    String getFolderPath(){
+        return  assembly_folder_path.getText();
+    }
+
+    void clear(){
+        assembly_gridpanes.clear();
     }
 }

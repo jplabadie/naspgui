@@ -31,22 +31,17 @@ public class JobPaneIntegrationTest extends Application {
         ApplicationGridPane ap = new ApplicationGridPane( "Test", "Testing" );
         OptionsGridPane op  = new OptionsGridPane();
 
-        ReadFolderGridPane rf = new ReadFolderGridPane();
+        FilesGridPane fgp = new FilesGridPane();
 
-        rf.addReadPair();
-        rf.addReadPair();
-        rf.addReadPair();
-
-        vb.getChildren().addAll( op, rf, ap );
+        vb.getChildren().addAll( op, fgp, ap );
 
         ScrollPane root = new ScrollPane();
         root.setContent( vb );
         primaryStage.setScene( new Scene( root, 800, 600 ) );
         primaryStage.show();
 
-
-        for(Method t :Aligner.class.getDeclaredMethods()){
-            System.out.println(t.getName());
+        for( Method t : Aligner.class.getDeclaredMethods() ){
+            System.out.println( t.getName() );
         }
     }
 }
