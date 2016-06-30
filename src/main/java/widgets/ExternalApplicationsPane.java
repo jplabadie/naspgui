@@ -13,6 +13,8 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.ExternalApplications;
+import xmlbinds.ObjectFactory;
+import xmlbinds.SNPCaller;
 
 import java.util.ArrayList;
 
@@ -142,8 +144,11 @@ class ExternalApplicationsPane extends GridPane {
     void addApplication( ApplicationPane ap){
         apps.add( ap );
     }
-    private void addApplication() {
-        ApplicationPane app = new ApplicationPane("","");
-        apps.add( app );
+
+    void addApplication() {
+
+        ObjectFactory of = new ObjectFactory();
+        ApplicationPane<SNPCaller> app = new ApplicationPane<>(of.createSNPCallerType());
+        apps.add ( app );
     }
 }

@@ -43,8 +43,9 @@ import javax.xml.bind.annotation.XmlType;
     "additionalArguments",
     "jobParameters"
 })
+
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-04-27T09:28:09-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-public class SNPCaller extends Application{
+public class SNPCaller implements Application{
 
     @XmlElement(name = "AdditionalArguments", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-04-27T09:28:09-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
@@ -162,5 +163,4 @@ public class SNPCaller extends Application{
     public void setPath(String value) {
         this.path = value;
     }
-
 }

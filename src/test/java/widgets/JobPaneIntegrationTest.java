@@ -6,6 +6,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import xmlbinds.Aligner;
+import xmlbinds.NaspInputData;
+import xmlbinds.ObjectFactory;
 
 import java.lang.reflect.Method;
 
@@ -28,13 +30,15 @@ public class JobPaneIntegrationTest extends Application {
         VBox vb = new VBox();
         vb.setPrefSize( 620, 480);
 
+        ObjectFactory of = new ObjectFactory();
+        NaspInputData ni = of.createNaspInputDataType();
+
         OptionsPane op  = new OptionsPane();
 
         FilesPane fgp = new FilesPane();
 
-        ExternalApplicationsPane aps = new ExternalApplicationsPane();
-        ApplicationPane ap1 = new ApplicationPane("App1", "/home/ap1");
-        aps.addApplication(ap1);
+        ExternalApplicationsPane aps = new ExternalApplicationsPane(ni.getExternalApplications());
+        aps.addApplication( );
 
         vb.getChildren().addAll( op, fgp, aps );
 

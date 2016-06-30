@@ -6,5 +6,19 @@ package xmlbinds;
  *
  * @author jlabadie
  */
-public class Application {
+public interface Application {
+
+    JobParameters getJobParameters();
+    void setJobParameters( JobParameters params );
+
+    String getName();
+    void setName( String name );
+
+    String getPath();
+    void setPath( String path );
+
+    String getAdditionalArguments();
+    void setAdditionalArguments( String args );
+
+
 }

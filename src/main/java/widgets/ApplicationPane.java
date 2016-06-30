@@ -10,9 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import xmlbinds.*;
-
-import java.lang.reflect.Type;
+import xmlbinds.Application;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -53,15 +51,15 @@ class ApplicationPane<V extends Application> extends GridPane {
     private TextField wall_time_req = new TextField ();
     private TextField job_sub_args = new TextField ();
 
-    private Type app_type;
     private V application_bind;
 
     /**
      *
-     * @param type
      * @param binding
      */
-    ApplicationPane(){
+    ApplicationPane(V binding){
+
+        application_bind = binding;
 
         /**
          * Define the look and feel of static label elements
@@ -110,8 +108,8 @@ class ApplicationPane<V extends Application> extends GridPane {
         app_title.setAlignment( Pos.CENTER );
 
         // Set default values
-        app_title.setText( app_type.getTypeName() );
-        app_path.setText( "todo-path" );
+        app_title.setText( application_bind.getName() );
+        app_path.setText( application_bind.getPath() );
 
         // Add the title to row 0 column 0
         this.add( app_title, 0, 0, 3, 1 );
@@ -220,14 +218,6 @@ class ApplicationPane<V extends Application> extends GridPane {
     }
     void setJobSubmitterArgs(String text){
         job_sub_args.setText(text);
-    }
-
-    void setAppType( Type application_type ){
-        app_type = application_type;
-    }
-
-    Type getAppType(){
-        return  app_type;
     }
 
     void setAppBind( V application){

@@ -20,10 +20,8 @@ public class ApplicationGridPaneTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Applications GridPane Test!");
-        ApplicationPane agpf = new ApplicationPane("GATK", "/scratch/bin/gatk");
 
         StackPane root = new StackPane();
-        root.getChildren().add(agpf);
         primaryStage.setScene(new Scene(root,400,300));
         primaryStage.show();
     }

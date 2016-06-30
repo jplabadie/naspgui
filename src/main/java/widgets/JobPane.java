@@ -11,7 +11,7 @@ import javafx.scene.control.TabPane;
 public class JobPane extends TabPane {
     OptionsPane ogp = new OptionsPane();
     FilesPane fgp = new FilesPane();
-    ExternalApplicationsPane exp = new ExternalApplicationsPane();
+   // ExternalApplicationsPane exp = new ExternalApplicationsPane();
 
 
     JobPane(){
