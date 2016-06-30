@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ReadPairPane extends WidgetGridPane {
+class ReadPairPane extends WidgetPane {
 
     private Label READ_PAIR = new Label( "Read Pair" );
     private Label SAMPLE_NAME = new Label( "Sample Name" );

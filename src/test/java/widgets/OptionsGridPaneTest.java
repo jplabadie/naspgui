@@ -20,7 +20,7 @@ public class OptionsGridPaneTest extends Application {
     @Override
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "Options GridPane Test!" );
-        OptionsGridPane ogp = new OptionsGridPane();
+        OptionsPane ogp = new OptionsPane();
 
         StackPane root = new StackPane();
         root.getChildren().add( ogp );

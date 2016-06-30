@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.*;
 
 import java.lang.reflect.Type;
 
@@ -23,7 +24,7 @@ import java.lang.reflect.Type;
  *
  * @author jlabadie
  */
-class ApplicationPane<V> extends GridPane {
+class ApplicationPane<V extends Application> extends GridPane {
 
     private Label APPLICATION_PATH = new Label( "Application Path" );
     private Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
@@ -57,10 +58,10 @@ class ApplicationPane<V> extends GridPane {
 
     /**
      *
-     * @param application_title the title of the application
-     * @param default_path the path to the default version of the application (a remote path)
+     * @param type
+     * @param binding
      */
-    ApplicationPane(String application_title, String default_path ){
+    ApplicationPane(){
 
         /**
          * Define the look and feel of static label elements
@@ -109,8 +110,8 @@ class ApplicationPane<V> extends GridPane {
         app_title.setAlignment( Pos.CENTER );
 
         // Set default values
-        app_title.setText( application_title );
-        app_path.setText( default_path );
+        app_title.setText( app_type.getTypeName() );
+        app_path.setText( "todo-path" );
 
         // Add the title to row 0 column 0
         this.add( app_title, 0, 0, 3, 1 );

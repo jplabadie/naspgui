@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class AssemblyPane extends JobGridPane {
+class AssemblyPane extends WidgetPane {
 
     private Label ASSEMBLY = new Label( "Assembly" );
     private Label ASSEMBLY_NAME = new Label( "Name" );

@@ -20,7 +20,7 @@ public class ReadFolderGridPaneTest extends Application {
     @Override
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "ReadFolder GridPane Test!" );
-        ReadFolderGridPane rfgp = new ReadFolderGridPane();
+        ReadFolderPane rfgp = new ReadFolderPane();
 
         ScrollPane sp = new ScrollPane();
         sp.setVbarPolicy( ScrollPane.ScrollBarPolicy.ALWAYS );

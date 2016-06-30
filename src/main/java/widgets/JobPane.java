@@ -9,8 +9,11 @@ import javafx.scene.control.TabPane;
  * @Author jlabadie
  */
 public class JobPane extends TabPane {
-    OptionsGridPane ogp = new OptionsGridPane();
-    AssemblyFolderGridPane afgp = new AssemblyFolderGridPane();
+    OptionsPane ogp = new OptionsPane();
+    FilesPane fgp = new FilesPane();
+    ExternalApplicationsPane exp = new ExternalApplicationsPane();
+
+
     JobPane(){
 
 

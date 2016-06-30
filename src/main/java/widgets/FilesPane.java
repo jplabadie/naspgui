@@ -31,7 +31,7 @@ class FilesPane extends GridPane {
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/garbage-2.png" ) );
 
     private ObservableList<AssemblyFolderPane> assemblies;
-    private ObservableList<ReadFolderGridPane> reads;
+    private ObservableList<ReadFolderPane> reads;
 
     private VBox assbox = new VBox();
     private VBox readbox = new VBox();
@@ -45,7 +45,7 @@ class FilesPane extends GridPane {
         ArrayList<AssemblyFolderPane> asss =  new ArrayList<>();
         assemblies = FXCollections.observableList( asss );
 
-        ArrayList<ReadFolderGridPane> readfolders =  new ArrayList<>();
+        ArrayList<ReadFolderPane> readfolders =  new ArrayList<>();
         reads = FXCollections.observableList( readfolders );
         /**
          * Define the look and feel of static label elements
@@ -174,7 +174,7 @@ class FilesPane extends GridPane {
                             image_view2.setFitWidth( 20 );
                             remove_rf.setGraphic( image_view2 );
 
-                            ReadFolderGridPane temp_rf = new ReadFolderGridPane();
+                            ReadFolderPane temp_rf = new ReadFolderPane();
 
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( temp_rf, remove_rf, add_rf );
@@ -186,10 +186,10 @@ class FilesPane extends GridPane {
                                     event -> {
                                         if(reads.size() > 1) {
                                             reads.remove( gp );
-                                            F.getChildren().remove( hbox );
+                                            readbox.getChildren().remove( hbox );
                                         }
                                         else if( reads.size() == 1 ){
-                                            ReadFolderGridPane rf = reads.get( 0 );
+                                            ReadFolderPane rf = reads.get( 0 );
                                             rf.clear();
                                         }
                                     }
@@ -221,12 +221,12 @@ class FilesPane extends GridPane {
     }
 
     void addReadFolder(String path){
-        ReadFolderGridPane rf = new ReadFolderGridPane();
+        ReadFolderPane rf = new ReadFolderPane();
         reads.add( rf );
     }
 
     void addReadFolder(){
-        ReadFolderGridPane rf = new ReadFolderGridPane();
+        ReadFolderPane rf = new ReadFolderPane();
         reads.add( rf );
     }
 }

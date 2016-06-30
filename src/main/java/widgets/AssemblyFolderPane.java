@@ -183,7 +183,7 @@ class AssemblyFolderPane extends GridPane {
     }
 
     /**
-     * Accepts buttons from the parent Node (FilesGridPane)
+     * Accepts buttons from the parent Node (FilesPane)
      * These buttons are controlled  by the parent, but visually fit in the child's pane
      * @param add_assembly
      * @param remove_assembly

@@ -40,7 +40,7 @@ class ReadFolderPane extends GridPane {
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<ReadPairGridPane> read_pairs_gridpanes;
+    private ObservableList<ReadPairPane> read_pairs_gridpanes;
 
     private int grid_row_position = 2;
 
@@ -49,7 +49,7 @@ class ReadFolderPane extends GridPane {
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<ReadPairGridPane> read_pairings =  new ArrayList<>();
+        ArrayList<ReadPairPane> read_pairings =  new ArrayList<>();
         read_pairs_gridpanes = FXCollections.observableList( read_pairings );
 
         /**
@@ -140,7 +140,7 @@ class ReadFolderPane extends GridPane {
                                             RF.getChildren().remove(hbox);
                                         }
                                         else if( read_pairs_gridpanes.size() == 1){
-                                           ReadPairGridPane rp = read_pairs_gridpanes.get(0);
+                                           ReadPairPane rp = read_pairs_gridpanes.get(0);
                                             rp.clear();
                                         }
                                     }
@@ -162,12 +162,12 @@ class ReadFolderPane extends GridPane {
 
 
     void addReadPair( String sample_name, String read_a, String read_b ){
-        ReadPairGridPane rp = new ReadPairGridPane( sample_name, read_a, read_b );
+        ReadPairPane rp = new ReadPairPane( sample_name, read_a, read_b );
         read_pairs_gridpanes.add( rp );
     }
 
     void addReadPair( ){
-        ReadPairGridPane rp = new ReadPairGridPane();
+        ReadPairPane rp = new ReadPairPane();
         read_pairs_gridpanes.add( rp );
     }
 

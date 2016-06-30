@@ -20,7 +20,7 @@ public class ReadPairGridPaneTest extends Application {
     @Override
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "ReadPair GridPane Test!" );
-        ReadPairGridPane rpgp = new ReadPairGridPane();
+        ReadPairPane rpgp = new ReadPairPane();
 
         StackPane root = new StackPane();
         root.getChildren().add( rpgp );

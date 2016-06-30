@@ -28,12 +28,15 @@ public class JobPaneIntegrationTest extends Application {
         VBox vb = new VBox();
         vb.setPrefSize( 620, 480);
 
-        ApplicationGridPane ap = new ApplicationGridPane( "Test", "Testing" );
-        OptionsGridPane op  = new OptionsGridPane();
+        OptionsPane op  = new OptionsPane();
 
-        FilesGridPane fgp = new FilesGridPane();
+        FilesPane fgp = new FilesPane();
 
-        vb.getChildren().addAll( op, fgp, ap );
+        ExternalApplicationsPane aps = new ExternalApplicationsPane();
+        ApplicationPane ap1 = new ApplicationPane("App1", "/home/ap1");
+        aps.addApplication(ap1);
+
+        vb.getChildren().addAll( op, fgp, aps );
 
         ScrollPane root = new ScrollPane();
         root.setContent( vb );
