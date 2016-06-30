@@ -181,4 +181,17 @@ class AssemblyFolderGridPane extends GridPane {
     void clear(){
         assembly_gridpanes.clear();
     }
+
+    /**
+     * Accepts buttons from the parent Node (FilesGridPane)
+     * These buttons are controlled  by the parent, but visually fit in the child's pane
+     * @param add_assembly
+     * @param remove_assembly
+     */
+    public void setButtons( Button add_assembly, Button remove_assembly) {
+
+        HBox button_box = new HBox();
+        button_box.getChildren().addAll(add_assembly, remove_assembly);
+        this.add( button_box, 3, 0, 3, 1);
+    }
 }

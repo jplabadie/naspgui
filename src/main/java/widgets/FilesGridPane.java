@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -26,8 +27,8 @@ class FilesGridPane extends GridPane {
     private GridPane F = this;
     private Label FILES = new Label( "Files" );
 
-    private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
-    private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
+    private Image add = new Image( getClass().getResourceAsStream( "/icons/add-1.png" ) );
+    private Image remove = new Image( getClass().getResourceAsStream( "/icons/garbage-2.png" ) );
 
     private ObservableList<AssemblyFolderGridPane> assemblies;
     private ObservableList<ReadFolderGridPane> reads;
@@ -99,8 +100,10 @@ class FilesGridPane extends GridPane {
                         for ( GridPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_assembly = new Button();
-
                             Button add_assembly = new Button();
+                            add_assembly.setTooltip(new Tooltip( "Add a new assembly folder" ));
+                            remove_assembly.setTooltip(new Tooltip("Remove this assembly folder"));
+
                             ImageView image_view1 = new ImageView( add );
                             image_view1.setFitHeight( 20 );
                             image_view1.setFitWidth( 20 );
@@ -116,16 +119,18 @@ class FilesGridPane extends GridPane {
                             remove_assembly.setGraphic( image_view2 );
 
                             AssemblyFolderGridPane new_folder = new AssemblyFolderGridPane();
-                            HBox hbox = new HBox();
-                            hbox.getChildren().addAll( new_folder, remove_assembly, add_assembly );
-                            hbox.setAlignment( Pos.BOTTOM_CENTER );
-                            assbox.getChildren().add ( hbox );
+                            HBox assmblybox = new HBox();
+                            assmblybox.getChildren().addAll( new_folder );
+                            assmblybox.setAlignment(Pos.BOTTOM_CENTER);
+
+                            new_folder.setButtons( add_assembly, remove_assembly );
+                            assbox.getChildren().addAll( assmblybox );
 
                             remove_assembly.setOnAction(
                                     event -> {
                                         if(assemblies.size() > 1) {
                                             assemblies.remove( gp );
-                                            assbox.getChildren().remove( hbox );
+                                            assbox.getChildren().remove( assmblybox );
                                         }
                                         else if( assemblies.size() == 1 ){
                                             AssemblyFolderGridPane af = assemblies.get( 0 );
@@ -162,7 +167,7 @@ class FilesGridPane extends GridPane {
                             add_rf.setGraphic( image_view1 );
                             add_rf.setAlignment( Pos.BOTTOM_RIGHT );
 
-                            add_rf.setOnAction( event -> addAssemblyFolder() );
+                            add_rf.setOnAction( event -> addReadFolder() );
 
                             ImageView image_view2 = new ImageView( remove);
                             image_view2.setFitHeight( 20 );
@@ -170,9 +175,11 @@ class FilesGridPane extends GridPane {
                             remove_rf.setGraphic( image_view2 );
 
                             ReadFolderGridPane temp_rf = new ReadFolderGridPane();
+
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( temp_rf, remove_rf, add_rf );
                             hbox.setAlignment( Pos.BOTTOM_CENTER );
+                            temp_rf.setButtons( add_rf, remove_rf );
                             readbox.getChildren().add( hbox );
 
                             remove_rf.setOnAction(

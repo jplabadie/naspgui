@@ -11,6 +11,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.lang.reflect.Type;
+
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
  *
@@ -21,24 +23,24 @@ import javafx.scene.text.FontWeight;
  *
  * @author jlabadie
  */
-class ApplicationGridPane extends GridPane {
+class ApplicationGridPane<V> extends GridPane {
 
-    private static Label APPLICATION_PATH = new Label( "Application Path" );
-    private static Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
-    private static Label JOB_PARAMETERS = new Label( "Job Parameters" );
-    private static Label MEMORY_REQUESTED = new Label( "Memory Requested" );
-    private static Label CPUS_REQUESTED = new Label( "CPUs Requested" );
-    private static Label QUEUE_REQUESTED = new Label( "Queue Requested" );
-    private static Label WALL_TIME_REQUESTED = new Label( "Maximum Walltime" );
-    private static Label JOB_SUBMITTER_ARGS = new Label( "Job Submitter Arguments") ;
+    private Label APPLICATION_PATH = new Label( "Application Path" );
+    private Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
+    private Label JOB_PARAMETERS = new Label( "Job Parameters" );
+    private Label MEMORY_REQUESTED = new Label( "Memory Requested" );
+    private Label CPUS_REQUESTED = new Label( "CPUs Requested" );
+    private Label QUEUE_REQUESTED = new Label( "Queue Requested" );
+    private Label WALL_TIME_REQUESTED = new Label( "Maximum Walltime" );
+    private Label JOB_SUBMITTER_ARGS = new Label( "Job Submitter Arguments") ;
 
-    private static Tooltip APP_PATH_TIP = new Tooltip("A path to the application on the remote service");
-    private static Tooltip ADD_ARGS_TIP = new Tooltip("Additional arguments or options to pass to the app");
-    private static Tooltip JOB_PARAM_TIP = new Tooltip("Parameters to pass the Job manager when running this app");
-    private static Tooltip MEM_REQ_TIP = new Tooltip("The amount of memory, in Gigabytes of RAM, to allocate for the app");
-    private static Tooltip CPU_REQ_TIP = new Tooltip("The number of CPUs to allocate for the app");
-    private static Tooltip WALL_TIME_TIP = new Tooltip("The allocated maximum completion time for the app, in hours");
-    private static Tooltip JOB_SUB_ARGS = new Tooltip("Additional arguments or options to pass to the job submitter");
+    private Tooltip APP_PATH_TIP = new Tooltip("A path to the application on the remote service");
+    private Tooltip ADD_ARGS_TIP = new Tooltip("Additional arguments or options to pass to the app");
+    private Tooltip JOB_PARAM_TIP = new Tooltip("Parameters to pass the Job manager when running this app");
+    private Tooltip MEM_REQ_TIP = new Tooltip("The amount of memory, in Gigabytes of RAM, to allocate for the app");
+    private Tooltip CPU_REQ_TIP = new Tooltip("The number of CPUs to allocate for the app");
+    private Tooltip WALL_TIME_TIP = new Tooltip("The allocated maximum completion time for the app, in hours");
+    private Tooltip JOB_SUB_ARGS = new Tooltip("Additional arguments or options to pass to the job submitter");
 
     private Label app_title = new Label();
     private TextField app_path = new TextField();
@@ -49,6 +51,9 @@ class ApplicationGridPane extends GridPane {
     private TextField queue_req = new TextField ();
     private TextField wall_time_req = new TextField ();
     private TextField job_sub_args = new TextField ();
+
+    private Type app_type;
+    private V application_bind;
 
     /**
      *
@@ -164,7 +169,6 @@ class ApplicationGridPane extends GridPane {
         queue_req.setText(queue);
         wall_time_req.setText(time);
         job_sub_args.setText(job_args);
-
     }
 
     String getTitle(){
@@ -215,5 +219,21 @@ class ApplicationGridPane extends GridPane {
     }
     void setJobSubmitterArgs(String text){
         job_sub_args.setText(text);
+    }
+
+    void setAppType( Type application_type ){
+        app_type = application_type;
+    }
+
+    Type getAppType(){
+        return  app_type;
+    }
+
+    void setAppBind( V application){
+        application_bind = application;
+    }
+
+    V getAppBind(){
+        return application_bind;
     }
 }

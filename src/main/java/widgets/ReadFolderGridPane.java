@@ -174,4 +174,17 @@ class ReadFolderGridPane extends GridPane {
     void clear(){
         read_pairs_gridpanes.clear();
     }
+
+    /**
+     * Accepts buttons from the parent Node (FilesGridPane)
+     * These buttons are controlled  by the parent, but visually fit in the child's pane
+     * @param add_readfolder
+     * @param remove_readfolder
+     */
+    public void setButtons( Button add_readfolder, Button remove_readfolder ) {
+
+        HBox button_box = new HBox();
+        button_box.getChildren().addAll(add_readfolder, remove_readfolder);
+        this.add( button_box, 3, 0, 3, 1);
+    }
 }
