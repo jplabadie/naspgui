@@ -23,7 +23,7 @@ import java.lang.reflect.Type;
  *
  * @author jlabadie
  */
-class ApplicationGridPane<V> extends GridPane {
+class ApplicationPane<V> extends GridPane {
 
     private Label APPLICATION_PATH = new Label( "Application Path" );
     private Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
@@ -60,7 +60,7 @@ class ApplicationGridPane<V> extends GridPane {
      * @param application_title the title of the application
      * @param default_path the path to the default version of the application (a remote path)
      */
-    ApplicationGridPane( String application_title, String default_path ){
+    ApplicationPane(String application_title, String default_path ){
 
         /**
          * Define the look and feel of static label elements

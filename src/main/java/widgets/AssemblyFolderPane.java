@@ -26,46 +26,46 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ReadFolderGridPane extends GridPane {
+class AssemblyFolderPane extends GridPane {
 
-    private GridPane RF = this;
-    private Label READ_FOLDER = new Label( "Read Folder" );
-    private Label READ_FOLDER_PATH = new Label( "Folder Path" );
+    private GridPane AF = this;
+    private Label ASSEMBLY_FOLDER = new Label( "Assembly Folder" );
+    private Label ASSEMBLY_FOLDER_PATH = new Label( "Folder Path" );
 
-    private TextField read_folder_path = new TextField();
+    private TextField assembly_folder_path = new TextField();
 
-    private Tooltip READ_FOLDER_PATH_TIP
-            = new Tooltip( "The remote path containing the reads you are interested in" );
+    private Tooltip ASSEMBLY_FOLDER_PATH_TIP
+            = new Tooltip( "The remote path containing the assemblies you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<ReadPairGridPane> read_pairs_gridpanes;
+    private ObservableList<AssemblyPane> assembly_gridpanes;
 
     private int grid_row_position = 2;
 
 
-    ReadFolderGridPane(){
+    AssemblyFolderPane(){
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<ReadPairGridPane> read_pairings =  new ArrayList<>();
-        read_pairs_gridpanes = FXCollections.observableList( read_pairings );
+        ArrayList<AssemblyPane> ass_pairings =  new ArrayList<>();
+        assembly_gridpanes = FXCollections.observableList( ass_pairings );
 
         /**
          * Define the look and feel of static label elements
          */
-        READ_FOLDER.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
-        READ_FOLDER.setPrefSize( 100, 20 );
-        READ_FOLDER.setAlignment( Pos.CENTER );
-        READ_FOLDER.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        READ_FOLDER.setAlignment( Pos.CENTER );
-        READ_FOLDER_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        ASSEMBLY_FOLDER.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        ASSEMBLY_FOLDER.setPrefSize( 100, 20 );
+        ASSEMBLY_FOLDER.setAlignment( Pos.CENTER );
+        ASSEMBLY_FOLDER.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        ASSEMBLY_FOLDER.setAlignment( Pos.CENTER );
+        ASSEMBLY_FOLDER_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
          */
-        READ_FOLDER_PATH.setTooltip(READ_FOLDER_PATH_TIP);
+        ASSEMBLY_FOLDER_PATH.setTooltip(ASSEMBLY_FOLDER_PATH_TIP);
 
         /**
          * Define the look and behavior of the GridPane
@@ -91,11 +91,11 @@ class ReadFolderGridPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add( READ_FOLDER, 0, 0, 3, 1 );
+        this.add( ASSEMBLY_FOLDER, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( READ_FOLDER_PATH, 1, 1, 3, 1 );
-        this.add( read_folder_path, 3, 1, 4, 1 );
+        this.add( ASSEMBLY_FOLDER_PATH, 1, 1, 3, 1 );
+        this.add( assembly_folder_path, 3, 1, 4, 1 );
 
         // Add the button to the widget with an event handler
 
@@ -103,7 +103,7 @@ class ReadFolderGridPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        read_pairs_gridpanes.addListener( new ListChangeListener<GridPane>() {
+        assembly_gridpanes.addListener(new ListChangeListener<GridPane>() {
 
             @Override
             public void onChanged( Change<? extends GridPane> c ) {
@@ -111,80 +111,87 @@ class ReadFolderGridPane extends GridPane {
                     if ( c.wasAdded() ) {
                         for ( GridPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
-                            Button remove_readpair = new Button();
+                            Button remove_assembly = new Button();
 
-                            Button add_readpair = new Button();
+                            Button add_assembly = new Button();
                             ImageView image_view1 = new ImageView( add );
                             image_view1.setFitHeight( 20 );
                             image_view1.setFitWidth( 20 );
-                            remove_readpair.setGraphic( image_view1 );
-                            add_readpair.setGraphic( image_view1 );
-                            add_readpair.setAlignment( Pos.BOTTOM_RIGHT );
+                            remove_assembly.setGraphic( image_view1 );
+                            add_assembly.setGraphic( image_view1 );
+                            add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
 
-                            add_readpair.setOnAction( event -> addReadPair() );
+                            add_assembly.setOnAction( event -> addAssembly() );
 
                             ImageView image_view2 = new ImageView( remove);
                             image_view2.setFitHeight( 20 );
                             image_view2.setFitWidth( 20 );
-                            remove_readpair.setGraphic( image_view2 );
+                            remove_assembly.setGraphic( image_view2 );
 
                             HBox hbox = new HBox();
-                            hbox.getChildren().addAll( remove_readpair, add_readpair );
+                            hbox.getChildren().addAll( remove_assembly, add_assembly );
                             hbox.setAlignment( Pos.BOTTOM_CENTER );
-                            RF.add( hbox, 5, grid_row_position, 3, 1 );
+                            AF.add( hbox, 5, grid_row_position, 3, 1 );
 
-                            remove_readpair.setOnAction(
+                            remove_assembly.setOnAction(
                                     event -> {
-                                        if(read_pairs_gridpanes.size() > 1) {
-                                            read_pairs_gridpanes.remove(gp);
-                                            RF.getChildren().remove(hbox);
+                                        if(assembly_gridpanes.size() > 1) {
+                                            assembly_gridpanes.remove( gp );
+                                            AF.getChildren().remove( hbox );
                                         }
-                                        else if( read_pairs_gridpanes.size() == 1){
-                                           ReadPairGridPane rp = read_pairs_gridpanes.get(0);
-                                            rp.clear();
+                                        else if( assembly_gridpanes.size() == 1 ){
+                                            AssemblyPane ap = assembly_gridpanes.get( 0 );
+                                            ap.clear();
                                         }
                                     }
                             );
-                            RF.add( gp, 2, grid_row_position++, 3, 1 );
+                            AF.add( gp, 2, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {
                         for ( GridPane gp : c.getRemoved() ) {
-                            RF.getChildren().remove( gp );
+                            AF.getChildren().remove( gp );
                             grid_row_position--;
                         }
                     }
                 }
             }
         });
-        this.addReadPair();
+        this.addAssembly();
     }
 
-
-    void addReadPair( String sample_name, String read_a, String read_b ){
-        ReadPairGridPane rp = new ReadPairGridPane( sample_name, read_a, read_b );
-        read_pairs_gridpanes.add( rp );
+    void addAssembly(String sample_name, String sample_path ){
+        AssemblyPane ap = new AssemblyPane( sample_name, sample_path );
+        assembly_gridpanes.add( ap );
     }
 
-    void addReadPair( ){
-        ReadPairGridPane rp = new ReadPairGridPane();
-        read_pairs_gridpanes.add( rp );
+    void addAssembly( ){
+        AssemblyPane ap = new AssemblyPane();
+        assembly_gridpanes.add( ap );
+    }
+
+    void setFolderPath( String text ){
+        assembly_folder_path.setText( text );
+    }
+
+    String getFolderPath(){
+        return  assembly_folder_path.getText();
     }
 
     void clear(){
-        read_pairs_gridpanes.clear();
+        assembly_gridpanes.clear();
     }
 
     /**
      * Accepts buttons from the parent Node (FilesGridPane)
      * These buttons are controlled  by the parent, but visually fit in the child's pane
-     * @param add_readfolder
-     * @param remove_readfolder
+     * @param add_assembly
+     * @param remove_assembly
      */
-    public void setButtons( Button add_readfolder, Button remove_readfolder ) {
+    public void setButtons( Button add_assembly, Button remove_assembly) {
 
         HBox button_box = new HBox();
-        button_box.getChildren().addAll(add_readfolder, remove_readfolder);
+        button_box.getChildren().addAll(add_assembly, remove_assembly);
         this.add( button_box, 3, 0, 3, 1);
     }
 }

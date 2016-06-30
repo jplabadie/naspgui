@@ -22,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class FilesGridPane extends GridPane {
+class FilesPane extends GridPane {
 
     private GridPane F = this;
     private Label FILES = new Label( "Files" );
@@ -30,7 +30,7 @@ class FilesGridPane extends GridPane {
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-1.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/garbage-2.png" ) );
 
-    private ObservableList<AssemblyFolderGridPane> assemblies;
+    private ObservableList<AssemblyFolderPane> assemblies;
     private ObservableList<ReadFolderGridPane> reads;
 
     private VBox assbox = new VBox();
@@ -38,11 +38,11 @@ class FilesGridPane extends GridPane {
 
     private Files files = new Files();
 
-    FilesGridPane(){
+    FilesPane(){
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<AssemblyFolderGridPane> asss =  new ArrayList<>();
+        ArrayList<AssemblyFolderPane> asss =  new ArrayList<>();
         assemblies = FXCollections.observableList( asss );
 
         ArrayList<ReadFolderGridPane> readfolders =  new ArrayList<>();
@@ -118,7 +118,7 @@ class FilesGridPane extends GridPane {
                             image_view2.setFitWidth( 20 );
                             remove_assembly.setGraphic( image_view2 );
 
-                            AssemblyFolderGridPane new_folder = new AssemblyFolderGridPane();
+                            AssemblyFolderPane new_folder = new AssemblyFolderPane();
                             HBox assmblybox = new HBox();
                             assmblybox.getChildren().addAll( new_folder );
                             assmblybox.setAlignment(Pos.BOTTOM_CENTER);
@@ -133,7 +133,7 @@ class FilesGridPane extends GridPane {
                                             assbox.getChildren().remove( assmblybox );
                                         }
                                         else if( assemblies.size() == 1 ){
-                                            AssemblyFolderGridPane af = assemblies.get( 0 );
+                                            AssemblyFolderPane af = assemblies.get( 0 );
                                             af.clear();
                                         }
                                     }
@@ -210,13 +210,13 @@ class FilesGridPane extends GridPane {
     }
 
     void addAssemblyFolder(String path){
-        AssemblyFolderGridPane af = new AssemblyFolderGridPane();
+        AssemblyFolderPane af = new AssemblyFolderPane();
         af.setFolderPath( path );
         assemblies.add( af );
     }
 
     void addAssemblyFolder(){
-        AssemblyFolderGridPane af = new AssemblyFolderGridPane();
+        AssemblyFolderPane af = new AssemblyFolderPane();
         assemblies.add( af );
     }
 

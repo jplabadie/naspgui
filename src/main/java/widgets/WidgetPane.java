@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-public abstract class JobGridPane extends GridPane {
+public abstract class WidgetPane extends GridPane {
 
     private ObservableList<GridPane> children;
 

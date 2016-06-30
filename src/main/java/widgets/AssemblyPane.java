@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class AssemblyGridPane extends JobGridPane {
+class AssemblyPane extends JobGridPane {
 
     private Label ASSEMBLY = new Label( "Assembly" );
     private Label ASSEMBLY_NAME = new Label( "Name" );
@@ -37,12 +37,12 @@ class AssemblyGridPane extends JobGridPane {
 
     private ObservableList<TextField> elements;
 
-    AssemblyGridPane( String name, String path){
+    AssemblyPane(String name, String path){
         assembly_name.setText( name );
         assembly_path.setText( path );
     }
 
-    AssemblyGridPane(){
+    AssemblyPane(){
 
         ASSEMBLY.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         ASSEMBLY_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );

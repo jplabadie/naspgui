@@ -16,7 +16,7 @@ import javafx.scene.text.FontWeight;
  *
  * @Author jlabadie
  */
-public class OptionsGridPane extends GridPane {
+public class OptionsPane extends GridPane {
 
     private Label CORE_SETTINGS = new Label("Core Settings");
     private Label RUN_NAME = new Label("Run Name");
@@ -48,7 +48,7 @@ public class OptionsGridPane extends GridPane {
     private TextField cov_filter = new TextField();
     private ChoiceBox<String> job_submitter = new ChoiceBox<>();
 
-    OptionsGridPane(){
+    OptionsPane(){
         /**
          * Define the look and feel of static label elements
          */

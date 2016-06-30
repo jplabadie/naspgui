@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ReadPairGridPane extends JobGridPane {
+class ReadPairPane extends WidgetGridPane {
 
     private Label READ_PAIR = new Label( "Read Pair" );
     private Label SAMPLE_NAME = new Label( "Sample Name" );
@@ -40,13 +40,13 @@ class ReadPairGridPane extends JobGridPane {
 
     private ObservableList<TextField> elements;
 
-    ReadPairGridPane( String name, String read_a, String read_b ){
+    ReadPairPane(String name, String read_a, String read_b ){
         sample_name.setText( name );
         read_file_a.setText( read_a );
         read_file_b.setText( read_b );
     }
 
-    ReadPairGridPane(){
+    ReadPairPane(){
 
         READ_PAIR.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         SAMPLE_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
