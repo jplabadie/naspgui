@@ -1,3 +1,4 @@
+/*
 package ctrls;
 
 import javafx.collections.FXCollections;
@@ -26,12 +27,14 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+*/
 /**
  * Controller for the JobTab Pane.
  *
  * In future iterations, this controller and perhaps its FXML should be dynamically defined based on XML.
  * This would allow a high degree of modularity.
- */
+ *//*
+
 public class JobTabMainController implements Initializable {
 
     // Panes and other Containers
@@ -171,19 +174,23 @@ public class JobTabMainController implements Initializable {
     private JobRecord jobrec;
     private RemoteNetUtil rem_network;
 
-    /**
+    */
+/**
      * This is the root Object which represents the Job XML
-     */
+     *//*
+
     private NaspInputData NASP_DATA;
 
     private DirectoryChooser dirChooser = new DirectoryChooser();
 
-    /**
+    */
+/**
      * Initializes the new JobPane.
      *
      * @param fxmlFileLocation a URL representing the FXML layout to be used for this pane
      * @param resources the ResourceBundle from which to call other resources
-     */
+     *//*
+
     @Override
     public void initialize(final URL fxmlFileLocation, ResourceBundle resources) {
 
@@ -238,13 +245,15 @@ public class JobTabMainController implements Initializable {
         jobManagerSystem.getSelectionModel().select(0);
 
         //Create a new NaspInputData Object which represents a blank job request
-        NASP_DATA = new ObjectFactory().createNaspInputDataType();
+        NASP_DATA = new ObjectFactory().createNaspInputData();
     }
 
-    /**
+    */
+/**
      * This method calls the setListDragHandler for every ListView in the given ArrayList
      * @param listFields
-     */
+     *//*
+
     private void initializeListViewDrag (ListView[] listFields) {
         int currentListItemIndex = 0;
 
@@ -255,11 +264,13 @@ public class JobTabMainController implements Initializable {
         }
     }
 
-    /**
+    */
+/**
      * Adds Drag-and-Drop functionality to the ListView
      *
      * @param list_view the ListView which will gain DnD
-     */
+     *//*
+
     private void setListDragHandler (ListView list_view) {
         // Get the current items in the ListView passed in
         final ObservableList listContents = list_view.getItems();
@@ -301,10 +312,12 @@ public class JobTabMainController implements Initializable {
         });
     }
 
-    /**
+    */
+/**
      * This method calls the setTextFieldDragHandler for every textField in the given ArrayList
      * @param textFields an array of all textFields to be initialized
-     */
+     *//*
+
     private void initializeTextFieldDrag(TextField[] textFields) {
         int currentListItemIndex = 0;
 
@@ -314,10 +327,12 @@ public class JobTabMainController implements Initializable {
         }
     }
 
-    /**
+    */
+/**
      *
      * @param textField a single TextField that will be initialized with a DnD handler
-     */
+     *//*
+
     private void setTextFieldDragHandler(final TextField textField) {
 
         textField.setOnDragOver(new EventHandler<DragEvent>() {
@@ -359,9 +374,11 @@ public class JobTabMainController implements Initializable {
         });
     }
 
-    /**
+    */
+/**
      * Initializes the Save button in the Bottom Menu
-     */
+     *//*
+
     private void initSaveButton(){
         btnSaveSettings.setOnAction(
                 new EventHandler<ActionEvent>() {
@@ -372,9 +389,11 @@ public class JobTabMainController implements Initializable {
                 });
     }
 
-    /**
+    */
+/**
      * Initializes the Load button in the Bottom Menu
-     */
+     *//*
+
     private void initLoadButton(){
         btnLoadSettings.setOnAction(
                 new EventHandler<ActionEvent>() {
@@ -385,9 +404,11 @@ public class JobTabMainController implements Initializable {
                 });
     }
 
-    /**
+    */
+/**
      * Initializes the Start Job button in the Bottom Menu
-     */
+     *//*
+
     private void initStartJobButton() {
         btnStartJob.setOnAction(
                 new EventHandler<ActionEvent>() {
@@ -466,9 +487,11 @@ public class JobTabMainController implements Initializable {
         return false; // could not save
     }
 
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     private File saveFormState(){
 
         if(NASP_DATA != null ){
@@ -500,7 +523,7 @@ public class JobTabMainController implements Initializable {
 
         ObjectFactory nasp_factory = new ObjectFactory();
 
-        NASP_DATA = nasp_factory.createNaspInputDataType();
+        NASP_DATA = nasp_factory.createNaspInputData();
 
         ExternalApplications exapps = NASP_DATA.getExternalApplications();
         if(exapps == null) exapps = new ExternalApplications();
@@ -514,9 +537,11 @@ public class JobTabMainController implements Initializable {
         if(files == null) files = new Files();
         NASP_DATA.setFiles(files);
 
-        /**
+        */
+/**
          * Save Reference Settings
-         */
+         *//*
+
         Reference refs = opts.getReference();
         if(refs == null) refs = new Reference();
 
@@ -533,26 +558,32 @@ public class JobTabMainController implements Initializable {
         refs.setName(ref_name);
         refs.setPath(ref_path);
 
-        /**
+        */
+/**
          * Save Options Settings
-         */
+         *//*
+
         opts.setReference(refs);
         opts.setOutputFolder(jobOutputDir.getText());
         opts.setJobSubmitter(jobManagerSystem.getValue());
         opts.setRunName(runName.getText());
 
-        /**
+        */
+/**
          * Save Options Filters Settings
-         */
+         *//*
+
         Filters filt = opts.getFilters();
         if(filt == null) filt = new Filters();
         filt.setCoverageFilter("10");
         filt.setProportionFilter("0.9");
         opts.setFilters(filt);
 
-        /**
+        */
+/**
          * Save Files Settings from Inputs pane
-         */
+         *//*
+
         ReadFolder readfolder = files.getReadFolder();
         if(readfolder == null) readfolder = new ReadFolder();
         files.setReadFolder(readfolder);
@@ -584,9 +615,11 @@ public class JobTabMainController implements Initializable {
             read.setPath(readstr);
         }
 
-        /**
+        */
+/**
          * Save External Application Settings
-         */
+         *//*
+
         Index index = new Index();
         Index bindex = new Index();
         MatrixGenerator mgen = new MatrixGenerator();
@@ -657,9 +690,11 @@ public class JobTabMainController implements Initializable {
         exapps.setDupFinder(dupfind);
         exapps.setAssemblyImporter(assimport);
 
-        /**
+        */
+/**
          * Save Aligners Settings
-         */
+         *//*
+
         List<Aligner> aligners = exapps.getAligner();
         List<SNPCaller> snpcallers = exapps.getSNPCaller();
 
@@ -797,14 +832,18 @@ public class JobTabMainController implements Initializable {
         }
     }
 
-    /**
+    */
+/**
      *
-     */
+     *//*
+
     private void loadFormState(){
 
-        /**
+        */
+/**
          * Start a pop-up dialog to chose a saved xml to load
-         */
+         *//*
+
         final Stage dialogStage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load Saved Job");
@@ -815,9 +854,11 @@ public class JobTabMainController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(dialogStage);
 
-        /**
+        */
+/**
          * convert the loaded file into XML data
-         */
+         *//*
+
         NASP_DATA = JobSaveLoadManager.jaxbXMLToObject(file);
         nasp_xml = file;
 
@@ -981,22 +1022,26 @@ public class JobTabMainController implements Initializable {
         alert.showAndWait();
     }
 
-    /**
+    */
+/**
      *
      * @param checkArray
      * @param checkPanes
-     */
+     *//*
+
     private void initializeCheckBoxToggle (CheckBox[] checkArray, TitledPane[] checkPanes) {
         for (int i = 0; i < checkArray.length; i++) {
             setCheckboxToggle(checkArray[i], checkPanes[i]);
         }
     }
 
-    /**
+    */
+/**
      *
      * @param checkBox the checkbox which will gain a new eventhandler
      * @param checkPane the titlepane which will be toggled by the checkbox
-     */
+     *//*
+
     private void setCheckboxToggle (final CheckBox checkBox, TitledPane checkPane) {
         //System.out.println("ID: " + checkBox.getId());
         final TitledPane correspondingPane = checkPane;
@@ -1018,4 +1063,4 @@ public class JobTabMainController implements Initializable {
     public void showLoadNaspDialog() {
         loadFormState();
     }
-}
+}*/

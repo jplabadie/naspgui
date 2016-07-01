@@ -132,7 +132,7 @@ public class MainController implements Initializable{
                             FXMLLoader loader = new FXMLLoader(getClass().
                                     getResource("/job/NASPDefaultJobPane.fxml"));
                             AnchorPane job_tab = loader.load();
-                            JobTabMainController ctlr = loader.<JobTabMainController>getController();
+                          /*  JobTabMainController ctlr = loader.<JobTabMainController>getController();
 
                             ctlr.initialize(loader.getLocation(),loader.getResources());
 
@@ -140,7 +140,7 @@ public class MainController implements Initializable{
 
                             new_tab.setContent(job_tab);
                             jobTabPane.getTabs().add(new_tab);
-                            ctlr.showLoadNaspDialog();
+                            ctlr.showLoadNaspDialog();*/
 
                         } catch (IOException e1) {
                             e1.printStackTrace();
