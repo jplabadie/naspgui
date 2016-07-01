@@ -40,13 +40,17 @@ class ReadPairPane extends WidgetPane {
 
     private ObservableList<TextField> elements;
 
-    ReadPairPane(String name, String read_a, String read_b ){
-        sample_name.setText( name );
-        read_file_a.setText( read_a );
-        read_file_b.setText( read_b );
-    }
+    private ReadPair readpair;
 
-    ReadPairPane(){
+    ReadPairPane( ReadPair read_in){
+        readpair = read_in;
+        if(readpair == null)
+            readpair = new ReadPair();
+        else{
+            sample_name.setText( readpair.getSample() );
+            read_file_a.setText( readpair.getRead1Filename() );
+            read_file_b.setText( readpair.getRead2Filename() );
+        }
 
         READ_PAIR.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         SAMPLE_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
@@ -94,7 +98,7 @@ class ReadPairPane extends WidgetPane {
         ArrayList<TextField> temp = new ArrayList<>();
         elements = FXCollections.observableArrayList(temp);
 
-        elements.addAll(sample_name, read_file_a, read_file_b);
+        elements.addAll( sample_name, read_file_a, read_file_b );
 
         elements.addListener(new ListChangeListener<TextField>() {
             @Override

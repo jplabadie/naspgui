@@ -14,7 +14,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.ExternalApplications;
 import xmlbinds.ObjectFactory;
-import xmlbinds.SNPCaller;
 
 import java.util.ArrayList;
 
@@ -42,6 +41,13 @@ class ExternalApplicationsPane extends GridPane {
     ExternalApplicationsPane( ExternalApplications binding ) {
 
         exaps_bind = binding;
+
+        if(exaps_bind == null){
+            exaps_bind = new ExternalApplications();
+        }
+        else{
+            //TODO: INITIALIZE using populated input
+        }
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -83,7 +89,6 @@ class ExternalApplicationsPane extends GridPane {
         this.add(EXAPPS, 0, 0, 3, 1);
 
         // Add the button to the widget with an event handler
-
         this.add(appbox, 1, 1, 3, 1);
 
         ImageView image_view = new ImageView(add);
@@ -110,7 +115,7 @@ class ExternalApplicationsPane extends GridPane {
                             add_app.setGraphic(image_view1);
                             add_app.setAlignment(Pos.BOTTOM_RIGHT);
 
-                            add_app.setOnAction(event -> addApplication());
+                            add_app.setOnAction( event -> addApplication() );
 
                             ImageView image_view2 = new ImageView(remove);
                             image_view2.setFitHeight(20);
@@ -146,9 +151,8 @@ class ExternalApplicationsPane extends GridPane {
     }
 
     void addApplication() {
-
         ObjectFactory of = new ObjectFactory();
-        ApplicationPane<SNPCaller> app = new ApplicationPane<>(of.createSNPCallerType());
+        ApplicationPane app = new ApplicationPane();
         apps.add ( app );
     }
 }

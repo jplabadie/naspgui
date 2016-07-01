@@ -61,7 +61,6 @@ public class OptionsPane extends GridPane {
     private ObservableList<Control> optionlist;
 
     OptionsPane(Options options){
-
         ArrayList<Control> tf = new ArrayList<>();
         optionlist = FXCollections.observableList( tf );
 

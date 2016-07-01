@@ -37,12 +37,11 @@ class AssemblyPane extends WidgetPane {
 
     private ObservableList<TextField> elements;
 
-    AssemblyPane(String name, String path){
-        assembly_name.setText( name );
-        assembly_path.setText( path );
-    }
+    AssemblyPane( Assembly ass ){
 
-    AssemblyPane(){
+        assembly = ass;
+        assembly_name.setText( ass.getValue() );
+        assembly_path.setText( ass.getSample() );
 
         ASSEMBLY.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         ASSEMBLY_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );

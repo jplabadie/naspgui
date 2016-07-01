@@ -38,7 +38,7 @@ public class JobTab extends Tab {
      *  Creates a blank job and initializes new NASP data
      */
     JobTab() {
-        NASP_DATA = OF.createNaspInputDataType();
+        NASP_DATA = OF.createNaspInputData();
         optspane = new OptionsPane(NASP_DATA.getOptions());
         filespane = new FilesPane(NASP_DATA.getFiles());
         xappspane = new ExternalApplicationsPane(NASP_DATA.getExternalApplications());

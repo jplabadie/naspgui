@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.ReadFolder;
 
 import java.util.ArrayList;
 
@@ -44,8 +45,11 @@ class ReadFolderPane extends GridPane {
 
     private int grid_row_position = 2;
 
+    ReadFolder readfolder;
 
-    ReadFolderPane(){
+    ReadFolderPane( ReadFolder rf){
+
+        readfolder = rf;
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */

@@ -24,7 +24,7 @@ public class OptionsGridPaneTest extends Application {
         primaryStage.setTitle( "Options GridPane Test!" );
 
         ObjectFactory of = new ObjectFactory();
-        NaspInputData NASP_DATA = of.createNaspInputDataType();
+        NaspInputData NASP_DATA = of.createNaspInputData();
         OptionsPane ogp = new OptionsPane(NASP_DATA.getOptions());
 
         StackPane root = new StackPane();

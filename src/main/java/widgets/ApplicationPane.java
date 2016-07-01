@@ -1,7 +1,10 @@
 package widgets;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -10,7 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import xmlbinds.Application;
+import xmlbinds.*;
+
+import java.util.ArrayList;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -42,6 +47,7 @@ class ApplicationPane<V extends Application> extends GridPane {
     private Tooltip JOB_SUB_ARGS = new Tooltip("Additional arguments or options to pass to the job submitter");
 
     private Label app_title = new Label();
+    private ChoiceBox<String> title_choice = new ChoiceBox<>();
     private TextField app_path = new TextField();
     private TextField app_args = new TextField();
 
@@ -51,15 +57,13 @@ class ApplicationPane<V extends Application> extends GridPane {
     private TextField wall_time_req = new TextField ();
     private TextField job_sub_args = new TextField ();
 
-    private V application_bind;
+    private Application application_bind = new MatrixGenerator();
+    private JobParameters app_params = new JobParameters();
 
-    /**
-     *
-     * @param binding
-     */
-    ApplicationPane(V binding){
 
-        application_bind = binding;
+    ApplicationPane(){
+
+        application_bind.setJobParameters( app_params );
 
         /**
          * Define the look and feel of static label elements
@@ -101,18 +105,56 @@ class ApplicationPane<V extends Application> extends GridPane {
          * Define the look and behavior of the non-static TextField and Label elements
          */
         app_title.setPrefSize( 100,20 );
-        app_title.setAlignment( Pos.CENTER );
+        app_title.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
         app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
         app_title.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         app_title.setAlignment( Pos.CENTER );
 
         // Set default values
-        app_title.setText( application_bind.getName() );
-        app_path.setText( application_bind.getPath() );
+        //app_title.setText( application_bind.getName() );
+        //app_path.setText( application_bind.getPath() );
+
+        ArrayList<String> temp = new ArrayList<String>();
+        ObservableList<String> choices = FXCollections.observableList( temp );
+        choices.addAll(
+                "index",
+                "matrixGenerator",
+                "picard",
+                "samtools",
+                "dupFinder",
+                "assemblyImporter",
+                "aligner",
+                "snpCaller");
+        title_choice.setItems( choices );
+
+        title_choice.setOnAction( event -> {
+            String title_text = choices.get( title_choice.getSelectionModel().getSelectedIndex() );
+            app_title.setText( title_text );
+            switch ( choices.get( title_choice.getSelectionModel().getSelectedIndex() ) ) {
+                case "index": application_bind = new Index();
+                    break;
+                case "matrixGenerator" : application_bind = new MatrixGenerator();
+                    break;
+                case "picard" : application_bind = new Picard();
+                    break;
+                case "samtools" : application_bind = new Samtools();
+                    break;
+                case "dupFinder" : application_bind = new DupFinder();
+                    break;
+                case "assemblyImporter" : application_bind = new AssemblyImporter();
+                    break;
+                case "aligner" : application_bind = new Aligner();
+                    break;
+                case "snpCaller" : application_bind = new SNPCaller();
+            }
+
+            application_bind.setName( title_text );
+        });
 
         // Add the title to row 0 column 0
         this.add( app_title, 0, 0, 3, 1 );
+        this.add( title_choice, 3 , 0, 3, 1);
 
         // Add row headings for app-path and app-args to column 1
         this.add( APPLICATION_PATH, 1, 1, 3, 1 );
@@ -134,97 +176,33 @@ class ApplicationPane<V extends Application> extends GridPane {
         this.add( queue_req,3,6,4,1 );
         this.add( wall_time_req,3,7,4,1 );
         this.add( job_sub_args,3,8,4,1 );
+
+        //TODO: ADD listeners to auto-update binds as input changes
+        app_path.setOnAction( event -> application_bind.setPath( app_path.getText() ));
+        app_args.setOnAction( event -> application_bind.setPath( app_args.getText() ));
+        mem_req.setOnAction( event -> app_params.setMemRequested( mem_req.getText() ));
+        cpus_req.setOnAction( event -> app_params.setNumCPUs( cpus_req.getText() ));
+        queue_req.setOnAction( event -> app_params.setQueue( queue_req.getText() ));
+        wall_time_req.setOnAction( event -> app_params.setWalltime( wall_time_req.getText() ));
+        job_sub_args.setOnAction( event -> app_params.setWalltime( job_sub_args.getText() ));
     }
 
-    /**
-     *
-     * @return a String array with all app-settings text as {title, path, args, mem, cpus, queue, time, job_args}
-     */
-    String[] getAppSettings(){
-        return new String[]{
-          app_title.getText(), app_path.getText(), app_args.getText(), mem_req.getText(), cpus_req.getText(),
-                queue_req.getText(),wall_time_req.getText(),job_sub_args.getText()
-        };
-    }
-
-    /**
-     *
-     * @param title the title of the app
-     * @param path the path of the app runtime on the remote service
-     * @param args arguments to pass to the app
-     * @param mem requested amount of RAM for the app
-     * @param cpus requested number of CPUs for the app
-     * @param queue requested queue to place the app in during execution
-     * @param time maximum allowable runtime
-     * @param job_args arguments to pass to the job submitter
-     */
-    void setAppSettings(String title, String path, String args, String mem, String cpus,
-                        String queue, String time, String job_args){
-        app_title.setText(title);
-        app_path.setText(path);
-        app_args.setText(args);
-        mem_req.setText(mem);
-        cpus_req.setText(cpus);
-        queue_req.setText(queue);
-        wall_time_req.setText(time);
-        job_sub_args.setText(job_args);
-    }
 
     String getTitle(){
         return app_title.getText();
     }
-    String getAppPath(){
-        return app_path.getText();
-    }
-    String getAppArgs(){
-        return app_args.getText();
-    }
-    String getMemRequested(){
-        return mem_req.getText();
-    }
-    String getCpusRequested(){
-        return cpus_req.getText();
-    }
-    String getQueueRequested(){
-        return queue_req.getText();
-    }
-    String getWallTimeRequested(){
-        return wall_time_req.getText();
-    }
-    String getJobSubmitterArgs(){
-        return job_sub_args.getText();
-    }
 
-    void setTitle(String text){
+    void setTitle(String text) {
         app_title.setText(text);
     }
-    void setAppPath(String text){
-        app_path.setText(text);
-    }
-    void setAppArgs(String text){
-        app_args.setText(text);
-    }
-    void setMemoryRequested(String text){
-        mem_req.setText(text);
-    }
-    void setCpusRequested(String text){
-        cpus_req.setText(text);
-    }
-    void setQueueRequested(String text){
-        queue_req.setText(text);
-    }
-    void setWallTimeRequested(String text){
-        wall_time_req.setText(text);
-    }
-    void setJobSubmitterArgs(String text){
-        job_sub_args.setText(text);
+
+    void setAppBind( Application app){
+        application_bind = app;
     }
 
-    void setAppBind( V application){
-        application_bind = application;
-    }
-
-    V getAppBind(){
+    Application getAppBind(){
         return application_bind;
     }
+
+
 }

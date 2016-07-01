@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import xmlbinds.ReadFolder;
 
 /**
  * Project naspgui.
@@ -20,7 +21,9 @@ public class ReadFolderGridPaneTest extends Application {
     @Override
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "ReadFolder GridPane Test!" );
-        ReadFolderPane rfgp = new ReadFolderPane();
+
+        ReadFolder rf = new ReadFolder();
+        ReadFolderPane rfgp = new ReadFolderPane(rf);
 
         ScrollPane sp = new ScrollPane();
         sp.setVbarPolicy( ScrollPane.ScrollBarPolicy.ALWAYS );

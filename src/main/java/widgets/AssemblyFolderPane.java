@@ -17,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.Assembly;
+import xmlbinds.AssemblyFolder;
 
 import java.util.ArrayList;
 
@@ -44,8 +46,13 @@ class AssemblyFolderPane extends GridPane {
 
     private int grid_row_position = 2;
 
+    private AssemblyFolder assfolder;
 
-    AssemblyFolderPane(){
+    AssemblyFolderPane( AssemblyFolder asf ){
+
+        assfolder = asf;
+
+        initializeData();
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -160,13 +167,13 @@ class AssemblyFolderPane extends GridPane {
         this.addAssembly();
     }
 
-    void addAssembly(String sample_name, String sample_path ){
-        AssemblyPane ap = new AssemblyPane( sample_name, sample_path );
+    void addAssembly( Assembly ass ){
+        AssemblyPane ap = new AssemblyPane( ass );
         assembly_gridpanes.add( ap );
     }
 
     void addAssembly( ){
-        AssemblyPane ap = new AssemblyPane();
+        AssemblyPane ap = new AssemblyPane( new Assembly() );
         assembly_gridpanes.add( ap );
     }
 
@@ -188,10 +195,16 @@ class AssemblyFolderPane extends GridPane {
      * @param add_assembly
      * @param remove_assembly
      */
-    public void setButtons( Button add_assembly, Button remove_assembly) {
+    public void setButtons( Button add_assembly, Button remove_assembly ) {
 
         HBox button_box = new HBox();
         button_box.getChildren().addAll(add_assembly, remove_assembly);
         this.add( button_box, 3, 0, 3, 1);
+    }
+
+    private void initializeData(){
+        assembly_folder_path.setText( assfolder.getPath() );
+
+
     }
 }

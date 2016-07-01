@@ -12,7 +12,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.AssemblyFolder;
 import xmlbinds.Files;
+import xmlbinds.ReadFolder;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,9 @@ class FilesPane extends GridPane {
 
     private Files files = new Files();
 
-    FilesPane(Files files){
+
+
+    FilesPane( Files files ){
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -118,7 +122,9 @@ class FilesPane extends GridPane {
                             image_view2.setFitWidth( 20 );
                             remove_assembly.setGraphic( image_view2 );
 
-                            AssemblyFolderPane new_folder = new AssemblyFolderPane();
+                            AssemblyFolder assf = new AssemblyFolder();
+                            //TODO: ADD AssemblyFolder (af) to Files (files) should accept multiple
+                            AssemblyFolderPane new_folder = new AssemblyFolderPane( assf );
                             HBox assmblybox = new HBox();
                             assmblybox.getChildren().addAll( new_folder );
                             assmblybox.setAlignment(Pos.BOTTOM_CENTER);
@@ -174,7 +180,9 @@ class FilesPane extends GridPane {
                             image_view2.setFitWidth( 20 );
                             remove_rf.setGraphic( image_view2 );
 
-                            ReadFolderPane temp_rf = new ReadFolderPane();
+                            ReadFolder rfolder = new ReadFolder();
+                            //TODO: ADD ReadFolder (rf) to Files (files) should accept multiple
+                            ReadFolderPane temp_rf = new ReadFolderPane( rfolder );
 
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( temp_rf, remove_rf, add_rf );
@@ -209,24 +217,23 @@ class FilesPane extends GridPane {
         this.addReadFolder();
     }
 
-    void addAssemblyFolder(String path){
-        AssemblyFolderPane af = new AssemblyFolderPane();
-        af.setFolderPath( path );
+    void addAssemblyFolder( AssemblyFolder assfolder ){
+        AssemblyFolderPane af = new AssemblyFolderPane( assfolder );
         assemblies.add( af );
     }
 
     void addAssemblyFolder(){
-        AssemblyFolderPane af = new AssemblyFolderPane();
+        AssemblyFolderPane af = new AssemblyFolderPane ( new AssemblyFolder() );
         assemblies.add( af );
     }
 
-    void addReadFolder(String path){
-        ReadFolderPane rf = new ReadFolderPane();
+    void addReadFolder( ReadFolder readfolder ){
+        ReadFolderPane rf = new ReadFolderPane( readfolder );
         reads.add( rf );
     }
 
     void addReadFolder(){
-        ReadFolderPane rf = new ReadFolderPane();
+        ReadFolderPane rf = new ReadFolderPane( new ReadFolder() );
         reads.add( rf );
     }
 }

@@ -31,7 +31,7 @@ public class JobPaneIntegrationTest extends Application {
         vb.setPrefSize( 620, 480);
 
         ObjectFactory of = new ObjectFactory();
-        NaspInputData NASP_DATA = of.createNaspInputDataType();
+        NaspInputData NASP_DATA = of.createNaspInputData();
 
         OptionsPane op  = new OptionsPane(NASP_DATA.getOptions());
 
