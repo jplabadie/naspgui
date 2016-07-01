@@ -1,7 +1,6 @@
 package widgets;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -64,30 +63,51 @@ public class OptionsPane extends GridPane {
     OptionsPane(Options options){
 
         ArrayList<Control> tf = new ArrayList<>();
-        tf.add(run_name);
-        tf.add(output_path);
-        tf.add(ref_name);
-        tf.add(ref_path);
-        tf.add(find_dups);
-        tf.add(prop_filter);
-        tf.add(cov_filter);
-        tf.add(job_submitter);
         optionlist = FXCollections.observableList( tf );
 
-        optionlist.addListener(new ListChangeListener<Control>() {
+        /**
+         * Set Listeners on elements to auto-update xml_bind data
+         */
+        run_name.setOnAction( (event) -> opts.setRunName( run_name.getText() ));
 
-            @Override
-            public void onChanged(Change<? extends Control> c) {
+        output_path.setOnAction( (event) -> opts.setOutputFolder( output_path.getText() ));
 
-                                   }
-                               });
+        ref_name.setOnAction((event) -> ref.setName( ref_name.getText() ));
+
+        ref_path.setOnAction( (event) -> ref.setPath( ref_path.getText() ));
+
+        find_dups.setAllowIndeterminate( false );
+        find_dups.setOnAction( event -> {
+            if( find_dups.isSelected() )
+                ref.setFindDups( "true" );
+            else
+                ref.setFindDups( "false" );
+        });
+
+        prop_filter.setOnAction( event -> filters.setProportionFilter( prop_filter.getText() ));
+
+        cov_filter.setOnAction( event -> filters.setCoverageFilter( cov_filter.getText() ));
+
+        job_submitter.setOnAction( event -> opts.setJobSubmitter( job_submitter.getValue() ));
 
         /**
          * Initialize links to binding objects
          */
-        opts = options;
+        opts = options; // This should never be null, but as a precaution...
+        if( opts == null )
+            opts = new Options();
+
         filters = opts.getFilters();
+        if( filters == null ){
+            filters = new Filters();
+            opts.setFilters( filters );
+        }
+
         ref = opts.getReference();
+        if( ref == null){
+            ref = new Reference();
+            opts.setReference( ref );
+        }
 
         /**
          * Define the look and feel of static label elements
@@ -103,6 +123,7 @@ public class OptionsPane extends GridPane {
         FIND_DUPLICATES.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         FILTERS.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
         JOB_SUBMITTER.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+
         /**
          * Add tooltips to the static label elements
          */

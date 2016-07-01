@@ -31,13 +31,13 @@ public class JobPaneIntegrationTest extends Application {
         vb.setPrefSize( 620, 480);
 
         ObjectFactory of = new ObjectFactory();
-        NaspInputData ni = of.createNaspInputDataType();
+        NaspInputData NASP_DATA = of.createNaspInputDataType();
 
         OptionsPane op  = new OptionsPane(NASP_DATA.getOptions());
 
         FilesPane fgp = new FilesPane(NASP_DATA.getFiles());
 
-        ExternalApplicationsPane aps = new ExternalApplicationsPane(ni.getExternalApplications());
+        ExternalApplicationsPane aps = new ExternalApplicationsPane(NASP_DATA.getExternalApplications());
         aps.addApplication( );
 
         vb.getChildren().addAll( op, fgp, aps );

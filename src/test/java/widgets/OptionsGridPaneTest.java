@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import xmlbinds.NaspInputData;
+import xmlbinds.ObjectFactory;
 
 /**
  * Project naspgui.
@@ -20,6 +22,9 @@ public class OptionsGridPaneTest extends Application {
     @Override
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "Options GridPane Test!" );
+
+        ObjectFactory of = new ObjectFactory();
+        NaspInputData NASP_DATA = of.createNaspInputDataType();
         OptionsPane ogp = new OptionsPane(NASP_DATA.getOptions());
 
         StackPane root = new StackPane();
