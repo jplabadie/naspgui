@@ -1,5 +1,7 @@
 package widgets;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -9,6 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import xmlbinds.Filters;
+import xmlbinds.Options;
+import xmlbinds.Reference;
+
+import java.util.ArrayList;
 
 /**
  * Project naspgui.
@@ -48,7 +55,40 @@ public class OptionsPane extends GridPane {
     private TextField cov_filter = new TextField();
     private ChoiceBox<String> job_submitter = new ChoiceBox<>();
 
-    OptionsPane(){
+    private Options opts;
+    private Filters filters;
+    private Reference ref;
+
+    private ObservableList<Control> optionlist;
+
+    OptionsPane(Options options){
+
+        ArrayList<Control> tf = new ArrayList<>();
+        tf.add(run_name);
+        tf.add(output_path);
+        tf.add(ref_name);
+        tf.add(ref_path);
+        tf.add(find_dups);
+        tf.add(prop_filter);
+        tf.add(cov_filter);
+        tf.add(job_submitter);
+        optionlist = FXCollections.observableList( tf );
+
+        optionlist.addListener(new ListChangeListener<Control>() {
+
+            @Override
+            public void onChanged(Change<? extends Control> c) {
+
+                                   }
+                               });
+
+        /**
+         * Initialize links to binding objects
+         */
+        opts = options;
+        filters = opts.getFilters();
+        ref = opts.getReference();
+
         /**
          * Define the look and feel of static label elements
          */
@@ -112,8 +152,8 @@ public class OptionsPane extends GridPane {
         // Add row headings for the job-manager text fields to column 2 of the GridPane
         this.add( REFERENCE_NAME,2,4,3,1 );
         this.add( REFERENCE_PATH,2,5,3,1 );
-        this.add( PROPORTION_FILTER,2,8,3,1);
-        this.add( COVERAGE_FILTER,2,9,3,1);
+        this.add( PROPORTION_FILTER,2,8,3,1 );
+        this.add( COVERAGE_FILTER,2,9,3,1 );
 
         // Add text fields,checkboxes,choiceboxes to column 3 of the GridPane
         this.add( run_name,3,1,4,1 );
@@ -123,8 +163,9 @@ public class OptionsPane extends GridPane {
         this.add( find_dups,3,6,4,1 );
         this.add( prop_filter,3,8,4,1 );
         this.add( cov_filter,3,9,4,1 );
-        this.add( job_submitter,3,10,4,1);
+        this.add( job_submitter,3,10,4,1 );
 
+        //TODO: Add listeners and observable list to tie fields to options object
     }
 
     String getRunName(){

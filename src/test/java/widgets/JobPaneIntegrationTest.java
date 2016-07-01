@@ -33,9 +33,9 @@ public class JobPaneIntegrationTest extends Application {
         ObjectFactory of = new ObjectFactory();
         NaspInputData ni = of.createNaspInputDataType();
 
-        OptionsPane op  = new OptionsPane();
+        OptionsPane op  = new OptionsPane(NASP_DATA.getOptions());
 
-        FilesPane fgp = new FilesPane();
+        FilesPane fgp = new FilesPane(NASP_DATA.getFiles());
 
         ExternalApplicationsPane aps = new ExternalApplicationsPane(ni.getExternalApplications());
         aps.addApplication( );

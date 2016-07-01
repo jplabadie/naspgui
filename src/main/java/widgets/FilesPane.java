@@ -38,7 +38,7 @@ class FilesPane extends GridPane {
 
     private Files files = new Files();
 
-    FilesPane(){
+    FilesPane(Files files){
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
