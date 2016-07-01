@@ -5,7 +5,6 @@
 // Generated on: 2016.07.01 at 12:40:32 PM MST 
 //
 
-
 package xmlbinds;
 
 import javax.annotation.Generated;
@@ -15,7 +14,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * <p>Java class for ExternalApplications complex type.
@@ -297,5 +295,4 @@ public class ExternalApplications {
         }
         return this.snpCaller;
     }
-
 }
