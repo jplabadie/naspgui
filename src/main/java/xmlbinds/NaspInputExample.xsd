@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="NaspInputData" type="NaspInputDataType"/>
+  <xs:element name="NaspInputData" type="NaspInputData"/>
   <xs:complexType name="Aligner">
     <xs:sequence>
       <xs:element name="AdditionalArguments">
@@ -12,7 +12,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name" use="optional"/>
     <xs:attribute type="xs:string" name="path" use="optional"/>
@@ -24,23 +24,23 @@
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
-  <xs:complexType name="ReadFolder">
+  <xs:complexType name="ReadFolder" >
     <xs:sequence>
-      <xs:element type="ReadPairType" name="ReadPair"/>
+      <xs:element type="ReadPair" name="ReadPair" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="MatrixGenerator">
     <xs:sequence>
       <xs:element type="xs:string" name="AdditionalArguments"/>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="AssemblyFolder">
     <xs:sequence>
-      <xs:element type="AssemblyType" name="Assembly"/>
+      <xs:element type="Assembly" name="Assembly" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
@@ -54,7 +54,7 @@
   <xs:complexType name="AssemblyImporter">
     <xs:sequence>
       <xs:element type="xs:string" name="AdditionalArguments"/>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
@@ -68,17 +68,17 @@
   </xs:complexType>
   <xs:complexType name="NaspInputData">
     <xs:sequence>
-      <xs:element type="OptionsType" name="Options"/>
-      <xs:element type="FilesType" name="Files"/>
-      <xs:element type="ExternalApplicationsType" name="ExternalApplications"/>
+      <xs:element type="Options" name="Options"/>
+      <xs:element type="Files" name="Files"/>
+      <xs:element type="ExternalApplications" name="ExternalApplications"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Options">
     <xs:sequence>
       <xs:element type="xs:string" name="RunName"/>
       <xs:element type="xs:string" name="OutputFolder"/>
-      <xs:element type="ReferenceType" name="Reference"/>
-      <xs:element type="FiltersType" name="Filters"/>
+      <xs:element type="Reference" name="Reference"/>
+      <xs:element type="Filters" name="Filters"/>
       <xs:element type="xs:string" name="JobSubmitter"/>
     </xs:sequence>
   </xs:complexType>
@@ -99,7 +99,7 @@
   <xs:complexType name="DupFinder">
     <xs:sequence>
       <xs:element type="xs:string" name="AdditionalArguments"/>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
@@ -141,20 +141,20 @@
   </xs:complexType>
   <xs:complexType name="ExternalApplications">
     <xs:sequence>
-      <xs:element type="IndexType" name="Index"/>
-      <xs:element type="MatrixGeneratorType" name="MatrixGenerator"/>
-      <xs:element type="PicardType" name="Picard"/>
-      <xs:element type="SamtoolsType" name="Samtools"/>
-      <xs:element type="DupFinderType" name="DupFinder"/>
-      <xs:element type="AssemblyImporterType" name="AssemblyImporter"/>
-      <xs:element type="AlignerType" name="Aligner" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element type="SNPCallerType" name="SNPCaller" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="Index" name="Index"/>
+      <xs:element type="MatrixGenerator" name="MatrixGenerator"/>
+      <xs:element type="Picard" name="Picard"/>
+      <xs:element type="Samtools" name="Samtools"/>
+      <xs:element type="DupFinder" name="DupFinder"/>
+      <xs:element type="AssemblyImporter" name="AssemblyImporter"/>
+      <xs:element type="Aligner" name="Aligner" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="SNPCaller" name="SNPCaller" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Files">
     <xs:sequence>
-      <xs:element type="ReadFolderType" name="ReadFolder"/>
-      <xs:element type="AssemblyFolderType" name="AssemblyFolder"/>
+      <xs:element type="ReadFolder" name="ReadFolder" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="AssemblyFolder" name="AssemblyFolder" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="SNPCaller">
@@ -167,7 +167,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name" use="optional"/>
     <xs:attribute type="xs:string" name="path" use="optional"/>
@@ -181,7 +181,7 @@
   <xs:complexType name="Index">
     <xs:sequence>
       <xs:element type="xs:string" name="AdditionalArguments"/>
-      <xs:element type="JobParametersType" name="JobParameters"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
