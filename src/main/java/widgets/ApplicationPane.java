@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -16,6 +13,7 @@ import javafx.scene.text.FontWeight;
 import xmlbinds.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -47,7 +45,7 @@ class ApplicationPane<V extends Application> extends GridPane {
     private Tooltip JOB_SUB_ARGS = new Tooltip("Additional arguments or options to pass to the job submitter");
 
     private Label app_title = new Label();
-    private ChoiceBox<String> title_choice = new ChoiceBox<>();
+    private ChoiceBox< String > title_choice = new ChoiceBox<>();
     private TextField app_path = new TextField();
     private TextField app_args = new TextField();
 
@@ -57,13 +55,11 @@ class ApplicationPane<V extends Application> extends GridPane {
     private TextField wall_time_req = new TextField ();
     private TextField job_sub_args = new TextField ();
 
-    private Application application_bind = new MatrixGenerator();
-    private JobParameters app_params = new JobParameters();
+    private Application application_bind ;
+    private JobParameters app_params;
 
 
     ApplicationPane(){
-
-        application_bind.setJobParameters( app_params );
 
         /**
          * Define the look and feel of static label elements
@@ -118,38 +114,47 @@ class ApplicationPane<V extends Application> extends GridPane {
         ArrayList<String> temp = new ArrayList<String>();
         ObservableList<String> choices = FXCollections.observableList( temp );
         choices.addAll(
-                "index",
-                "matrixGenerator",
-                "picard",
-                "samtools",
-                "dupFinder",
-                "assemblyImporter",
-                "aligner",
-                "snpCaller");
+                "Index",
+                "MatrixGenerator",
+                "Picard",
+                "Samtools",
+                "DupFinder",
+                "AssemblyImporter",
+                "Aligner",
+                "SnpCaller");
         title_choice.setItems( choices );
 
         title_choice.setOnAction( event -> {
-            String title_text = choices.get( title_choice.getSelectionModel().getSelectedIndex() );
-            app_title.setText( title_text );
-            switch ( choices.get( title_choice.getSelectionModel().getSelectedIndex() ) ) {
-                case "index": application_bind = new Index();
-                    break;
-                case "matrixGenerator" : application_bind = new MatrixGenerator();
-                    break;
-                case "picard" : application_bind = new Picard();
-                    break;
-                case "samtools" : application_bind = new Samtools();
-                    break;
-                case "dupFinder" : application_bind = new DupFinder();
-                    break;
-                case "assemblyImporter" : application_bind = new AssemblyImporter();
-                    break;
-                case "aligner" : application_bind = new Aligner();
-                    break;
-                case "snpCaller" : application_bind = new SNPCaller();
+            if( application_bind != null){
+                Alert warning = new Alert(Alert.AlertType.WARNING, "This will erase the existing application! Continue?"
+                , ButtonType.YES, ButtonType.CANCEL);
+                Optional<ButtonType> decision = warning.showAndWait();
+                if( decision.isPresent() && decision.get().equals((ButtonType.YES))){
+                    String title_text = choices.get( title_choice.getSelectionModel().getSelectedIndex() );
+                    app_title.setText( title_text );
+                    switch ( choices.get( title_choice.getSelectionModel().getSelectedIndex() ) ) {
+                        case "Index": application_bind = new Index();
+                            break;
+                        case "MatrixGenerator" : application_bind = new MatrixGenerator();
+                            break;
+                        case "Picard" : application_bind = new Picard();
+                            break;
+                        case "Samtools" : application_bind = new Samtools();
+                            break;
+                        case "DupFinder" : application_bind = new DupFinder();
+                            break;
+                        case "AssemblyImporter" : application_bind = new AssemblyImporter();
+                            break;
+                        case "Aligner" : application_bind = new Aligner();
+                            break;
+                        case "SnpCaller" : application_bind = new SNPCaller();
+                    }
+                    application_bind.setName( title_text );
+                }
+                else{
+                    title_choice.getSelectionModel().select( application_bind.getName());
+                }
             }
-
-            application_bind.setName( title_text );
         });
 
         // Add the title to row 0 column 0
@@ -187,7 +192,6 @@ class ApplicationPane<V extends Application> extends GridPane {
         job_sub_args.setOnAction( event -> app_params.setWalltime( job_sub_args.getText() ));
     }
 
-
     String getTitle(){
         return app_title.getText();
     }
@@ -198,11 +202,17 @@ class ApplicationPane<V extends Application> extends GridPane {
 
     void setAppBind( Application app){
         application_bind = app;
+        app_params = application_bind.getJobParameters();
+        if( app_params == null){
+            app_params = new JobParameters();
+            application_bind.setJobParameters( app_params );
+        }
+
+        title_choice.getSelectionModel().select( app.getName() );
     }
 
     Application getAppBind(){
         return application_bind;
     }
-
 
 }
