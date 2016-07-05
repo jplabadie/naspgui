@@ -12,8 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import xmlbinds.ExternalApplications;
-import xmlbinds.ObjectFactory;
+import xmlbinds.*;
 
 import java.util.ArrayList;
 
@@ -39,20 +38,13 @@ class ExternalApplicationsPane extends GridPane {
 
 
     ExternalApplicationsPane( ExternalApplications binding ) {
-
-        exaps_bind = binding;
-
-        if(exaps_bind == null){
-            exaps_bind = new ExternalApplications();
-        }
-        else{
-            //TODO: INITIALIZE using populated input
-        }
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
         ArrayList<ApplicationPane> app_panes = new ArrayList<>();
         apps = FXCollections.observableList(app_panes);
+
+        exaps_bind = binding;
 
         /**
          * Define the look and feel of static label elements
@@ -144,6 +136,52 @@ class ExternalApplicationsPane extends GridPane {
                 }
             }
         });
+
+        if(exaps_bind == null){
+            exaps_bind = new ExternalApplications();
+        }
+        else{
+            if( exaps_bind.getIndex() != null ){
+                ApplicationPane< Index > app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getIndex() );
+                addApplication( app );
+            }
+            if( exaps_bind.getMatrixGenerator() != null ){
+                ApplicationPane< MatrixGenerator > app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getMatrixGenerator() );
+                addApplication( app );
+            }
+            if( exaps_bind.getPicard() != null ){
+                ApplicationPane<Picard> app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getPicard() );
+                addApplication( app );
+            }
+            if( exaps_bind.getSamtools() != null ){
+                ApplicationPane<Samtools> app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getSamtools() );
+                addApplication( app );
+            }
+            if( exaps_bind.getDupFinder() != null ){
+                ApplicationPane<DupFinder> app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getDupFinder() );
+                addApplication( app );
+            }
+            if( exaps_bind.getAssemblyImporter() != null){
+                ApplicationPane<AssemblyImporter> app = new ApplicationPane<>();
+                app.setAppBind( exaps_bind.getAssemblyImporter() );
+                addApplication( app );
+            }
+            for( SNPCaller temp : exaps_bind.getSNPCaller()){
+                ApplicationPane<SNPCaller> app = new ApplicationPane<>();
+                app.setAppBind( temp );
+                addApplication( app );
+            }
+            for( Aligner temp : exaps_bind.getAligner()){
+                ApplicationPane<Aligner> app = new ApplicationPane<>();
+                app.setAppBind( temp );
+                addApplication( app );
+            }
+        }
     }
 
     void addApplication( ApplicationPane ap){
