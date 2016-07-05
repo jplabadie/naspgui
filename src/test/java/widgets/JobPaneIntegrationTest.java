@@ -2,12 +2,9 @@ package widgets;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import xmlbinds.Aligner;
-import xmlbinds.NaspInputData;
-import xmlbinds.ObjectFactory;
 
 import java.lang.reflect.Method;
 
@@ -27,23 +24,10 @@ public class JobPaneIntegrationTest extends Application {
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "JobTab Integration Test" );
 
-        VBox vb = new VBox();
-        vb.setPrefSize( 620, 480);
+        JobTab tab = new JobTab();
+        TabPane root = new TabPane();
 
-        ObjectFactory of = new ObjectFactory();
-        NaspInputData NASP_DATA = of.createNaspInputData();
-
-        OptionsPane op  = new OptionsPane(NASP_DATA.getOptions());
-
-        FilesPane fgp = new FilesPane(NASP_DATA.getFiles());
-
-        ExternalApplicationsPane aps = new ExternalApplicationsPane(NASP_DATA.getExternalApplications());
-        aps.addApplication( );
-
-        vb.getChildren().addAll( op, fgp, aps );
-
-        ScrollPane root = new ScrollPane();
-        root.setContent( vb );
+        root.getTabs().add( tab );
         primaryStage.setScene( new Scene( root, 800, 600 ) );
         primaryStage.show();
 
