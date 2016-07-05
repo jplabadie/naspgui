@@ -18,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.ReadFolder;
+import xmlbinds.ReadPair;
 
 import java.util.ArrayList;
 
@@ -165,13 +166,14 @@ class ReadFolderPane extends GridPane {
     }
 
 
-    void addReadPair( String sample_name, String read_a, String read_b ){
-        ReadPairPane rp = new ReadPairPane( sample_name, read_a, read_b );
+    void addReadPair( ReadPair input_pair ){
+        ReadPairPane rp = new ReadPairPane( input_pair );
         read_pairs_gridpanes.add( rp );
     }
 
     void addReadPair( ){
-        ReadPairPane rp = new ReadPairPane();
+        ReadPair new_rp = new ReadPair();
+        ReadPairPane rp = new ReadPairPane( new_rp );
         read_pairs_gridpanes.add( rp );
     }
 
