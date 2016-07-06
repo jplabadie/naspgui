@@ -21,17 +21,14 @@ public class JobTab extends Tab {
     private BorderPane borderPane = new BorderPane();
     private ScrollPane scrollPane = new ScrollPane();
     private VBox vBox = new VBox();
-    private ToolBar menu = new ToolBar();
+    private ToolBar bottom_toolbar = new ToolBar();
 
-
-    private JobRecord job_rec;
+    private JobRecord job_rec; //TODO: Integrate jobRecord/logging
 
     private OptionsPane optspane;
     private FilesPane filespane;
     private ExternalApplicationsPane xappspane;
     private NaspInputData NASP_DATA;
-
-
 
     private ObjectFactory OF = new ObjectFactory();
 
@@ -40,6 +37,7 @@ public class JobTab extends Tab {
      * @param input NaspInputData initialized from XML
      */
     JobTab( NaspInputData input ) {
+        // TODO: Display NaspInputData correctly in the View
         NASP_DATA = input;
     }
 
@@ -47,65 +45,83 @@ public class JobTab extends Tab {
      *  Creates a blank job and initializes new NASP data
      */
     JobTab() {
-        NASP_DATA = OF.createNaspInputData();
-        Options temp_opts = new Options();
-        Filters temp_filters = new Filters();
-        Reference temp_ref = new Reference();
-        temp_opts.setFilters(temp_filters);
-        temp_opts.setReference(temp_ref);
-        NASP_DATA.setOptions(temp_opts);
+        /**
+         * Create new (blank) NaspInputData root and populate with Children
+         */
+        NASP_DATA = OF.createNaspInputData(); // Create NaspInputData
 
-        Files temp_files = new Files();
-        AssemblyFolder temp_af = new AssemblyFolder();
-        Assembly temp_assembly = new Assembly();
-        temp_af.getAssembly().add(temp_assembly);
-        ReadFolder temp_rf = new ReadFolder();
-        ReadPair temp_rp = new ReadPair();
-        temp_rf.getReadPair().add(temp_rp);
-        temp_files.getAssemblyFolder().add(temp_af);
-        temp_files.getReadFolder().add(temp_rf);
-        NASP_DATA.setFiles( temp_files );
+        // Create and populate Options
+        Options options = OF.createOptions(); // create Options
+        options.setFilters( OF.createFilters() ); // create Filters
+        options.setReference( OF.createReference() ); // create Reference
+        NASP_DATA.setOptions( options ); // set NaspInputData Options to newly created objects
 
-        ExternalApplications temp_xa = new ExternalApplications();
+        //Create and populate Files
+        Files files = new Files(); // create Files
+        AssemblyFolder assembly_folder = new AssemblyFolder(); // create first empty AssemblyFolder
+        Assembly assembly = new Assembly(); // create first empty Assembly
+        assembly_folder.getAssembly().add(assembly); // add first Assembly to AssemblyFolder
+        ReadFolder read_folder = new ReadFolder(); // create first empty ReadFolder
+        ReadPair read_pair = new ReadPair(); // create first empty ReadPair
+        read_folder.getReadPair().add( read_pair ); // add first ReadPair to ReadFolder
+        files.getAssemblyFolder().add( assembly_folder ); // add AssemblyFolder to Files
+        files.getReadFolder().add( read_folder ); // add ReadFolder to Files
+        NASP_DATA.setFiles( files ); // add Files to NaspInputData
 
-        MatrixGenerator mg = new MatrixGenerator();
-        mg.setName( "MatrixGenerator" );
-        Index indx = new Index();
-        indx.setName( "Index" );
-        temp_xa.setMatrixGenerator( mg );
-        temp_xa.setIndex( indx );
-        NASP_DATA.setExternalApplications( temp_xa );
+        //Create and populate ExternalApplications
+        ExternalApplications temp_xa = new ExternalApplications(); // Create ExternalApplications
+        MatrixGenerator mg = new MatrixGenerator(); // Create MatrixGenerator
+        mg.setName( "MatrixGenerator" ); // set MatrixGenerator name to default (MatrixGenerator)
+        Index indx = new Index(); // Create Index
+        indx.setName( "Index" ); // set Index name to default (Index)
+        temp_xa.setMatrixGenerator( mg ); // add MatrixGenerator to ExternalApplications
+        temp_xa.setIndex( indx ); // add Index to ExternalApplications
+        NASP_DATA.setExternalApplications( temp_xa ); // Add ExternalApplications to NaspInputData
 
-        optspane = new OptionsPane( NASP_DATA.getOptions() );
-        filespane = new FilesPane( NASP_DATA.getFiles() );
-        xappspane = new ExternalApplicationsPane( NASP_DATA.getExternalApplications() );
+        optspane = new OptionsPane( NASP_DATA.getOptions() ); // init OptionsPane
+        filespane = new FilesPane( NASP_DATA.getFiles() ); // init FilesPane
+        xappspane = new ExternalApplicationsPane( NASP_DATA.getExternalApplications() ); //Init ExApps Pane
 
+        this.setContent( borderPane ); // set a BorderPane as the root container for this Tab
+        scrollPane.setContent( vBox ); // add a VBox to the scroll pane ( the VBox will hold our GridPanes )
+        borderPane.setCenter( scrollPane ); // add the scroll pane to the Center region of the BorderPane
 
-        this.setContent( borderPane );
-        scrollPane.setContent( vBox );
-        borderPane.setCenter( scrollPane );
+        vBox.getChildren().addAll( optspane, filespane, xappspane); // add our GridPanes to the VBox ( order matters )
 
-        vBox.getChildren().addAll( optspane, filespane, xappspane);
-
+        /**
+         * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
+         */
         Button start_job = new Button( "Start Job" );
         Button save_job = new Button( "Save Job" );
         Button load_job = new Button( "Load Job" );
-        menu.getItems().addAll( save_job, load_job, start_job );
-        vBox.getChildren().add( menu );
-        borderPane.setBottom( menu );
+        bottom_toolbar.getItems().addAll( save_job, load_job, start_job );
+        vBox.getChildren().add( bottom_toolbar );
+        borderPane.setBottom( bottom_toolbar );
 
+        /**
+         * Define save button actions
+         */
         save_job.setOnAction( event -> {
-            String output = optspane.getRunName();
+            String output = options.getRunName();
+            if (output == null)
+                output = "/temp";
+            System.out.println(NASP_DATA.getOptions().getFilters().getCoverageFilter());
+            JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
+        });
+
+        /**
+         * Define load button actions
+         */
+        load_job.setOnAction( event -> {
+            //TODO: Finish this func, include error handling and alerts
+            String output = options.getRunName();
             if (output == null)
                 output = "/temp";
             JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
         });
 
-        load_job.setOnAction( event -> { //TODO: Finish this func
-            String output = optspane.getRunName();
-            if (output == null)
-                output = "/temp";
-            JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
+        start_job.setOnAction( event -> {
+
         });
     }
 }

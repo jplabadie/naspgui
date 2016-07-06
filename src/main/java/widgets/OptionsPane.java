@@ -10,9 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import xmlbinds.Filters;
 import xmlbinds.Options;
-import xmlbinds.Reference;
 
 import java.util.ArrayList;
 
@@ -20,10 +18,9 @@ import java.util.ArrayList;
  * Project naspgui.
  * Created by jlabadie on 6/15/16.
  *
- * @Author jlabadie
+ * @author jlabadie
  */
 public class OptionsPane extends GridPane {
-
     private Label CORE_SETTINGS = new Label("Core Settings");
     private Label RUN_NAME = new Label("Run Name");
     private Label OUTPUT_PATH = new Label("Remote Output Path");
@@ -54,59 +51,61 @@ public class OptionsPane extends GridPane {
     private TextField cov_filter = new TextField();
     private ChoiceBox<String> job_submitter = new ChoiceBox<>();
 
-    private Options opts;
-    private Filters filters;
-    private Reference ref;
+    private Options options;
 
-    private ObservableList<Control> optionlist;
+    OptionsPane( Options input_options ){
+        /**
+         * Initialize links to binding objects
+         */
+        options = input_options;
 
-    OptionsPane(Options options){
-        ArrayList<Control> tf = new ArrayList<>();
-        optionlist = FXCollections.observableList( tf );
+        // Add options to job-submitter choicebox
+        ArrayList<String> job_sub_chocies = new ArrayList<>();
+        ObservableList<String> choice_list = FXCollections.observableArrayList( job_sub_chocies );
+        choice_list.addAll("PBS/Torque", "SLURM");
+        job_submitter.setItems( choice_list );
+        job_submitter.setValue( "PBS/Torque" ); //Default to PBS
 
         /**
          * Set Listeners on elements to auto-update xml_bind data
-         */
-        run_name.setOnAction( (event) -> opts.setRunName( run_name.getText() ));
+         */run_name.textProperty().addListener(
+                (observable -> {
+                    options.setRunName( run_name.getText());
+                })
+        );
 
-        output_path.setOnAction( (event) -> opts.setOutputFolder( output_path.getText() ));
+        output_path.textProperty().addListener(
+                (observable -> {
+                    options.setOutputFolder( output_path.getText() );
 
-        ref_name.setOnAction((event) -> ref.setName( ref_name.getText() ));
+                })
+        );
 
-        ref_path.setOnAction( (event) -> ref.setPath( ref_path.getText() ));
+        ref_name.textProperty().addListener(
+                (observable -> options.getReference().setName( run_name.getText()))
+        );
+
+        ref_path.textProperty().addListener(
+                (observable -> options.getReference().setPath( ref_path.getText()))
+        );
 
         find_dups.setAllowIndeterminate( false );
         find_dups.setOnAction( event -> {
             if( find_dups.isSelected() )
-                ref.setFindDups( "true" );
+                options.getReference().setFindDups( "true" );
             else
-                ref.setFindDups( "false" );
+                options.getReference().setFindDups( "false" );
         });
 
-        prop_filter.setOnAction( event -> filters.setProportionFilter( prop_filter.getText() ));
+        prop_filter.textProperty().addListener(
+                observable -> options.getFilters().setProportionFilter( prop_filter.getText() )
+        );
 
-        cov_filter.setOnAction( event -> filters.setCoverageFilter( cov_filter.getText() ));
+        cov_filter.textProperty().addListener(
+                observable -> options.getFilters().setCoverageFilter( cov_filter.getText() )
+        );
 
-        job_submitter.setOnAction( event -> opts.setJobSubmitter( job_submitter.getValue() ));
-
-        /**
-         * Initialize links to binding objects
-         */
-        opts = options; // This should never be null, but as a precaution...
-        if( opts == null )
-            opts = new Options();
-
-        filters = opts.getFilters();
-        if( filters == null ){
-            filters = new Filters();
-            opts.setFilters( filters );
-        }
-
-        ref = opts.getReference();
-        if( ref == null){
-            ref = new Reference();
-            opts.setReference( ref );
-        }
+        job_submitter.setOnAction( event -> options.setJobSubmitter( job_submitter.getValue() ));
 
         /**
          * Define the look and feel of static label elements
@@ -116,12 +115,12 @@ public class OptionsPane extends GridPane {
         CORE_SETTINGS.setAlignment( Pos.CENTER );
         CORE_SETTINGS.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         CORE_SETTINGS.setAlignment( Pos.CENTER );
-        RUN_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        OUTPUT_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        REFERENCE.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        FIND_DUPLICATES.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        FILTERS.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        JOB_SUBMITTER.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        RUN_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        OUTPUT_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        REFERENCE.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        FIND_DUPLICATES.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        FILTERS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        JOB_SUBMITTER.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
@@ -139,8 +138,8 @@ public class OptionsPane extends GridPane {
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 4 );
-        this.setVgap( 4 );
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 60, 120 );
         ColumnConstraints c1 = new ColumnConstraints( 25, 60, 120 );
@@ -184,63 +183,5 @@ public class OptionsPane extends GridPane {
         this.add( prop_filter,3,8,4,1 );
         this.add( cov_filter,3,9,4,1 );
         this.add( job_submitter,3,10,4,1 );
-
-        //TODO: Add listeners and observable list to tie fields to options object
-    }
-
-    String getRunName(){
-        return run_name.getText();
-    }
-    String getOuputPath(){
-        return output_path.getText();
-    }
-    String getReferenceName(){
-        return ref_name.getText();
-    }
-    String getReferencePath(){
-        return ref_path.getText();
-    }
-    Boolean getFindDuplicates(){
-        return find_dups.isSelected();
-    }
-    String getProportionFilter(){
-        return prop_filter.getText();
-    }
-    String getCoverageFilter(){
-        return cov_filter.getText();
-    }
-    String getJobSubmitter(){
-        return job_submitter.getValue();
-    }
-    ObservableList<String> getJobSubmitterOptions(){
-        return job_submitter.getItems();
-    }
-
-    void setRunName(String text){
-        run_name.setText(text);
-    }
-    void setOutputPath(String text){
-        output_path.setText(text);
-    }
-    void setReferenceName(String text){
-        ref_name.setText(text);
-    }
-    void setReferencePath(String text){
-        ref_path.setText(text);
-    }
-    void setFindDuplicates(boolean bool){
-        find_dups.setSelected(bool);
-    }
-    void setProportionFilter(String text){
-        prop_filter.setText(text);
-    }
-    void setCoverageFilter(String text){
-        cov_filter.setText(text);
-    }
-    void setJobSubmitter(String text){
-        job_submitter.setValue(text);
-    }
-    void setJobSubmitterOptions(ObservableList<String> options){
-        job_submitter.setItems(options);
     }
 }

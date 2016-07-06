@@ -12,11 +12,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import xmlbinds.AssemblyFolder;
-import xmlbinds.Files;
-import xmlbinds.ReadFolder;
+import xmlbinds.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project naspgui.
@@ -26,40 +25,51 @@ import java.util.ArrayList;
  */
 class FilesPane extends GridPane {
 
-    private GridPane F = this;
-    private Label FILES = new Label( "Files" );
+    private Label files_label = new Label( "Files" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-1.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/garbage-2.png" ) );
 
-    private ObservableList<AssemblyFolderPane> assemblies;
-    private ObservableList<ReadFolderPane> reads;
+    private ObservableList<AssemblyFolderPane> assemblyFolderPanes;
+    private ObservableList<ReadFolderPane> readFolderPanes;
+    private ObservableList<AssemblyFolder> ASSEMBLY_FOLDERS;
+    private ObservableList<ReadFolder> READ_FOLDERS;
 
     private VBox assbox = new VBox();
     private VBox readbox = new VBox();
 
-    private Files files = new Files();
+    private Files FILES;
 
+    /**
+     *
+     * @param input_files a Files Object from the root NaspInputData Object
+     */
+    FilesPane( Files input_files ){
 
-
-    FilesPane( Files files ){
+        FILES = input_files; // initialize File object ( an XML bind object )
         /**
-         * Initialize the observable list which will hold the read pairs for this widget
+         * Initialize observable lists for sub-elements which can change
          */
+        List<AssemblyFolder> af_list = FILES.getAssemblyFolder();
+        ASSEMBLY_FOLDERS = FXCollections.observableList( af_list );
+
+        List<ReadFolder> rf_list = FILES.getReadFolder();
+        READ_FOLDERS = FXCollections.observableList( rf_list );
+
         ArrayList<AssemblyFolderPane> asss =  new ArrayList<>();
-        assemblies = FXCollections.observableList( asss );
+        assemblyFolderPanes = FXCollections.observableList( asss );
 
         ArrayList<ReadFolderPane> readfolders =  new ArrayList<>();
-        reads = FXCollections.observableList( readfolders );
+        readFolderPanes = FXCollections.observableList( readfolders );
+
         /**
          * Define the look and feel of static label elements
          */
-
-        FILES.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
-        FILES.setPrefSize( 100, 20 );
-        FILES.setAlignment( Pos.CENTER );
-        FILES.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        FILES.setAlignment( Pos.CENTER );
+        files_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
+        files_label.setPrefSize( 100, 20 );
+        files_label.setAlignment( Pos.CENTER );
+        files_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        files_label.setAlignment( Pos.CENTER );
 
         /**
          * Add tooltips to the static label elements
@@ -69,13 +79,13 @@ class FilesPane extends GridPane {
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 4 );
-        this.setVgap( 4 );
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 60, 600 );
         //Define column auto-resizing behavior
-        c1.setHgrow( Priority.ALWAYS);
+        c1.setHgrow( Priority.ALWAYS );
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1 );
 
@@ -84,7 +94,7 @@ class FilesPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add(FILES, 0, 0, 3, 1);
+        this.add(files_label, 0, 0, 3, 1);
 
         // Add the button to the widget with an event handler
 
@@ -95,70 +105,120 @@ class FilesPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        assemblies.addListener(new ListChangeListener<GridPane>() {
-
+        /**
+         * Add a listener to watch the AssemblyFolder list in NaspInputData itself, and update the view as needed
+         */
+        ASSEMBLY_FOLDERS.addListener( new ListChangeListener<AssemblyFolder>() {
             @Override
-            public void onChanged( Change<? extends GridPane> c ) {
-                while ( c.next() ) {
-                    if ( c.wasAdded() ) {
-                        for ( GridPane gp : c.getAddedSubList() ) {
-                            // Add the remove button to the widget
-                            Button remove_assembly = new Button();
-                            Button add_assembly = new Button();
-                            add_assembly.setTooltip(new Tooltip( "Add a new assembly folder" ));
-                            remove_assembly.setTooltip(new Tooltip("Remove this assembly folder"));
-
-                            ImageView image_view1 = new ImageView( add );
-                            image_view1.setFitHeight( 20 );
-                            image_view1.setFitWidth( 20 );
-                            remove_assembly.setGraphic( image_view1 );
-                            add_assembly.setGraphic( image_view1 );
-                            add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
-
-                            add_assembly.setOnAction( event -> addAssemblyFolder() );
-
-                            ImageView image_view2 = new ImageView( remove);
-                            image_view2.setFitHeight( 20 );
-                            image_view2.setFitWidth( 20 );
-                            remove_assembly.setGraphic( image_view2 );
-
-                            AssemblyFolder assf = new AssemblyFolder();
-                            //TODO: ADD AssemblyFolder (af) to Files (files) should accept multiple
-                            AssemblyFolderPane new_folder = new AssemblyFolderPane( assf );
-                            HBox assmblybox = new HBox();
-                            assmblybox.getChildren().addAll( new_folder );
-                            assmblybox.setAlignment(Pos.BOTTOM_CENTER);
-
-                            new_folder.setButtons( add_assembly, remove_assembly );
-                            assbox.getChildren().addAll( assmblybox );
-
-                            remove_assembly.setOnAction(
-                                    event -> {
-                                        if(assemblies.size() > 1) {
-                                            assemblies.remove( gp );
-                                            assbox.getChildren().remove( assmblybox );
-                                        }
-                                        else if( assemblies.size() == 1 ){
-                                            AssemblyFolderPane af = assemblies.get( 0 );
-                                            af.clear();
-                                        }
-                                    }
-                            );
+            public void onChanged( Change<? extends AssemblyFolder> c ) {
+                while( c.next() ){
+                    if( c.wasAdded() ){
+                        for( AssemblyFolder new_folder : c.getAddedSubList() ){
+                            AssemblyFolderPane new_folder_pane = new AssemblyFolderPane( new_folder );
+                            assemblyFolderPanes.add( new_folder_pane );
+                            FILES.getAssemblyFolder().add( new_folder );
                         }
+
                     }
-                    if ( c.wasRemoved() ) {
-                        for ( GridPane gp : c.getRemoved() ) {
-                            assbox.getChildren().remove(gp);
+                }
+            }
+        });
+
+        /**
+         * Add a listener to watch the ReadFolder list in NaspInputData itself, and update the view as needed
+         */
+        READ_FOLDERS.addListener( new ListChangeListener<ReadFolder>() {
+            @Override
+            public void onChanged( Change<? extends ReadFolder> c ) {
+                while( c.next() ){
+                    if( c.wasAdded() ){
+                        for( ReadFolder new_folder : c.getAddedSubList() ){
+                            ReadFolderPane new_folder_pane = new ReadFolderPane( new_folder );
+                            readFolderPanes.add( new_folder_pane );
+                            FILES.getReadFolder().add( new_folder );
                         }
                     }
                 }
             }
         });
 
-        reads.addListener(new ListChangeListener<GridPane>() {
-
+        /**
+         * Add a listener to watch the AssemblyFolderPane list, and update ASSEMBLY_FOLDERS and the view as needed
+         */
+        assemblyFolderPanes.addListener( new ListChangeListener<AssemblyFolderPane>() {
             @Override
-            public void onChanged( Change<? extends GridPane> c ) {
+            public void onChanged( Change<? extends AssemblyFolderPane > c ) {
+                while ( c.next() ) {
+                    if ( c.wasAdded() ) {
+                        for ( AssemblyFolderPane gp : c.getAddedSubList() ) {
+                            // Add the remove button to the widget
+                            Button remove_assembly = new Button();
+                            Button add_assembly = new Button();
+                            add_assembly.setTooltip(new Tooltip( "Add a new assembly folder" ));
+                            remove_assembly.setTooltip(new Tooltip("Remove this assembly folder"));
+
+                            ImageView add_icon_view = new ImageView( add );
+                            add_icon_view.setFitHeight( 20 );
+                            add_icon_view.setFitWidth( 20 );
+                            remove_assembly.setGraphic( add_icon_view );
+                            add_assembly.setGraphic( add_icon_view );
+                            add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
+
+                            ImageView remove_icon_view = new ImageView( remove );
+                            remove_icon_view.setFitHeight( 20 );
+                            remove_icon_view.setFitWidth( 20 );
+                            remove_assembly.setGraphic( remove_icon_view );
+
+                            /**
+                             * When the new_folder button is pressed, add a new assembly folder to the FILES list
+                             * with an Assembly
+                             */
+                            add_assembly.setOnAction( event -> {
+                                AssemblyFolder new_folder = new AssemblyFolder();
+                                Assembly new_assembly = new Assembly();
+                                new_folder.getAssembly().add( new_assembly );
+                                ASSEMBLY_FOLDERS.add( new_folder );
+                            } );
+
+                            AssemblyFolder new_assembly_folder = new AssemblyFolder();
+                            //TODO: ADD AssemblyFolder (af) to Files (files) should accept multiple
+                            AssemblyFolderPane new_folder_pane = new AssemblyFolderPane( new_assembly_folder );
+                            HBox assmblybox = new HBox();
+                            assmblybox.getChildren().addAll( new_folder_pane );
+                            assmblybox.setAlignment(Pos.BOTTOM_CENTER);
+
+                            new_folder_pane.setButtons( add_assembly, remove_assembly );
+                            assbox.getChildren().addAll( assmblybox );
+
+                            remove_assembly.setOnAction(
+                                    event -> {
+                                        if(assemblyFolderPanes.size() > 1) {
+                                            assemblyFolderPanes.remove( gp );
+                                            assbox.getChildren().remove( assmblybox );
+
+                                        }
+                                        else if( assemblyFolderPanes.size() == 1 ){
+                                            AssemblyFolderPane af = assemblyFolderPanes.get( 0 );
+                                            af.clear();
+                                        }
+                                    }
+                            );
+
+                        }
+                    }
+                    if ( c.wasRemoved() ) {
+                        for ( AssemblyFolderPane gp : c.getRemoved() ) {
+                            assbox.getChildren().remove( gp );
+                            ASSEMBLY_FOLDERS.remove( gp.getAssemblyFolder() );
+                        }
+                    }
+                }
+            }
+        });
+
+        readFolderPanes.addListener(new ListChangeListener<ReadFolderPane>() {
+            @Override
+            public void onChanged( Change<? extends ReadFolderPane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
                         for ( GridPane gp : c.getAddedSubList() ) {
@@ -173,7 +233,12 @@ class FilesPane extends GridPane {
                             add_rf.setGraphic( image_view1 );
                             add_rf.setAlignment( Pos.BOTTOM_RIGHT );
 
-                            add_rf.setOnAction( event -> addReadFolder() );
+                            add_rf.setOnAction( event -> {
+                                ReadFolder new_folder = new ReadFolder();
+                                ReadPair new_pair = new ReadPair();
+                                new_folder.getReadPair().add( new_pair );
+                                READ_FOLDERS.add( new_folder );
+                            } );
 
                             ImageView image_view2 = new ImageView( remove);
                             image_view2.setFitHeight( 20 );
@@ -192,12 +257,12 @@ class FilesPane extends GridPane {
 
                             remove_rf.setOnAction(
                                     event -> {
-                                        if(reads.size() > 1) {
-                                            reads.remove( gp );
+                                        if(readFolderPanes.size() > 1) {
+                                            readFolderPanes.remove( gp );
                                             readbox.getChildren().remove( hbox );
                                         }
-                                        else if( reads.size() == 1 ){
-                                            ReadFolderPane rf = reads.get( 0 );
+                                        else if( readFolderPanes.size() == 1 ){
+                                            ReadFolderPane rf = readFolderPanes.get( 0 );
                                             rf.clear();
                                         }
                                     }
@@ -205,35 +270,20 @@ class FilesPane extends GridPane {
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( GridPane gp : c.getRemoved() ) {
+                        for ( ReadFolderPane gp : c.getRemoved() ) {
                             readbox.getChildren().remove( gp );
+                            READ_FOLDERS.remove( gp.getReadFolder() );
                         }
                     }
                 }
             }
         });
 
-        this.addAssemblyFolder();
-        this.addReadFolder();
-    }
+        AssemblyFolder af1 = new AssemblyFolder();
+        ReadFolder rf1 = new ReadFolder();
 
-    void addAssemblyFolder( AssemblyFolder assfolder ){
-        AssemblyFolderPane af = new AssemblyFolderPane( assfolder );
-        assemblies.add( af );
-    }
+        ASSEMBLY_FOLDERS.add( af1 );
+        READ_FOLDERS.add( rf1 );
 
-    void addAssemblyFolder(){
-        AssemblyFolderPane af = new AssemblyFolderPane ( new AssemblyFolder() );
-        assemblies.add( af );
-    }
-
-    void addReadFolder( ReadFolder readfolder ){
-        ReadFolderPane rf = new ReadFolderPane( readfolder );
-        reads.add( rf );
-    }
-
-    void addReadFolder(){
-        ReadFolderPane rf = new ReadFolderPane( new ReadFolder() );
-        reads.add( rf );
     }
 }

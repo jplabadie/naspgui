@@ -46,11 +46,11 @@ class AssemblyFolderPane extends GridPane {
 
     private int grid_row_position = 2;
 
-    private AssemblyFolder assfolder;
+    private AssemblyFolder assemblyFolder;
 
     AssemblyFolderPane( AssemblyFolder asf ){
 
-        assfolder = asf;
+        assemblyFolder = asf;
 
         initializeData();
         /**
@@ -203,8 +203,16 @@ class AssemblyFolderPane extends GridPane {
     }
 
     private void initializeData(){
-        assembly_folder_path.setText( assfolder.getPath() );
+        assembly_folder_path.setText( assemblyFolder.getPath() );
 
 
+    }
+
+    public AssemblyFolder getAssemblyFolder() {
+        return assemblyFolder;
+    }
+
+    public void setAssemblyFolder( AssemblyFolder input){
+        assemblyFolder = input;
     }
 }

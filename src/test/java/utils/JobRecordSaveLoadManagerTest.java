@@ -3,17 +3,17 @@ package utils;
 import xmlbinds.NaspInputData;
 
 import java.io.File;
+import java.net.URL;
 
 /**
  * @author Jean-Paul Labadie
  */
 public class JobRecordSaveLoadManagerTest {
 
-    private static JobSaveLoadManager tempparser;
 
     @org.junit.BeforeClass
     public static void onlyOnce(){
-        tempparser =JobSaveLoadManager.getInstance();
+
     }
 
     @org.junit.Test
@@ -27,9 +27,13 @@ public class JobRecordSaveLoadManagerTest {
         NaspInputData naspInputData = null;
         try {
 
-            File nip = new File(getClass().getClassLoader().getResource("test/NaspInputExample_Aspen.xml").getPath());
+            URL nip = getClass()
+                    .getResource("/Users/jlabadie/Workspace/naspgui/src/test/java/utils/NaspInputExample.xml");
+            File nfile = new File(nip.getFile());
 
-            naspInputData = tempparser.jaxbXMLToObject(nip);
+            naspInputData = JobSaveLoadManager.jaxbXMLToObject(nfile);
+
+            JobSaveLoadManager.jaxbObjectToXML(naspInputData, "test_out");
 
         }
         catch (NullPointerException e){

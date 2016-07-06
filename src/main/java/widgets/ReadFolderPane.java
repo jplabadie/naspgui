@@ -193,4 +193,12 @@ class ReadFolderPane extends GridPane {
         button_box.getChildren().addAll(add_readfolder, remove_readfolder);
         this.add( button_box, 3, 0, 3, 1);
     }
+
+    ReadFolder getReadFolder(){
+        return readfolder;
+    }
+
+    void setReadFolder( ReadFolder input ){
+        readfolder = input;
+    }
 }

@@ -1,9 +1,11 @@
 package utils;
 
 import xmlbinds.NaspInputData;
-import xmlbinds.ObjectFactory;
 
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 
@@ -29,7 +31,7 @@ public class JobSaveLoadManager {
     @SuppressWarnings(" unchecked ")
     public static NaspInputData jaxbXMLToObject(File xml_path) {
         try {
-            JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
+            JAXBContext context = JAXBContext.newInstance(NaspInputData.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             NaspInputData naspData = ((NaspInputData) unmarshaller.unmarshal(xml_path));
             lm.info(null, null, "JSLM: Job XML loaded and converted to objects from: "+xml_path.getPath());
@@ -51,7 +53,7 @@ public class JobSaveLoadManager {
      */
     public static void jaxbObjectToXML(NaspInputData input_for_conversion, String output_path) {
         try {
-            JAXBContext context = JAXBContext.newInstance(NaspInputData.class);
+            JAXBContext context = JAXBContext.newInstance( input_for_conversion.getClass() );
             Marshaller m = context.createMarshaller();
             //for "pretty-print" XML in JAXB
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
