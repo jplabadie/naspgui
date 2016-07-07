@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
+import java.util.List;
 
 
 /**
@@ -45,7 +46,35 @@ public class ObjectFactory {
      * 
      */
     public NaspInputData createNaspInputData() {
-        return new NaspInputData();
+
+        NaspInputData naspInputData = new NaspInputData();
+
+            Options options = new Options();
+                Filters filters = new Filters();
+                Reference reference = new Reference();
+            options.setFilters( filters );
+            options.setReference( reference );
+        naspInputData.setOptions( options );
+
+        Files files = new Files();
+            List<AssemblyFolder> assemblyFolderList = files.getAssemblyFolder();
+                AssemblyFolder assemblyFolder = new AssemblyFolder();
+                    List<Assembly> assemblyList = assemblyFolder.getAssembly();
+                        Assembly assembly = new Assembly();
+                    assemblyList.add( assembly );
+                assemblyFolderList.add( assemblyFolder );
+            List<ReadFolder> readFolderList = files.getReadFolder();
+                ReadFolder readFolder = new ReadFolder();
+                    List<ReadPair> readPairList =  readFolder.getReadPair();
+                        ReadPair readPair = new ReadPair();
+                    readPairList.add( readPair );
+                readFolderList.add( readFolder );
+        naspInputData.setFiles( files );
+
+        ExternalApplications externalApplications = new ExternalApplications();
+        naspInputData.setExternalApplications( externalApplications );
+
+        return naspInputData;
     }
 
     /**

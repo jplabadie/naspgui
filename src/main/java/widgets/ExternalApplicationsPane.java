@@ -34,7 +34,7 @@ class ExternalApplicationsPane extends GridPane {
 
     private VBox appbox = new VBox();
 
-    private ExternalApplications exaps_bind;
+    private ExternalApplications EXTERNALAPPS;
 
 
     ExternalApplicationsPane( ExternalApplications binding ) {
@@ -44,7 +44,7 @@ class ExternalApplicationsPane extends GridPane {
         ArrayList<ApplicationPane> app_panes = new ArrayList<>();
         apps = FXCollections.observableList(app_panes);
 
-        exaps_bind = binding;
+        EXTERNALAPPS = binding;
 
         /**
          * Define the look and feel of static label elements
@@ -63,15 +63,15 @@ class ExternalApplicationsPane extends GridPane {
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap(4);
-        this.setVgap(4);
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
-        ColumnConstraints c0 = new ColumnConstraints(30, 60, 90);
-        ColumnConstraints c1 = new ColumnConstraints(30, 200, 600);
+        ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
+        ColumnConstraints c1 = new ColumnConstraints( 30, 200, 600 );
         //Define column auto-resizing behavior
-        c1.setHgrow(Priority.ALWAYS);
+        c1.setHgrow( Priority.ALWAYS );
         // Add column behavior to the GridPane (order matters!)
-        this.getColumnConstraints().addAll(c0, c1);
+        this.getColumnConstraints().addAll( c0, c1 );
 
         /**
          * Define the look and behavior of the non-static TextField and Label elements
@@ -80,7 +80,8 @@ class ExternalApplicationsPane extends GridPane {
         // Add the title to row 0 column 0
         this.add(EXAPPS, 0, 0, 3, 1);
 
-        // Add the button to the widget with an event handler
+        // Add the application box to the widget with an event handler
+        appbox.setSpacing(5);
         this.add(appbox, 1, 1, 3, 1);
 
         ImageView image_view = new ImageView(add);
@@ -137,46 +138,46 @@ class ExternalApplicationsPane extends GridPane {
             }
         });
 
-        if(exaps_bind == null){
-            exaps_bind = new ExternalApplications();
+        if(EXTERNALAPPS == null){
+            EXTERNALAPPS = new ExternalApplications();
         }
         else{
-            if( exaps_bind.getIndex() != null ){
+            if( EXTERNALAPPS.getIndex() != null ){
                 ApplicationPane< Index > app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getIndex() );
+                app.setAppBind( EXTERNALAPPS.getIndex() );
                 addApplication( app );
             }
-            if( exaps_bind.getMatrixGenerator() != null ){
+            if( EXTERNALAPPS.getMatrixGenerator() != null ){
                 ApplicationPane< MatrixGenerator > app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getMatrixGenerator() );
+                app.setAppBind( EXTERNALAPPS.getMatrixGenerator() );
                 addApplication( app );
             }
-            if( exaps_bind.getPicard() != null ){
+            if( EXTERNALAPPS.getPicard() != null ){
                 ApplicationPane<Picard> app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getPicard() );
+                app.setAppBind( EXTERNALAPPS.getPicard() );
                 addApplication( app );
             }
-            if( exaps_bind.getSamtools() != null ){
+            if( EXTERNALAPPS.getSamtools() != null ){
                 ApplicationPane<Samtools> app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getSamtools() );
+                app.setAppBind( EXTERNALAPPS.getSamtools() );
                 addApplication( app );
             }
-            if( exaps_bind.getDupFinder() != null ){
+            if( EXTERNALAPPS.getDupFinder() != null ){
                 ApplicationPane<DupFinder> app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getDupFinder() );
+                app.setAppBind( EXTERNALAPPS.getDupFinder() );
                 addApplication( app );
             }
-            if( exaps_bind.getAssemblyImporter() != null){
+            if( EXTERNALAPPS.getAssemblyImporter() != null){
                 ApplicationPane<AssemblyImporter> app = new ApplicationPane<>();
-                app.setAppBind( exaps_bind.getAssemblyImporter() );
+                app.setAppBind( EXTERNALAPPS.getAssemblyImporter() );
                 addApplication( app );
             }
-            for( SNPCaller temp : exaps_bind.getSNPCaller()){
+            for( SNPCaller temp : EXTERNALAPPS.getSNPCaller()){
                 ApplicationPane<SNPCaller> app = new ApplicationPane<>();
                 app.setAppBind( temp );
                 addApplication( app );
             }
-            for( Aligner temp : exaps_bind.getAligner()){
+            for( Aligner temp : EXTERNALAPPS.getAligner()){
                 ApplicationPane<Aligner> app = new ApplicationPane<>();
                 app.setAppBind( temp );
                 addApplication( app );

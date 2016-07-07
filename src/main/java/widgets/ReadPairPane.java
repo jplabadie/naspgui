@@ -1,8 +1,5 @@
 package widgets;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,8 +10,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.ReadPair;
 
-import java.util.ArrayList;
-
 /**
  * Project naspgui.
  * Created by jlabadie on 6/16/16.
@@ -23,43 +18,40 @@ import java.util.ArrayList;
  */
 class ReadPairPane extends WidgetPane {
 
-    private Label READ_PAIR = new Label( "Read Pair" );
-    private Label SAMPLE_NAME = new Label( "Sample Name" );
-    private Label READ_FILE_A = new Label( "Read File A" );
-    private Label READ_FILE_B = new Label( "Read File B" );
+    private Label read_pair_label = new Label( "Read Pair" );
+    private Label sample_name_label = new Label( "Sample Name" );
+    private Label read_file_a_label = new Label( "Read File A" );
+    private Label read_file_b_label = new Label( "Read File B" );
 
-    private Tooltip SAMPLE_NAME_TIP = new Tooltip( "The name given to this sample" );
-    private Tooltip READ_FILE_A_TIP = new Tooltip( "The name of the file for read A for the read pair" );
-    private Tooltip READ_FILE_B_TIP = new Tooltip( "The name of the file for read B for the read pair" );
+    private Tooltip sample_name_tip = new Tooltip( "The name given to this sample" );
+    private Tooltip read_file_a_tip = new Tooltip( "The name of the file for read A for the read pair" );
+    private Tooltip read_file_b_tip = new Tooltip( "The name of the file for read B for the read pair" );
 
     private TextField sample_name = new TextField();
     private TextField read_file_a = new TextField();
     private TextField read_file_b = new TextField();
 
-    private ReadPair rp;
 
-    private ObservableList<TextField> elements;
-
-    private ReadPair readpair;
+    private ReadPair READPAIR;
 
     ReadPairPane( ReadPair read_in){
-        readpair = read_in;
-        if(readpair == null)
-            readpair = new ReadPair();
+        READPAIR = read_in;
+        if(READPAIR == null)
+            READPAIR = new ReadPair();
         else{
-            sample_name.setText( readpair.getSample() );
-            read_file_a.setText( readpair.getRead1Filename() );
-            read_file_b.setText( readpair.getRead2Filename() );
+            sample_name.setText( READPAIR.getSample() );
+            read_file_a.setText( READPAIR.getRead1Filename() );
+            read_file_b.setText( READPAIR.getRead2Filename() );
         }
 
-        READ_PAIR.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        SAMPLE_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        READ_FILE_A.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        READ_FILE_B.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        read_pair_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        sample_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        read_file_a_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        read_file_b_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
-        SAMPLE_NAME.setTooltip(SAMPLE_NAME_TIP);
-        READ_FILE_A.setTooltip(READ_FILE_A_TIP);
-        READ_FILE_B.setTooltip(READ_FILE_B_TIP);
+        sample_name_label.setTooltip(sample_name_tip);
+        read_file_a_label.setTooltip(read_file_a_tip);
+        read_file_b_label.setTooltip(read_file_b_tip);
         /**
          * Define the look and behavior of the GridPane
          */
@@ -84,74 +76,53 @@ class ReadPairPane extends WidgetPane {
          */
 
         // Add the title to row 0 column 0
-        this.add( READ_PAIR, 0, 0, 3, 1 );
+        this.add(read_pair_label, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( SAMPLE_NAME, 1, 1, 3, 1 );
-        this.add( READ_FILE_A, 1, 2, 3, 1 );
-        this.add( READ_FILE_B, 1, 3, 3, 1 );
+        this.add(sample_name_label, 1, 1, 3, 1 );
+        this.add(read_file_a_label, 1, 2, 3, 1 );
+        this.add(read_file_b_label, 1, 3, 3, 1 );
 
         this.add( sample_name, 2, 1, 3, 1 );
         this.add( read_file_a, 2, 2, 3, 1 );
         this.add( read_file_b, 2, 3, 3, 1 );
 
-        ArrayList<TextField> temp = new ArrayList<>();
-        elements = FXCollections.observableArrayList(temp);
-
-        elements.addAll( sample_name, read_file_a, read_file_b );
-
-        elements.addListener(new ListChangeListener<TextField>() {
-            @Override
-            public void onChanged(Change<? extends TextField> c) {
-                if(rp == null){
-                    rp = new ReadPair();
+        sample_name.textProperty().addListener(
+                observable -> {
+                    READPAIR.setSample( sample_name.getText() );
                 }
-                while( c.next() ){
-                    //Hacky, any change will save all fields to the xmlbind
-                    rp.setSample( sample_name.getText() );
-                    rp.setRead1Filename( read_file_a.getText() );
-                    rp.setRead2Filename( read_file_b.getText() );
+        );
+
+        read_file_a.textProperty().addListener(
+                observable -> {
+                    READPAIR.setRead1Filename( read_file_a.getText());
                 }
-            }
-        });
+        );
+
+        read_file_b.textProperty().addListener(
+                observable -> {
+                    READPAIR.setRead2Filename( read_file_b.getText());
+                }
+        );
     }
 
-    String getSampleName(){
-        return sample_name.getText();
-    }
-    void setSampleName( String name ){
-        sample_name.setText( name );
-    }
-
-    String getReadFileA(){
-        return read_file_a.getText();
-    }
-    void setReadFileA( String file ){
-        read_file_a.setText( file );
-    }
-
-    String getReadFileB(){
-        return read_file_b.getText();
-    }
-    void setReadFileB( String file ){
-        read_file_b.setText( file );
-    }
 
     @Override
     void setTitle(String title) {
 
     }
 
-    void clear() {
-        setReadFileA( "" );
-        setReadFileB( "" );
-        setSampleName( "" );
+    void clear(){
+        sample_name.setText("");
+        read_file_a.setText("");
+        read_file_b.setText("");
     }
 
-    void setXMLBind( ReadPair readpair ){
-        rp = readpair;
-        sample_name.setText( readpair.getSample() );
-        read_file_a.setText( readpair.getRead1Filename() );
-        read_file_b.setText( readpair.getRead2Filename() );
+    void setReadPair( ReadPair input_pair ){
+        READPAIR = input_pair;
+    }
+
+    ReadPair getReadPair(){
+        return READPAIR;
     }
 }

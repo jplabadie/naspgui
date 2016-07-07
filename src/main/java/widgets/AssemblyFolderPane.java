@@ -21,6 +21,7 @@ import xmlbinds.Assembly;
 import xmlbinds.AssemblyFolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project naspgui.
@@ -31,55 +32,57 @@ import java.util.ArrayList;
 class AssemblyFolderPane extends GridPane {
 
     private GridPane AF = this;
-    private Label ASSEMBLY_FOLDER = new Label( "Assembly Folder" );
-    private Label ASSEMBLY_FOLDER_PATH = new Label( "Folder Path" );
+    private Label assembly_folder_label = new Label( "Assembly Folder" );
+    private Label assembly_folder_path_label = new Label( "Folder Path" );
 
-    private TextField assembly_folder_path = new TextField();
+    private TextField assemblyFolderPath = new TextField();
 
-    private Tooltip ASSEMBLY_FOLDER_PATH_TIP
+    private Tooltip assembly_folder_path_tip
             = new Tooltip( "The remote path containing the assemblies you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<AssemblyPane> assembly_gridpanes;
+    private ObservableList<AssemblyPane> assemblyGridpanes;
 
     private int grid_row_position = 2;
 
-    private AssemblyFolder assemblyFolder;
+    private AssemblyFolder ASSEMBLYFOLDER;
+    private List<Assembly> ASSEMBLIES;
 
-    AssemblyFolderPane( AssemblyFolder asf ){
+    AssemblyFolderPane( AssemblyFolder input_assembly_folder ){
 
-        assemblyFolder = asf;
+        ASSEMBLYFOLDER = input_assembly_folder;
+        ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
 
-        initializeData();
+        assemblyFolderPath.setText( ASSEMBLYFOLDER.getPath() );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
         ArrayList<AssemblyPane> ass_pairings =  new ArrayList<>();
-        assembly_gridpanes = FXCollections.observableList( ass_pairings );
+        assemblyGridpanes = FXCollections.observableList( ass_pairings );
 
         /**
          * Define the look and feel of static label elements
          */
-        ASSEMBLY_FOLDER.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
-        ASSEMBLY_FOLDER.setPrefSize( 100, 20 );
-        ASSEMBLY_FOLDER.setAlignment( Pos.CENTER );
-        ASSEMBLY_FOLDER.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        ASSEMBLY_FOLDER.setAlignment( Pos.CENTER );
-        ASSEMBLY_FOLDER_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        assembly_folder_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        assembly_folder_label.setPrefSize( 100, 20 );
+        assembly_folder_label.setAlignment( Pos.CENTER );
+        assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        assembly_folder_label.setAlignment( Pos.CENTER );
+        assembly_folder_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
          */
-        ASSEMBLY_FOLDER_PATH.setTooltip(ASSEMBLY_FOLDER_PATH_TIP);
+        assembly_folder_path_label.setTooltip(assembly_folder_path_tip);
 
         /**
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 4 );
-        this.setVgap( 4 );
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
@@ -98,11 +101,17 @@ class AssemblyFolderPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add( ASSEMBLY_FOLDER, 0, 0, 3, 1 );
+        this.add( assembly_folder_label, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( ASSEMBLY_FOLDER_PATH, 1, 1, 3, 1 );
-        this.add( assembly_folder_path, 3, 1, 4, 1 );
+        this.add(assembly_folder_path_label, 1, 1, 3, 1 );
+        this.add(assemblyFolderPath, 3, 1, 4, 1 );
+
+        assemblyFolderPath.textProperty().addListener(
+                observable -> {
+                    ASSEMBLYFOLDER.setPath( assemblyFolderPath.getText() );
+                }
+        );
 
         // Add the button to the widget with an event handler
 
@@ -110,13 +119,12 @@ class AssemblyFolderPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        assembly_gridpanes.addListener(new ListChangeListener<GridPane>() {
-
+        assemblyGridpanes.addListener( new ListChangeListener<AssemblyPane>() {
             @Override
-            public void onChanged( Change<? extends GridPane> c ) {
+            public void onChanged( Change<? extends AssemblyPane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
-                        for ( GridPane gp : c.getAddedSubList() ) {
+                        for ( AssemblyPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_assembly = new Button();
 
@@ -128,9 +136,14 @@ class AssemblyFolderPane extends GridPane {
                             add_assembly.setGraphic( image_view1 );
                             add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
 
-                            add_assembly.setOnAction( event -> addAssembly() );
+                            add_assembly.setOnAction( event -> {
+                                Assembly assembly = new Assembly();
+                                AssemblyPane ap = new AssemblyPane( assembly );
+                                ASSEMBLIES.add( assembly );
+                                assemblyGridpanes.add ( ap );
+                            } );
 
-                            ImageView image_view2 = new ImageView( remove);
+                            ImageView image_view2 = new ImageView( remove );
                             image_view2.setFitHeight( 20 );
                             image_view2.setFitWidth( 20 );
                             remove_assembly.setGraphic( image_view2 );
@@ -142,12 +155,12 @@ class AssemblyFolderPane extends GridPane {
 
                             remove_assembly.setOnAction(
                                     event -> {
-                                        if(assembly_gridpanes.size() > 1) {
-                                            assembly_gridpanes.remove( gp );
+                                        if( assemblyGridpanes.size() > 1 ) {
+                                            assemblyGridpanes.remove( gp );
                                             AF.getChildren().remove( hbox );
                                         }
-                                        else if( assembly_gridpanes.size() == 1 ){
-                                            AssemblyPane ap = assembly_gridpanes.get( 0 );
+                                        else if( assemblyGridpanes.size() == 1 ){
+                                            AssemblyPane ap = assemblyGridpanes.get( 0 );
                                             ap.clear();
                                         }
                                     }
@@ -156,37 +169,23 @@ class AssemblyFolderPane extends GridPane {
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( GridPane gp : c.getRemoved() ) {
+                        for ( AssemblyPane gp : c.getRemoved() ) {
                             AF.getChildren().remove( gp );
+                            ASSEMBLIES.remove( gp.getAssembly() );
                             grid_row_position--;
                         }
                     }
                 }
             }
         });
-        this.addAssembly();
-    }
-
-    void addAssembly( Assembly ass ){
-        AssemblyPane ap = new AssemblyPane( ass );
-        assembly_gridpanes.add( ap );
-    }
-
-    void addAssembly( ){
-        AssemblyPane ap = new AssemblyPane( new Assembly() );
-        assembly_gridpanes.add( ap );
-    }
-
-    void setFolderPath( String text ){
-        assembly_folder_path.setText( text );
-    }
-
-    String getFolderPath(){
-        return  assembly_folder_path.getText();
+        for( Assembly assmbly: ASSEMBLIES){
+            AssemblyPane ap = new AssemblyPane( assmbly );
+            assemblyGridpanes.add( ap );
+        }
     }
 
     void clear(){
-        assembly_gridpanes.clear();
+        assemblyGridpanes.clear();
     }
 
     /**
@@ -195,24 +194,18 @@ class AssemblyFolderPane extends GridPane {
      * @param add_assembly
      * @param remove_assembly
      */
-    public void setButtons( Button add_assembly, Button remove_assembly ) {
+    void setButtons( Button add_assembly, Button remove_assembly ) {
 
         HBox button_box = new HBox();
         button_box.getChildren().addAll(add_assembly, remove_assembly);
         this.add( button_box, 3, 0, 3, 1);
     }
 
-    private void initializeData(){
-        assembly_folder_path.setText( assemblyFolder.getPath() );
-
-
+    AssemblyFolder getAssemblyFolder() {
+        return ASSEMBLYFOLDER;
     }
 
-    public AssemblyFolder getAssemblyFolder() {
-        return assemblyFolder;
-    }
-
-    public void setAssemblyFolder( AssemblyFolder input){
-        assemblyFolder = input;
+    public void setAssemblyFolder(AssemblyFolder input){
+        ASSEMBLYFOLDER = input;
     }
 }

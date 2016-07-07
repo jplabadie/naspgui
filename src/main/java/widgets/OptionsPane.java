@@ -51,15 +51,15 @@ public class OptionsPane extends GridPane {
     private TextField cov_filter = new TextField();
     private ChoiceBox<String> job_submitter = new ChoiceBox<>();
 
-    private Options options;
+    private Options OPTIONS;
 
     OptionsPane( Options input_options ){
         /**
          * Initialize links to binding objects
          */
-        options = input_options;
+        OPTIONS = input_options;
 
-        // Add options to job-submitter choicebox
+        // Add OPTIONS to job-submitter choicebox
         ArrayList<String> job_sub_chocies = new ArrayList<>();
         ObservableList<String> choice_list = FXCollections.observableArrayList( job_sub_chocies );
         choice_list.addAll("PBS/Torque", "SLURM");
@@ -70,42 +70,42 @@ public class OptionsPane extends GridPane {
          * Set Listeners on elements to auto-update xml_bind data
          */run_name.textProperty().addListener(
                 (observable -> {
-                    options.setRunName( run_name.getText());
+                    OPTIONS.setRunName( run_name.getText());
                 })
         );
 
         output_path.textProperty().addListener(
                 (observable -> {
-                    options.setOutputFolder( output_path.getText() );
+                    OPTIONS.setOutputFolder( output_path.getText() );
 
                 })
         );
 
         ref_name.textProperty().addListener(
-                (observable -> options.getReference().setName( run_name.getText()))
+                (observable -> OPTIONS.getReference().setName( run_name.getText()))
         );
 
         ref_path.textProperty().addListener(
-                (observable -> options.getReference().setPath( ref_path.getText()))
+                (observable -> OPTIONS.getReference().setPath( ref_path.getText()))
         );
 
         find_dups.setAllowIndeterminate( false );
         find_dups.setOnAction( event -> {
             if( find_dups.isSelected() )
-                options.getReference().setFindDups( "true" );
+                OPTIONS.getReference().setFindDups( "true" );
             else
-                options.getReference().setFindDups( "false" );
+                OPTIONS.getReference().setFindDups( "false" );
         });
 
         prop_filter.textProperty().addListener(
-                observable -> options.getFilters().setProportionFilter( prop_filter.getText() )
+                observable -> OPTIONS.getFilters().setProportionFilter( prop_filter.getText() )
         );
 
         cov_filter.textProperty().addListener(
-                observable -> options.getFilters().setCoverageFilter( cov_filter.getText() )
+                observable -> OPTIONS.getFilters().setCoverageFilter( cov_filter.getText() )
         );
 
-        job_submitter.setOnAction( event -> options.setJobSubmitter( job_submitter.getValue() ));
+        job_submitter.setOnAction( event -> OPTIONS.setJobSubmitter( job_submitter.getValue() ));
 
         /**
          * Define the look and feel of static label elements

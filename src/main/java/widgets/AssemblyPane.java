@@ -1,7 +1,5 @@
 package widgets;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
@@ -13,8 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.Assembly;
 
-import java.util.ArrayList;
-
 /**
  * Project naspgui.
  * Created by jlabadie on 6/16/16.
@@ -23,29 +19,29 @@ import java.util.ArrayList;
  */
 class AssemblyPane extends WidgetPane {
 
-    private Label ASSEMBLY = new Label( "Assembly" );
+    private Label assembly_label = new Label( "Assembly" );
     private Label ASSEMBLY_NAME = new Label( "Name" );
     private Label ASSEMBLY_PATH = new Label( "Path" );
 
-    private Tooltip ASSEMBLY_NAME_TIP = new Tooltip( "The name given to this assembly" );
-    private Tooltip ASSEMBLY_PATH_TIP = new Tooltip( "The path (file name) of this assembly" );
+    private Tooltip ASSEMBLY_NAME_TIP = new Tooltip( "The name given to this ASSEMBLY" );
+    private Tooltip ASSEMBLY_PATH_TIP = new Tooltip( "The path (file name) of this ASSEMBLY" );
 
     private TextField assembly_name = new TextField();
     private TextField assembly_path = new TextField();
 
-    private Assembly assembly;
+    private Assembly ASSEMBLY;
 
     private ObservableList<TextField> elements;
 
-    AssemblyPane( Assembly ass ){
+    AssemblyPane( Assembly assembly ){
 
-        assembly = ass;
-        assembly_name.setText( ass.getValue() );
-        assembly_path.setText( ass.getSample() );
+        ASSEMBLY = assembly;
+        assembly_name.setText( ASSEMBLY.getValue() );
+        assembly_path.setText( ASSEMBLY.getSample() );
 
-        ASSEMBLY.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        ASSEMBLY_NAME.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        ASSEMBLY_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        assembly_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        ASSEMBLY_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        ASSEMBLY_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         ASSEMBLY_NAME.setTooltip(ASSEMBLY_NAME_TIP);
         ASSEMBLY_PATH.setTooltip(ASSEMBLY_PATH_TIP);
@@ -73,7 +69,7 @@ class AssemblyPane extends WidgetPane {
          */
 
         // Add the title to row 0 column 0
-        this.add(ASSEMBLY, 0, 0, 3, 1 );
+        this.add(assembly_label, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
         this.add(ASSEMBLY_NAME, 1, 1, 3, 1 );
@@ -82,38 +78,20 @@ class AssemblyPane extends WidgetPane {
         this.add(assembly_name, 2, 1, 3, 1 );
         this.add(assembly_path, 2, 2, 3, 1 );
 
-        ArrayList<TextField> temp = new ArrayList<>();
-        elements = FXCollections.observableArrayList(temp);
+        assembly_name.textProperty().addListener(
+                observable -> ASSEMBLY.setSample( assembly_name.getText() )
+        );
 
-        elements.addAll( assembly_name, assembly_path );
-
-        elements.addListener(new ListChangeListener<TextField>() {
-            @Override
-            public void onChanged(Change<? extends TextField> c) {
-                if( assembly == null ){
-                    assembly = new Assembly();
-                }
-                while( c.next() ){
-                    //Hacky, any change will save all fields to the xmlbind
-                    assembly.setSample( assembly_name.getText() );
-                    assembly.setValue( assembly_path.getText() );
-                }
-            }
-        });
+        assembly_path.textProperty().addListener(
+                observable -> ASSEMBLY.setValue( assembly_path.getText() )
+        );
     }
 
-    String getAssemblyName(){
-        return assembly_name.getText();
+    Assembly getAssembly(){
+        return ASSEMBLY;
     }
-    void setAssemblyName( String name ){
-        assembly_name.setText( name );
-    }
-
-    String getAssembly(){
-        return assembly_path.getText();
-    }
-    void setAssembly( String file ){
-        assembly_path.setText( file );
+    void setAssembly(Assembly assembly){
+        ASSEMBLY = assembly;
     }
 
     @Override
@@ -122,13 +100,8 @@ class AssemblyPane extends WidgetPane {
     }
 
     void clear() {
-        setAssemblyName( "" );
-        setAssembly( "" );
+        assembly_name.setText( "" );
+        assembly_path.setText( "" );
     }
 
-    void setXMLBind( Assembly assembly_obj ){
-        assembly = assembly_obj;
-        assembly_name.setText( assembly_obj.getSample() );
-        assembly_path.setText( assembly_obj.getValue() );
-    }
 }

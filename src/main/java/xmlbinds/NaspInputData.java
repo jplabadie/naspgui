@@ -45,13 +45,13 @@ public class NaspInputData {
 
     @XmlElement(name = "Options", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected Options options;
+    protected Options options = new Options();
     @XmlElement(name = "Files", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected Files files;
+    protected Files files = new Files();
     @XmlElement(name = "ExternalApplications", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected ExternalApplications externalApplications;
+    protected ExternalApplications externalApplications = new ExternalApplications();
 
     /**
      * Gets the value of the options property.

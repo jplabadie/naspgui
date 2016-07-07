@@ -21,6 +21,7 @@ import xmlbinds.ReadFolder;
 import xmlbinds.ReadPair;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Project naspgui.
@@ -31,53 +32,56 @@ import java.util.ArrayList;
 class ReadFolderPane extends GridPane {
 
     private GridPane RF = this;
-    private Label READ_FOLDER = new Label( "Read Folder" );
-    private Label READ_FOLDER_PATH = new Label( "Folder Path" );
+    private Label read_folder_label = new Label( "Read Folder" );
+    private Label read_folder_path_label = new Label( "Folder Path" );
 
     private TextField read_folder_path = new TextField();
 
-    private Tooltip READ_FOLDER_PATH_TIP
+    private Tooltip read_folder_path_tip
             = new Tooltip( "The remote path containing the reads you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<ReadPairPane> read_pairs_gridpanes;
+    private ObservableList<ReadPairPane> readPairPanes;
 
     private int grid_row_position = 2;
 
-    ReadFolder readfolder;
+    ReadFolder READFOLDER;
+    List<ReadPair> READPAIRS;
 
-    ReadFolderPane( ReadFolder rf){
+    ReadFolderPane( ReadFolder readfolder ){
 
-        readfolder = rf;
+        READFOLDER = readfolder;
+        READPAIRS = READFOLDER.getReadPair();
+
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
         ArrayList<ReadPairPane> read_pairings =  new ArrayList<>();
-        read_pairs_gridpanes = FXCollections.observableList( read_pairings );
+        readPairPanes = FXCollections.observableList( read_pairings );
 
         /**
          * Define the look and feel of static label elements
          */
-        READ_FOLDER.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
-        READ_FOLDER.setPrefSize( 100, 20 );
-        READ_FOLDER.setAlignment( Pos.CENTER );
-        READ_FOLDER.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        READ_FOLDER.setAlignment( Pos.CENTER );
-        READ_FOLDER_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        read_folder_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        read_folder_label.setPrefSize( 100, 20 );
+        read_folder_label.setAlignment( Pos.CENTER );
+        read_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        read_folder_label.setAlignment( Pos.CENTER );
+        read_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
          */
-        READ_FOLDER_PATH.setTooltip(READ_FOLDER_PATH_TIP);
+        read_folder_path_label.setTooltip(read_folder_path_tip);
 
         /**
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 4 );
-        this.setVgap( 4 );
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
@@ -96,11 +100,17 @@ class ReadFolderPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add( READ_FOLDER, 0, 0, 3, 1 );
+        this.add(read_folder_label, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( READ_FOLDER_PATH, 1, 1, 3, 1 );
+        this.add(read_folder_path_label, 1, 1, 3, 1 );
         this.add( read_folder_path, 3, 1, 4, 1 );
+
+        read_folder_path.textProperty().addListener(
+                observable -> {
+                    READFOLDER.setPath( read_folder_path.getText());
+                }
+        );
 
         // Add the button to the widget with an event handler
 
@@ -108,13 +118,12 @@ class ReadFolderPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        read_pairs_gridpanes.addListener( new ListChangeListener<GridPane>() {
-
+        readPairPanes.addListener(new ListChangeListener<ReadPairPane>() {
             @Override
-            public void onChanged( Change<? extends GridPane> c ) {
+            public void onChanged( Change<? extends ReadPairPane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
-                        for ( GridPane gp : c.getAddedSubList() ) {
+                        for ( ReadPairPane rpp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_readpair = new Button();
 
@@ -126,7 +135,15 @@ class ReadFolderPane extends GridPane {
                             add_readpair.setGraphic( image_view1 );
                             add_readpair.setAlignment( Pos.BOTTOM_RIGHT );
 
-                            add_readpair.setOnAction( event -> addReadPair() );
+                            /**
+                             * When the add-new-pair button is pressed, create and add a new ReadPair (bind)
+                             */
+                            add_readpair.setOnAction( event -> {
+                                ReadPair new_pair = new ReadPair();
+                                ReadPairPane new_pane = new ReadPairPane( new_pair );
+                                readPairPanes.add( new_pane );
+                                READPAIRS.add( new_pair );
+                            });
 
                             ImageView image_view2 = new ImageView( remove);
                             image_view2.setFitHeight( 20 );
@@ -140,45 +157,39 @@ class ReadFolderPane extends GridPane {
 
                             remove_readpair.setOnAction(
                                     event -> {
-                                        if(read_pairs_gridpanes.size() > 1) {
-                                            read_pairs_gridpanes.remove(gp);
+                                        if(readPairPanes.size() > 1) {
+                                            readPairPanes.remove(rpp);
                                             RF.getChildren().remove(hbox);
                                         }
-                                        else if( read_pairs_gridpanes.size() == 1){
-                                           ReadPairPane rp = read_pairs_gridpanes.get(0);
+                                        else if( readPairPanes.size() == 1){
+                                            ReadPairPane rp = readPairPanes.get(0);
                                             rp.clear();
                                         }
                                     }
                             );
-                            RF.add( gp, 2, grid_row_position++, 3, 1 );
+                            RF.add( rpp, 2, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( GridPane gp : c.getRemoved() ) {
+                        for ( ReadPairPane gp : c.getRemoved() ) {
                             RF.getChildren().remove( gp );
+                            READPAIRS.remove( gp.getReadPair() );
                             grid_row_position--;
                         }
                     }
                 }
             }
         });
-        this.addReadPair();
+
+        for( ReadPair read : READPAIRS ){
+            ReadPairPane new_pair_pane = new ReadPairPane ( read );
+            readPairPanes.add( new_pair_pane );
+        }
     }
 
-
-    void addReadPair( ReadPair input_pair ){
-        ReadPairPane rp = new ReadPairPane( input_pair );
-        read_pairs_gridpanes.add( rp );
-    }
-
-    void addReadPair( ){
-        ReadPair new_rp = new ReadPair();
-        ReadPairPane rp = new ReadPairPane( new_rp );
-        read_pairs_gridpanes.add( rp );
-    }
 
     void clear(){
-        read_pairs_gridpanes.clear();
+        readPairPanes.clear();
     }
 
     /**
@@ -195,10 +206,10 @@ class ReadFolderPane extends GridPane {
     }
 
     ReadFolder getReadFolder(){
-        return readfolder;
+        return READFOLDER;
     }
 
     void setReadFolder( ReadFolder input ){
-        readfolder = input;
+        READFOLDER = input;
     }
 }

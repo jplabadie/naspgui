@@ -16,7 +16,7 @@ import xmlbinds.*;
  *
  * @author jlabadie
  */
-public class JobTab extends Tab {
+class JobTab extends Tab {
 
     private BorderPane borderPane = new BorderPane();
     private ScrollPane scrollPane = new ScrollPane();
@@ -39,44 +39,31 @@ public class JobTab extends Tab {
     JobTab( NaspInputData input ) {
         // TODO: Display NaspInputData correctly in the View
         NASP_DATA = input;
+        initialize();
+    }
+
+    JobTab(){
+        initialize();
     }
 
     /**
      *  Creates a blank job and initializes new NASP data
      */
-    JobTab() {
+    void initialize() {
         /**
          * Create new (blank) NaspInputData root and populate with Children
          */
-        NASP_DATA = OF.createNaspInputData(); // Create NaspInputData
-
-        // Create and populate Options
-        Options options = OF.createOptions(); // create Options
-        options.setFilters( OF.createFilters() ); // create Filters
-        options.setReference( OF.createReference() ); // create Reference
-        NASP_DATA.setOptions( options ); // set NaspInputData Options to newly created objects
-
-        //Create and populate Files
-        Files files = new Files(); // create Files
-        AssemblyFolder assembly_folder = new AssemblyFolder(); // create first empty AssemblyFolder
-        Assembly assembly = new Assembly(); // create first empty Assembly
-        assembly_folder.getAssembly().add(assembly); // add first Assembly to AssemblyFolder
-        ReadFolder read_folder = new ReadFolder(); // create first empty ReadFolder
-        ReadPair read_pair = new ReadPair(); // create first empty ReadPair
-        read_folder.getReadPair().add( read_pair ); // add first ReadPair to ReadFolder
-        files.getAssemblyFolder().add( assembly_folder ); // add AssemblyFolder to Files
-        files.getReadFolder().add( read_folder ); // add ReadFolder to Files
-        NASP_DATA.setFiles( files ); // add Files to NaspInputData
-
+        if(NASP_DATA == null) {
+            NASP_DATA = OF.createNaspInputData(); // Create NaspInputData
+        }
         //Create and populate ExternalApplications
-        ExternalApplications temp_xa = new ExternalApplications(); // Create ExternalApplications
-        MatrixGenerator mg = new MatrixGenerator(); // Create MatrixGenerator
+        ExternalApplications externalApplications = NASP_DATA.getExternalApplications(); // Create ExternalApplications
+        MatrixGenerator mg = externalApplications.getMatrixGenerator(); // Create MatrixGenerator
+        if( mg == null){
+            mg = OF.createMatrixGenerator();
+            externalApplications.setMatrixGenerator( mg );
+        }
         mg.setName( "MatrixGenerator" ); // set MatrixGenerator name to default (MatrixGenerator)
-        Index indx = new Index(); // Create Index
-        indx.setName( "Index" ); // set Index name to default (Index)
-        temp_xa.setMatrixGenerator( mg ); // add MatrixGenerator to ExternalApplications
-        temp_xa.setIndex( indx ); // add Index to ExternalApplications
-        NASP_DATA.setExternalApplications( temp_xa ); // Add ExternalApplications to NaspInputData
 
         optspane = new OptionsPane( NASP_DATA.getOptions() ); // init OptionsPane
         filespane = new FilesPane( NASP_DATA.getFiles() ); // init FilesPane
@@ -102,10 +89,10 @@ public class JobTab extends Tab {
          * Define save button actions
          */
         save_job.setOnAction( event -> {
-            String output = options.getRunName();
+            String output = NASP_DATA.getOptions().getRunName();
             if (output == null)
                 output = "/temp";
-            System.out.println(NASP_DATA.getOptions().getFilters().getCoverageFilter());
+            System.out.println( NASP_DATA.getFiles().getReadFolder().get(0).getPath() );
             JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
         });
 
@@ -114,10 +101,7 @@ public class JobTab extends Tab {
          */
         load_job.setOnAction( event -> {
             //TODO: Finish this func, include error handling and alerts
-            String output = options.getRunName();
-            if (output == null)
-                output = "/temp";
-            JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
+
         });
 
         start_job.setOnAction( event -> {
