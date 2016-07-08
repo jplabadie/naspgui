@@ -131,7 +131,9 @@ class ExternalApplicationsPane extends GridPane {
                                     apps.remove( gp );
                                 }
                             );
+
                             Application app = gp.getApplication();
+
                             if( app.getClass() == Index.class )
                                 EXTERNALAPPS.setIndex((Index) app);
                             else if( app.getClass() == MatrixGenerator.class )
@@ -152,8 +154,10 @@ class ExternalApplicationsPane extends GridPane {
                     }
                     if ( c.wasRemoved() ) {
                         for ( ApplicationPane gp : c.getRemoved() ) {
+
                             appbox.getChildren().remove( gp );
                             Application app = gp.getApplication();
+
                             if( app.getClass() == Index.class )
                                 EXTERNALAPPS.setIndex( null );
                             else if( app.getClass() == MatrixGenerator.class )
