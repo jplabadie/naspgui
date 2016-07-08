@@ -4,7 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -13,7 +16,6 @@ import javafx.scene.text.FontWeight;
 import xmlbinds.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -25,7 +27,7 @@ import java.util.Optional;
  *
  * @author jlabadie
  */
-class ApplicationPane<V extends Application> extends GridPane {
+class ApplicationPane extends GridPane {
 
     private Label APPLICATION_PATH = new Label( "Application Path" );
     private Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
@@ -46,27 +48,35 @@ class ApplicationPane<V extends Application> extends GridPane {
 
     private Label app_title = new Label();
     private ChoiceBox< String > title_choice = new ChoiceBox<>();
-    private TextField app_path = new TextField();
-    private TextField app_args = new TextField();
+    private TextField appPath = new TextField();
+    private TextField appArgs = new TextField();
 
-    private TextField mem_req = new TextField();
-    private TextField cpus_req = new TextField ();
-    private TextField queue_req = new TextField ();
-    private TextField wall_time_req = new TextField ();
-    private TextField job_sub_args = new TextField ();
+    private TextField memReq = new TextField();
+    private TextField cpusReq = new TextField ();
+    private TextField queueReq = new TextField ();
+    private TextField wallTimeReq = new TextField ();
+    private TextField jobSubArgs = new TextField ();
 
-    private Application application_bind ;
-    private JobParameters app_params;
+    private Application APPLICATION;
+    private JobParameters JOBPARAMETERS;
 
+    ApplicationPane( Application app ){
+        APPLICATION = app;
+        JOBPARAMETERS = APPLICATION.getJobParameters();
+        if( JOBPARAMETERS == null ) {
+            JOBPARAMETERS = new JobParameters();
+            APPLICATION.setJobParameters( JOBPARAMETERS );
+        }
 
-    ApplicationPane(){
+        app_title.setText( APPLICATION.getName() );
+        title_choice.setValue( app_title.getText() );
 
         /**
          * Define the look and feel of static label elements
          */
-        APPLICATION_PATH.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        ADDITIONAL_ARGS.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
-        JOB_PARAMETERS.setFont( Font.font( "Courier", FontWeight.BOLD, 14 ) );
+        APPLICATION_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        ADDITIONAL_ARGS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        JOB_PARAMETERS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         /**
          * Add tooltips to the static label elements
          */
@@ -82,8 +92,8 @@ class ApplicationPane<V extends Application> extends GridPane {
          * Define the look and behavior of the GridPane
          */
         // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 4 );
-        this.setVgap( 4 );
+        this.setHgap( 2 );
+        this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
         ColumnConstraints c1 = new ColumnConstraints( 25, 25, 50 );
@@ -100,16 +110,16 @@ class ApplicationPane<V extends Application> extends GridPane {
         /**
          * Define the look and behavior of the non-static TextField and Label elements
          */
-        app_title.setPrefSize( 100,20 );
+        app_title.setPrefSize( 100, 20 );
         app_title.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
-        app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
+        app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
         app_title.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         app_title.setAlignment( Pos.CENTER );
 
         // Set default values
-        //app_title.setText( application_bind.getName() );
-        //app_path.setText( application_bind.getPath() );
+        //app_title.setText( APPLICATION.getName() );
+        //appPath.setText( APPLICATION.getPath() );
 
         ArrayList<String> temp = new ArrayList<String>();
         ObservableList<String> choices = FXCollections.observableList( temp );
@@ -121,39 +131,32 @@ class ApplicationPane<V extends Application> extends GridPane {
                 "DupFinder",
                 "AssemblyImporter",
                 "Aligner",
-                "SnpCaller");
+                "SnpCaller"
+        );
         title_choice.setItems( choices );
 
         title_choice.setOnAction( event -> {
-            if( application_bind != null){
-                Alert warning = new Alert(Alert.AlertType.WARNING, "This will erase the existing application! Continue?"
-                , ButtonType.YES, ButtonType.CANCEL);
-                Optional<ButtonType> decision = warning.showAndWait();
-                if( decision.isPresent() && decision.get().equals((ButtonType.YES))){
-                    String title_text = choices.get( title_choice.getSelectionModel().getSelectedIndex() );
-                    app_title.setText( title_text );
-                    switch ( choices.get( title_choice.getSelectionModel().getSelectedIndex() ) ) {
-                        case "Index": application_bind = new Index();
-                            break;
-                        case "MatrixGenerator" : application_bind = new MatrixGenerator();
-                            break;
-                        case "Picard" : application_bind = new Picard();
-                            break;
-                        case "Samtools" : application_bind = new Samtools();
-                            break;
-                        case "DupFinder" : application_bind = new DupFinder();
-                            break;
-                        case "AssemblyImporter" : application_bind = new AssemblyImporter();
-                            break;
-                        case "Aligner" : application_bind = new Aligner();
-                            break;
-                        case "SnpCaller" : application_bind = new SNPCaller();
-                    }
-                    application_bind.setName( title_text );
+            if( APPLICATION != null){
+               String title_text = choices.get( title_choice.getSelectionModel().getSelectedIndex() );
+                app_title.setText( title_text );
+                switch ( choices.get( title_choice.getSelectionModel().getSelectedIndex() ) ) {
+                    case "Index": APPLICATION = new Index();
+                        break;
+                    case "MatrixGenerator" : APPLICATION = new MatrixGenerator();
+                        break;
+                    case "Picard" : APPLICATION = new Picard();
+                        break;
+                    case "Samtools" : APPLICATION = new Samtools();
+                        break;
+                    case "DupFinder" : APPLICATION = new DupFinder();
+                        break;
+                    case "AssemblyImporter" : APPLICATION = new AssemblyImporter();
+                        break;
+                    case "Aligner" : APPLICATION = new Aligner();
+                        break;
+                    case "SnpCaller" : APPLICATION = new SNPCaller();
                 }
-                else{
-                    title_choice.getSelectionModel().select( application_bind.getName());
-                }
+                APPLICATION.setName( title_text );
             }
         });
 
@@ -174,22 +177,31 @@ class ApplicationPane<V extends Application> extends GridPane {
         this.add( JOB_SUBMITTER_ARGS,2,8,3,1 );
 
         // Add text fields to column 3 of the GridPane
-        this.add( app_path,3,1,4,1 );
-        this.add( app_args,3,2,4,1 );
-        this.add( mem_req,3,4,4,1 );
-        this.add( cpus_req,3,5,4,1 );
-        this.add( queue_req,3,6,4,1 );
-        this.add( wall_time_req,3,7,4,1 );
-        this.add( job_sub_args,3,8,4,1 );
+        this.add(appPath,3,1,4,1 );
+        this.add(appArgs,3,2,4,1 );
+        this.add(memReq,3,4,4,1 );
+        this.add(cpusReq,3,5,4,1 );
+        this.add(queueReq,3,6,4,1 );
+        this.add(wallTimeReq,3,7,4,1 );
+        this.add(jobSubArgs,3,8,4,1 );
 
         //TODO: ADD listeners to auto-update binds as input changes
-        app_path.setOnAction( event -> application_bind.setPath( app_path.getText() ));
-        app_args.setOnAction( event -> application_bind.setPath( app_args.getText() ));
-        mem_req.setOnAction( event -> app_params.setMemRequested( mem_req.getText() ));
-        cpus_req.setOnAction( event -> app_params.setNumCPUs( cpus_req.getText() ));
-        queue_req.setOnAction( event -> app_params.setQueue( queue_req.getText() ));
-        wall_time_req.setOnAction( event -> app_params.setWalltime( wall_time_req.getText() ));
-        job_sub_args.setOnAction( event -> app_params.setWalltime( job_sub_args.getText() ));
+
+        appPath.textProperty().addListener( observable -> APPLICATION.setPath( appPath.getText() ));
+        appArgs.textProperty().addListener( observable -> APPLICATION.setAdditionalArguments( appArgs.getText() ));
+        memReq.textProperty().addListener( observable -> JOBPARAMETERS.setMemRequested( memReq.getText() ));
+        cpusReq.textProperty().addListener( observable -> JOBPARAMETERS.setNumCPUs( cpusReq.getText() ));
+        queueReq.textProperty().addListener( observable -> JOBPARAMETERS.setQueue( queueReq.getText() ));
+        wallTimeReq.textProperty().addListener( observable -> JOBPARAMETERS.setWalltime( wallTimeReq.getText() ));
+        jobSubArgs.textProperty().addListener( observable ->  JOBPARAMETERS.setJobSubmitterArgs( jobSubArgs.getText() ));
+
+        appPath.setText( APPLICATION.getPath() );
+        appArgs.setText( APPLICATION.getAdditionalArguments() );
+        memReq.setText( JOBPARAMETERS.getMemRequested() );
+        cpusReq.setText( JOBPARAMETERS.getNumCPUs() );
+        queueReq.setText( JOBPARAMETERS.getQueue() );
+        wallTimeReq.setText( JOBPARAMETERS.getWalltime() );
+        jobSubArgs.setText( JOBPARAMETERS.getJobSubmitterArgs() );
     }
 
     String getTitle(){
@@ -200,19 +212,11 @@ class ApplicationPane<V extends Application> extends GridPane {
         app_title.setText(text);
     }
 
-    void setAppBind( Application app){
-        application_bind = app;
-        app_params = application_bind.getJobParameters();
-        if( app_params == null){
-            app_params = new JobParameters();
-            application_bind.setJobParameters( app_params );
-        }
-
-        title_choice.getSelectionModel().select( app.getName() );
+    Application getApplication(){
+        return APPLICATION;
     }
 
-    Application getAppBind(){
-        return application_bind;
+    void setApplication( Application app ){
+        APPLICATION = app;
     }
-
 }

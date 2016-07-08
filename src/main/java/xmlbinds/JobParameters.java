@@ -78,22 +78,22 @@ public class JobParameters {
 
     @XmlElement(name = "MemRequested", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String memRequested;
+    protected String memRequested = "";
     @XmlElement(name = "NumCPUs", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String numCPUs;
+    protected String numCPUs = "";
     @XmlElement(name = "Walltime", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String walltime;
+    protected String walltime = "";
     @XmlElement(name = "Queue", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String queue;
+    protected String queue = "";
     @XmlElement(name = "JobSubmitterArgs", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String jobSubmitterArgs;
+    protected String jobSubmitterArgs = "";
     @XmlAttribute(name = "name")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String name;
+    protected String name = "";
 
     /**
      * Gets the value of the memRequested property.
