@@ -4,12 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.*;
@@ -22,29 +21,43 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ExternalApplicationsPane extends GridPane {
+class ExternalApplicationsPane extends Accordion {
 
-    private GridPane F = this;
     private Label external_apps_label = new Label("External Applications");
 
     private Image add = new Image(getClass().getResourceAsStream("/icons/add-1.png"));
     private Image remove = new Image(getClass().getResourceAsStream("/icons/garbage-2.png"));
 
-    private ObservableList<ApplicationPane> apps;
+    private ObservableList <ApplicationPane> coreApps;
+    private ObservableList <ApplicationPane> alignerApps;
+    private ObservableList <ApplicationPane> snpApps;
 
-    private VBox appbox = new VBox();
+    private TitledPane coreAppsPane = new TitledPane();
+    private TitledPane alignerAppsPane = new TitledPane();
+    private TitledPane snpAppsPane = new TitledPane();
 
     private ExternalApplications EXTERNALAPPS;
 
-
     ExternalApplicationsPane( ExternalApplications binding ) {
+
+        EXTERNALAPPS = binding;
+
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<ApplicationPane> app_panes = new ArrayList<>();
-        apps = FXCollections.observableList( app_panes );
+        coreApps = FXCollections.observableList( new ArrayList<ApplicationPane>() );
+        alignerApps = FXCollections.observableList( new ArrayList<ApplicationPane>() );
+        snpApps = FXCollections.observableList( new ArrayList<ApplicationPane>() );
 
-        EXTERNALAPPS = binding;
+        coreAppsPane.setText( "Tools" );
+        alignerAppsPane.setText( "Aligners" );
+        snpAppsPane.setText( "SNP Callers" );
+
+        initCoreAppsPane();
+        initAlignerAppsPane();
+        initSnpAppsPane();
+
+        this.getChildren().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
 
         /**
          * Define the look and feel of static label elements
@@ -55,40 +68,104 @@ class ExternalApplicationsPane extends GridPane {
         external_apps_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         external_apps_label.setAlignment( Pos.CENTER );
 
-        /**
-         * Add tooltips to the static label elements
-         */
 
-        /**
-         * Define the look and behavior of the GridPane
-         */
-        // Set Horizontal and Vertical gap size (spacing between column areas)
-        this.setHgap( 2 );
-        this.setVgap( 2 );
-        //Define column behavior (min_size, preferred_size, max_size)
-        ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c1 = new ColumnConstraints( 30, 200, 600 );
-        //Define column auto-resizing behavior
-        c1.setHgrow( Priority.ALWAYS );
-        // Add column behavior to the GridPane (order matters!)
-        this.getColumnConstraints().addAll( c0, c1 );
-
-        /**
-         * Define the look and behavior of the non-static TextField and Label elements
-         */
-
-        // Add the title to row 0 column 0
-        this.add( external_apps_label, 0, 0, 3, 1 );
-
-        // Add the application box to the widget with an event handler
-        appbox.setSpacing( 5 );
-        this.add( appbox, 1, 1, 3, 1 );
+        this.getChildren().add( external_apps_label );
 
         ImageView image_view = new ImageView( add );
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        apps.addListener( new ListChangeListener<ApplicationPane>() {
+
+
+        if(EXTERNALAPPS == null){
+            EXTERNALAPPS = new ExternalApplications();
+        }
+        else{
+            if( EXTERNALAPPS.getIndex() != null ){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getIndex() );
+                coreApps.add( app );
+            }
+            if( EXTERNALAPPS.getMatrixGenerator() != null ){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getMatrixGenerator() );
+                coreApps.add( app );
+            }
+            if( EXTERNALAPPS.getPicard() != null ){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getPicard() );
+                coreApps.add( app );
+            }
+            if( EXTERNALAPPS.getSamtools() != null ){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getSamtools() );
+                coreApps.add( app );
+            }
+            if( EXTERNALAPPS.getDupFinder() != null ){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getDupFinder() );
+                coreApps.add( app );
+            }
+            if( EXTERNALAPPS.getAssemblyImporter() != null){
+                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getAssemblyImporter() );
+                coreApps.add( app );
+            }
+            for( SNPCaller snpcaller : EXTERNALAPPS.getSNPCaller()){
+                ApplicationPane app = new ApplicationPane( snpcaller );
+                coreApps.add( app );
+            }
+            for( Aligner aligner : EXTERNALAPPS.getAligner()){
+                ApplicationPane app = new ApplicationPane( aligner );
+                coreApps.add( app );
+            }
+        }
+    }
+
+    private void initCoreAppsPane() {
+
+        HBox matrixGenBox = new HBox();
+        HBox indexBox = new HBox();
+        HBox picardBox = new HBox();
+        HBox samtoolsBox = new HBox();
+        HBox dupFindBox = new HBox();
+        HBox assemblyImporterBox = new HBox();
+
+        CheckBox mgenCheck = new CheckBox();
+        CheckBox indexCheck = new CheckBox();
+        CheckBox picardCheck = new CheckBox();
+        CheckBox samtoolsCheck = new CheckBox();
+        CheckBox dupfindCheck = new CheckBox();
+        CheckBox assemblyImportCheck = new CheckBox();
+
+        ApplicationPane<MatrixGenerator> mpane = new ApplicationPane<>( EXTERNALAPPS.getMatrixGenerator() );
+        ApplicationPane<Index> ipane = new ApplicationPane<>( EXTERNALAPPS.getIndex() );
+        ApplicationPane<Picard> ppane = new ApplicationPane<>( EXTERNALAPPS.getPicard() );
+        ApplicationPane<Samtools> spane = new ApplicationPane<>( EXTERNALAPPS.getSamtools() );
+        ApplicationPane<DupFinder> dpane = new ApplicationPane<>( EXTERNALAPPS.getDupFinder() );
+        ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>( EXTERNALAPPS.getAssemblyImporter() );
+
+        matrixGenBox.getChildren().addAll( mgenCheck, mpane );
+        indexBox.getChildren().addAll( indexCheck, ipane );
+        picardBox.getChildren().addAll( picardCheck, ppane );
+        samtoolsBox.getChildren().addAll( samtoolsCheck, spane );
+        dupFindBox.getChildren().addAll( dupfindCheck, dpane );
+        assemblyImporterBox.getChildren().addAll( assemblyImportCheck, apane );
+
+        VBox coreBox = new VBox();
+        coreBox.getChildren().addAll( matrixGenBox, indexBox, picardBox, samtoolsBox, dupFindBox, assemblyImporterBox);
+
+
+        coreApps.addListener(new ListChangeListener<ApplicationPane>() {
+            @Override
+            public void onChanged( Change<? extends ApplicationPane> c ) {
+                while ( c.next() ) {
+
+
+                }
+            }
+        });
+    }
+
+    private void initAlignerAppsPane(){
+
+        VBox alignersBox = new VBox();
+
+        alignerApps.addListener(new ListChangeListener<ApplicationPane>() {
             @Override
             public void onChanged( Change<? extends ApplicationPane> c ) {
                 while ( c.next() ) {
@@ -110,7 +187,7 @@ class ExternalApplicationsPane extends GridPane {
                             add_app.setOnAction( event -> {
                                 Application new_app = new MatrixGenerator(); // TODO: Answer: is this unwrapping bad?
                                 ApplicationPane new_pane = new ApplicationPane( new_app );
-                                apps.add( new_pane );
+                                coreApps.add( new_pane );
                             } );
 
                             ImageView image_view2 = new ImageView( remove );
@@ -123,13 +200,13 @@ class ExternalApplicationsPane extends GridPane {
                             new_ap_box.setAlignment( Pos.BOTTOM_CENTER );
 
                             //new_app.setButtons(add_app, remove_app);
-                            appbox.getChildren().add( new_ap_box );
+                            //appbox.getChildren().add( new_ap_box );
 
                             remove_app.setOnAction(
-                                event -> {
-                                    appbox.getChildren().remove( new_ap_box );
-                                    apps.remove( gp );
-                                }
+                                    event -> {
+                                        //appbox.getChildren().remove( new_ap_box );
+                                        coreApps.remove( gp );
+                                    }
                             );
 
                             Application app = gp.getApplication();
@@ -155,67 +232,15 @@ class ExternalApplicationsPane extends GridPane {
                     if ( c.wasRemoved() ) {
                         for ( ApplicationPane gp : c.getRemoved() ) {
 
-                            appbox.getChildren().remove( gp );
-                            Application app = gp.getApplication();
 
-                            if( app.getClass() == Index.class )
-                                EXTERNALAPPS.setIndex( null );
-                            else if( app.getClass() == MatrixGenerator.class )
-                                EXTERNALAPPS.setMatrixGenerator( null );
-                            else if( app.getClass() == Picard.class )
-                                EXTERNALAPPS.setPicard( null );
-                            else if( app.getClass() == Samtools.class )
-                                EXTERNALAPPS.setSamtools( null );
-                            else if( app.getClass() == DupFinder.class )
-                                EXTERNALAPPS.setDupFinder( null );
-                            else if( app.getClass() == AssemblyImporter.class )
-                                EXTERNALAPPS.setAssemblyImporter( null );
-                            else if( app.getClass() == Aligner.class )
-                                EXTERNALAPPS.getAligner().remove( app );
-                            else if( app.getClass() == SNPCaller.class)
-                                EXTERNALAPPS.getSNPCaller().remove( app );
                         }
                     }
                 }
             }
         });
+    }
 
-        if(EXTERNALAPPS == null){
-            EXTERNALAPPS = new ExternalApplications();
-        }
-        else{
-            if( EXTERNALAPPS.getIndex() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getIndex() );
-                apps.add( app );
-            }
-            if( EXTERNALAPPS.getMatrixGenerator() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getMatrixGenerator() );
-                apps.add( app );
-            }
-            if( EXTERNALAPPS.getPicard() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getPicard() );
-                apps.add( app );
-            }
-            if( EXTERNALAPPS.getSamtools() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getSamtools() );
-                apps.add( app );
-            }
-            if( EXTERNALAPPS.getDupFinder() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getDupFinder() );
-                apps.add( app );
-            }
-            if( EXTERNALAPPS.getAssemblyImporter() != null){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getAssemblyImporter() );
-                apps.add( app );
-            }
-            for( SNPCaller snpcaller : EXTERNALAPPS.getSNPCaller()){
-                ApplicationPane app = new ApplicationPane( snpcaller );
-                apps.add( app );
-            }
-            for( Aligner aligner : EXTERNALAPPS.getAligner()){
-                ApplicationPane app = new ApplicationPane( aligner );
-                apps.add( app );
-            }
-        }
+    private void initSnpAppsPane(){
+
     }
 }

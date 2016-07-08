@@ -39,17 +39,18 @@ class ApplicationPane< V extends Application> extends GridPane {
 
     private V APPLICATION;
 
-    ApplicationPane(V app ){
+    ApplicationPane( V app ){
         APPLICATION = app;
 
         app_title.setText( APPLICATION.getName() );
+        JobParameters jobparams = APPLICATION.getJobParameters();
 
-        JobParameters jobparams  = APPLICATION.getJobParameters();
-        if( jobparams == null ) {
+        if (jobparams == null) {
             jobparams = new JobParameters();
-            APPLICATION.setJobParameters(jobparams);        }
+            APPLICATION.setJobParameters(jobparams);
+        }
 
-        jobParametersPane = new JobParametersPane( jobparams );
+        jobParametersPane = new JobParametersPane(jobparams);
 
         /**
          * Define the look and feel of static label elements
@@ -107,7 +108,7 @@ class ApplicationPane< V extends Application> extends GridPane {
         this.add( appPath,3,1,4,1 );
         this.add( appArgs,3,2,4,1 );
 
-        this.add( jobParametersPane, 1, 3, 6, 4 );
+//        this.add( jobParametersPane, 1, 3, 6, 4 );
 
         //TODO: ADD listeners to auto-update binds as input changes
 
