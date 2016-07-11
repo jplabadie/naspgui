@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import utils.JobSaveLoadManager;
 import xmlbinds.Aligner;
+import xmlbinds.NaspInputData;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 /**
@@ -24,7 +27,9 @@ public class JobPaneIntegrationTest extends Application {
     public void start( Stage primaryStage ) {
         primaryStage.setTitle( "JobTab Integration Test" );
 
-        JobTab tab = new JobTab();
+        File input = new File(getClass().getResource("/xml/060616-config.xml").getFile());
+        NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
+        JobTab tab = new JobTab( nid );
         TabPane root = new TabPane();
 
         root.getTabs().add( tab );
