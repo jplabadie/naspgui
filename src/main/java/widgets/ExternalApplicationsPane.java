@@ -7,8 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import xmlbinds.*;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ExternalApplicationsPane extends Accordion {
+class ExternalApplicationsPane extends GridPane {
 
     private Label external_apps_label = new Label("External Applications");
 
@@ -35,6 +34,8 @@ class ExternalApplicationsPane extends Accordion {
     private TitledPane coreAppsPane = new TitledPane();
     private TitledPane alignerAppsPane = new TitledPane();
     private TitledPane snpAppsPane = new TitledPane();
+
+    private Accordion accordion = new Accordion();
 
     private ExternalApplications EXTERNALAPPS;
 
@@ -56,7 +57,7 @@ class ExternalApplicationsPane extends Accordion {
         initAlignerAppsPane();
         initSnpAppsPane();
 
-        this.getPanes().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
+        accordion.getPanes().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
 
         /**
          * Define the look and feel of static label elements
@@ -67,7 +68,13 @@ class ExternalApplicationsPane extends Accordion {
         external_apps_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         external_apps_label.setAlignment( Pos.CENTER );
 
-        this.getChildren().add( external_apps_label );
+        ColumnConstraints c0 = new ColumnConstraints( 50,50,50 );
+        ColumnConstraints c1 = new ColumnConstraints( 150,400,900 );
+        c1.setHgrow( Priority.ALWAYS );
+        this.getColumnConstraints().addAll( c0, c1 );
+
+        this.add( external_apps_label, 0, 0, 2, 1 );
+        this.add( accordion, 1, 1, 2, 1 );
 
         ImageView image_view = new ImageView( add );
         image_view.setFitHeight( 20 );
@@ -76,12 +83,15 @@ class ExternalApplicationsPane extends Accordion {
 
     private void initCoreAppsPane() {
         VBox coreBox = new VBox();
+        coreBox.setSpacing( 10 );
         coreAppsPane.setContent( coreBox );
 
-        if(EXTERNALAPPS == null){
+        if (EXTERNALAPPS == null) {
             EXTERNALAPPS = new ExternalApplications();
-        }
-        else {
+        } else {
+
+            // Index
+
             if (EXTERNALAPPS.getIndex() == null) {
                 EXTERNALAPPS.setIndex(new Index());
             }
@@ -101,6 +111,7 @@ class ExternalApplicationsPane extends Accordion {
             coreApps.add(ipane);
             coreBox.getChildren().add(indexBox);
 
+            //MatrixGenerator
             if (EXTERNALAPPS.getMatrixGenerator() == null) {
                 EXTERNALAPPS.setMatrixGenerator(new MatrixGenerator());
             }
@@ -119,45 +130,84 @@ class ExternalApplicationsPane extends Accordion {
             matrixGenBox.getChildren().addAll(mgenCheck, mpane);
             coreBox.getChildren().add(matrixGenBox);
 
+            // Picard
             if (EXTERNALAPPS.getPicard() == null) {
                 EXTERNALAPPS.setPicard(new Picard());
             }
             HBox picardBox = new HBox();
-            picardBox.setAlignment( Pos.CENTER_RIGHT );
-            picardBox.setSpacing( 5 );
+            picardBox.setAlignment(Pos.CENTER_RIGHT);
+            picardBox.setSpacing(5);
             CheckBox picardCheck = new CheckBox();
             picardCheck.setSelected(false);
             ApplicationPane<Picard> ppane = new ApplicationPane<>(EXTERNALAPPS.getPicard());
             picardCheck.setOnAction(event -> {
                 if (picardCheck.isSelected())
-                    ppane.setDisable(true);
-                else ppane.setDisable(false);
+                    ppane.setDisable(false);
+                else ppane.setDisable(true);
             });
-            picardBox.getChildren().addAll( picardCheck, ppane);
+            picardBox.getChildren().addAll(picardCheck, ppane);
             coreApps.add(ppane);
             coreBox.getChildren().add(picardBox);
 
-            if (EXTERNALAPPS.getSamtools() != null) {
-                ApplicationPane<Samtools> spane = new ApplicationPane<>(EXTERNALAPPS.getSamtools());
-                CheckBox samtoolsCheck = new CheckBox();
-                HBox samtoolsBox = new HBox();
-                samtoolsBox.getChildren().addAll(samtoolsCheck, spane);
-                coreApps.add(spane);
+            // SamTools
+            if (EXTERNALAPPS.getSamtools() == null) {
+                EXTERNALAPPS.setSamtools(new Samtools());
             }
-            if (EXTERNALAPPS.getDupFinder() != null) {
-                ApplicationPane<DupFinder> dpane = new ApplicationPane<>(EXTERNALAPPS.getDupFinder());
-                HBox dupFindBox = new HBox();
-                CheckBox dupfindCheck = new CheckBox();
-                dupFindBox.getChildren().addAll(dupfindCheck, dpane);
-                coreApps.add(dpane);
+            HBox samtoolsBox = new HBox();
+            samtoolsBox.setAlignment(Pos.CENTER_RIGHT);
+            samtoolsBox.setSpacing(5);
+            CheckBox samCheck = new CheckBox();
+            samCheck.setSelected(false);
+            ApplicationPane<Samtools> spane = new ApplicationPane<>(EXTERNALAPPS.getSamtools());
+            samCheck.setOnAction(event -> {
+                if (samCheck.isSelected())
+                    spane.setDisable(false);
+                else spane.setDisable(true);
+            });
+
+            samtoolsBox.getChildren().addAll(samCheck, spane);
+            coreApps.add(spane);
+            coreBox.getChildren().add(samtoolsBox);
+
+            // DupFinder
+            if (EXTERNALAPPS.getDupFinder() == null) {
+                EXTERNALAPPS.setDupFinder(new DupFinder());
             }
-            if (EXTERNALAPPS.getAssemblyImporter() != null) {
-                HBox assemblyImporterBox = new HBox();
-                CheckBox assemblyImportCheck = new CheckBox();
-                ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>(EXTERNALAPPS.getAssemblyImporter());
-                assemblyImporterBox.getChildren().addAll(assemblyImportCheck, apane);
-                coreApps.add(apane);
+            HBox dupFindBox = new HBox();
+            dupFindBox.setAlignment(Pos.CENTER_RIGHT);
+            dupFindBox.setSpacing(5);
+            CheckBox dupfindCheck = new CheckBox();
+            dupfindCheck.setSelected(false);
+            ApplicationPane<DupFinder> dpane = new ApplicationPane<>(EXTERNALAPPS.getDupFinder());
+            dupfindCheck.setOnAction(event -> {
+                if (dupfindCheck.isSelected())
+                    dpane.setDisable(false);
+                else dpane.setDisable(true);
+            });
+
+            dupFindBox.getChildren().addAll(dupfindCheck, dpane);
+            coreApps.add(dpane);
+            coreBox.getChildren().add(dupFindBox);
+
+            // AssemblyImporter
+            if (EXTERNALAPPS.getAssemblyImporter() == null) {
+                EXTERNALAPPS.setAssemblyImporter( new AssemblyImporter());
             }
+            HBox assemblyImporterBox = new HBox();
+            assemblyImporterBox.setAlignment( Pos.CENTER_RIGHT );
+            assemblyImporterBox.setSpacing( 5 );
+            CheckBox assemblyImportCheck = new CheckBox();
+            ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>(EXTERNALAPPS.getAssemblyImporter());
+            assemblyImportCheck.setOnAction( event -> {
+                if( assemblyImportCheck.isSelected() )
+                    assemblyImporterBox.setDisable( false );
+                else assemblyImporterBox.setDisable( true );
+            });
+
+            assemblyImporterBox.getChildren().addAll( assemblyImportCheck, apane );
+            coreApps.add( apane );
+            coreBox.getChildren().add( assemblyImporterBox );
+
             for (SNPCaller snpcaller : EXTERNALAPPS.getSNPCaller()) {
                 ApplicationPane<SNPCaller> app = new ApplicationPane<>(snpcaller);
                 coreApps.add(app);
@@ -220,7 +270,7 @@ class ExternalApplicationsPane extends Accordion {
                             Application app = gp.getApplication();
 
                             if( app.getClass() == Index.class )
-                                EXTERNALAPPS.setIndex((Index) app);
+                                EXTERNALAPPS.setIndex( (Index) app );
                             else if( app.getClass() == MatrixGenerator.class )
                                 EXTERNALAPPS.setMatrixGenerator((MatrixGenerator) app);
                             else if( app.getClass() == Picard.class )
