@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<NaspInputData>
+    <Options>
+        <RunName>060616</RunName>
+        <OutputFolder>/scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/final_tree_watypical/060616</OutputFolder>
+        <Reference name="WM-175" path="/scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/final_tree_watypical/WM-175.fasta">
+            <FindDups>True</FindDups>
+        </Reference>
+        <Filters>
+            <ProportionFilter>0.9</ProportionFilter>
+            <CoverageFilter>10</CoverageFilter>
+        </Filters>
+        <JobSubmitter>PBS</JobSubmitter>
+    </Options>
+    <Files/>
+    <ExternalApplications>
+        <Index name="Index" path="/packages/nasp/1.0">
+            <AdditionalArguments/>
+            <JobParameters name="nasp_index">
+                <MemRequested>2</MemRequested>
+                <NumCPUs>1</NumCPUs>
+                <Walltime>4</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </Index>
+        <MatrixGenerator name="MatrixGenerator" path="/packages/nasp/1.0/nasp-1.0.2-py3.4.egg/nasp/nasptool_linux_64">
+            <AdditionalArguments/>
+            <JobParameters name="nasp_matrix">
+                <MemRequested>8</MemRequested>
+                <NumCPUs>8</NumCPUs>
+                <Walltime>48</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </MatrixGenerator>
+        <Samtools name="Samtools" path="/scratch/bin/samtools">
+            <AdditionalArguments/>
+        </Samtools>
+        <DupFinder name="DupFinder" path="/scratch/bin/nucmer">
+            <AdditionalArguments/>
+            <JobParameters>
+                <MemRequested>4</MemRequested>
+                <NumCPUs>1</NumCPUs>
+                <Walltime>4</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </DupFinder>
+    </ExternalApplications>
+</NaspInputData>
