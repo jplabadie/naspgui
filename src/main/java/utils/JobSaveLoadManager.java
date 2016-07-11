@@ -20,24 +20,28 @@ public class JobSaveLoadManager {
     private static LogManager lm = LogManager.getInstance();
 
     private JobSaveLoadManager(){
-        lm.info(null, null, "JSLM: JSLM Singleton Initialized");
+        lm.info( null, null, "JSLM: JSLM Singleton Initialized" );
     }
 
     /**
      *
-      * @param xml_path the absolute path to the xml file we will use to create Java objects
+     * @param xml_path the absolute path to the xml file we will use to create Java objects
      * @return a populated NaspInputData object with references to related classes
      */
     @SuppressWarnings(" unchecked ")
-    public static NaspInputData jaxbXMLToObject(File xml_path) {
+    public static NaspInputData jaxbXMLToObject( File xml_path ) {
+
         try {
-            JAXBContext context = JAXBContext.newInstance(NaspInputData.class);
+            JAXBContext context = JAXBContext.newInstance( NaspInputData.class );
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            NaspInputData naspData = ((NaspInputData) unmarshaller.unmarshal(xml_path));
-            lm.info(null, null, "JSLM: Job XML loaded and converted to objects from: "+xml_path.getPath());
+            NaspInputData naspData = ( (NaspInputData) unmarshaller.unmarshal( xml_path ) );
+            lm.info( null, null, "JSLM: Job XML loaded and converted to objects from: "+ xml_path.getPath() );
             return naspData;
-        } catch (JAXBException e) {
-            lm.error(null, null, "JSLM: Job XML failed to load from: " + xml_path.getPath() + "\nError occured:\n" + e.getMessage());
+
+        } catch ( JAXBException e ) {
+            lm.error( null, null, "JSLM: Job XML failed to load from: " + xml_path.getPath() +
+                    "\nError occured:\n" + e.getMessage() );
+            e.printStackTrace();
         }
         return null;
     }
@@ -51,25 +55,25 @@ public class JobSaveLoadManager {
      * @param input_for_conversion NaspInputData object which will be converted to XML for output to NASP
      * @param output_path the absolute path desired for the output XML
      */
-    public static void jaxbObjectToXML(NaspInputData input_for_conversion, String output_path) {
+    public static void jaxbObjectToXML( NaspInputData input_for_conversion, String output_path ) {
         try {
             JAXBContext context = JAXBContext.newInstance( input_for_conversion.getClass() );
             Marshaller m = context.createMarshaller();
             //for "pretty-print" XML in JAXB
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 
             //Ensure correct .xml tag is added
-            output_path = setFileTagsToXml(output_path);
+            output_path = setFileTagsToXml( output_path );
             // Write to File
-            m.marshal(input_for_conversion, new File(output_path));
-            lm.info(null, null, "JSLM: Job XML converted from objects and saved to XML at: "+output_path);
-        } catch (JAXBException e) {
+            m.marshal(input_for_conversion, new File( output_path ));
+            lm.info( null, null, "JSLM: Job XML converted from objects and saved to XML at: " + output_path );
+        } catch ( JAXBException e ) {
             String temp ="";
-            for( StackTraceElement x : e.getStackTrace()){
-                temp+= "\t"+ x.toString()+"\n";
+            for( StackTraceElement x : e.getStackTrace() ){
+                temp+= "\t"+ x.toString() + "\n";
             }
-            lm.error(null, null, "JSLM: Job objects failed to convert or save as XML to: " + output_path + "\nError occured:\n"
-                    + temp);
+            lm.error(null, null, "JSLM: Job objects failed to convert or save as XML to: " + output_path +
+                    "\nError occured:\n" + temp);
             e.printStackTrace();
         }
     }
