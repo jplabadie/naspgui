@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.*;
  * &lt;/complexType>
  * </pre>
  * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement( name = "NaspInputData" )
