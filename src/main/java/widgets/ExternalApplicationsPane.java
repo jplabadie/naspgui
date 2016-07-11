@@ -39,7 +39,6 @@ class ExternalApplicationsPane extends Accordion {
     private ExternalApplications EXTERNALAPPS;
 
     ExternalApplicationsPane( ExternalApplications binding ) {
-
         EXTERNALAPPS = binding;
 
         /**
@@ -57,7 +56,7 @@ class ExternalApplicationsPane extends Accordion {
         initAlignerAppsPane();
         initSnpAppsPane();
 
-        this.getChildren().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
+        this.getPanes().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
 
         /**
          * Define the look and feel of static label elements
@@ -68,97 +67,106 @@ class ExternalApplicationsPane extends Accordion {
         external_apps_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         external_apps_label.setAlignment( Pos.CENTER );
 
-
         this.getChildren().add( external_apps_label );
 
         ImageView image_view = new ImageView( add );
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
+    }
 
-
+    private void initCoreAppsPane() {
+        VBox coreBox = new VBox();
+        coreAppsPane.setContent( coreBox );
 
         if(EXTERNALAPPS == null){
             EXTERNALAPPS = new ExternalApplications();
         }
-        else{
-            if( EXTERNALAPPS.getIndex() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getIndex() );
-                coreApps.add( app );
+        else {
+            if (EXTERNALAPPS.getIndex() == null) {
+                EXTERNALAPPS.setIndex(new Index());
             }
-            if( EXTERNALAPPS.getMatrixGenerator() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getMatrixGenerator() );
-                coreApps.add( app );
+            HBox indexBox = new HBox();
+            indexBox.setAlignment(Pos.CENTER_RIGHT);
+            indexBox.setSpacing(5);
+            CheckBox indexCheck = new CheckBox();
+            indexCheck.setSelected(true);
+            ApplicationPane<Index> ipane = new ApplicationPane<>(EXTERNALAPPS.getIndex());
+            indexCheck.setOnAction(event -> {
+                if (indexCheck.isSelected())
+                    ipane.setDisable(false);
+                else ipane.setDisable(true);
+            });
+
+            indexBox.getChildren().addAll(indexCheck, ipane);
+            coreApps.add(ipane);
+            coreBox.getChildren().add(indexBox);
+
+            if (EXTERNALAPPS.getMatrixGenerator() == null) {
+                EXTERNALAPPS.setMatrixGenerator(new MatrixGenerator());
             }
-            if( EXTERNALAPPS.getPicard() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getPicard() );
-                coreApps.add( app );
+            HBox matrixGenBox = new HBox();
+            matrixGenBox.setAlignment(Pos.CENTER_RIGHT);
+            matrixGenBox.setSpacing(5);
+            CheckBox mgenCheck = new CheckBox();
+            mgenCheck.setSelected(true);
+            ApplicationPane<MatrixGenerator> mpane = new ApplicationPane<>(EXTERNALAPPS.getMatrixGenerator());
+            mgenCheck.setOnAction(event -> {
+                if (mgenCheck.isSelected())
+                    mpane.setDisable(false);
+                else mpane.setDisable(true);
+            });
+            coreApps.add(mpane);
+            matrixGenBox.getChildren().addAll(mgenCheck, mpane);
+            coreBox.getChildren().add(matrixGenBox);
+
+            if (EXTERNALAPPS.getPicard() == null) {
+                EXTERNALAPPS.setPicard(new Picard());
             }
-            if( EXTERNALAPPS.getSamtools() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getSamtools() );
-                coreApps.add( app );
+            HBox picardBox = new HBox();
+            picardBox.setAlignment( Pos.CENTER_RIGHT );
+            picardBox.setSpacing( 5 );
+            CheckBox picardCheck = new CheckBox();
+            picardCheck.setSelected(false);
+            ApplicationPane<Picard> ppane = new ApplicationPane<>(EXTERNALAPPS.getPicard());
+            picardCheck.setOnAction(event -> {
+                if (picardCheck.isSelected())
+                    ppane.setDisable(true);
+                else ppane.setDisable(false);
+            });
+            picardBox.getChildren().addAll( picardCheck, ppane);
+            coreApps.add(ppane);
+            coreBox.getChildren().add(picardBox);
+
+            if (EXTERNALAPPS.getSamtools() != null) {
+                ApplicationPane<Samtools> spane = new ApplicationPane<>(EXTERNALAPPS.getSamtools());
+                CheckBox samtoolsCheck = new CheckBox();
+                HBox samtoolsBox = new HBox();
+                samtoolsBox.getChildren().addAll(samtoolsCheck, spane);
+                coreApps.add(spane);
             }
-            if( EXTERNALAPPS.getDupFinder() != null ){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getDupFinder() );
-                coreApps.add( app );
+            if (EXTERNALAPPS.getDupFinder() != null) {
+                ApplicationPane<DupFinder> dpane = new ApplicationPane<>(EXTERNALAPPS.getDupFinder());
+                HBox dupFindBox = new HBox();
+                CheckBox dupfindCheck = new CheckBox();
+                dupFindBox.getChildren().addAll(dupfindCheck, dpane);
+                coreApps.add(dpane);
             }
-            if( EXTERNALAPPS.getAssemblyImporter() != null){
-                ApplicationPane app = new ApplicationPane( EXTERNALAPPS.getAssemblyImporter() );
-                coreApps.add( app );
+            if (EXTERNALAPPS.getAssemblyImporter() != null) {
+                HBox assemblyImporterBox = new HBox();
+                CheckBox assemblyImportCheck = new CheckBox();
+                ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>(EXTERNALAPPS.getAssemblyImporter());
+                assemblyImporterBox.getChildren().addAll(assemblyImportCheck, apane);
+                coreApps.add(apane);
             }
-            for( SNPCaller snpcaller : EXTERNALAPPS.getSNPCaller()){
-                ApplicationPane app = new ApplicationPane( snpcaller );
-                coreApps.add( app );
+            for (SNPCaller snpcaller : EXTERNALAPPS.getSNPCaller()) {
+                ApplicationPane<SNPCaller> app = new ApplicationPane<>(snpcaller);
+                coreApps.add(app);
             }
-            for( Aligner aligner : EXTERNALAPPS.getAligner()){
-                ApplicationPane app = new ApplicationPane( aligner );
-                coreApps.add( app );
+            for (Aligner aligner : EXTERNALAPPS.getAligner()) {
+                ApplicationPane<Aligner> app = new ApplicationPane<>(aligner);
+                coreApps.add(app);
             }
         }
-    }
-
-    private void initCoreAppsPane() {
-
-        HBox matrixGenBox = new HBox();
-        HBox indexBox = new HBox();
-        HBox picardBox = new HBox();
-        HBox samtoolsBox = new HBox();
-        HBox dupFindBox = new HBox();
-        HBox assemblyImporterBox = new HBox();
-
-        CheckBox mgenCheck = new CheckBox();
-        CheckBox indexCheck = new CheckBox();
-        CheckBox picardCheck = new CheckBox();
-        CheckBox samtoolsCheck = new CheckBox();
-        CheckBox dupfindCheck = new CheckBox();
-        CheckBox assemblyImportCheck = new CheckBox();
-
-        ApplicationPane<MatrixGenerator> mpane = new ApplicationPane<>( EXTERNALAPPS.getMatrixGenerator() );
-        ApplicationPane<Index> ipane = new ApplicationPane<>( EXTERNALAPPS.getIndex() );
-        ApplicationPane<Picard> ppane = new ApplicationPane<>( EXTERNALAPPS.getPicard() );
-        ApplicationPane<Samtools> spane = new ApplicationPane<>( EXTERNALAPPS.getSamtools() );
-        ApplicationPane<DupFinder> dpane = new ApplicationPane<>( EXTERNALAPPS.getDupFinder() );
-        ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>( EXTERNALAPPS.getAssemblyImporter() );
-
-        matrixGenBox.getChildren().addAll( mgenCheck, mpane );
-        indexBox.getChildren().addAll( indexCheck, ipane );
-        picardBox.getChildren().addAll( picardCheck, ppane );
-        samtoolsBox.getChildren().addAll( samtoolsCheck, spane );
-        dupFindBox.getChildren().addAll( dupfindCheck, dpane );
-        assemblyImporterBox.getChildren().addAll( assemblyImportCheck, apane );
-
-        VBox coreBox = new VBox();
-        coreBox.getChildren().addAll( matrixGenBox, indexBox, picardBox, samtoolsBox, dupFindBox, assemblyImporterBox);
-
-
-        coreApps.addListener(new ListChangeListener<ApplicationPane>() {
-            @Override
-            public void onChanged( Change<? extends ApplicationPane> c ) {
-                while ( c.next() ) {
-
-
-                }
-            }
-        });
     }
 
     private void initAlignerAppsPane(){
