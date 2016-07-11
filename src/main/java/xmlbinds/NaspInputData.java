@@ -5,12 +5,10 @@
 // Generated on: 2016.07.01 at 12:40:32 PM MST 
 //
 
-
 package xmlbinds;
 
 import javax.annotation.Generated;
 import javax.xml.bind.annotation.*;
-
 
 /**
  * <p>Java class for NaspInputData complex type.
@@ -34,12 +32,13 @@ import javax.xml.bind.annotation.*;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement( name = "NaspInputData" )
 @XmlType(name = "NaspInputData", propOrder = {
     "options",
     "files",
     "externalApplications"
 })
+
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
 public class NaspInputData {
 

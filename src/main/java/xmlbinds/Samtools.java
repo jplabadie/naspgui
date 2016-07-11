@@ -49,10 +49,10 @@ public class Samtools implements Application{
     protected String additionalArguments;
     @XmlAttribute(name = "name")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String name;
+    protected String name = "Samtools";
     @XmlAttribute(name = "path")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String path;
+    protected String path = "";
 
     /**
      * Gets the value of the additionalArguments property.
