@@ -183,5 +183,16 @@ public class OptionsPane extends GridPane {
         this.add( prop_filter,3,8,4,1 );
         this.add( cov_filter,3,9,4,1 );
         this.add( job_submitter,3,10,4,1 );
+
+        run_name.setText( OPTIONS.getRunName() );
+        output_path.setText( OPTIONS.getOutputFolder() );
+        ref_name.setText( OPTIONS.getReference().getName() );
+        ref_path.setText( OPTIONS.getReference().getPath() );
+        if(OPTIONS.getReference().getFindDups().equalsIgnoreCase("true")){
+            find_dups.setSelected( true );
+        }
+        prop_filter.setText( OPTIONS.getFilters().getProportionFilter() );
+        cov_filter.setText( OPTIONS.getFilters().getCoverageFilter() );
+        job_submitter.setValue( OPTIONS.getJobSubmitter() );
     }
 }
