@@ -179,7 +179,6 @@ class FilesPane extends GridPane {
                         for ( ReadFolderPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_rf = new Button();
-
                             Button add_rf = new Button();
                             ImageView image_view1 = new ImageView( add );
                             image_view1.setFitHeight( 20 );
@@ -236,20 +235,21 @@ class FilesPane extends GridPane {
              ReadFolderPane rfp = new ReadFolderPane( rf );
              readFolderPanes.add( rfp );
          }
+
         for( AssemblyFolder af: ASSEMBLYFOLDERS ){
             AssemblyFolderPane afp = new AssemblyFolderPane( af );
             assemblyFolderPanes.add( afp );
         }
 
-        if( READFOLDERS.size() == 0){
+        if( READFOLDERS.size() == 0 ){
             ReadFolder rf = new ReadFolder();
             ReadPair rp = new ReadPair();
             rf.getReadPair().add( rp );
             ReadFolderPane rfp = new ReadFolderPane( rf );
             readFolderPanes.add( rfp );
         }
-        if( ASSEMBLYFOLDERS.size() == 0)
-        {
+
+        if( ASSEMBLYFOLDERS.size() == 0 ){
             AssemblyFolder af = new AssemblyFolder();
             Assembly a = new Assembly();
             af.getAssembly().add( a );

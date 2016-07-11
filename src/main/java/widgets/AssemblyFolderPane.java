@@ -65,17 +65,17 @@ class AssemblyFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        assembly_folder_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        assembly_folder_label.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
         assembly_folder_label.setPrefSize( 100, 20 );
         assembly_folder_label.setAlignment( Pos.CENTER );
         assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         assembly_folder_label.setAlignment( Pos.CENTER );
-        assembly_folder_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
          */
-        assembly_folder_path_label.setTooltip(assembly_folder_path_tip);
+        assembly_folder_path_label.setTooltip( assembly_folder_path_tip );
+        assembly_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14));
 
         /**
          * Define the look and behavior of the GridPane
@@ -83,16 +83,19 @@ class AssemblyFolderPane extends GridPane {
         // Set Horizontal and Vertical gap size (spacing between column areas)
         this.setHgap( 2 );
         this.setVgap( 2 );
+
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c2 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c3 = new ColumnConstraints( 30, 60, 90 );
+
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );
         c2.setHgrow( Priority.ALWAYS );
         c3.setHgrow( Priority.SOMETIMES );
         c3.setHalignment( HPos.RIGHT );
+
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
 
@@ -114,7 +117,6 @@ class AssemblyFolderPane extends GridPane {
         );
 
         // Add the button to the widget with an event handler
-
         ImageView image_view = new ImageView( add );
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
@@ -206,6 +208,6 @@ class AssemblyFolderPane extends GridPane {
     }
 
     public void setAssemblyFolder(AssemblyFolder input){
-        ASSEMBLYFOLDER = input;
+    ASSEMBLYFOLDER = input;
     }
 }

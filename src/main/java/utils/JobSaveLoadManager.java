@@ -84,15 +84,15 @@ public class JobSaveLoadManager {
      * @param path the user-provided path for output
      * @return the newly edited path as a String
      */
-    private static String setFileTagsToXml(String path){
+    private static String setFileTagsToXml( String path ){
         String xmltag = ".xml";
-        int done = path.lastIndexOf(xmltag);
-        int dot = path.lastIndexOf(".");
+        int done = path.lastIndexOf( xmltag );
+        int dot = path.lastIndexOf( "." );
 
-        if(done>=0) return path;
+        if( done>=0 ) return path;
 
-        else if(dot>=0){
-            path = path.substring(0,dot);
+        else if( dot>=0 ){
+            path = path.substring( 0, dot );
             path += xmltag;
         }
         lm.info(null, null, "JSLM: .xml tag missing, was automatically added to Job XML save name: "+ path);
@@ -104,7 +104,7 @@ public class JobSaveLoadManager {
      * @return a Singleton object instance of this class
      */
     public static JobSaveLoadManager getInstance() {
-        if(instance == null)
+        if( instance == null )
             instance = new JobSaveLoadManager();
         return instance;
     }
