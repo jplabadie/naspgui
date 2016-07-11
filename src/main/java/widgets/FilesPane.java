@@ -240,5 +240,21 @@ class FilesPane extends GridPane {
             AssemblyFolderPane afp = new AssemblyFolderPane( af );
             assemblyFolderPanes.add( afp );
         }
+
+        if( READFOLDERS.size() == 0){
+            ReadFolder rf = new ReadFolder();
+            ReadPair rp = new ReadPair();
+            rf.getReadPair().add( rp );
+            ReadFolderPane rfp = new ReadFolderPane( rf );
+            readFolderPanes.add( rfp );
+        }
+        if( ASSEMBLYFOLDERS.size() == 0)
+        {
+            AssemblyFolder af = new AssemblyFolder();
+            Assembly a = new Assembly();
+            af.getAssembly().add( a );
+            AssemblyFolderPane afp = new AssemblyFolderPane( af );
+            assemblyFolderPanes.add( afp );
+        }
     }
 }
