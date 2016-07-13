@@ -32,9 +32,9 @@ import javax.xml.bind.annotation.XmlValue;
 public class Alignment {
 
     @XmlValue
-    protected String value;
+    protected String value = "";
     @XmlAttribute(name = "sample")
-    protected String sample;
+    protected String sample = "";
 
     /**
      * Gets the value of the value property.

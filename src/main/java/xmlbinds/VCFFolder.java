@@ -1,11 +1,8 @@
 
 package xmlbinds;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.util.List;
 
 
 /**
@@ -35,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 public class VCFFolder {
 
     @XmlElement(name = "VCFFile", required = true)
-    protected VCFFile vcfFile;
+    protected List<VCFFile> vcfFile;
     @XmlAttribute(name = "path")
     protected String path;
 
@@ -47,21 +44,10 @@ public class VCFFolder {
      *     {@link VCFFile }
      *     
      */
-    public VCFFile getVCFFile() {
+    public List<VCFFile> getVCFFile() {
         return vcfFile;
     }
 
-    /**
-     * Sets the value of the vcfFile property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link VCFFile }
-     *     
-     */
-    public void setVCFFile(VCFFile value) {
-        this.vcfFile = value;
-    }
 
     /**
      * Gets the value of the path property.

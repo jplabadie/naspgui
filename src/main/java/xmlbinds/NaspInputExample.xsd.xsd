@@ -3,19 +3,21 @@
   <xs:element name="NaspInputData" type="NaspInputData"/>
   <xs:complexType name="Aligner">
     <xs:sequence>
-      <xs:element name="AdditionalArguments">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value=""/>
-            <xs:enumeration value="-r all"/>
-            <xs:enumeration value="-M"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
+      <xs:element type="xs:string" name="AdditionalArguments"/>
       <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
-    <xs:attribute type="xs:string" name="name" use="optional"/>
-    <xs:attribute type="xs:string" name="path" use="optional"/>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="path"/>
+  </xs:complexType>
+  <xs:complexType name="VCFFolder">
+    <xs:sequence>
+      <xs:element type="VCFFile" name="VCFFile">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="Picard">
     <xs:sequence>
@@ -24,9 +26,13 @@
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
-  <xs:complexType name="ReadFolder" >
+  <xs:complexType name="ReadFolder">
     <xs:sequence>
-      <xs:element type="ReadPair" name="ReadPair" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="ReadPair" name="ReadPair">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
@@ -38,23 +44,22 @@
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
-  <xs:complexType name="AlignmentFolder">
-    <xs:sequence>
-      <xs:element type="Alignment" name="Alignment" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute type="xs:string" name="path"/>
-  </xs:complexType>
-  <xs:complexType name="VCFFolder">
-    <xs:sequence>
-      <xs:element type="VCFFile" name="VCFFile" maxOccurs="unbounded" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute type="xs:string" name="path"/>
-  </xs:complexType>
   <xs:complexType name="AssemblyFolder">
     <xs:sequence>
-      <xs:element type="Assembly" name="Assembly" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="Assembly" name="Assembly">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute type="xs:string" name="path"/>
+  </xs:complexType>
+  <xs:complexType name="VCFFile">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="sample"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="ReadPair">
     <xs:sequence>
@@ -94,11 +99,28 @@
       <xs:element type="xs:string" name="JobSubmitter"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="Alignment">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="sample"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name="Samtools">
     <xs:sequence>
       <xs:element type="xs:string" name="AdditionalArguments"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="path"/>
+  </xs:complexType>
+  <xs:complexType name="AlignmentFolder">
+    <xs:sequence>
+      <xs:element type="Alignment" name="Alignment">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="Assembly">
@@ -108,19 +130,13 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name="VCFFile">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="sample"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name="Alignment">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="sample"/>
-      </xs:extension>
-    </xs:simpleContent>
+  <xs:complexType name="BamIndex">
+    <xs:sequence>
+      <xs:element type="xs:string" name="AdditionalArguments"/>
+      <xs:element type="JobParameters" name="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="DupFinder">
     <xs:sequence>
@@ -135,9 +151,8 @@
       <xs:element name="MemRequested">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="2"/>
-            <xs:enumeration value="8"/>
             <xs:enumeration value="4"/>
+            <xs:enumeration value="8"/>
             <xs:enumeration value="10"/>
           </xs:restriction>
         </xs:simpleType>
@@ -145,18 +160,17 @@
       <xs:element name="NumCPUs">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="1"/>
             <xs:enumeration value="8"/>
             <xs:enumeration value="4"/>
+            <xs:enumeration value="1"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="Walltime">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="4"/>
             <xs:enumeration value="48"/>
-            <xs:enumeration value="36"/>
+            <xs:enumeration value="4"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -168,38 +182,55 @@
   <xs:complexType name="ExternalApplications">
     <xs:sequence>
       <xs:element type="Index" name="Index"/>
-        <xs:element type="BamIndex" name="BamIndex"/>
+      <xs:element type="BamIndex" name="BamIndex"/>
       <xs:element type="MatrixGenerator" name="MatrixGenerator"/>
       <xs:element type="Picard" name="Picard"/>
       <xs:element type="Samtools" name="Samtools"/>
       <xs:element type="DupFinder" name="DupFinder"/>
       <xs:element type="AssemblyImporter" name="AssemblyImporter"/>
-      <xs:element type="Aligner" name="Aligner" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element type="SNPCaller" name="SNPCaller" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="Aligner" name="Aligner">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="SNPCaller" name="SNPCaller">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Files">
     <xs:sequence>
-      <xs:element type="AlignmentFolder" name="AlignmentFolder" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element type="VCFFolder" name="VCFFolder" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element type="ReadFolder" name="ReadFolder" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element type="AssemblyFolder" name="AssemblyFolder" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="AlignmentFolder" name="AlignmentFolder">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="VCFFolder" name="VCFFolder">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="ReadFolder" name="ReadFolder">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="AssemblyFolder" name="AssemblyFolder">
+        <xs:annotation>
+          <xs:documentation>Zero or more repetitions:</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="SNPCaller">
     <xs:sequence>
-      <xs:element name="AdditionalArguments">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="-stand_call_conf 100 -stand_emit_conf 100 -ploidy 1"/>
-            <xs:enumeration value=""/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
+      <xs:element type="xs:string" name="AdditionalArguments"/>
       <xs:element type="JobParameters" name="JobParameters"/>
     </xs:sequence>
-    <xs:attribute type="xs:string" name="name" use="optional"/>
-    <xs:attribute type="xs:string" name="path" use="optional"/>
+    <xs:attribute type="xs:string" name="name"/>
+    <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
   <xs:complexType name="Filters">
     <xs:sequence>
@@ -215,12 +246,4 @@
     <xs:attribute type="xs:string" name="name"/>
     <xs:attribute type="xs:string" name="path"/>
   </xs:complexType>
-    <xs:complexType name="BamIndex">
-        <xs:sequence>
-            <xs:element type="xs:string" name="AdditionalArguments"/>
-            <xs:element type="JobParameters" name="JobParameters"/>
-        </xs:sequence>
-        <xs:attribute type="xs:string" name="name"/>
-        <xs:attribute type="xs:string" name="path"/>
-    </xs:complexType>
 </xs:schema>

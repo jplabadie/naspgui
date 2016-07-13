@@ -44,6 +44,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ExternalApplications", propOrder = {
     "index",
+    "bamIndex",
     "matrixGenerator",
     "picard",
     "samtools",
@@ -58,6 +59,8 @@ public class ExternalApplications {
     @XmlElement(name = "Index", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected Index index;
+    @XmlElement(name = "BamIndex", required = true)
+    protected BamIndex bamIndex;
     @XmlElement(name = "MatrixGenerator", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected MatrixGenerator matrixGenerator;
@@ -104,6 +107,30 @@ public class ExternalApplications {
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     public void setIndex(Index value) {
         this.index = value;
+    }
+
+    /**
+     * Gets the value of the bamIndex property.
+     *
+     * @return
+     *     possible object is
+     *     {@link BamIndex }
+     *
+     */
+    public BamIndex getBamIndex() {
+        return bamIndex;
+    }
+
+    /**
+     * Sets the value of the bamIndex property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link BamIndex }
+     *
+     */
+    public void setBamIndex(BamIndex value) {
+        this.bamIndex = value;
     }
 
     /**

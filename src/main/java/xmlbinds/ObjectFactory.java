@@ -69,6 +69,12 @@ public class ObjectFactory {
                         ReadPair readPair = new ReadPair();
                     readPairList.add( readPair );
                 readFolderList.add( readFolder );
+            List<VCFFolder> vcfFolderList = files.getVCFFolder();
+                VCFFolder vcfFolder = new VCFFolder();
+                    List<VCFFile> vcfFiles =  vcfFolder.getVCFFile();
+                        VCFFile vcf = new VCFFile();
+                    vcfFiles.add( vcf );
+                vcfFolderList.add( vcfFolder );
         naspInputData.setFiles( files );
 
         ExternalApplications externalApplications = new ExternalApplications();
@@ -91,6 +97,36 @@ public class ObjectFactory {
      */
     public AssemblyImporter createAssemblyImporter() {
         return new AssemblyImporter();
+    }
+    /**
+     * Create an instance of {@link VCFFolder }
+     *
+     */
+    public VCFFolder createVCFFolderType() {
+        return new VCFFolder();
+    }
+    /**
+     * Create an instance of {@link VCFFile }
+     *
+     */
+    public VCFFile createVCFFileType() {
+        return new VCFFile();
+    }
+
+    /**
+     * Create an instance of {@link Alignment }
+     *
+     */
+    public Alignment createAlignmentType() {
+        return new Alignment();
+    }
+
+    /**
+     * Create an instance of {@link AlignmentFolder }
+     *
+     */
+    public AlignmentFolder createAlignmentFolderType() {
+        return new AlignmentFolder();
     }
 
     /**
@@ -132,6 +168,15 @@ public class ObjectFactory {
     public Index createIndex() {
         return new Index();
     }
+
+    /**
+     * Create an instance of {@link BamIndex }
+     *
+     */
+    public BamIndex createBamIndexType() {
+        return new BamIndex();
+    }
+
 
     /**
      * Create an instance of {@link ReadFolder }

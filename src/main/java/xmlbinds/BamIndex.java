@@ -1,13 +1,7 @@
 
 package xmlbinds;
 
-import xmlbinds2.JobParametersType;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -42,7 +36,7 @@ public class BamIndex {
     @XmlElement(name = "AdditionalArguments", required = true)
     protected String additionalArguments;
     @XmlElement(name = "JobParameters", required = true)
-    protected JobParametersType jobParameters;
+    protected JobParameters jobParameters;
     @XmlAttribute(name = "name")
     protected String name;
     @XmlAttribute(name = "path")
@@ -77,10 +71,10 @@ public class BamIndex {
      * 
      * @return
      *     possible object is
-     *     {@link JobParametersType }
+     *     {@link JobParameters }
      *     
      */
-    public JobParametersType getJobParameters() {
+    public JobParameters getJobParameters() {
         return jobParameters;
     }
 
@@ -89,10 +83,10 @@ public class BamIndex {
      * 
      * @param value
      *     allowed object is
-     *     {@link JobParametersType }
+     *     {@link JobParameters }
      *     
      */
-    public void setJobParameters(JobParametersType value) {
+    public void setJobParameters(JobParameters value) {
         this.jobParameters = value;
     }
 

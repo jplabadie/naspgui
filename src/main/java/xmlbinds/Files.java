@@ -8,13 +8,13 @@
 
 package xmlbinds;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -45,12 +45,47 @@ import javax.xml.bind.annotation.XmlType;
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
 public class Files {
 
+    @XmlElement(name = "AlignmentFolder", required = true)
+    protected List<AlignmentFolder> alignmentFolder;
+    @XmlElement(name = "VCFFolder", required = true)
+    protected List<VCFFolder> vcfFolder;
     @XmlElement(name = "ReadFolder")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected List<ReadFolder> readFolder;
     @XmlElement(name = "AssemblyFolder")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected List<AssemblyFolder> assemblyFolder;
+
+    /**
+     * Gets the value of the alignmentFolder property.
+     *
+     * @return
+     *     possible object is
+     *     {@link AlignmentFolder }
+     *
+     */
+    public List<AlignmentFolder> getAlignmentFolder() {
+        if( alignmentFolder == null){
+            alignmentFolder = new ArrayList<AlignmentFolder>();
+        }
+        return this.alignmentFolder;
+    }
+
+
+    /**
+     * Gets the value of the vcfFolder property.
+     *
+     * @return
+     *     possible object is
+     *     {@link VCFFolder }
+     *
+     */
+    public List<VCFFolder> getVCFFolder() {
+        if( vcfFolder == null ) {
+            vcfFolder =  new ArrayList<VCFFolder>();
+        }
+            return this.vcfFolder;
+    }
 
     /**
      * Gets the value of the readFolder property.
