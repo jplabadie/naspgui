@@ -31,16 +31,16 @@ import javax.xml.bind.annotation.*;
     "additionalArguments",
     "jobParameters"
 })
-public class BamIndex {
+public class BamIndex implements Application {
 
     @XmlElement(name = "AdditionalArguments", required = true)
     protected String additionalArguments;
     @XmlElement(name = "JobParameters", required = true)
     protected JobParameters jobParameters;
     @XmlAttribute(name = "name")
-    protected String name;
+    protected String name = "BamIndex";
     @XmlAttribute(name = "path")
-    protected String path;
+    protected String path = "";
 
     /**
      * Gets the value of the additionalArguments property.
