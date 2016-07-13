@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="NaspInputData" type="NaspInputData"/>
+
+  <xs:complexType name="NaspInputData">
+    <xs:sequence>
+      <xs:element name="Options" type="Options"/>
+      <xs:element name="Files" type="Files"/>
+      <xs:element name="ExternalApplications" type="ExternalApplications"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Options">
+    <xs:sequence>
+      <xs:element name="RunName" type="xs:string"/>
+      <xs:element name="OutputFolder" type="xs:string"/>
+      <xs:element name="Reference" type="Reference"/>
+      <xs:element name="Filters" type="Filters"/>
+      <xs:element name="JobSubmitter" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Reference">
+    <xs:sequence>
+      <xs:element name="FindDups" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Filters">
+    <xs:sequence>
+      <xs:element name="ProportionFilter" type="xs:string"/>
+      <xs:element name="CoverageFilter" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Files">
+    <xs:sequence>
+      <xs:element name="ReadFolder" type="ReadFolder" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="AssemblyFolder" type="AssemblyFolder" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ReadFolder">
+    <xs:sequence>
+      <xs:element name="ReadPair" type="ReadPair" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ReadPair">
+    <xs:sequence>
+      <xs:element name="Read1Filename" type="xs:string"/>
+      <xs:element name="Read2Filename" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="sample" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="AssemblyFolder">
+    <xs:sequence>
+      <xs:element name="Assembly" type="Assembly" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Assembly">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="sample" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="ExternalApplications">
+    <xs:sequence>
+      <xs:element name="Index" type="Index"/>
+      <xs:element name="MatrixGenerator" type="MatrixGenerator"/>
+      <xs:element name="Picard" type="Picard"/>
+      <xs:element name="Samtools" type="Samtools"/>
+      <xs:element name="DupFinder" type="DupFinder"/>
+      <xs:element name="AssemblyImporter" type="AssemblyImporter"/>
+      <xs:element name="Aligner" type="Aligner" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="SNPCaller" type="SNPCaller" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Index">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="JobParameters">
+    <xs:sequence>
+      <xs:element name="MemRequested" type="xs:string"/>
+      <xs:element name="NumCPUs" type="xs:string"/>
+      <xs:element name="Walltime" type="xs:string"/>
+      <xs:element name="Queue" type="xs:string"/>
+      <xs:element name="JobSubmitterArgs" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="MatrixGenerator">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Picard">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Samtools">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="DupFinder">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="AssemblyImporter">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Aligner">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="SNPCaller">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>
+
