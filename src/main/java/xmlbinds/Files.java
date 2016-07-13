@@ -40,7 +40,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Files", propOrder = {
     "readFolder",
-    "assemblyFolder"
+    "assemblyFolder",
+        "vcfFolder",
+        "alignmentFolder"
 })
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
 public class Files {

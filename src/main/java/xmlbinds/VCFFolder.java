@@ -2,6 +2,7 @@
 package xmlbinds;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,7 +46,9 @@ public class VCFFolder {
      *     
      */
     public List<VCFFile> getVCFFile() {
-        return vcfFile;
+        if( vcfFile == null)
+            vcfFile = new ArrayList<VCFFile>();
+        return this.vcfFile;
     }
 
 
