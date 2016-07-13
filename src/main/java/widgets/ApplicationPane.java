@@ -93,6 +93,7 @@ class ApplicationPane< V extends Application> extends GridPane {
          */
 
         app_title.setPrefWidth(50);
+        app_title.setPrefHeight( 20);
         app_title.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
         app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ));
@@ -130,8 +131,8 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         appPath.textProperty().addListener( observable -> {
             APPLICATION.setPath( appPath.getText() );
-        }
-        );
+        });
+
         appArgs.textProperty().addListener( observable -> APPLICATION.setAdditionalArguments( appArgs.getText() ));
 
         appPath.setText( APPLICATION.getPath() );
@@ -142,7 +143,7 @@ class ApplicationPane< V extends Application> extends GridPane {
         return app_title.getText();
     }
 
-    void setTitle(String text) {
+    void setTitle(String text){
         app_title.setText(text);
     }
 

@@ -55,7 +55,6 @@ class ExternalApplicationsPane extends GridPane {
 
         initCoreAppsPane();
         initAlignerAppsPane();
-
         initSnpAppsPane();
 
         accordion.getPanes().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
@@ -102,12 +101,11 @@ class ExternalApplicationsPane extends GridPane {
             }
             else indexCheck.setSelected( true );
 
-            Index thisindex = EXTERNALAPPS.getIndex();
             ApplicationPane<Index> ipane = new ApplicationPane<>( EXTERNALAPPS.getIndex() );
             indexCheck.setOnAction( event -> {
                 if (indexCheck.isSelected()) {
                     ipane.setDisable(false);
-                    EXTERNALAPPS.setIndex( thisindex );
+                    EXTERNALAPPS.setIndex( (Index) ipane.getApplication() );
                 }
                 else {
                     ipane.setDisable(true);
@@ -130,13 +128,11 @@ class ExternalApplicationsPane extends GridPane {
                 mgenCheck.setSelected( false );
             }
             else mgenCheck.setSelected( true );
-
-            MatrixGenerator thismatrixgen = EXTERNALAPPS.getMatrixGenerator();
             ApplicationPane<MatrixGenerator> mpane = new ApplicationPane<>( EXTERNALAPPS.getMatrixGenerator() );
             mgenCheck.setOnAction( event -> {
                 if (mgenCheck.isSelected()) {
                     mpane.setDisable(false);
-                    EXTERNALAPPS.setMatrixGenerator( thismatrixgen);
+                    EXTERNALAPPS.setMatrixGenerator((MatrixGenerator) mpane.getApplication());
                 }
                 else{
                     mpane.setDisable(true);
@@ -148,83 +144,113 @@ class ExternalApplicationsPane extends GridPane {
             coreBox.getChildren().add(matrixGenBox);
             /** <<< END MATRIXGENERATOR PANE INIT >>> */
 
-            // Picard
-            if (EXTERNALAPPS.getPicard() == null) {
-                EXTERNALAPPS.setPicard(new Picard());
-            }
+            /** <<< BEGIN PICARD PANE INIT >>> */
             HBox picardBox = new HBox();
-            picardBox.setAlignment(Pos.CENTER_RIGHT);
-            picardBox.setSpacing(5);
+            picardBox.setAlignment( Pos.CENTER_RIGHT );
+            picardBox.setSpacing( 5 );
             CheckBox picardCheck = new CheckBox();
-            picardCheck.setSelected(false);
-            ApplicationPane<Picard> ppane = new ApplicationPane<>(EXTERNALAPPS.getPicard());
+            if ( EXTERNALAPPS.getPicard() == null ) {
+                EXTERNALAPPS.setPicard( new Picard() );
+                picardCheck.setSelected( false );
+            }
+            else picardCheck.setSelected( true );
+            ApplicationPane<Picard> ppane = new ApplicationPane<>( EXTERNALAPPS.getPicard() );
             picardCheck.setOnAction(event -> {
-                if (picardCheck.isSelected())
-                    ppane.setDisable(false);
-                else ppane.setDisable(true);
+                if (picardCheck.isSelected()){
+                    ppane.setDisable( false );
+                    EXTERNALAPPS.setPicard( (Picard) ppane.getApplication() );
+                }
+                else {
+                    ppane.setDisable(true);
+                    EXTERNALAPPS.setPicard( null );
+                }
             });
             picardBox.getChildren().addAll(picardCheck, ppane);
             coreApps.add(ppane);
             coreBox.getChildren().add(picardBox);
+            /** <<< END PICARD PANE INIT >>> */
 
-            // SamTools
-            if (EXTERNALAPPS.getSamtools() == null) {
-                EXTERNALAPPS.setSamtools(new Samtools());
-            }
+            /** <<< BEGIN SAMTOOLS PANE INIT >>> */
             HBox samtoolsBox = new HBox();
             samtoolsBox.setAlignment(Pos.CENTER_RIGHT);
             samtoolsBox.setSpacing(5);
             CheckBox samCheck = new CheckBox();
-            samCheck.setSelected(false);
-            ApplicationPane<Samtools> spane = new ApplicationPane<>(EXTERNALAPPS.getSamtools());
+            if (EXTERNALAPPS.getSamtools() == null) {
+                EXTERNALAPPS.setSamtools(new Samtools());
+                samCheck.setSelected( false );
+            }
+            else samCheck.setSelected( true );
+            ApplicationPane<Samtools> spane = new ApplicationPane<>( EXTERNALAPPS.getSamtools() );
             samCheck.setOnAction(event -> {
-                if (samCheck.isSelected())
+                if (samCheck.isSelected()){
                     spane.setDisable(false);
-                else spane.setDisable(true);
+                    EXTERNALAPPS.setSamtools( (Samtools) spane.getApplication() );
+                }
+                else{
+                    spane.setDisable(true);
+                    EXTERNALAPPS.setSamtools( null );
+                }
             });
 
             samtoolsBox.getChildren().addAll(samCheck, spane);
             coreApps.add(spane);
             coreBox.getChildren().add(samtoolsBox);
+            /** <<< END SAMTOOLS PANE INIT >>> */
 
-            // DupFinder
-            if (EXTERNALAPPS.getDupFinder() == null) {
-                EXTERNALAPPS.setDupFinder(new DupFinder());
-            }
+            /** <<< BEGIN DUPFINDER PANE INIT >>> */
             HBox dupFindBox = new HBox();
             dupFindBox.setAlignment(Pos.CENTER_RIGHT);
             dupFindBox.setSpacing(5);
             CheckBox dupfindCheck = new CheckBox();
-            dupfindCheck.setSelected(false);
-            ApplicationPane<DupFinder> dpane = new ApplicationPane<>(EXTERNALAPPS.getDupFinder());
+            if (EXTERNALAPPS.getDupFinder() == null) {
+                EXTERNALAPPS.setDupFinder(new DupFinder());
+                dupfindCheck.setSelected( false );
+            }
+            else dupfindCheck.setSelected( true );
+            ApplicationPane<DupFinder> dpane = new ApplicationPane<>( EXTERNALAPPS.getDupFinder() );
             dupfindCheck.setOnAction(event -> {
-                if (dupfindCheck.isSelected())
+                if (dupfindCheck.isSelected()) {
                     dpane.setDisable(false);
-                else dpane.setDisable(true);
+                    EXTERNALAPPS.setDupFinder( (DupFinder) dpane.getApplication());
+                }
+                else {
+                    dpane.setDisable(true);
+                    EXTERNALAPPS.setDupFinder( null );
+                }
             });
 
             dupFindBox.getChildren().addAll(dupfindCheck, dpane);
             coreApps.add(dpane);
             coreBox.getChildren().add(dupFindBox);
+            /** <<< END DUPFINDER PANE INIT >>> */
 
-            // AssemblyImporter
-            if (EXTERNALAPPS.getAssemblyImporter() == null) {
-                EXTERNALAPPS.setAssemblyImporter( new AssemblyImporter());
-            }
+            /** <<< BEGIN ASSEMBLYIMPORTER PANE INIT >>> */
             HBox assemblyImporterBox = new HBox();
             assemblyImporterBox.setAlignment( Pos.CENTER_RIGHT );
             assemblyImporterBox.setSpacing( 5 );
             CheckBox assemblyImportCheck = new CheckBox();
+            if (EXTERNALAPPS.getAssemblyImporter() == null) {
+                EXTERNALAPPS.setAssemblyImporter( new AssemblyImporter());
+                assemblyImportCheck.setSelected( false );
+            }
+            else assemblyImportCheck.setSelected( true );
+
             ApplicationPane<AssemblyImporter> apane = new ApplicationPane<>(EXTERNALAPPS.getAssemblyImporter());
             assemblyImportCheck.setOnAction( event -> {
-                if( assemblyImportCheck.isSelected() )
-                    assemblyImporterBox.setDisable( false );
-                else assemblyImporterBox.setDisable( true );
+                if( assemblyImportCheck.isSelected() ){
+                    apane.setDisable( false );
+                    EXTERNALAPPS.setAssemblyImporter( (AssemblyImporter) apane.getApplication());
+                }
+                else {
+                    apane.setDisable( true );
+                    EXTERNALAPPS.setAssemblyImporter( null );
+                }
             });
 
             assemblyImporterBox.getChildren().addAll( assemblyImportCheck, apane );
             coreApps.add( apane );
             coreBox.getChildren().add( assemblyImporterBox );
+            /** <<< END ASSEMBLYIMPORTER PANE INIT >>> */
         }
     }
 
@@ -269,25 +295,22 @@ class ExternalApplicationsPane extends GridPane {
                             new_ap_box.setAlignment( Pos.BOTTOM_CENTER );
                             alignersBox.getChildren().add( new_ap_box );
 
-                            //new_app.setButtons(add_app, remove_app);
-                            //appbox.getChildren().add( new_ap_box );
-
                             remove_app.setOnAction(
                                     event -> {
-                                        //appbox.getChildren().remove( new_ap_box );
                                         alignerApps.remove( gp );
                                         alignersBox.getChildren().remove( new_ap_box );
                                     }
                             );
 
+                            // Don't add aligners twice, especially on-load
                             Application app = gp.getApplication();
-                            EXTERNALAPPS.getAligner().add( (Aligner) app );
+                            if( ! EXTERNALAPPS.getAligner().contains( app ))
+                                EXTERNALAPPS.getAligner().add( (Aligner) app );
                         }
                     }
                     if ( c.wasRemoved() ) {
                         for ( ApplicationPane gp : c.getRemoved() ) {
                             EXTERNALAPPS.getAligner().remove( (Aligner) gp.getApplication());
-
                         }
                     }
                 }
@@ -300,8 +323,6 @@ class ExternalApplicationsPane extends GridPane {
             temp.add( app );
         }
         alignerApps.addAll( temp );
-
-
     }
 
     private void initSnpAppsPane(){
@@ -344,9 +365,6 @@ class ExternalApplicationsPane extends GridPane {
                             new_ap_box.setAlignment( Pos.BOTTOM_CENTER );
                             snpcallersBox.getChildren().add( new_ap_box );
 
-                            //new_app.setButtons(add_app, remove_app);
-                            //appbox.getChildren().add( new_ap_box );
-
                             remove_app.setOnAction(
                                     event -> {
                                         snpApps.remove( gp );
@@ -354,14 +372,15 @@ class ExternalApplicationsPane extends GridPane {
                                     }
                             );
 
+                            // Don't add SNPCallers twice, especially on-load
                             Application app = gp.getApplication();
-                            EXTERNALAPPS.getSNPCaller().add( (SNPCaller) app );
+                            if( ! EXTERNALAPPS.getSNPCaller().contains( app ))
+                                EXTERNALAPPS.getSNPCaller().add( (SNPCaller) app );
                         }
                     }
                     if ( c.wasRemoved() ) {
                         for ( ApplicationPane gp : c.getRemoved() ) {
                             EXTERNALAPPS.getSNPCaller().remove( (SNPCaller) gp.getApplication());
-
                         }
                     }
                 }
@@ -374,6 +393,5 @@ class ExternalApplicationsPane extends GridPane {
             temp.add(app);
         }
         snpApps.addAll( temp );
-
     }
 }

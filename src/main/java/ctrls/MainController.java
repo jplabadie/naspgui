@@ -11,12 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import javafx.util.Pair;
-import utils.DefaultRemoteNetUtil;
-import utils.LogManager;
-import utils.RemoteFileSystemManager;
-import utils.UserSettingsManager;
+import utils.*;
+import widgets.JobTab;
+import xmlbinds.NaspInputData;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,6 +69,9 @@ public class MainController implements Initializable{
 
         DragResizerController.makeResizable(localFileBrowserTree);
         DragResizerController.makeResizable(remotePathBrowserTree);
+
+        centerPane.setPrefHeight( Region.USE_COMPUTED_SIZE );
+        jobTabPane.setPrefHeight( Region.USE_COMPUTED_SIZE );
     }
 
     private void initLogin() {
@@ -160,15 +163,12 @@ public class MainController implements Initializable{
                 new EventHandler<ActionEvent>() {
                     //@Override
                     public void handle(final ActionEvent e) {
-                        try {
-                            AnchorPane new_job_pane = FXMLLoader.load(getClass().getResource("/job/NASPDefaultJobPane.fxml"));
-                            new_job_pane.setUserData(userpass);
-                            Tab new_tab = new Tab("New Tab");
-                            new_tab.setContent(new_job_pane);
-                            jobTabPane.getTabs().add(new_tab);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                        File input = new File(getClass().getResource("/xml/defaultjob.xml").getFile());
+                        NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
+
+                        JobTab new_tab = new JobTab( nid );
+                        jobTabPane.getTabs().add(new_tab);
+
                     }
                 });
     }

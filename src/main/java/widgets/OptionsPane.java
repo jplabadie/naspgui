@@ -195,4 +195,8 @@ public class OptionsPane extends GridPane {
         cov_filter.setText( OPTIONS.getFilters().getCoverageFilter() );
         job_submitter.setValue( OPTIONS.getJobSubmitter() );
     }
+
+    TextField getRunName(){
+        return run_name;
+    }
 }

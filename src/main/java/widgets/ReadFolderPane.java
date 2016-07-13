@@ -106,6 +106,7 @@ class ReadFolderPane extends GridPane {
         this.add(read_folder_path_label, 1, 1, 3, 1 );
         this.add( read_folder_path, 3, 1, 4, 1 );
 
+        read_folder_path.setText( READFOLDER.getPath() );
         read_folder_path.textProperty().addListener(
                 observable -> {
                     READFOLDER.setPath( read_folder_path.getText());

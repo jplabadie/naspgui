@@ -1,5 +1,6 @@
 package widgets;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -8,7 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import utils.JobRecord;
 import utils.JobSaveLoadManager;
-import xmlbinds.*;
+import xmlbinds.ExternalApplications;
+import xmlbinds.MatrixGenerator;
+import xmlbinds.NaspInputData;
+import xmlbinds.ObjectFactory;
 
 /**
  * Project naspgui.
@@ -16,7 +20,7 @@ import xmlbinds.*;
  *
  * @author jlabadie
  */
-class JobTab extends Tab {
+public class JobTab extends Tab {
 
     private BorderPane borderPane = new BorderPane();
     private ScrollPane scrollPane = new ScrollPane();
@@ -36,13 +40,13 @@ class JobTab extends Tab {
      * Creates a job tab window from existing NaspData
      * @param input NaspInputData initialized from XML
      */
-    JobTab( NaspInputData input ) {
+    public JobTab( NaspInputData input ) {
         // TODO: Display NaspInputData correctly in the View
         NASP_DATA = input;
         initialize();
     }
 
-    JobTab(){
+    public JobTab(){
         initialize();
     }
 
@@ -50,6 +54,8 @@ class JobTab extends Tab {
      *  Creates a blank job and initializes new NASP data
      */
     void initialize() {
+
+        borderPane.setPrefHeight( 900);
         /**
          * Create new (blank) NaspInputData root and populate with Children
          */
@@ -74,7 +80,7 @@ class JobTab extends Tab {
         borderPane.setCenter( scrollPane ); // add the scroll pane to the Center region of the BorderPane
 
         vBox.getChildren().addAll( optspane, filespane, xappspane ); // add our GridPanes to the VBox ( order matters )
-
+        vBox.setPadding(new Insets(50,20,20,50));
         /**
          * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
          */
@@ -85,6 +91,12 @@ class JobTab extends Tab {
         bottom_toolbar.getItems().addAll( save_job, start_job, preview_job );
         vBox.getChildren().add( bottom_toolbar );
         borderPane.setBottom( bottom_toolbar );
+
+        this.setText( optspane.getRunName().getText());
+        optspane.getRunName().setOnAction( event -> {
+            this.setText( optspane.getRunName().getText());
+        });
+
 
         /**
          * Define save button actions

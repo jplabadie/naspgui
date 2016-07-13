@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="mainStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.MainController">
+<BorderPane fx:id="mainStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.MainController">
    <top>
       <MenuBar fx:id="menu_bar">
         <menus>
@@ -33,11 +33,16 @@
       </MenuBar>
    </top>
    <center>
-       <AnchorPane fx:id="centerPane" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-      <TabPane fx:id="jobTabPane" prefHeight="600.0" prefWidth="800.0" tabMaxHeight="50.0" tabMaxWidth="1000.0">
-         <tabs>
-         </tabs>
-      </TabPane>
+       <AnchorPane fx:id="centerPane" maxHeight="2000" maxWidth="3000" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+          <children>
+
+                <TabPane fx:id="jobTabPane" maxHeight="2000" maxWidth="3000" prefHeight="600.0" prefWidth="800.0"
+                         scaleShape="true" tabMaxHeight="50.0" tabMaxWidth="1000.0">
+                    <tabs>
+                    </tabs>
+                 </TabPane>
+
+          </children>
        </AnchorPane>
    </center>
    <left>
