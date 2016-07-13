@@ -73,15 +73,16 @@ class JobTab extends Tab {
         scrollPane.setContent( vBox ); // add a VBox to the scroll pane ( the VBox will hold our GridPanes )
         borderPane.setCenter( scrollPane ); // add the scroll pane to the Center region of the BorderPane
 
-        vBox.getChildren().addAll( optspane, filespane, xappspane); // add our GridPanes to the VBox ( order matters )
+        vBox.getChildren().addAll( optspane, filespane, xappspane ); // add our GridPanes to the VBox ( order matters )
 
         /**
          * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
          */
         Button start_job = new Button( "Start Job" );
         Button save_job = new Button( "Save Job" );
-        Button load_job = new Button( "Load Job" );
-        bottom_toolbar.getItems().addAll( save_job, load_job, start_job );
+        Button preview_job = new Button( "Preview XML" );
+
+        bottom_toolbar.getItems().addAll( save_job, start_job, preview_job );
         vBox.getChildren().add( bottom_toolbar );
         borderPane.setBottom( bottom_toolbar );
 
@@ -90,24 +91,18 @@ class JobTab extends Tab {
          */
         save_job.setOnAction( event -> {
             String output = NASP_DATA.getOptions().getRunName();
-            if (output == null)
+            if ( output == null )
                 output = "/temp";
-            System.out.println( NASP_DATA.getFiles().getReadFolder().get(0).getPath() );
-            JobSaveLoadManager.jaxbObjectToXML(NASP_DATA, output );
-        });
-
-        /**
-         * Define load button actions
-         */
-        load_job.setOnAction( event -> {
-            //TODO: Finish this func, include error handling and alerts
-            //TODO: Is this button a good idea?
-
-
-
+            System.out.println( NASP_DATA.getFiles().getReadFolder().get( 0 ).getPath() );
+            JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
         });
 
         start_job.setOnAction( event -> {
+
+        });
+
+        preview_job.setOnAction( event -> {
+
 
         });
     }
