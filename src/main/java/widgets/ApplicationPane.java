@@ -10,8 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.controlsfx.control.textfield.TextFields;
+import xmlbinds.Aligner;
 import xmlbinds.Application;
 import xmlbinds.JobParameters;
+import xmlbinds.SNPCaller;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -31,7 +34,7 @@ class ApplicationPane< V extends Application> extends GridPane {
     private Tooltip APP_PATH_TIP = new Tooltip("A path to the application on the remote service");
     private Tooltip ADD_ARGS_TIP = new Tooltip("Additional arguments or options to pass to the app");
 
-    private Label app_title = new Label();
+    private TextField app_title = new TextField();
     private TextField appPath = new TextField();
     private TextField appArgs = new TextField();
 
@@ -40,6 +43,7 @@ class ApplicationPane< V extends Application> extends GridPane {
     private V APPLICATION;
 
     ApplicationPane( V app ){
+
         APPLICATION = app;
 
         app_title.setText( APPLICATION.getName() );
@@ -71,11 +75,12 @@ class ApplicationPane< V extends Application> extends GridPane {
         this.setHgap( 2 );
         this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
-        ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
+        ColumnConstraints c0 = new ColumnConstraints( 25, 25, 35 );
         ColumnConstraints c1 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 150, 200 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 150 );
         //Define column auto-resizing behavior
+        c0.setHgrow( Priority.SOMETIMES );
         c1.setHgrow( Priority.NEVER );
         c2.setHgrow( Priority.ALWAYS );
         c3.setHgrow( Priority.SOMETIMES );
@@ -86,12 +91,11 @@ class ApplicationPane< V extends Application> extends GridPane {
         /**
          * Define the look and behavior of the non-static TextField and Label elements
          */
-        app_title.setPrefSize( 100, 20 );
+
+        app_title.setPrefWidth(50);
         app_title.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
         app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ));
-        app_title.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        app_title.setAlignment( Pos.CENTER );
 
         // Set default values
         //app_title.setText( APPLICATION.getName() );
@@ -112,7 +116,22 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         //TODO: ADD listeners to auto-update binds as input changes
 
-        appPath.textProperty().addListener( observable -> APPLICATION.setPath( appPath.getText() ));
+        app_title.textProperty().addListener( observable -> {
+            APPLICATION.setName( app_title.getText() );
+        });
+
+        if( APPLICATION.getClass() == SNPCaller.class)
+            TextFields.bindAutoCompletion( app_title, "GATK", "VarScan", "SAMtools" );
+        else if( APPLICATION.getClass() == Aligner.class)
+            TextFields.bindAutoCompletion( app_title, "BWA-mem", "Bowtie2", "Novoalign", "SNAP" );
+        else
+            TextFields.bindAutoCompletion( app_title, "Index", "MatrixGenerator", "Picard", "Samtools",
+                    "DupFinder", "AssemblyImporter");
+
+        appPath.textProperty().addListener( observable -> {
+            APPLICATION.setPath( appPath.getText() );
+        }
+        );
         appArgs.textProperty().addListener( observable -> APPLICATION.setAdditionalArguments( appArgs.getText() ));
 
         appPath.setText( APPLICATION.getPath() );
