@@ -370,6 +370,8 @@ public class MainController implements Initializable{
         @Override public boolean isLeaf() {
             if (isFirstTimeLeaf) {
                 isFirstTimeLeaf = false;
+                Path f = getValue();
+                System.out.println(f.toString());
                 isLeaf = false;
             }
             return isLeaf;
