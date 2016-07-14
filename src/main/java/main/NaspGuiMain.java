@@ -25,6 +25,7 @@ public class NaspGuiMain extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("NASPGuiMainLayout.fxml"));
         primaryStage.setTitle("NASP GUI Beta");
         Scene scene = new Scene(root, 1024, 800);
+        scene.getStylesheets().add("css/default.css");
 
         // Loading in this method seems to fail here
         //scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());

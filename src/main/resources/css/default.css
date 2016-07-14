@@ -1,5 +1,9 @@
 .root{
-    -fx-font: 14px Helvectica;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Helvetica";
+    -fx-fill: whitesmoke;
+    -fx-base: rgb(20,20,20);
+    -fx-background: rgb(150,150,150);
 }
 
 #fancytext {
