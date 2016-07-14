@@ -258,6 +258,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public String runNaspJob(String job_XML_abs_path) {
         String runpath = job_XML_abs_path.substring(0,job_XML_abs_path.lastIndexOf('/'));
+        String jobname = "";
         try {
             assert exec_channel != null;
             exec_channel.setCommand("cd "+ runpath);
@@ -268,13 +269,16 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             exec_channel.setCommand("nasp --config " + job_XML_abs_path); //run nasp with the xml
             log.info(null, null, "RNU: Run command - nasp --config " + job_XML_abs_path);
 
+
+            jobname = getUserJobs();
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error(null, null, "RNU: Run NASP failed: " + e.getMessage());
         }
 
-        //dreams
-        return "The ID of the started Job";
+        //TODO: dreams
+        return jobname;
     }
 
     /**
