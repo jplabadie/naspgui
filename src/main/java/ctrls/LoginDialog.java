@@ -10,7 +10,7 @@ import utils.*;
 /**
  * @author Jean-Paul Labadie
  */
-class LoginDialog extends Dialog<Pair<String,String>>{
+public class LoginDialog extends Dialog<Pair<String,String>>{
 
     private RemoteFileSystemManager rfsm = RemoteFileSystemManager.getInstance();
     private RemoteNetUtil nm = RemoteNetUtilFactoryMaker.getFactory().createRemoteNetUtil();
@@ -19,7 +19,7 @@ class LoginDialog extends Dialog<Pair<String,String>>{
     /**
      * Creates a custom JavaFX Dialog for capturing a login
      */
-    LoginDialog(){
+    public LoginDialog(){
 
         this.setTitle("Login");
         this.setHeaderText("NASP GUI Login");
@@ -67,13 +67,10 @@ class LoginDialog extends Dialog<Pair<String,String>>{
         grid.add(new Label("Port:"), 0, 3);
         grid.add(port, 1, 3);
 
-
-
         this.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
         Platform.runLater(username::requestFocus);
-
 
         /**
          * Convert the result to an Optional username-password-pair when the login button is clicked
@@ -88,6 +85,7 @@ class LoginDialog extends Dialog<Pair<String,String>>{
                             host.getText(), Integer.valueOf(port.getText()));
                     nm.initSession(username.getText(), password.getText(),
                             host.getText(), Integer.valueOf(port.getText()));
+                    nm.openSession();
                 }
                 catch(RuntimeException re){
                     log.error(null, null, "Login Failed - Unable to connect or authenticate: \n"+ re.getMessage());
@@ -102,6 +100,9 @@ class LoginDialog extends Dialog<Pair<String,String>>{
             }
             return null;
         });
+    }
 
+    RemoteNetUtil getNet(){
+        return nm;
     }
 }
