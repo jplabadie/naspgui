@@ -142,6 +142,8 @@ class FilesPane extends GridPane {
                             remove_icon_view.setFitWidth( 20 );
                             remove_assembly.setGraphic( remove_icon_view );
 
+                            ASSEMBLYFOLDERS.add( gp.getAssemblyFolder() );
+
                             /**
                              * When the new_folder button is pressed, add a new assembly folder to the FILES list
                              * with an Assembly
@@ -150,7 +152,6 @@ class FilesPane extends GridPane {
                                 AssemblyFolder new_folder = new AssemblyFolder();
                                 Assembly new_assembly = new Assembly();
                                 new_folder.getAssembly().add( new_assembly );
-                                ASSEMBLYFOLDERS.add( new_folder );
                                 AssemblyFolderPane new_pane = new AssemblyFolderPane( new_folder );
                                 assemblyFolderPanes.add( new_pane );
                             } );
@@ -203,11 +204,12 @@ class FilesPane extends GridPane {
                             add_rf.setGraphic( image_view1 );
                             add_rf.setAlignment( Pos.BOTTOM_RIGHT );
 
+                            READFOLDERS.add( gp.getReadFolder() );
+
                             add_rf.setOnAction( event -> {
                                 ReadFolder new_folder = new ReadFolder();
                                 ReadPair new_pair = new ReadPair();
                                 new_folder.getReadPair().add( new_pair );
-                                READFOLDERS.add( new_folder );
                                 ReadFolderPane new_pane = new ReadFolderPane( new_folder );
                                 readFolderPanes.add( new_pane );
                             } );
@@ -274,6 +276,8 @@ class FilesPane extends GridPane {
                             remove_icon_view.setFitWidth( 20 );
                             removeVcf.setGraphic( remove_icon_view );
 
+                            VCFFOLDERS.add( gp.getVcfFolder() );
+
                             /**
                              * When the new_folder button is pressed, add a new assembly folder to the FILES list
                              * with an Assembly
@@ -282,7 +286,7 @@ class FilesPane extends GridPane {
                                 VCFFolder new_folder = new VCFFolder();
                                 VCFFile new_vcf = new VCFFile();
                                 new_folder.getVCFFile().add( new_vcf );
-                                VCFFOLDERS.add( new_folder );
+
                                 VcfFolderPane new_pane = new VcfFolderPane( new_folder );
                                 vcfFolderPanes.add( new_pane );
                             } );
@@ -345,6 +349,7 @@ class FilesPane extends GridPane {
                             remove_icon_view.setFitWidth( 20 );
                             removeAlignment.setGraphic( remove_icon_view );
 
+                            ALIGNFOLDERS.add( gp.getAssemblyFolder() );
                             /**
                              * When the new_folder button is pressed, add a new assembly folder to the FILES list
                              * with an Assembly
@@ -353,7 +358,6 @@ class FilesPane extends GridPane {
                                 AlignmentFolder new_folder = new AlignmentFolder();
                                 Alignment new_align = new Alignment();
                                 new_folder.getAlignment().add( new_align );
-                                ALIGNFOLDERS.add( new_folder );
                                 AlignmentFolderPane new_pane = new AlignmentFolderPane( new_folder );
                                 alignmentFolderPanes.add( new_pane );
                             } );
@@ -391,25 +395,32 @@ class FilesPane extends GridPane {
         });
 
 
+        ArrayList list = new ArrayList<ReadFolderPane>();
         for( ReadFolder rf : READFOLDERS ){
              ReadFolderPane rfp = new ReadFolderPane( rf );
-             readFolderPanes.add( rfp );
+             list.add( rfp );
          }
+        readFolderPanes.addAll( list );
 
+        list = new ArrayList<AssemblyFolderPane>();
         for( AssemblyFolder af: ASSEMBLYFOLDERS ){
             AssemblyFolderPane afp = new AssemblyFolderPane( af );
-            assemblyFolderPanes.add( afp );
+            list.add( afp );
         }
+        assemblyFolderPanes.addAll( list );
 
+        list = new ArrayList<VcfFolderPane>();
         for( VCFFolder vf: VCFFOLDERS ){
             VcfFolderPane vfp = new VcfFolderPane( vf );
-            vcfFolderPanes.add( vfp );
         }
+        vcfFolderPanes.addAll( list );
 
+        list = new ArrayList<AlignmentFolderPane>();
         for( AlignmentFolder alignf: ALIGNFOLDERS ){
             AlignmentFolderPane afp = new AlignmentFolderPane( alignf );
             alignmentFolderPanes.add( afp );
         }
+        alignmentFolderPanes.addAll( list );
 
         if( READFOLDERS.size() == 0 ){
             ReadFolder rf = new ReadFolder();

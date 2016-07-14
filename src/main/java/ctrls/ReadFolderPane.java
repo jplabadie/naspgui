@@ -48,8 +48,6 @@ public class ReadFolderPane {
                 // Get an item ID here, which was stored when the drag started
                 String path = db.getString();
 
-
-
             }
             event.setDropCompleted(success);
             event.consume();

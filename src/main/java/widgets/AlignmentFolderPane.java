@@ -187,7 +187,14 @@ class AlignmentFolderPane extends GridPane {
     }
 
     void clear(){
-        alignmentGridpanes.clear();
+        alignmentFolderPath.setText("");
+        for( int i= alignmentGridpanes.size() -1 ; i >=0 ; i--) {
+            if (i > 1){
+                alignmentGridpanes.remove( i);
+            }
+            else
+                alignmentGridpanes.get(i).clear();
+        }
     }
 
     /**
