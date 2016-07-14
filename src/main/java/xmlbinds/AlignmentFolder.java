@@ -2,6 +2,7 @@
 package xmlbinds;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,6 +46,8 @@ public class AlignmentFolder {
      *     
      */
     public List<Alignment> getAlignment() {
+        if( alignment == null)
+            alignment = new ArrayList<>();
         return alignment;
     }
 
