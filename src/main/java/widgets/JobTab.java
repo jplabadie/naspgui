@@ -7,12 +7,16 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
 import utils.JobSaveLoadManager;
+import utils.RemoteNetUtil;
 import xmlbinds.ExternalApplications;
 import xmlbinds.MatrixGenerator;
 import xmlbinds.NaspInputData;
 import xmlbinds.ObjectFactory;
+
+import java.io.File;
 
 /**
  * Project naspgui.
@@ -35,6 +39,7 @@ public class JobTab extends Tab {
     private NaspInputData NASP_DATA;
 
     private ObjectFactory OF = new ObjectFactory();
+    private RemoteNetUtil net = new DefaultRemoteNetUtil();
 
     /**
      * Creates a job tab window from existing NaspData
@@ -81,6 +86,7 @@ public class JobTab extends Tab {
 
         vBox.getChildren().addAll( optspane, filespane, xappspane ); // add our GridPanes to the VBox ( order matters )
         vBox.setPadding(new Insets(50,20,20,50));
+
         /**
          * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
          */
@@ -97,7 +103,6 @@ public class JobTab extends Tab {
             this.setText( optspane.getRunName().getText());
         });
 
-
         /**
          * Define save button actions
          */
@@ -109,13 +114,30 @@ public class JobTab extends Tab {
             JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
         });
 
+        /**
+         * Define start-job button actions
+         */
         start_job.setOnAction( event -> {
+            String xml_name = NASP_DATA.getOptions().getRunName();
+            String remotepath = NASP_DATA.getOptions().getOutputFolder();
+            if ( xml_name == null )
+                xml_name = "/temp";
+            System.out.println( NASP_DATA.getFiles().getReadFolder().get( 0 ).getPath() );
+            File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
 
+            net.upload( outfile, remotepath+ ".xml");
+            String jobid = net.runNaspJob( remotepath +".xml" );
+            System.out.println( jobid );
+            System.out.println( remotepath );
         });
 
         preview_job.setOnAction( event -> {
 
 
         });
+    }
+
+    public void setRemoteNet( RemoteNetUtil network){
+        net = network;
     }
 }
