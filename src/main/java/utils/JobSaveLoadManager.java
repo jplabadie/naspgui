@@ -55,7 +55,7 @@ public class JobSaveLoadManager {
      * @param input_for_conversion NaspInputData object which will be converted to XML for output to NASP
      * @param output_path the absolute path desired for the output XML
      */
-    public static void jaxbObjectToXML( NaspInputData input_for_conversion, String output_path ) {
+    public static File jaxbObjectToXML( NaspInputData input_for_conversion, String output_path ) {
         try {
             JAXBContext context = JAXBContext.newInstance( input_for_conversion.getClass() );
             Marshaller m = context.createMarshaller();
@@ -64,9 +64,11 @@ public class JobSaveLoadManager {
 
             //Ensure correct .xml tag is added
             output_path = setFileTagsToXml( output_path );
+            File outfile = new File( output_path);
             // Write to File
-            m.marshal(input_for_conversion, new File( output_path ));
+            m.marshal(input_for_conversion, outfile);
             lm.info( null, null, "JSLM: Job XML converted from objects and saved to XML at: " + output_path );
+            return outfile;
         } catch ( JAXBException e ) {
             String temp ="";
             for( StackTraceElement x : e.getStackTrace() ){
@@ -75,6 +77,7 @@ public class JobSaveLoadManager {
             lm.error(null, null, "JSLM: Job objects failed to convert or save as XML to: " + output_path +
                     "\nError occured:\n" + temp);
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -87,11 +90,11 @@ public class JobSaveLoadManager {
     private static String setFileTagsToXml( String path ){
         String xmltag = ".xml";
         int done = path.lastIndexOf( xmltag );
-        int dot = path.lastIndexOf( "." );
+        int dot = path.lastIndexOf( ".xml" );
 
-        if( done>=0 ) return path;
+        if( done>0 ) return path;
 
-        else if( dot>=0 ){
+        else if( dot>0 ){
             path = path.substring( 0, dot );
             path += xmltag;
         }
