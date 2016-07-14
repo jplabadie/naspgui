@@ -181,7 +181,7 @@ class AssemblyFolderPane extends GridPane {
             }
         });
         for( Assembly assmbly: ASSEMBLIES){
-            AssemblyPane ap = new AssemblyPane( assmbly );
+           AssemblyPane ap = new AssemblyPane( assmbly );
             assemblyGridpanes.add( ap );
         }
     }

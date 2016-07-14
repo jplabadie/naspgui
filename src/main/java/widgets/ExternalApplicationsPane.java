@@ -118,6 +118,34 @@ class ExternalApplicationsPane extends GridPane {
             coreBox.getChildren().add(indexBox);
             /** <<< END INDEX PANE INIT >>> */
 
+            /** <<< BEGIN BAMINDEX PANE INIT >>>   */
+            HBox bamIndexBox = new HBox();
+            bamIndexBox.setAlignment(Pos.CENTER_RIGHT);
+            bamIndexBox.setSpacing(5);
+            CheckBox bamIndexCheck = new CheckBox();
+            if (EXTERNALAPPS.getBamIndex() == null) {
+                EXTERNALAPPS.setBamIndex( new BamIndex() );
+                bamIndexCheck.setSelected( false );
+            }
+            else bamIndexCheck.setSelected( true );
+
+            ApplicationPane<BamIndex> bampane = new ApplicationPane<>( EXTERNALAPPS.getBamIndex() );
+            bamIndexCheck.setOnAction( event -> {
+                if (bamIndexCheck.isSelected()) {
+                    bampane.setDisable(false);
+                    EXTERNALAPPS.setBamIndex( (BamIndex) bampane.getApplication() );
+                }
+                else {
+                    bampane.setDisable(true);
+                    EXTERNALAPPS.setIndex( null );
+                }
+            });
+
+            bamIndexBox.getChildren().addAll(bamIndexCheck, bampane);
+            coreApps.add(bampane);
+            coreBox.getChildren().add(bamIndexBox);
+            /** <<< END BAMINDEX PANE INIT >>> */
+
             /** <<< BEGIN MATRIXGENERATOR PANE INIT >>>   */
             HBox matrixGenBox = new HBox();
             matrixGenBox.setAlignment(Pos.CENTER_RIGHT);
