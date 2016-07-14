@@ -40,9 +40,10 @@ class DraggableTreeCell<T> extends TreeCell<T> {
                 setGraphic(null);
             }
             else {
-                this.setText(this.getTreeItem().getValue().toString());
+                String file = this.getTreeItem().getValue().toString();
+                file = file.substring( file.lastIndexOf('/'), file.length());
+                this.setText( file );
                 text = this.getText();
-
             }
         }
         catch (NullPointerException e){
