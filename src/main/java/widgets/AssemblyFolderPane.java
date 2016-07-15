@@ -52,10 +52,12 @@ class AssemblyFolderPane extends GridPane {
 
     AssemblyFolderPane( AssemblyFolder input_assembly_folder ){
 
+        this.setId("folderpane1");
         ASSEMBLYFOLDER = input_assembly_folder;
         ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
 
         assemblyFolderPath.setText( ASSEMBLYFOLDER.getPath() );
+        assemblyFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -65,7 +67,7 @@ class AssemblyFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        assembly_folder_label.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        assembly_folder_label.setId( "header3" );
         assembly_folder_label.setPrefSize( 100, 20 );
         assembly_folder_label.setAlignment( Pos.CENTER );
         assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );

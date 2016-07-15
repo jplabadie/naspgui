@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * @author jlabadie
  */
 public class OptionsPane extends GridPane {
-    private Label CORE_SETTINGS = new Label("Core Settings");
+    private Label core_settings = new Label("Core Settings");
     private Label RUN_NAME = new Label("Run Name");
     private Label OUTPUT_PATH = new Label("Remote Output Path");
     private Label REFERENCE = new Label( "Reference" );
@@ -42,14 +42,14 @@ public class OptionsPane extends GridPane {
     private Tooltip COVERAGE_FILTER_TIP = new Tooltip("The setting for the coverage filter");
     private Tooltip JOB_SUBMITTER_TIP = new Tooltip("The Job manager/submitter you would like to use on this run");
 
-    private TextField run_name = new TextField();
-    private TextField output_path = new TextField();
-    private TextField ref_name = new TextField();
-    private TextField ref_path = new TextField();
-    private CheckBox find_dups = new CheckBox();
-    private TextField prop_filter = new TextField();
-    private TextField cov_filter = new TextField();
-    private ChoiceBox<String> job_submitter = new ChoiceBox<>();
+    private TextField runName = new TextField();
+    private TextField outputPath = new TextField();
+    private TextField refName = new TextField();
+    private TextField refPath = new TextField();
+    private CheckBox findDups = new CheckBox();
+    private TextField propFilter = new TextField();
+    private TextField covFilter = new TextField();
+    private ChoiceBox<String> jobSubmitter = new ChoiceBox<>();
 
     private Options OPTIONS;
 
@@ -63,58 +63,58 @@ public class OptionsPane extends GridPane {
         ArrayList<String> job_sub_chocies = new ArrayList<>();
         ObservableList<String> choice_list = FXCollections.observableArrayList( job_sub_chocies );
         choice_list.addAll("PBS/Torque", "SLURM");
-        job_submitter.setItems( choice_list );
-        job_submitter.setValue( "PBS/Torque" ); //Default to PBS
+        jobSubmitter.setItems( choice_list );
+        jobSubmitter.setValue( "PBS/Torque" ); //Default to PBS
 
         /**
          * Set Listeners on elements to auto-update xml_bind data
-         */run_name.textProperty().addListener(
+         */runName.textProperty().addListener(
                 (observable -> {
-                    OPTIONS.setRunName( run_name.getText());
+                    OPTIONS.setRunName( runName.getText());
                 })
         );
 
-        output_path.textProperty().addListener(
+        outputPath.textProperty().addListener(
                 (observable -> {
-                    OPTIONS.setOutputFolder( output_path.getText() );
+                    OPTIONS.setOutputFolder( outputPath.getText() );
 
                 })
         );
 
-        ref_name.textProperty().addListener(
-                (observable -> OPTIONS.getReference().setName( run_name.getText()))
+        refName.textProperty().addListener(
+                (observable -> OPTIONS.getReference().setName( runName.getText()))
         );
 
-        ref_path.textProperty().addListener(
-                (observable -> OPTIONS.getReference().setPath( ref_path.getText()))
+        refPath.textProperty().addListener(
+                (observable -> OPTIONS.getReference().setPath( refPath.getText()))
         );
 
-        find_dups.setAllowIndeterminate( false );
-        find_dups.setOnAction( event -> {
-            if( find_dups.isSelected() )
+        findDups.setAllowIndeterminate( false );
+        findDups.setOnAction(event -> {
+            if( findDups.isSelected() )
                 OPTIONS.getReference().setFindDups( "true" );
             else
                 OPTIONS.getReference().setFindDups( "false" );
         });
 
-        prop_filter.textProperty().addListener(
-                observable -> OPTIONS.getFilters().setProportionFilter( prop_filter.getText() )
+        propFilter.textProperty().addListener(
+                observable -> OPTIONS.getFilters().setProportionFilter( propFilter.getText() )
         );
 
-        cov_filter.textProperty().addListener(
-                observable -> OPTIONS.getFilters().setCoverageFilter( cov_filter.getText() )
+        covFilter.textProperty().addListener(
+                observable -> OPTIONS.getFilters().setCoverageFilter( covFilter.getText() )
         );
 
-        job_submitter.setOnAction( event -> OPTIONS.setJobSubmitter( job_submitter.getValue() ));
+        jobSubmitter.setOnAction(event -> OPTIONS.setJobSubmitter( jobSubmitter.getValue() ));
 
         /**
          * Define the look and feel of static label elements
          */
-        CORE_SETTINGS.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
-        CORE_SETTINGS.setPrefSize( 100,20 );
-        CORE_SETTINGS.setAlignment( Pos.CENTER );
-        CORE_SETTINGS.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        CORE_SETTINGS.setAlignment( Pos.CENTER );
+        core_settings.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
+        core_settings.setPrefSize( 100,20 );
+        core_settings.setAlignment( Pos.CENTER );
+        core_settings.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        core_settings.setAlignment( Pos.CENTER );
         RUN_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         OUTPUT_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         REFERENCE.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
@@ -158,7 +158,7 @@ public class OptionsPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add( CORE_SETTINGS, 0, 0, 3, 1 );
+        this.add(core_settings, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
         this.add( RUN_NAME, 1, 1, 3, 1 );
@@ -175,28 +175,28 @@ public class OptionsPane extends GridPane {
         this.add( COVERAGE_FILTER,2,9,3,1 );
 
         // Add text fields,checkboxes,choiceboxes to column 3 of the GridPane
-        this.add( run_name,3,1,4,1 );
-        this.add( output_path,3,2,4,1 );
-        this.add( ref_name,3,4,4,1 );
-        this.add( ref_path,3,5,4,1 );
-        this.add( find_dups,3,6,4,1 );
-        this.add( prop_filter,3,8,4,1 );
-        this.add( cov_filter,3,9,4,1 );
-        this.add( job_submitter,3,10,4,1 );
+        this.add(runName,3,1,4,1 );
+        this.add(outputPath,3,2,4,1 );
+        this.add(refName,3,4,4,1 );
+        this.add(refPath,3,5,4,1 );
+        this.add(findDups,3,6,4,1 );
+        this.add(propFilter,3,8,4,1 );
+        this.add(covFilter,3,9,4,1 );
+        this.add(jobSubmitter,3,10,4,1 );
 
-        run_name.setText( OPTIONS.getRunName() );
-        output_path.setText( OPTIONS.getOutputFolder() );
-        ref_name.setText( OPTIONS.getReference().getName() );
-        ref_path.setText( OPTIONS.getReference().getPath() );
+        runName.setText( OPTIONS.getRunName() );
+        outputPath.setText( OPTIONS.getOutputFolder() );
+        refName.setText( OPTIONS.getReference().getName() );
+        refPath.setText( OPTIONS.getReference().getPath() );
         if(OPTIONS.getReference().getFindDups().equalsIgnoreCase("true")){
-            find_dups.setSelected( true );
+            findDups.setSelected( true );
         }
-        prop_filter.setText( OPTIONS.getFilters().getProportionFilter() );
-        cov_filter.setText( OPTIONS.getFilters().getCoverageFilter() );
-        job_submitter.setValue( OPTIONS.getJobSubmitter() );
+        propFilter.setText( OPTIONS.getFilters().getProportionFilter() );
+        covFilter.setText( OPTIONS.getFilters().getCoverageFilter() );
+        jobSubmitter.setValue( OPTIONS.getJobSubmitter() );
     }
 
     TextField getRunName(){
-        return run_name;
+        return runName;
     }
 }

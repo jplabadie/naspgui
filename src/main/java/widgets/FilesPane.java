@@ -10,8 +10,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.*;
 
 import java.util.ArrayList;
@@ -75,11 +73,13 @@ class FilesPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        files_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
-        files_label.setPrefSize( 100, 20 );
-        files_label.setAlignment( Pos.CENTER );
-        files_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        files_label.setAlignment( Pos.CENTER );
+//        files_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
+//        files_label.setPrefSize( 100, 20 );
+//        files_label.setAlignment( Pos.CENTER );
+//        files_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+//        files_label.setAlignment( Pos.CENTER );
+
+        files_label.setId("header1");
 
         /**
          * Add tooltips to the static label elements
