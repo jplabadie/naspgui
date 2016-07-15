@@ -13,23 +13,24 @@ import utils.LogManager;
  */
 class DraggableTreeCell<T> extends TreeCell<T> {
     private String text = super.getText();
+    private String full_path = "";
 
     public DraggableTreeCell() {
         setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
 
-                Dragboard db = startDragAndDrop(TransferMode.MOVE);
+                Dragboard db = startDragAndDrop(TransferMode.ANY);
                 ClipboardContent content = new ClipboardContent();
 
                 // Store node ID in order to know what is dragged.
-                content.putString(text);
+                content.putString( full_path );
                 db.setContent(content);
                 event.consume();
             }
         });
-
     }
+
     @Override
     public void updateItem(T item, boolean empty) {
         super.updateItem(item, empty);
@@ -41,9 +42,11 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             }
             else {
                 String file = this.getTreeItem().getValue().toString();
+                full_path = file;
                 file = file.substring( file.lastIndexOf('/'), file.length());
                 this.setText( file );
                 text = this.getText();
+                super.setText( text );
             }
         }
         catch (NullPointerException e){
