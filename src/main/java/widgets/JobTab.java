@@ -1,12 +1,16 @@
 package widgets;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ToolBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
 import utils.JobSaveLoadManager;
@@ -17,6 +21,7 @@ import xmlbinds.NaspInputData;
 import xmlbinds.ObjectFactory;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Project naspgui.
@@ -60,7 +65,7 @@ public class JobTab extends Tab {
      */
     void initialize() {
 
-        borderPane.setPrefHeight( 900);
+        borderPane.setPrefHeight( 900 );
         /**
          * Create new (blank) NaspInputData root and populate with Children
          */
@@ -134,6 +139,57 @@ public class JobTab extends Tab {
         preview_job.setOnAction( event -> {
 
 
+        });
+
+        /**
+         * Enable Drag-and-Drop Drag-Over events
+         */
+        this.getContent().setOnDragOver( new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent event) {
+                if( event.getDragboard().hasString() ){
+                    event.acceptTransferModes( TransferMode.ANY );
+                }
+                event.consume();
+            }
+        });
+
+        /**
+         * Enable visual feedback to indicate Drag-Event has passed checks
+         */
+        this.getContent().setOnDragEntered( new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                if ( event.getDragboard().hasString() ) {
+                    borderPane.setBackground(
+                            new Background( new BackgroundFill( Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY))
+                    );
+                }
+                event.consume();
+            }
+        });
+
+        /**
+         * Enable Drag-and-Drop Drop event handling
+         */
+        this.getContent().setOnDragDropped( new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+
+                Dragboard db = event.getDragboard();
+                System.out.println(db.getString());
+                boolean success = false;
+                if (db.hasString()) {
+                    ArrayList<String> files = net.getAllFiles( db.getString() );
+                    for( String x : files ) {
+
+                        System.out.println(x);
+                    }
+                    System.out.println(".oOo.");
+                    //TODO: Use the files in 'files' to build and populate the UI/NASP xml
+                    success = true;
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            }
         });
     }
 
