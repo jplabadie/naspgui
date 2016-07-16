@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * @author Jean-Paul Labadie
@@ -51,6 +52,7 @@ public interface RemoteNetUtil {
 
     String getUserJobs();
 
+    ArrayList<String> getAllFiles(String remote_abs_path);
 
     /**
      *  Tests to see if a specified file exists and is a file on the remote server
