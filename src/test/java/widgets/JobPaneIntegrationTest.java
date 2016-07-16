@@ -33,7 +33,9 @@ public class JobPaneIntegrationTest extends Application {
         TabPane root = new TabPane();
 
         root.getTabs().add( tab );
-        primaryStage.setScene( new Scene( root, 800, 600 ) );
+        Scene scene = new Scene( root, 800, 600 );
+        scene.getStylesheets().add("css/darc.css");
+        primaryStage.setScene( scene );
         primaryStage.show();
 
         for( Method t : Aligner.class.getDeclaredMethods() ){
