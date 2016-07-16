@@ -1,0 +1,60 @@
+.root{
+    -fx-font-size: 10pt;
+    -fx-font-family: "Helvetica";
+    -fx-text-fill: silver;
+    -fx-base: rgb(180,180,180);
+    -fx-background: rgb(120,120,120);
+}
+
+#fancytext {
+    -fx-font: 100px Tahoma;
+//-fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat, aqua 0%, red 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+#header1{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bolder;
+    -fx-font-size: 24pt;
+}
+
+#header2{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 20pt;
+}
+
+#header3{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 18pt;
+}
+
+#header4{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 16pt;
+}
+
+#header5{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 14pt;
+}
+
+#textfield1{
+    -fx-text-fill: aqua;
+    -fx-highlight-fill: chocolate;
+    -fx-background-color: lightslategray;
+}
+
+#folderpane1{
+    -fx-border-color: orange;
+    -fx-border-radius: 5em;
+}
