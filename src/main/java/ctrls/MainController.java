@@ -69,11 +69,18 @@ public class MainController implements Initializable{
         initCreateNewJobHandler();
         //initUserSettingsPaneHandler();
 
-        DragResizerController.makeResizable(localFileBrowserTree);
-        DragResizerController.makeResizable(remotePathBrowserTree);
+        DragResizerController.makeResizable( localFileBrowserTree );
+        DragResizerController.makeResizable( remotePathBrowserTree );
+        DragResizerController.makeResizable( centerPane );
 
         centerPane.setPrefHeight( Region.USE_COMPUTED_SIZE );
         jobTabPane.setPrefHeight( Region.USE_COMPUTED_SIZE );
+
+        AnchorPane.setBottomAnchor( jobTabPane, 10.0 );
+        AnchorPane.setRightAnchor( jobTabPane, 5.0 );
+        AnchorPane.setTopAnchor( jobTabPane, 1.0 );
+        AnchorPane.setLeftAnchor( jobTabPane, 5.0 );
+
     }
 
     private void initLogin() {
@@ -387,12 +394,15 @@ public class MainController implements Initializable{
 
         @Override public boolean isLeaf() {
 
-            if (isFirstTimeLeaf) {
-                isFirstTimeLeaf = false;
-                Path p = getValue();
-                isLeaf = ! Files.isDirectory( p );
-            }
+//            if (isFirstTimeLeaf) {
+//                isFirstTimeLeaf = false;
+//                Path p = getValue();
+//                isLeaf = ! Files.isDirectory( p );
+//            }
             return isLeaf;
+        }
+        public void setLeaf( Boolean leaf){
+            isLeaf = leaf;
         }
 
         @Override
@@ -402,13 +412,18 @@ public class MainController implements Initializable{
 
         private ObservableList<TreeItem<Path>> buildChildren( RemoteTreeItem tree_item ) {
             Path this_path = tree_item.getValue();
-            if (!tree_item.isLeaf()) {
+            if ( true ) {
                 try {
                     DirectoryStream<Path> ds = rfsm.getDirectory(this_path.toString());
                     ObservableList<TreeItem<Path>> children = FXCollections.observableArrayList();
                     for (Path path : ds) {
-                        if (path != this_path && Files.isDirectory(this_path)) {
-                            children.add(new RemoteTreeItem(path));
+                        if (path != this_path ) {
+                            RemoteTreeItem new_item = new RemoteTreeItem( path );
+                            if( Files.isDirectory( path) )
+                                new_item.setLeaf( false );
+                            else new_item.setLeaf( true );
+
+                            children.add( new_item );
                         }
                         System.out.println(path.toString());
                     }
