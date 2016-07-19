@@ -70,6 +70,16 @@
                 <JobSubmitterArgs/>
             </JobParameters>
         </AssemblyImporter>
+        <ReadTrimmer>
+            <AdditionalArguments>ILLUMINACLIP:illumina_adapters_all.fasta:4:30:10:1:true SLIDINGWINDOW:5:20 MINLEN: 80</AdditionalArguments>
+            <JobParameters name="">
+                <MemRequested>6</MemRequested>
+                <NumCPUs>4</NumCPUs>
+                <Walltime>24</Walltime>
+                <Queue/>
+                <JobSubmitterArgs/>
+            </JobParameters>
+        </ReadTrimmer>
         <Aligner name="BWA-mem" path="/packages/tnorth/bin/bwa">
             <AdditionalArguments/>
             <JobParameters name="">
