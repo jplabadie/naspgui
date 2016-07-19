@@ -76,6 +76,9 @@ public class ExternalApplications {
     @XmlElement(name = "AssemblyImporter", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected AssemblyImporter assemblyImporter;
+    @XmlElement(name = "ReadTrimmer", required = true)
+    @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-19-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
+    protected ReadTrimmer readTrimmer;
     @XmlElement(name = "Aligner")
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected List<Aligner> aligner;
@@ -262,6 +265,31 @@ public class ExternalApplications {
     public void setAssemblyImporter(AssemblyImporter value) {
         this.assemblyImporter = value;
     }
+
+    /**
+     * Gets the value of the readTrimmer property.
+     *
+     * @return
+     *     possible object is
+     *     {@link ReadTrimmer }
+     *
+     */
+    public ReadTrimmer getReadTrimmer() {
+        return readTrimmer;
+    }
+
+    /**
+     * Sets the value of the readTrimmer property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link ReadTrimmer }
+     *
+     */
+    public void setReadTrimmer(ReadTrimmer value) {
+        this.readTrimmer = value;
+    }
+
 
     /**
      * Gets the value of the aligner property.
