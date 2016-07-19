@@ -70,7 +70,7 @@
                 <JobSubmitterArgs/>
             </JobParameters>
         </AssemblyImporter>
-        <ReadTrimmer>
+        <ReadTrimmer name="ReadTrimmer" path="/packages/tnorth/trimmomatic-0.32.jar">
             <AdditionalArguments>ILLUMINACLIP:illumina_adapters_all.fasta:4:30:10:1:true SLIDINGWINDOW:5:20 MINLEN: 80</AdditionalArguments>
             <JobParameters name="">
                 <MemRequested>6</MemRequested>
