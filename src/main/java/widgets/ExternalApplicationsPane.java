@@ -279,6 +279,34 @@ class ExternalApplicationsPane extends GridPane {
             coreApps.add( apane );
             coreBox.getChildren().add( assemblyImporterBox );
             /** <<< END ASSEMBLYIMPORTER PANE INIT >>> */
+
+            /** <<< BEGIN READTRIMMER PANE INIT >>> */
+            HBox readTrimmerBox = new HBox();
+            readTrimmerBox.setAlignment( Pos.CENTER_RIGHT );
+            readTrimmerBox.setSpacing( 5 );
+            CheckBox readTrimmerCheck = new CheckBox();
+            if (EXTERNALAPPS.getReadTrimmer() == null) {
+                EXTERNALAPPS.setReadTrimmer( new ReadTrimmer());
+                readTrimmerCheck.setSelected( false );
+            }
+            else readTrimmerCheck.setSelected( true );
+
+            ApplicationPane<ReadTrimmer> tpane = new ApplicationPane<>(EXTERNALAPPS.getReadTrimmer());
+            readTrimmerCheck.setOnAction( event -> {
+                if( readTrimmerCheck.isSelected() ){
+                    tpane.setDisable( false );
+                    EXTERNALAPPS.setReadTrimmer( (ReadTrimmer) tpane.getApplication());
+                }
+                else {
+                    tpane.setDisable( true );
+                    EXTERNALAPPS.setReadTrimmer( null );
+                }
+            });
+
+            readTrimmerBox.getChildren().addAll( readTrimmerCheck, tpane );
+            coreApps.add( tpane );
+            coreBox.getChildren().add( readTrimmerBox );
+            /** <<< END READTRIMMER PANE INIT >>> */
         }
     }
 
