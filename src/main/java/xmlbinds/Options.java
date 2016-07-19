@@ -51,10 +51,10 @@ public class Options {
 
     @XmlElement(name = "RunName", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String runName;
+    protected String runName = "";
     @XmlElement(name = "OutputFolder", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String outputFolder;
+    protected String outputFolder="";
     @XmlElement(name = "Reference", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected Reference reference;
@@ -63,7 +63,7 @@ public class Options {
     protected Filters filters;
     @XmlElement(name = "JobSubmitter", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-    protected String jobSubmitter;
+    protected String jobSubmitter = "";
 
     /**
      * Gets the value of the runName property.
