@@ -90,12 +90,10 @@ public class JobSaveLoadManager {
     private static String setFileTagsToXml( String path ){
         String xmltag = ".xml";
         int done = path.lastIndexOf( xmltag );
-        int dot = path.lastIndexOf( ".xml" );
 
-        if( done>0 ) return path;
-
-        else if( dot>0 ){
-            path = path.substring( 0, dot );
+        if( done>0 )
+            return path;
+        else {
             path += xmltag;
         }
         lm.info(null, null, "JSLM: .xml tag missing, was automatically added to Job XML save name: "+ path);
