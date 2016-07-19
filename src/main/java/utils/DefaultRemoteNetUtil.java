@@ -296,17 +296,31 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         String jobname = "";
         try {
             assert exec_channel != null;
-            ((ChannelExec)exec_channel).setCommand("cd "+ runpath);
-            ((ChannelExec)exec_channel).setCommand("module load nasp"); //main nasp tool
-            log.info(null, null, "RNU: Run command - module load nasp");
-            ((ChannelExec)exec_channel).setCommand("module load tnorth"); //main the tnorth tool [what does this do??]
-            log.info(null, null, "RNU: Run command - module load tnorth");
-            ((ChannelExec)exec_channel).setCommand("nasp --config " + job_XML_abs_path); //run nasp with the xml
-            log.info(null, null, "RNU: Run command - nasp --config " + job_XML_abs_path);
+
+            ((ChannelExec)exec_channel).setCommand(
+                    "cd " + runpath + "\n" +
+                    "module load nasp" + "\n" +
+                    "module load tnorth" + "\n" +
+                    "nasp --config " + job_XML_abs_path);
+            ArrayList<String> out = new ArrayList<>();
 
 
+            try {
+                exec_channel.setInputStream( null );
+                exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
+                ((ChannelExec) exec_channel).connect();
+                out.add(exec_in.readLine());
+
+                while ( exec_in.ready() ){
+                    out.add( exec_in.readLine() );
+                }
+
+                exec_channel.disconnect();
+                log.info( null, null, "RNU: Run command - nasp --config " + job_XML_abs_path );
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
             jobname = getUserJobs();
-
         } catch (Exception e) {
             e.printStackTrace();
             log.error(null, null, "RNU: Run NASP failed: " + e.getMessage());
@@ -322,17 +336,31 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     @Override
     public String getUserJobs() {
-        ((ChannelExec)exec_channel).setCommand("qstat -au" + getUsername() );
-        String output = "";
+        assert exec_channel != null;
+        ((ChannelExec)exec_channel).setCommand( "qstat -au " + getUsername() );
+        ArrayList<String> out = new ArrayList<>();
+
         try {
-            while(exec_in.ready()) {
-                output += exec_in.readLine() + "\n";
+            exec_channel.setInputStream( null );
+            exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
+            ((ChannelExec) exec_channel).connect();
+            out.add(exec_in.readLine());
+
+            while ( exec_in.ready() ){
+                out.add( exec_in.readLine() );
             }
 
-        } catch (IOException e) {
+            exec_channel.disconnect();
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        } catch (JSchException e) {
             e.printStackTrace();
         }
-        return output;
+        String outstr = "";
+        for( String s : out){
+            outstr += s + " \n";
+        }
+        return outstr;
     }
 
     /**
