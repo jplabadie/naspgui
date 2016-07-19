@@ -56,6 +56,7 @@ public class JobSaveLoadManager {
      * @param output_path the absolute path desired for the output XML
      */
     public static File jaxbObjectToXML( NaspInputData input_for_conversion, String output_path ) {
+
         try {
             JAXBContext context = JAXBContext.newInstance( input_for_conversion.getClass() );
             Marshaller m = context.createMarshaller();
@@ -80,6 +81,7 @@ public class JobSaveLoadManager {
             return null;
         }
     }
+
 
     /**
      * Helper method to add the .xml tag to the chosen output path

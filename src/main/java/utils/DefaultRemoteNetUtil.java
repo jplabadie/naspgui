@@ -194,6 +194,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public void upload(File file, String abs_remote_path){
         log.info(null, null, "RNU: Attempting upload: "+ file.getName()+ " at "+ abs_remote_path);
+        String remote_dir = abs_remote_path.substring(0, abs_remote_path.lastIndexOf('/'));
 
         if (sftp_channel == null){
             log.error(null, null, "NM - Upload Step Fail: SFTP Channel is null. Cannot upload.");
@@ -204,19 +205,21 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             return;
         }
 
-        if(!isRemoteDir(abs_remote_path)){
-            log.error(null, null, "NM - Upload Step Fail: Connection failed or remote path " +
-                    "is not a valid path for SFTP Upload. Cannot upload.");
-            return;
+        //TODO:Add mkdir exec step
+        System.out.println( remote_dir + "!!!");
+        if(!isRemoteDir(remote_dir)){
+            log.info(null, null, "NM - Upload Step Info: Connection failed or remote path " +
+                    "is not a valid path for SFTP Upload. Solving by mkdir.");
+            ArrayList<String> t = execCommand("mkdir " + remote_dir);
         }
 
         try {
-            log.info(null, null, "RNU: Upload - Attempting: cd " + abs_remote_path);
-                sftp_channel.cd(abs_remote_path); //cd to the absolute directory
+            log.info(null, null, "RNU: Upload - Attempting: cd " + remote_dir );
+                sftp_channel.cd( remote_dir ); //cd to the absolute directory
         }
         catch (SftpException e){
             //the directory cannot be visited
-            log.error(null, null, "RNU: Upload Step Fail: cd " + abs_remote_path +": Failed. Insufficient Permissions? \n"
+            log.error(null, null, "RNU: Upload Step Fail: cd " + remote_dir + ": Failed. Insufficient Permissions? \n"
                     + e.getMessage());
         }
 
@@ -234,6 +237,37 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.error(null, null, "NM - Upload Step Fail: SFTP Failed. " +
                     "Insufficient Permissions? \n" + e.getMessage());
         }
+    }
+
+    private ArrayList<String> execCommand( String cmd0, String... arguments ){
+        assert exec_channel != null;
+
+        String cmdlist = cmd0;
+
+        for(String cmd : arguments)
+        {
+            cmdlist += "\n" + cmd;
+        }
+        ((ChannelExec)exec_channel).setCommand( cmdlist );
+        ArrayList<String> out = new ArrayList<>();
+
+        try {
+            exec_channel.setInputStream( null );
+            exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
+            ((ChannelExec) exec_channel).connect();
+            out.add(exec_in.readLine());
+
+            while ( exec_in.ready() ){
+                out.add( exec_in.readLine() );
+            }
+
+            exec_channel.disconnect();
+        } catch ( IOException e ) {
+            e.printStackTrace();
+        } catch (JSchException e) {
+            e.printStackTrace();
+        }
+        return out;
     }
 
     /**
@@ -294,39 +328,19 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     public String runNaspJob(String job_XML_abs_path) {
         String runpath = job_XML_abs_path.substring(0,job_XML_abs_path.lastIndexOf('/'));
         String jobname = "";
-        try {
-            assert exec_channel != null;
-
-            ((ChannelExec)exec_channel).setCommand(
-                    "cd " + runpath + "\n" +
-                    "module load nasp" + "\n" +
-                    "module load tnorth" + "\n" +
+        System.out.println("&^&^"+runpath);
+        System.out.println("%%%&^"+job_XML_abs_path);
+        ArrayList<String> out =
+            execCommand(
+                    "cd " + runpath,
+                    "module load nasp",
+                    "module load tnorth",
                     "nasp --config " + job_XML_abs_path);
-            ArrayList<String> out = new ArrayList<>();
 
-
-            try {
-                exec_channel.setInputStream( null );
-                exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
-                ((ChannelExec) exec_channel).connect();
-                out.add(exec_in.readLine());
-
-                while ( exec_in.ready() ){
-                    out.add( exec_in.readLine() );
-                }
-
-                exec_channel.disconnect();
-                log.info( null, null, "RNU: Run command - nasp --config " + job_XML_abs_path );
-            } catch ( IOException e ) {
-                e.printStackTrace();
-            }
-            jobname = getUserJobs();
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(null, null, "RNU: Run NASP failed: " + e.getMessage());
-        }
 
         //TODO: dreams
+        for(String x : out)
+            jobname += x;
         return jobname;
     }
 
@@ -336,31 +350,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     @Override
     public String getUserJobs() {
-        assert exec_channel != null;
-        ((ChannelExec)exec_channel).setCommand( "qstat -au " + getUsername() );
-        ArrayList<String> out = new ArrayList<>();
 
-        try {
-            exec_channel.setInputStream( null );
-            exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
-            ((ChannelExec) exec_channel).connect();
-            out.add(exec_in.readLine());
+        ArrayList<String> jobs = execCommand( "qstat -au " + getUsername() );
+        String out = "";
 
-            while ( exec_in.ready() ){
-                out.add( exec_in.readLine() );
-            }
-
-            exec_channel.disconnect();
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        } catch (JSchException e) {
-            e.printStackTrace();
+        for ( String line : jobs ) {
+            out += line +"\n";
         }
-        String outstr = "";
-        for( String s : out){
-            outstr += s + " \n";
-        }
-        return outstr;
+        return out;
     }
 
     /**
@@ -369,27 +366,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return an ArrayList of all files found by absolute-path
      */
     public ArrayList<String> getAllFiles( String remote_abs_path){
-        assert exec_channel != null;
-        ((ChannelExec)exec_channel).setCommand( "cd "+ remote_abs_path+"\nfind $PWD -type f" );
-        ArrayList<String> out = new ArrayList<>();
 
-        try {
-            exec_channel.setInputStream( null );
-            exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
-            ((ChannelExec) exec_channel).connect();
-            out.add(exec_in.readLine());
+        return execCommand( "cd "+ remote_abs_path, "find $PWD -type f" );
 
-            while ( exec_in.ready() ){
-                out.add( exec_in.readLine() );
-            }
-
-            exec_channel.disconnect();
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        return out;
     }
 
     /**
@@ -401,7 +380,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     public boolean isRemoteFile(String remote_file_abs_path){
 
         InputStream exec_in;
-        int exec_status =-1;
+        int exec_status = -1;
         assert exec_channel != null;
         try {
             exec_in = exec_channel.getInputStream();

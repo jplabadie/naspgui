@@ -115,7 +115,6 @@ public class JobTab extends Tab {
             String output = NASP_DATA.getOptions().getRunName();
             if ( output == null )
                 output = "/temp";
-            System.out.println( NASP_DATA.getFiles().getReadFolder().get( 0 ).getPath() );
             JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
         });
 
@@ -125,13 +124,16 @@ public class JobTab extends Tab {
         start_job.setOnAction( event -> {
             String xml_name = NASP_DATA.getOptions().getRunName();
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
-            if ( xml_name == null )
-                xml_name = "/temp";
-            System.out.println( NASP_DATA.getFiles().getReadFolder().get( 0 ).getPath() );
+
+
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
 
-            net.upload( outfile, remotepath+ ".xml");
-            String jobid = net.runNaspJob( remotepath +".xml" );
+           remotepath = remotepath +"/"+ outfile.getName();
+
+
+            //TODO: The remote path needs to include the desired filename, and must be platform agnostic
+            net.upload( outfile, remotepath);
+            String jobid = net.runNaspJob( remotepath );
             System.out.println( jobid );
             System.out.println( remotepath );
         });
