@@ -50,6 +50,7 @@ import java.util.List;
     "samtools",
     "dupFinder",
     "assemblyImporter",
+    "readTrimmer",
     "aligner",
     "snpCaller"
 })
