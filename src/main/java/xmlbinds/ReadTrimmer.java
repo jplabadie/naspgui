@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
     "jobParameters"
 })
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-19T09:20:06-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
-public class ReadTrimmer {
+public class ReadTrimmer implements Application{
 
     @XmlElement(name = "AdditionalArguments", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-19T09:20:06-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
