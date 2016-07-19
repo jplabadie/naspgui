@@ -81,6 +81,7 @@
       <xs:element name="Samtools" type="Samtools"/>
       <xs:element name="DupFinder" type="DupFinder"/>
       <xs:element name="AssemblyImporter" type="AssemblyImporter"/>
+      <xs:element name="ReadTrimmer" type="AssemblyImporter"/>
       <xs:element name="Aligner" type="Aligner" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="SNPCaller" type="SNPCaller" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -141,6 +142,15 @@
   </xs:complexType>
 
   <xs:complexType name="AssemblyImporter">
+    <xs:sequence>
+      <xs:element name="AdditionalArguments" type="xs:string"/>
+      <xs:element name="JobParameters" type="JobParameters"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="path" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ReadTrimmer">
     <xs:sequence>
       <xs:element name="AdditionalArguments" type="xs:string"/>
       <xs:element name="JobParameters" type="JobParameters"/>
