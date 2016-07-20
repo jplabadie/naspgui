@@ -11,6 +11,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.util.Pair;
 import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
 import utils.JobSaveLoadManager;
@@ -22,6 +23,8 @@ import xmlbinds.ObjectFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Project naspgui.
@@ -185,8 +188,71 @@ public class JobTab extends Tab {
 
                         System.out.println(x);
                     }
-                    System.out.println(".oOo.");
-                    //TODO: Use the files in 'files' to build and populate the UI/NASP xml
+                    //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
+
+                    ArrayList<String> reads = new ArrayList<>();
+                    Pattern fasta = Pattern.compile( "(.*)(.f(ast)?q(?:.gz)?)$");
+                    for( String x : files ){
+
+                        Matcher m = fasta.matcher( x );
+                        if ( m.find() ){
+                            reads.add( x );
+                        }
+                    }
+
+                    ArrayList<Pair<String, String>> rps = new ArrayList<>();
+                    Pattern pair1 = Pattern.compile( "^(.*)(_[R]?)([1])(.*)$" );
+                    Pattern pair2 = Pattern.compile( "^(.*)(_[R]?)([2])(.*)$" );
+                    for( String x : reads ){
+                        Matcher m1 = pair1.matcher( x );
+                        if( m1.find()) {
+                            for (String y : reads) {
+                                Matcher m2 = pair2.matcher( y );
+                                if ( m2.find() ){
+                                    Pair<String, String> pair = new Pair<>( x, y );
+                                    rps.add( pair );
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    for( Pair<String, String> x : rps ){
+                        System.out.println( x.getKey() + " : " + x.getValue() );
+                    }
+
+                    ArrayList<String> assemblies = new ArrayList<>();
+                    Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)$" );
+                    for( String x : files ){
+                        Matcher m = ass.matcher( x );
+                        if ( m.find() ){
+                            assemblies.add( x );
+                        }
+                    }
+
+                    ArrayList<String> vcfs = new ArrayList<>();
+                    Pattern vcf = Pattern.compile( "(?:.gz)" );
+                    for( String x : files ){
+                        Matcher m = vcf.matcher( x );
+                        if ( m.find() ){
+                            vcfs.add( x );
+                        }
+                    }
+
+                    ArrayList<String> sambam = new ArrayList<>();
+                    Pattern sam = Pattern.compile( "(?:.sam)" );
+                    Pattern bam = Pattern.compile( "(?:.bam)" );
+                    for( String x : files ){
+                        Matcher m1 = sam.matcher( x );
+                        Matcher m2 = bam.matcher( x );
+                        if ( m1.find() ){
+                            sambam.add( x );
+                        }
+                        else if ( m2.find() ){
+                            sambam.add( x );
+                        }
+                    }
+
                     success = true;
                 }
                 event.setDropCompleted(success);
