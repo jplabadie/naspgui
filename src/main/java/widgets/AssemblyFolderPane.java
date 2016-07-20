@@ -67,7 +67,7 @@ class AssemblyFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        assembly_folder_label.setId( "header3" );
+        assembly_folder_label.setId( "header5" );
         assembly_folder_label.setPrefSize( 100, 20 );
         assembly_folder_label.setAlignment( Pos.CENTER );
         assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );

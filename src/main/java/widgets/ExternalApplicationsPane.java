@@ -120,15 +120,15 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN BAMINDEX PANE INIT >>>   */
             HBox bamIndexBox = new HBox();
+            Boolean bamIndexEmpty = false;
             bamIndexBox.setAlignment(Pos.CENTER_RIGHT);
             bamIndexBox.setSpacing(5);
             CheckBox bamIndexCheck = new CheckBox();
+
             if (EXTERNALAPPS.getBamIndex() == null) {
                 EXTERNALAPPS.setBamIndex( new BamIndex() );
-                bamIndexCheck.setSelected( false );
+                bamIndexEmpty = true;
             }
-            else bamIndexCheck.setSelected( true );
-
             ApplicationPane<BamIndex> bampane = new ApplicationPane<>( EXTERNALAPPS.getBamIndex() );
             bamIndexCheck.setOnAction( event -> {
                 if (bamIndexCheck.isSelected()) {
@@ -137,13 +137,19 @@ class ExternalApplicationsPane extends GridPane {
                 }
                 else {
                     bampane.setDisable(true);
-                    EXTERNALAPPS.setIndex( null );
+                    EXTERNALAPPS.setBamIndex( null );
                 }
             });
 
-            bamIndexBox.getChildren().addAll(bamIndexCheck, bampane);
-            coreApps.add(bampane);
-            coreBox.getChildren().add(bamIndexBox);
+            if( bamIndexEmpty ) {
+                bamIndexCheck.setSelected( false );
+                bampane.setDisable( true );
+            }
+            else bamIndexCheck.setSelected( true );
+
+            bamIndexBox.getChildren().addAll( bamIndexCheck, bampane );
+            coreApps.add( bampane );
+            coreBox.getChildren().add( bamIndexBox );
             /** <<< END BAMINDEX PANE INIT >>> */
 
             /** <<< BEGIN MATRIXGENERATOR PANE INIT >>>   */
@@ -323,50 +329,31 @@ class ExternalApplicationsPane extends GridPane {
                     if ( c.wasAdded() ) {
                         for (ApplicationPane gp : c.getAddedSubList()) {
                             // Add the remove button to the widget
-                            Button remove_app = new Button();
-                            Button add_app = new Button();
-                            add_app.setTooltip( new Tooltip("Add a new application") );
-                            remove_app.setTooltip( new Tooltip("Remove this application") );
-
-                            ImageView image_view1 = new ImageView( add );
-                            image_view1.setFitHeight( 20 );
-                            image_view1.setFitWidth( 20 );
-                            remove_app.setGraphic( image_view1 );
-                            add_app.setGraphic( image_view1 );
-                            add_app.setAlignment( Pos.BOTTOM_RIGHT );
-
-                            add_app.setOnAction( event -> {
-                                Aligner new_app = new Aligner(); // TODO: Answer: is this unwrapping bad?
-                                ApplicationPane<Aligner> new_pane = new ApplicationPane<>( new_app );
-                                alignerApps.add( new_pane );
-                            } );
-
-                            ImageView image_view2 = new ImageView( remove );
-                            image_view2.setFitHeight( 20 );
-                            image_view2.setFitWidth( 20 );
-                            remove_app.setGraphic( image_view2 );
+                            CheckBox alignerCheck = new CheckBox();
+                            alignerCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
                             HBox new_ap_box = new HBox();
-                            new_ap_box.getChildren().addAll( gp, add_app, remove_app );
-                            new_ap_box.setAlignment( Pos.BOTTOM_CENTER );
+                            new_ap_box.setAlignment( Pos.TOP_CENTER);
+                            new_ap_box.setSpacing( 10.0 );
+                            new_ap_box.getChildren().addAll( alignerCheck, gp );
                             alignersBox.getChildren().add( new_ap_box );
 
-                            remove_app.setOnAction(
-                                    event -> {
-                                        alignerApps.remove( gp );
-                                        alignersBox.getChildren().remove( new_ap_box );
-                                    }
-                            );
+                            alignerCheck.setOnAction( event -> {
+                                if(alignerCheck.isSelected()){
+                                    gp.setDisable( true );
+                                    EXTERNALAPPS.getAligner().remove( (Aligner) gp.getApplication());
+                                }
+                                else{
+                                    gp.setDisable( false );
+                                    EXTERNALAPPS.getAligner().add((Aligner) gp.getApplication());
+                                }
+                            } );
+
 
                             // Don't add aligners twice, especially on-load
                             Application app = gp.getApplication();
                             if( ! EXTERNALAPPS.getAligner().contains( app ))
                                 EXTERNALAPPS.getAligner().add( (Aligner) app );
-                        }
-                    }
-                    if ( c.wasRemoved() ) {
-                        for ( ApplicationPane gp : c.getRemoved() ) {
-                            EXTERNALAPPS.getAligner().remove( (Aligner) gp.getApplication());
                         }
                     }
                 }
@@ -393,40 +380,26 @@ class ExternalApplicationsPane extends GridPane {
                     if ( c.wasAdded() ) {
                         for (ApplicationPane gp : c.getAddedSubList()) {
                             // Add the remove button to the widget
-                            Button remove_app = new Button();
-                            Button add_app = new Button();
-                            add_app.setTooltip( new Tooltip("Add a new application") );
-                            remove_app.setTooltip( new Tooltip("Remove this application") );
+                            CheckBox snpCheck = new CheckBox();
+                            snpCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
-                            ImageView image_view1 = new ImageView( add );
-                            image_view1.setFitHeight( 20 );
-                            image_view1.setFitWidth( 20 );
-                            remove_app.setGraphic( image_view1 );
-                            add_app.setGraphic( image_view1 );
-                            add_app.setAlignment( Pos.BOTTOM_RIGHT );
+                            HBox new_snp_box = new HBox();
+                            new_snp_box.setAlignment( Pos.TOP_CENTER);
+                            new_snp_box.setSpacing( 10.0 );
+                            new_snp_box.getChildren().addAll( snpCheck, gp );
+                            snpcallersBox.getChildren().add( new_snp_box );
 
-                            add_app.setOnAction( event -> {
-                                SNPCaller new_app = new SNPCaller(); // TODO: Answer: is this unwrapping bad?
-                                ApplicationPane<SNPCaller> new_pane = new ApplicationPane<>( new_app );
-                                snpApps.add( new_pane );
+                            snpCheck.setOnAction( event -> {
+                                if(snpCheck.isSelected()){
+                                    gp.setDisable( true );
+                                    EXTERNALAPPS.getSNPCaller().remove( (SNPCaller) gp.getApplication());
+                                }
+                                else{
+                                    gp.setDisable( false );
+                                    EXTERNALAPPS.getSNPCaller().add( (SNPCaller) gp.getApplication());
+                                }
                             } );
 
-                            ImageView image_view2 = new ImageView( remove );
-                            image_view2.setFitHeight( 20 );
-                            image_view2.setFitWidth( 20 );
-                            remove_app.setGraphic( image_view2 );
-
-                            HBox new_ap_box = new HBox();
-                            new_ap_box.getChildren().addAll( gp, add_app, remove_app );
-                            new_ap_box.setAlignment( Pos.BOTTOM_CENTER );
-                            snpcallersBox.getChildren().add( new_ap_box );
-
-                            remove_app.setOnAction(
-                                    event -> {
-                                        snpApps.remove( gp );
-                                        snpcallersBox.getChildren().remove( new_ap_box );
-                                    }
-                            );
 
                             // Don't add SNPCallers twice, especially on-load
                             Application app = gp.getApplication();
