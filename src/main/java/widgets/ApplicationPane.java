@@ -10,11 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.controlsfx.control.textfield.TextFields;
-import xmlbinds.Aligner;
 import xmlbinds.Application;
 import xmlbinds.JobParameters;
-import xmlbinds.SNPCaller;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.
@@ -34,7 +31,7 @@ class ApplicationPane< V extends Application> extends GridPane {
     private Tooltip APP_PATH_TIP = new Tooltip("A path to the application on the remote service");
     private Tooltip ADD_ARGS_TIP = new Tooltip("Additional arguments or options to pass to the app");
 
-    private TextField app_title = new TextField();
+    private Label appTitle = new Label();
     private TextField appPath = new TextField();
     private TextField appArgs = new TextField();
 
@@ -46,7 +43,7 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         APPLICATION = app;
 
-        app_title.setText( APPLICATION.getName() );
+        appTitle.setText( APPLICATION.getName() );
         JobParameters jobparams = APPLICATION.getJobParameters();
 
         if (jobparams == null) {
@@ -92,18 +89,17 @@ class ApplicationPane< V extends Application> extends GridPane {
          * Define the look and behavior of the non-static TextField and Label elements
          */
 
-        app_title.setPrefWidth(50);
-        app_title.setPrefHeight( 20);
-        app_title.setAlignment( Pos.CENTER_LEFT );
+        appTitle.setPrefHeight( 20);
+        appTitle.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
-        app_title.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ));
+        appTitle.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ));
 
         // Set default values
-        //app_title.setText( APPLICATION.getName() );
+        //appTitle.setText( APPLICATION.getName() );
         //appPath.setText( APPLICATION.getPath() );
 
         // Add the title to row 0 column 0
-        this.add( app_title, 0, 0, 3, 1 );
+        this.add(appTitle, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
         this.add( APPLICATION_PATH, 1, 1, 3, 1 );
@@ -117,18 +113,6 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         //TODO: ADD listeners to auto-update binds as input changes
 
-        app_title.textProperty().addListener( observable -> {
-            APPLICATION.setName( app_title.getText() );
-        });
-
-        if( APPLICATION.getClass() == SNPCaller.class)
-            TextFields.bindAutoCompletion( app_title, "GATK", "VarScan", "SAMtools" );
-        else if( APPLICATION.getClass() == Aligner.class)
-            TextFields.bindAutoCompletion( app_title, "BWA-mem", "Bowtie2", "Novoalign", "SNAP" );
-        else
-            TextFields.bindAutoCompletion( app_title, "Index", "MatrixGenerator", "Picard", "Samtools",
-                    "DupFinder", "AssemblyImporter");
-
         appPath.textProperty().addListener( observable -> {
             APPLICATION.setPath( appPath.getText() );
         });
@@ -140,11 +124,11 @@ class ApplicationPane< V extends Application> extends GridPane {
     }
 
     String getTitle(){
-        return app_title.getText();
+        return appTitle.getText();
     }
 
     void setTitle(String text){
-        app_title.setText(text);
+        appTitle.setText(text);
     }
 
     Application getApplication(){
