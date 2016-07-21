@@ -367,7 +367,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public ArrayList<String> getAllFiles( String remote_abs_path){
 
-        return execCommand( "cd "+ remote_abs_path, "find $PWD -type f" );
+        System.out.println( "Rempath: "+ remote_abs_path);
+        return execCommand( "cd "+ remote_abs_path, "find -L $PWD -type f" );
 
     }
 
