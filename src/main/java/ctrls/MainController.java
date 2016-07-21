@@ -41,7 +41,9 @@ public class MainController implements Initializable{
     @FXML    private AnchorPane centerPane;
     @FXML    private TabPane jobTabPane;
     @FXML    private TreeView<File> localFileBrowserTree;
+
     @FXML    private TreeView<Path> remotePathBrowserTree;
+    @FXML   private ToolBar remoteTreeToolbar;
 
     private static RemoteFileSystemManager rfsm;
     private static LogManager log;
@@ -195,8 +197,8 @@ public class MainController implements Initializable{
                     public void handle(final ActionEvent e) {
                         try {
                             jobTabPane.setVisible(false);
-                            AnchorPane user_settings = FXMLLoader.load(getClass()
-                                    .getResource("/main/UserSettingsPane.fxml"));
+                            AnchorPane user_settings = FXMLLoader.load( getClass()
+                                    .getResource("/main/UserSettingsPane.fxml") );
                             centerPane = user_settings;
 
                         } catch (IOException e1) {
@@ -219,7 +221,7 @@ public class MainController implements Initializable{
         dummyRoot.setValue(new File("local"));
         // Iterate over the list of drives and add them and their children as children to the dummy node
         for (File root : roots) {
-            dummyRoot.getChildren().addAll(createNode(root));
+            dummyRoot.getChildren().addAll( createNode(root) );
         }
 
         localFileBrowserTree.setEditable(true);
@@ -250,6 +252,13 @@ public class MainController implements Initializable{
             @Override
             protected RemoteTreeItem call() throws Exception {
                 RemoteTreeItem rti = new RemoteTreeItem();
+
+                Button toParent = new Button(" < ");
+                Button toRoot = new Button(" ^ ");
+
+                remoteTreeToolbar.getItems().addAll( toParent, toRoot );
+
+
                 if( rfsm != null && rfsm.isConnected() )
                 {
                     try {
@@ -257,7 +266,6 @@ public class MainController implements Initializable{
                         log.info( null, null, "RPBT: Init at root: " + default_rem_dir );
                         rti = new RemoteTreeItem( rfsm.getDirAsPath( default_rem_dir ) );
 
-                        rti.buildChildren( rti );
 
                     } catch ( IOException e ) {
                         e.printStackTrace();
@@ -284,6 +292,7 @@ public class MainController implements Initializable{
         Thread thread = new Thread( buildThread );
         thread.setDaemon( true );
         thread.start();
+
     }
 
 
