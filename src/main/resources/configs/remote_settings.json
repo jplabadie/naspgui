@@ -6,8 +6,9 @@
     "configname":"default",
     "username":"jlabadie",
     "url":"aspen.tgen.org",
-    "port":22,"jobmgr":"PBS",
-    "remdirs":["/home/jlabadie"]
+    "port":22,
+    "jobmgr":"PBS",
+    "remdirs":["/scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/"]
   }
 
 }
