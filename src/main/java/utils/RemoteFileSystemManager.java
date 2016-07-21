@@ -136,6 +136,15 @@ public class RemoteFileSystemManager {
         return specific_path;
     }
 
+    public Path getParentOfDir( String dir ){
+
+        String parent_dir = dir.substring( 0, dir.lastIndexOf("/") );
+        if( parent_dir.length() == 0 ) parent_dir = "/"; // parent is root
+        Path parent = sshfs.getPath( parent_dir );
+        return parent;
+
+    }
+
     /**
      *
      * @return the state of the remote FileSystem, true for connected, false for disconnected
