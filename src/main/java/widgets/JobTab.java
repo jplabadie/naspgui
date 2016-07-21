@@ -16,13 +16,11 @@ import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
 import utils.JobSaveLoadManager;
 import utils.RemoteNetUtil;
-import xmlbinds.ExternalApplications;
-import xmlbinds.MatrixGenerator;
-import xmlbinds.NaspInputData;
-import xmlbinds.ObjectFactory;
+import xmlbinds.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -116,9 +114,13 @@ public class JobTab extends Tab {
          */
         save_job.setOnAction( event -> {
             String output = NASP_DATA.getOptions().getRunName();
+            String remotepath = NASP_DATA.getOptions().getOutputFolder();
             if ( output == null )
                 output = "/temp";
-            JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
+            File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
+            remotepath = remotepath +"/"+ outfile.getName();
+
+            net.upload( outfile, remotepath);
         });
 
         /**
@@ -127,14 +129,9 @@ public class JobTab extends Tab {
         start_job.setOnAction( event -> {
             String xml_name = NASP_DATA.getOptions().getRunName();
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
-
-
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
 
-           remotepath = remotepath +"/"+ outfile.getName();
-
-
-            //TODO: The remote path needs to include the desired filename, and must be platform agnostic
+            remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);
             String jobid = net.runNaspJob( remotepath );
             System.out.println( jobid );
@@ -185,77 +182,137 @@ public class JobTab extends Tab {
                 if (db.hasString()) {
                     ArrayList<String> files = net.getAllFiles( db.getString() );
                     for( String x : files ) {
-
-                        System.out.println(x);
+                        System.out.println("Files: " + x);
                     }
                     //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
 
                     ArrayList<String> reads = new ArrayList<>();
-                    Pattern fasta = Pattern.compile( "(.*)(.f(ast)?q(?:.gz)?)$");
+                    Pattern fastq = Pattern.compile( "(?:fastq|f?q)(?:.gz)?$");
                     for( String x : files ){
-
-                        Matcher m = fasta.matcher( x );
+                        Matcher m = fastq.matcher( x );
                         if ( m.find() ){
                             reads.add( x );
+                            System.out.println( "Reads: " + x );
                         }
                     }
-
                     ArrayList<Pair<String, String>> rps = new ArrayList<>();
-                    Pattern pair1 = Pattern.compile( "^(.*)(_[R]?)([1])(.*)$" );
-                    Pattern pair2 = Pattern.compile( "^(.*)(_[R]?)([2])(.*)$" );
+
                     for( String x : reads ){
+                        Pattern pair1 = Pattern.compile( "(.*)(_[R]?)([1])(.*)$" );
                         Matcher m1 = pair1.matcher( x );
-                        if( m1.find()) {
-                            for (String y : reads) {
+                        if( m1.find() ) {
+                            String p1 = m1.group( 1 );
+                            for ( String y : reads ) {
+                                Pattern pair2 = Pattern.compile( "(.*)(_[R]?)([2])(.*)$" );
                                 Matcher m2 = pair2.matcher( y );
                                 if ( m2.find() ){
-                                    Pair<String, String> pair = new Pair<>( x, y );
-                                    rps.add( pair );
-                                    break;
+                                    String p2 = m2.group( 1 );
+                                    if( p2.equals( p1 ) ) {
+                                        Pair<String, String> pair = new Pair<>( x, y );
+                                        System.out.println( "Pairs: " + x + " \n\t " + y );
+                                        rps.add( pair );
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
 
-                    for( Pair<String, String> x : rps ){
-                        System.out.println( x.getKey() + " : " + x.getValue() );
-                    }
-
                     ArrayList<String> assemblies = new ArrayList<>();
-                    Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)$" );
+                    Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
                     for( String x : files ){
                         Matcher m = ass.matcher( x );
                         if ( m.find() ){
                             assemblies.add( x );
+                            System.out.println( "Assemblies: " + x );
                         }
                     }
 
                     ArrayList<String> vcfs = new ArrayList<>();
-                    Pattern vcf = Pattern.compile( "(?:.gz)" );
+                    Pattern vcf = Pattern.compile( "\\.vcf(?=[?.]*$)" );
                     for( String x : files ){
                         Matcher m = vcf.matcher( x );
                         if ( m.find() ){
                             vcfs.add( x );
+                            System.out.println( "VCFs: " + x );
                         }
                     }
 
                     ArrayList<String> sambam = new ArrayList<>();
-                    Pattern sam = Pattern.compile( "(?:.sam)" );
-                    Pattern bam = Pattern.compile( "(?:.bam)" );
+                    Pattern sam = Pattern.compile( "\\.sam(?=[?.]*$)" );
+                    Pattern bam = Pattern.compile( "\\.bam(?=[?.]*$)" );
                     for( String x : files ){
                         Matcher m1 = sam.matcher( x );
                         Matcher m2 = bam.matcher( x );
                         if ( m1.find() ){
                             sambam.add( x );
+                            System.out.println( "SAMs: " + x);
                         }
                         else if ( m2.find() ){
                             sambam.add( x );
+                            System.out.println( "BAMs: " + x);
                         }
                     }
 
+                    List<ReadFolder> rf = NASP_DATA.getFiles().getReadFolder();
+
+                    ArrayList<String> read_folders = new ArrayList<String>();
+                    for( ReadFolder x : rf)
+                            read_folders.add( x.getPath() );
+
+                    //TODO: Initialize read_folders with those already in NASPDATA
+
+                    for( Pair<String, String> pair : rps ){
+                        System.out.println("!" + pair.getKey());
+                        String folder = pair.getKey().substring( 0, pair.getKey().lastIndexOf("/")+1 );
+                        String file1 = pair.getKey().substring(pair.getKey().lastIndexOf("/")+1, pair.getKey().length());
+                        String file2 = pair.getValue().substring(pair.getValue().lastIndexOf("/")+1, pair.getValue().length());
+
+                        System.out.println( "Folder: "+ folder+ ": "+ file1 + ", "+ file2 );
+
+                        if( read_folders.contains( folder )) {
+                            System.out.println("%%");
+                            ReadFolder fold = rf.get( read_folders.indexOf( folder ) );
+                            List<ReadPair> readpairings = fold.getReadPair();
+                            ReadPair new_pair = new ReadPair();
+                            new_pair.setRead1Filename( file1 );
+                            new_pair.setRead2Filename( file2 );
+                            Pattern pp = Pattern.compile( "(.*)(_[R]?)([1])(.*)$" );
+                            Matcher mm = pp.matcher( file1 );
+                            mm.find();
+                            System.out.println("$$$"+mm.group(1));
+                            new_pair.setSample( mm.group(1) );
+
+                            readpairings.add( new_pair );
+                        }
+                        else {
+                            System.out.println("***");
+                            read_folders.add( folder );
+                            ReadFolder new_folder = new ReadFolder();
+                            new_folder.setPath( folder );
+
+                            List<ReadPair> readpairings = new_folder.getReadPair();
+                            ReadPair new_pair = new ReadPair();
+                            new_pair.setRead1Filename( file1 );
+                            new_pair.setRead2Filename( file2 );
+                            Pattern pp = Pattern.compile( "(.*)(_[R]?)([1])(.*)$" );
+                            Matcher mm = pp.matcher( file1 );
+                            mm.find();
+                            System.out.println( mm.toString() );
+                            System.out.println("$$$"+mm.group(1));
+                            new_pair.setSample( mm.group(1) );
+
+
+                            readpairings.add( new_pair );
+                            rf.add( new_folder );
+                        }
+                    }
+                    filespane = null;
+                    filespane = new FilesPane( NASP_DATA.getFiles() );
+
                     success = true;
                 }
-                event.setDropCompleted(success);
+                event.setDropCompleted( success );
                 event.consume();
             }
         });
