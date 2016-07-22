@@ -91,7 +91,7 @@ public class JobTab extends Tab {
         borderPane.setCenter( scrollPane ); // add the scroll pane to the Center region of the BorderPane
 
         vBox.getChildren().addAll( optspane, filespane, xappspane ); // add our GridPanes to the VBox ( order matters )
-        vBox.setPadding(new Insets(50,20,20,50));
+        vBox.setPadding( new Insets(50,20,20,50) );
 
         /**
          * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
@@ -104,9 +104,9 @@ public class JobTab extends Tab {
         vBox.getChildren().add( bottom_toolbar );
         borderPane.setBottom( bottom_toolbar );
 
-        this.setText( optspane.getRunName().getText());
+        this.setText( optspane.getRunName().getText() );
         optspane.getRunName().setOnAction( event -> {
-            this.setText( optspane.getRunName().getText());
+            this.setText( optspane.getRunName().getText() );
         });
 
         /**
@@ -118,9 +118,9 @@ public class JobTab extends Tab {
             if ( output == null )
                 output = "/temp";
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
-            remotepath = remotepath +"/"+ outfile.getName();
-
-            net.upload( outfile, remotepath);
+            //TODO: upload saved job?
+            //remotepath = remotepath + "/" + outfile.getName();
+            //net.upload( outfile, remotepath );
         });
 
         /**
@@ -180,14 +180,17 @@ public class JobTab extends Tab {
                 System.out.println(db.getString());
                 boolean success = false;
                 if (db.hasString()) {
-                    ArrayList<String> files = net.getAllFiles( db.getString() );
-                    for( String x : files ) {
-                        System.out.println("Files: " + x);
-                    }
-                    //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
 
+                    ArrayList<String> files = net.getAllFiles( db.getString() );
+
+                    for( String x : files)
+                            System.out.println( "File: " + x);
+                    //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
+                    /**
+                     * Find and pair read files from Drag-and-Drop remote path
+                     */
                     ArrayList<String> reads = new ArrayList<>();
-                    Pattern fastq = Pattern.compile( "(?:fastq|f?q)(?:.gz)?$");
+                    Pattern fastq = Pattern.compile( "(?:fastq|f?q)(?:.gz)?$" );
                     for( String x : files ){
                         Matcher m = fastq.matcher( x );
                         if ( m.find() ){
@@ -218,55 +221,127 @@ public class JobTab extends Tab {
                         }
                     }
 
-                    ArrayList<String> assemblies = new ArrayList<>();
+                    /**
+                     * Handle Assemblies in Drag-and-Drop
+                     */
+                    List<AssemblyFolder> assf =  NASP_DATA.getFiles().getAssemblyFolder();
+                    ArrayList<String> ass_folders = new ArrayList<>();
+                    for( AssemblyFolder x : assf ) {
+                        System.out.println("folder:" +  x.getPath() );
+                        ass_folders.add(x.getPath());
+                    }
+
                     Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
                     for( String x : files ){
                         Matcher m = ass.matcher( x );
                         if ( m.find() ){
-                            assemblies.add( x );
+                            String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
+                            AssemblyFolder af;
+                            if( ass_folders.contains( folder )){
+                                af = assf.get( ass_folders.indexOf( folder ) );
+                            }
+                            else{
+                                af = new AssemblyFolder();
+                                af.setPath( folder );
+                                ass_folders.add( folder );
+                                assf.add( af );
+                            }
+                            Assembly temp = new Assembly();
+                            temp.setValue( x );
+                            temp.setSample( x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.') ) );
+                            af.getAssembly().add( temp );
                             System.out.println( "Assemblies: " + x );
                         }
                     }
 
-                    ArrayList<String> vcfs = new ArrayList<>();
+                    /**
+                     * Handle VCF files in Drag-and-Drop
+                     */
+                    List<VCFFolder> vcfz =  NASP_DATA.getFiles().getVCFFolder();
+                    ArrayList<String> vcf_folders = new ArrayList<>();
+                    if( vcfz != null ){
+                        for (VCFFolder x : vcfz) {
+                            vcf_folders.add("" + x.getPath());
+                        }
+                    }
                     Pattern vcf = Pattern.compile( "\\.vcf(?=[?.]*$)" );
                     for( String x : files ){
                         Matcher m = vcf.matcher( x );
                         if ( m.find() ){
-                            vcfs.add( x );
+                            String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
+                            VCFFolder vf;
+
+                            if( vcf_folders.contains( folder ))
+                                vf = vcfz.get( vcf_folders.indexOf( folder ));
+                            else{
+                                vf = new VCFFolder();
+                                vf.setPath( folder );
+                                vcf_folders.add( folder );
+                                vcfz.add( vf );
+                            }
+                            VCFFile temp = new VCFFile();
+                            temp.setValue( x );
+                            x = x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.'));
+                            temp.setSample( x );
+                            vf.getVCFFile().add( temp );
                             System.out.println( "VCFs: " + x );
                         }
                     }
 
-                    ArrayList<String> sambam = new ArrayList<>();
+                    /**
+                     * Handle Alignment files in Drag-and-Drop
+                     */
+                    List<AlignmentFolder> algn =  NASP_DATA.getFiles().getAlignmentFolder();
+                    ArrayList<String> algn_folders = new ArrayList<>();
+                    for( AlignmentFolder x : algn )
+                        algn_folders.add( x.getPath() );
+
                     Pattern sam = Pattern.compile( "\\.sam(?=[?.]*$)" );
                     Pattern bam = Pattern.compile( "\\.bam(?=[?.]*$)" );
                     for( String x : files ){
+                        System.out.println( "algn");
                         Matcher m1 = sam.matcher( x );
                         Matcher m2 = bam.matcher( x );
-                        if ( m1.find() ){
-                            sambam.add( x );
-                            System.out.println( "SAMs: " + x);
-                        }
-                        else if ( m2.find() ){
-                            sambam.add( x );
-                            System.out.println( "BAMs: " + x);
+
+                        if ( m1.find() || m2.find() ){
+                            String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
+                            AlignmentFolder af;
+                            if( algn_folders.contains( folder ))
+                                af = algn.get( algn_folders.indexOf( folder ) );
+                            else {
+                                af = new AlignmentFolder();
+                                algn_folders.add( folder );
+                                af.setPath(folder);
+                                algn.add( af );
+                            }
+
+                            Alignment temp = new Alignment();
+                            temp.setValue( x );
+                            x = x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.'));
+                            temp.setSample( x );
+
+                            af.getAlignment().add( temp );
+                            System.out.println( "BAMs/SAMs: " + x);
                         }
                     }
 
+                    /**
+                     * Handle Read files in Drag-and-Drop
+                     */
                     List<ReadFolder> rf = NASP_DATA.getFiles().getReadFolder();
-
-                    ArrayList<String> read_folders = new ArrayList<String>();
-                    for( ReadFolder x : rf)
+                    ArrayList<String> read_folders = new ArrayList<>();
+                    for( ReadFolder x : rf )
                             read_folders.add( x.getPath() );
 
                     //TODO: Initialize read_folders with those already in NASPDATA
 
                     for( Pair<String, String> pair : rps ){
                         System.out.println("!" + pair.getKey());
-                        String folder = pair.getKey().substring( 0, pair.getKey().lastIndexOf("/")+1 );
-                        String file1 = pair.getKey().substring(pair.getKey().lastIndexOf("/")+1, pair.getKey().length());
-                        String file2 = pair.getValue().substring(pair.getValue().lastIndexOf("/")+1, pair.getValue().length());
+                        String folder = pair.getKey().substring( 0, pair.getKey().lastIndexOf("/") + 1 );
+                        String file1 = pair.getKey().substring(pair.getKey().lastIndexOf("/")
+                                + 1, pair.getKey().length());
+                        String file2 = pair.getValue().substring(pair.getValue().lastIndexOf("/")
+                                + 1, pair.getValue().length());
 
                         System.out.println( "Folder: "+ folder+ ": "+ file1 + ", "+ file2 );
 
@@ -302,13 +377,13 @@ public class JobTab extends Tab {
                             System.out.println("$$$"+mm.group(1));
                             new_pair.setSample( mm.group(1) );
 
-
                             readpairings.add( new_pair );
                             rf.add( new_folder );
                         }
                     }
-                    filespane = null;
+                    vBox.getChildren().remove( filespane );
                     filespane = new FilesPane( NASP_DATA.getFiles() );
+                    vBox.getChildren().add( 1, filespane );
 
                     success = true;
                 }
