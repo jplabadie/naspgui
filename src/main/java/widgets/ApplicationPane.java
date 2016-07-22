@@ -43,7 +43,9 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         APPLICATION = app;
 
+
         appTitle.setText( APPLICATION.getName() );
+
         JobParameters jobparams = APPLICATION.getJobParameters();
 
         if (jobparams == null) {
@@ -115,6 +117,7 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         appPath.textProperty().addListener( observable -> {
             APPLICATION.setPath( appPath.getText() );
+
         });
 
         appArgs.textProperty().addListener( observable -> APPLICATION.setAdditionalArguments( appArgs.getText() ));

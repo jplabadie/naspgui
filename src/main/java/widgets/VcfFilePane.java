@@ -34,8 +34,8 @@ class VcfFilePane extends WidgetPane {
 
     VcfFilePane(VCFFile vcf ){
         VCFFILE = vcf;
-        vcfName.setText( VCFFILE.getValue() );
-        vcfPath.setText( VCFFILE.getSample() );
+        vcfName.setText( VCFFILE.getSample() );
+        vcfPath.setText( VCFFILE.getValue() );
 
         vcf_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         vcf_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );

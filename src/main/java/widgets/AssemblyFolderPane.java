@@ -52,7 +52,7 @@ class AssemblyFolderPane extends GridPane {
 
     AssemblyFolderPane( AssemblyFolder input_assembly_folder ){
 
-        this.setId("folderpane1");
+        this.setId( "folderpane1" );
         ASSEMBLYFOLDER = input_assembly_folder;
         ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
 
@@ -77,7 +77,7 @@ class AssemblyFolderPane extends GridPane {
          * Add tooltips to the static label elements
          */
         assembly_folder_path_label.setTooltip( assembly_folder_path_tip );
-        assembly_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14));
+        assembly_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ));
 
         /**
          * Define the look and behavior of the GridPane

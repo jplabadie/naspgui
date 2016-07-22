@@ -34,8 +34,8 @@ class AlignmentPane extends WidgetPane {
     AlignmentPane(Alignment alignment ){
 
         ALIGNMENT = alignment;
-        alignmentName.setText( ALIGNMENT.getValue() );
-        alignmentPath.setText( ALIGNMENT.getSample() );
+        alignmentName.setText( ALIGNMENT.getSample() );
+        alignmentPath.setText( ALIGNMENT.getValue() );
 
         alignment_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         alignment_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );

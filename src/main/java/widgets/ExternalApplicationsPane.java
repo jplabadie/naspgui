@@ -120,19 +120,24 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN BAMINDEX PANE INIT >>>   */
             HBox bamIndexBox = new HBox();
-            Boolean bamIndexEmpty = false;
             bamIndexBox.setAlignment(Pos.CENTER_RIGHT);
             bamIndexBox.setSpacing(5);
             CheckBox bamIndexCheck = new CheckBox();
+            BamIndex bi;
 
-            if (EXTERNALAPPS.getBamIndex() == null) {
-                EXTERNALAPPS.setBamIndex( new BamIndex() );
-                bamIndexEmpty = true;
+            if(EXTERNALAPPS.getBamIndex() == null)
+            {
+                //TODO: Init with defaults with config
+                bamIndexCheck.setSelected( false );
+                bi = new BamIndex();
             }
-            ApplicationPane<BamIndex> bampane = new ApplicationPane<>( EXTERNALAPPS.getBamIndex() );
+            else bi =  EXTERNALAPPS.getBamIndex();
+            ApplicationPane<BamIndex> bampane = new ApplicationPane<>( bi );
             bamIndexCheck.setOnAction( event -> {
                 if (bamIndexCheck.isSelected()) {
                     bampane.setDisable(false);
+                    if(EXTERNALAPPS.getBamIndex() == null)
+                        EXTERNALAPPS.setBamIndex( new BamIndex() );
                     EXTERNALAPPS.setBamIndex( (BamIndex) bampane.getApplication() );
                 }
                 else {
@@ -141,7 +146,7 @@ class ExternalApplicationsPane extends GridPane {
                 }
             });
 
-            if( bamIndexEmpty ) {
+            if( EXTERNALAPPS.getBamIndex() == null ) {
                 bamIndexCheck.setSelected( false );
                 bampane.setDisable( true );
             }
@@ -330,6 +335,7 @@ class ExternalApplicationsPane extends GridPane {
                         for (ApplicationPane gp : c.getAddedSubList()) {
                             // Add the remove button to the widget
                             CheckBox alignerCheck = new CheckBox();
+                            alignerCheck.setSelected( true );
                             alignerCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
                             HBox new_ap_box = new HBox();
@@ -339,7 +345,7 @@ class ExternalApplicationsPane extends GridPane {
                             alignersBox.getChildren().add( new_ap_box );
 
                             alignerCheck.setOnAction( event -> {
-                                if(alignerCheck.isSelected()){
+                                if( ! alignerCheck.isSelected() ){
                                     gp.setDisable( true );
                                     EXTERNALAPPS.getAligner().remove( (Aligner) gp.getApplication());
                                 }
@@ -348,7 +354,6 @@ class ExternalApplicationsPane extends GridPane {
                                     EXTERNALAPPS.getAligner().add((Aligner) gp.getApplication());
                                 }
                             } );
-
 
                             // Don't add aligners twice, especially on-load
                             Application app = gp.getApplication();
@@ -381,16 +386,17 @@ class ExternalApplicationsPane extends GridPane {
                         for (ApplicationPane gp : c.getAddedSubList()) {
                             // Add the remove button to the widget
                             CheckBox snpCheck = new CheckBox();
+                            snpCheck.setSelected( true );
                             snpCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
                             HBox new_snp_box = new HBox();
-                            new_snp_box.setAlignment( Pos.TOP_CENTER);
+                            new_snp_box.setAlignment( Pos.TOP_CENTER );
                             new_snp_box.setSpacing( 10.0 );
                             new_snp_box.getChildren().addAll( snpCheck, gp );
                             snpcallersBox.getChildren().add( new_snp_box );
 
                             snpCheck.setOnAction( event -> {
-                                if(snpCheck.isSelected()){
+                                if( ! snpCheck.isSelected()){
                                     gp.setDisable( true );
                                     EXTERNALAPPS.getSNPCaller().remove( (SNPCaller) gp.getApplication());
                                 }
@@ -399,7 +405,6 @@ class ExternalApplicationsPane extends GridPane {
                                     EXTERNALAPPS.getSNPCaller().add( (SNPCaller) gp.getApplication());
                                 }
                             } );
-
 
                             // Don't add SNPCallers twice, especially on-load
                             Application app = gp.getApplication();

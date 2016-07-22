@@ -1,6 +1,5 @@
 package widgets;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,13 +30,11 @@ class AssemblyPane extends WidgetPane {
 
     private Assembly ASSEMBLY;
 
-    private ObservableList<TextField> elements;
-
     AssemblyPane( Assembly assembly ){
 
         ASSEMBLY = assembly;
-        assembly_name.setText( ASSEMBLY.getValue() );
-        assembly_path.setText( ASSEMBLY.getSample() );
+        assembly_name.setText( ASSEMBLY.getSample() );
+        assembly_path.setText( ASSEMBLY.getValue() );
 
         assembly_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
         ASSEMBLY_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );

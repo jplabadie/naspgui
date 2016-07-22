@@ -146,7 +146,7 @@ class ReadFolderPane extends GridPane {
                                 READPAIRS.add( new_pair );
                             });
 
-                            ImageView image_view2 = new ImageView( remove);
+                            ImageView image_view2 = new ImageView( remove );
                             image_view2.setFitHeight( 20 );
                             image_view2.setFitWidth( 20 );
                             remove_readpair.setGraphic( image_view2 );

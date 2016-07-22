@@ -110,7 +110,7 @@ class FilesPane extends GridPane {
         Button addAssemblyFolder = new Button( "", a_add_img );
 
         Label af_label = new Label( "Assembly Folders" );
-        af_label.setId( "header4");
+        af_label.setId( "header4" );
         assemblyFolderOuter.add( af_label, 0, 0, 2, 1 );
         assemblyFolderOuter.add( addAssemblyFolder, 2, 0 );
         addAssemblyFolder.setOnAction( event -> {
@@ -148,12 +148,12 @@ class FilesPane extends GridPane {
         ImageView al_add_img = new ImageView( add );
         al_add_img.setFitHeight( 25 );
         al_add_img.setFitWidth( 25 );
-        Button addAlignFolder = new Button("", al_add_img );
+        Button addAlignFolder = new Button( "", al_add_img );
         alignFolderOuter.add( addAlignFolder, 1, 1 );
         Label al_label = new Label( "Alignment Folders" );
         alignFolderOuter.add( al_label, 0, 0 );
         addAlignFolder.setOnAction( event -> {
-            alignmentFolderPanes.add( new AlignmentFolderPane( new AlignmentFolder()));
+            alignmentFolderPanes.add( new AlignmentFolderPane( new AlignmentFolder() ));
         });
 
         /**
@@ -165,15 +165,12 @@ class FilesPane extends GridPane {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
                         for ( AssemblyFolderPane gp : c.getAddedSubList() ) {
-
-                            ASSEMBLYFOLDERS.add( gp.getAssemblyFolder() );
-
+                            if( ! ASSEMBLYFOLDERS.contains( gp.getAssemblyFolder() ))
+                                ASSEMBLYFOLDERS.add( gp.getAssemblyFolder() );
                             HBox assmblybox = new HBox();
                             assmblybox.getChildren().addAll( gp );
                             assmblybox.setAlignment( Pos.BOTTOM_CENTER );
-
                             assembly_box.getChildren().addAll( assmblybox );
-
                         }
                     }
                     if ( c.wasRemoved() ) {
@@ -192,14 +189,13 @@ class FilesPane extends GridPane {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
                         for ( ReadFolderPane gp : c.getAddedSubList() ) {
-
-                            READFOLDERS.add( gp.getReadFolder() );
+                            if( ! READFOLDERS.contains( gp.getReadFolder() ))
+                                READFOLDERS.add( gp.getReadFolder() );
 
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( gp );
                             hbox.setAlignment( Pos.BOTTOM_CENTER );
                             read_box.getChildren().add( hbox );
-
                         }
                     }
                     if ( c.wasRemoved() ) {
@@ -221,14 +217,13 @@ class FilesPane extends GridPane {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
                         for ( VcfFolderPane gp : c.getAddedSubList() ) {
-
-                            VCFFOLDERS.add( gp.getVcfFolder() );
+                            if( ! VCFFOLDERS.contains( gp.getVcfFolder() ))
+                                VCFFOLDERS.add( gp.getVcfFolder() );
 
                             HBox vcfBox = new HBox();
                             vcfBox.getChildren().addAll( gp );
                             vcfBox.setAlignment( Pos.BOTTOM_CENTER );
                             vcfFolderBox.getChildren().addAll( vcfBox );
-
                         }
                     }
                     if ( c.wasRemoved() ) {
@@ -249,13 +244,12 @@ class FilesPane extends GridPane {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
                         for ( AlignmentFolderPane gp : c.getAddedSubList() ) {
-
-                            ALIGNFOLDERS.add( gp.getAssemblyFolder() );
+                            if( ! ALIGNFOLDERS.contains( gp.getAssemblyFolder() ))
+                                ALIGNFOLDERS.add( gp.getAssemblyFolder() );
                             HBox alignBox = new HBox();
                             alignBox.getChildren().addAll( gp );
                             alignBox.setAlignment( Pos.BOTTOM_CENTER );
                             align_box.getChildren().addAll( alignBox );
-
                         }
                     }
                     if ( c.wasRemoved() ) {
@@ -286,13 +280,14 @@ class FilesPane extends GridPane {
         list = new ArrayList<VcfFolderPane>();
         for( VCFFolder vf: VCFFOLDERS ){
             VcfFolderPane vfp = new VcfFolderPane( vf );
+            list.add( vfp );
         }
         vcfFolderPanes.addAll( list );
 
         list = new ArrayList<AlignmentFolderPane>();
         for( AlignmentFolder alignf: ALIGNFOLDERS ){
             AlignmentFolderPane afp = new AlignmentFolderPane( alignf );
-            alignmentFolderPanes.add( afp );
+            list.add( afp );
         }
         alignmentFolderPanes.addAll( list );
 
