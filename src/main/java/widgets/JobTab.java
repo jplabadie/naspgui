@@ -248,7 +248,7 @@ public class JobTab extends Tab {
                             }
                             Assembly temp = new Assembly();
                             temp.setValue( x );
-                            temp.setSample( x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.') ) );
+                            temp.setSample( x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') ));
                             af.getAssembly().add( temp );
                             System.out.println( "Assemblies: " + x );
                         }
@@ -260,8 +260,8 @@ public class JobTab extends Tab {
                     List<VCFFolder> vcfz =  NASP_DATA.getFiles().getVCFFolder();
                     ArrayList<String> vcf_folders = new ArrayList<>();
                     if( vcfz != null ){
-                        for (VCFFolder x : vcfz) {
-                            vcf_folders.add("" + x.getPath());
+                        for ( VCFFolder x : vcfz ) {
+                            vcf_folders.add( "" + x.getPath() );
                         }
                     }
                     Pattern vcf = Pattern.compile( "\\.vcf(?=[?.]*$)" );
@@ -299,29 +299,28 @@ public class JobTab extends Tab {
                     Pattern sam = Pattern.compile( "\\.sam(?=[?.]*$)" );
                     Pattern bam = Pattern.compile( "\\.bam(?=[?.]*$)" );
                     for( String x : files ){
-                        System.out.println( "algn");
                         Matcher m1 = sam.matcher( x );
                         Matcher m2 = bam.matcher( x );
 
                         if ( m1.find() || m2.find() ){
-                            String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
+                            String folder = x.substring( 0, x.lastIndexOf("/" ) + 1 );
                             AlignmentFolder af;
                             if( algn_folders.contains( folder ))
                                 af = algn.get( algn_folders.indexOf( folder ) );
                             else {
                                 af = new AlignmentFolder();
                                 algn_folders.add( folder );
-                                af.setPath(folder);
+                                af.setPath( folder );
                                 algn.add( af );
                             }
 
                             Alignment temp = new Alignment();
                             temp.setValue( x );
-                            x = x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.'));
+                            x = x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.') );
                             temp.setSample( x );
 
                             af.getAlignment().add( temp );
-                            System.out.println( "BAMs/SAMs: " + x);
+                            System.out.println( "BAMs/SAMs: " + x );
                         }
                     }
 
@@ -336,17 +335,17 @@ public class JobTab extends Tab {
                     //TODO: Initialize read_folders with those already in NASPDATA
 
                     for( Pair<String, String> pair : rps ){
-                        System.out.println("!" + pair.getKey());
+                        System.out.println( "!" + pair.getKey() );
                         String folder = pair.getKey().substring( 0, pair.getKey().lastIndexOf("/") + 1 );
-                        String file1 = pair.getKey().substring(pair.getKey().lastIndexOf("/")
-                                + 1, pair.getKey().length());
-                        String file2 = pair.getValue().substring(pair.getValue().lastIndexOf("/")
-                                + 1, pair.getValue().length());
+                        String file1 = pair.getKey().substring( pair.getKey().lastIndexOf("/")
+                                + 1, pair.getKey().length() );
+                        String file2 = pair.getValue().substring( pair.getValue().lastIndexOf("/")
+                                + 1, pair.getValue().length() );
 
-                        System.out.println( "Folder: "+ folder+ ": "+ file1 + ", "+ file2 );
+                        System.out.println( "Folder: " + folder+ ": "+ file1 + ", " + file2 );
 
                         if( read_folders.contains( folder )) {
-                            System.out.println("%%");
+                            System.out.println( "%%" );
                             ReadFolder fold = rf.get( read_folders.indexOf( folder ) );
                             List<ReadPair> readpairings = fold.getReadPair();
                             ReadPair new_pair = new ReadPair();
@@ -355,13 +354,13 @@ public class JobTab extends Tab {
                             Pattern pp = Pattern.compile( "(.*)(_[R]?)([1])(.*)$" );
                             Matcher mm = pp.matcher( file1 );
                             mm.find();
-                            System.out.println("$$$"+mm.group(1));
+                            System.out.println( "$$$" + mm.group(1) );
                             new_pair.setSample( mm.group(1) );
 
                             readpairings.add( new_pair );
                         }
                         else {
-                            System.out.println("***");
+                            System.out.println( "***" );
                             read_folders.add( folder );
                             ReadFolder new_folder = new ReadFolder();
                             new_folder.setPath( folder );
@@ -374,7 +373,7 @@ public class JobTab extends Tab {
                             Matcher mm = pp.matcher( file1 );
                             mm.find();
                             System.out.println( mm.toString() );
-                            System.out.println("$$$"+mm.group(1));
+                            System.out.println( "$$$"+mm.group(1) );
                             new_pair.setSample( mm.group(1) );
 
                             readpairings.add( new_pair );

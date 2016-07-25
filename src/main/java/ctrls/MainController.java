@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -82,7 +81,6 @@ public class MainController implements Initializable{
         AnchorPane.setRightAnchor( jobTabPane, 5.0 );
         AnchorPane.setTopAnchor( jobTabPane, 1.0 );
         AnchorPane.setLeftAnchor( jobTabPane, 5.0 );
-
     }
 
     private void initLogin() {
@@ -235,9 +233,9 @@ public class MainController implements Initializable{
                 return new DraggableTreeCell<>();
             }
         });
-        localFileBrowserTree.setRoot(dummyRoot);     // Set dummy node as root of the TreeView
-        localFileBrowserTree.setShowRoot(false);     // Hide the root so the drives appear as roots
-        // localFileBrowserTree.setRoot(root);
+        localFileBrowserTree.setRoot( dummyRoot );     // Set dummy node as root of the TreeView
+        localFileBrowserTree.setShowRoot( false );     // Hide the root so the drives appear as roots
+        // localFileBrowserTree.setRoot( root );
     }
 
     /**
@@ -258,15 +256,11 @@ public class MainController implements Initializable{
 
                 remoteTreeToolbar.getItems().addAll( toParent, toRoot );
 
-
-                if( rfsm != null && rfsm.isConnected() )
-                {
+                if( rfsm != null && rfsm.isConnected() ) {
                     try {
                         String default_rem_dir = UserSettingsManager.getDefaultRemoteDirs();
                         log.info( null, null, "RPBT: Init at root: " + default_rem_dir );
                         rti = new RemoteTreeItem( rfsm.getDirAsPath( default_rem_dir ) );
-
-
                     } catch ( IOException e ) {
                         e.printStackTrace();
                     }
@@ -277,7 +271,7 @@ public class MainController implements Initializable{
 
                     remotePathBrowserTree.setCellFactory(new Callback<TreeView<Path>, TreeCell<Path>>() {
                         @Override
-                        public TreeCell<Path> call(TreeView<Path> param) {
+                        public TreeCell<Path> call( TreeView<Path> param ) {
 
                             return new DraggableTreeCell<>();
                         }
@@ -292,9 +286,7 @@ public class MainController implements Initializable{
         Thread thread = new Thread( buildThread );
         thread.setDaemon( true );
         thread.start();
-
     }
-
 
     /**
      * This method creates a TreeItem to represent the given File. It does this
@@ -346,14 +338,14 @@ public class MainController implements Initializable{
             private ObservableList<TreeItem<File>> buildChildren(TreeItem<File> tree_item) {
                 File f = tree_item.getValue();
 
-                if (f != null && f.isDirectory()) {
+                if ( f != null && f.isDirectory() ) {
                     File[] files = f.listFiles();
 
-                    if (files != null) {
+                    if ( files != null ) {
                         ObservableList<TreeItem<File>> children = FXCollections.observableArrayList();
 
-                        for (File child_file : files) {
-                            children.add( createNode(child_file) );
+                        for ( File child_file : files ) {
+                            children.add( createNode( child_file ));
                         }
 
                         return children;
@@ -370,8 +362,8 @@ public class MainController implements Initializable{
      */
     private class RemoteTreeItem extends TreeItem<Path>{
 
-        RemoteTreeItem(Path path){
-            super.setValue(path);
+        RemoteTreeItem( Path path ){
+            super.setValue( path );
         }
         RemoteTreeItem(){        }
 
@@ -391,26 +383,21 @@ public class MainController implements Initializable{
         private boolean isFirstTimeLeaf = true;
 
         @Override public ObservableList<TreeItem<Path>> getChildren() {
-            if (isFirstTimeChildren) {
+            if ( isFirstTimeChildren ) {
                 isFirstTimeChildren = false;
 
                 // First getChildren() call, so we actually go off and
                 // determine the children of the File contained in this TreeItem.
-                super.getChildren().setAll(buildChildren(this));
+                super.getChildren().setAll( buildChildren(this) );
             }
             return super.getChildren();
         }
 
         @Override public boolean isLeaf() {
-
-//            if (isFirstTimeLeaf) {
-//                isFirstTimeLeaf = false;
-//                Path p = getValue();
-//                isLeaf = ! Files.isDirectory( p );
-//            }
             return isLeaf;
         }
-        public void setLeaf( Boolean leaf){
+
+        public void setLeaf( Boolean leaf ){
             isLeaf = leaf;
         }
 
@@ -423,23 +410,24 @@ public class MainController implements Initializable{
             Path this_path = tree_item.getValue();
             if ( true ) {
                 try {
-                    DirectoryStream<Path> ds = rfsm.getDirectory(this_path.toString());
+                    DirectoryStream<Path> ds = rfsm.getDirectory( this_path.toString() );
                     ObservableList<TreeItem<Path>> children = FXCollections.observableArrayList();
-                    for (Path path : ds) {
-                        if (path != this_path ) {
+                    for ( Path path : ds ) {
+                        if ( path != this_path ) {
                             RemoteTreeItem new_item = new RemoteTreeItem( path );
-                            if( Files.isDirectory( path) )
+                            if( !path.equals( super.getValue() )) {
                                 new_item.setLeaf( false );
-                            else new_item.setLeaf( true );
-
-                            children.add( new_item );
+                                children.add( new_item );
+                            }
+                            else
+                                this.setLeaf( true );
                         }
-                        System.out.println(path.toString());
+                        System.out.println( path.toString() );
                     }
                     return children;
 
-                } catch (IOException e) {
-                    log.error(null, null, "RTB: Error while building remote directory tree: " + e);
+                } catch ( IOException e ) {
+                    log.error( null, null, "RTB: Error while building remote directory tree: " + e );
                 }
             }
             return FXCollections.emptyObservableList();
