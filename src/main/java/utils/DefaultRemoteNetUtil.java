@@ -12,10 +12,13 @@ import java.util.Vector;
 public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
     private Session session;
-    private Session exc_session;
+    private Session shell_session;
     private ChannelSftp sftp_channel;
-    private Channel exec_channel;
-    private BufferedReader exec_in;
+    private Channel shell_channel;
+    private InputStream shell_in;
+    private PrintStream ps;
+    private OutputStream ops;
+    private BufferedReader buff;
 
     private static DefaultRemoteNetUtil instance = null;
     private LogManager log = LogManager.getInstance();
@@ -68,8 +71,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.error(null, null, "Unable to initialize a new sftp session: \n" + e1.getMessage());
         }
         try {
-            exc_session = jsch.getSession(username, url, port);
-            exc_session.setUserInfo(new UserInfo() {
+            shell_session = jsch.getSession(username, url, port);
+            shell_session.setUserInfo(new UserInfo() {
                 public String getPassphrase() {
                     return password;
                 }
@@ -109,7 +112,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         log.info(null, null, "RNU: Attempting to Open Remote Session and related connections.");
 
         try {
-            exc_session.connect();
+            shell_session.connect();
             session.connect();
             log.info(null, null, "RNU: Open Session - Session connected successfully.");
         } catch (JSchException e) {
@@ -119,47 +122,48 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         try {
 
-            Channel sftpchannel=session.openChannel("sftp");
+            Channel sftpchannel=session.openChannel( "sftp" );
             sftp_channel=(ChannelSftp)sftpchannel;
 
-            exec_channel = exc_session.openChannel("exec");
-            exec_channel.setInputStream( null );
+            shell_channel = shell_session.openChannel( "shell" );
+            shell_channel.setInputStream( null );
 
             log.info(null, null, "RNU: Open Session - SFTP/EXEC Channels connected successfully.");
 
         } catch (JSchException e) {
             log.error(null, null, "NM - Unable to Open and Connect to SFTP/EXEC Channels: \n" + e.getMessage());
             session.disconnect();
-            exc_session.disconnect();
+            shell_session.disconnect();
             log.warn(null, null, "NM - Session failed : Closing Session.");
             return;
         }
 
         try {
-            ((ChannelExec)exec_channel).setErrStream( System.err );
-            exec_in = new BufferedReader( new InputStreamReader(exec_channel.getInputStream()) );
 
+            shell_in = shell_channel.getInputStream();
+            buff = new BufferedReader( new InputStreamReader( shell_in ));
+            ops = shell_channel.getOutputStream();
+            ps = new PrintStream(ops, true);
+
+            shell_channel.connect();
             sftp_channel.connect();
 
             log.info(null, null, "RNU: Open Session - I/O Streams connected successfully.");
-            log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+sftp_channel.pwd());
-        } catch (IOException e) {
-            log.error(null, null, "NM - Unable to Get SFTP/EXEC I/O Streams: \n" + e.getMessage());
-            session.disconnect();
-            log.warn(null, null, "NM - Session failed : Closing Session.");
+            log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+ sftp_channel.pwd());
+
         } catch (SftpException e) {
             log.error(null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage());
         } catch (JSchException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
     /**
      * Close all channels and exit the session
      */
     public void closeSession(){
-
         try{
             session.isConnected();
         }
@@ -168,9 +172,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             return;
         }
         if(session.isConnected()) {
-
             sftp_channel.disconnect();
-            exec_channel.disconnect();
+            shell_channel.disconnect();
             log.info(null, null, "NM - Session Channels Disconnected.");
 
             session.disconnect();
@@ -196,26 +199,32 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         log.info(null, null, "RNU: Attempting upload: "+ file.getName()+ " at "+ abs_remote_path);
         String remote_dir = abs_remote_path.substring(0, abs_remote_path.lastIndexOf('/'));
 
-        if (sftp_channel == null){
+        if ( sftp_channel == null ){
             log.error(null, null, "NM - Upload Step Fail: SFTP Channel is null. Cannot upload.");
             return;
         }
-        else if(!file.exists()){
+        else if( !file.exists() ){
             log.error(null, null, "NM - Upload Step Fail: File for SFTP Upload is null. Cannot upload.");
             return;
         }
 
         //TODO:Add mkdir exec step
-        System.out.println( remote_dir + "!!!");
-        if(!isRemoteDir(remote_dir)){
-            log.info(null, null, "NM - Upload Step Info: Connection failed or remote path " +
-                    "is not a valid path for SFTP Upload. Solving by mkdir.");
-            ArrayList<String> t = execCommand("mkdir " + remote_dir);
+        System.out.println( remote_dir + "!!!" );
+        if( !isRemoteDir( remote_dir )){
+            System.out.println( remote_dir + "!!!1" );
+            log.info( null, null, "NM - Upload Step Info: Connection failed or remote path " +
+                    "is not a valid path for SFTP Upload. Solving by mkdir." );
+            System.out.println( remote_dir + "!!!2" );
+            ArrayList<String> t = execCommand( "mkdir " + remote_dir );
+            System.out.println( remote_dir + "!!!3" );
         }
 
         try {
-            log.info(null, null, "RNU: Upload - Attempting: cd " + remote_dir );
-                sftp_channel.cd( remote_dir ); //cd to the absolute directory
+            System.out.println( remote_dir + "!!!4" );
+            log.info( null, null, "RNU: Upload - Attempting: cd " + remote_dir );
+            System.out.println( remote_dir + "!!!5" );
+            sftp_channel.cd( remote_dir ); //cd to the absolute directory
+            System.out.println( remote_dir + "!!!6" );
         }
         catch (SftpException e){
             //the directory cannot be visited
@@ -239,32 +248,33 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
     }
 
+    /**
+     * Accepts one or more Strings which represent linux commands. Commands are run in order on the remote system.
+     * Output from stdout is stored in order in an ArrayList of Strings
+     * @param cmd0 required first command
+     * @param arguments optional varargs commands
+     * @return an ArrayList containing Strings from the stdout result
+     */
     private ArrayList<String> execCommand( String cmd0, String... arguments ){
-        assert exec_channel != null;
+        assert shell_channel != null;
 
         String cmdlist = cmd0;
-
-        for(String cmd : arguments)
+        for( String cmd : arguments )
         {
             cmdlist += "\n" + cmd;
         }
-        ((ChannelExec)exec_channel).setCommand( cmdlist );
+        ps.println( cmdlist );
+        System.out.println( "$$ " + cmdlist + " $$" );
+
         ArrayList<String> out = new ArrayList<>();
 
         try {
-            exec_channel.setInputStream( null );
-            exec_in = new BufferedReader( new InputStreamReader( exec_channel.getInputStream() ));
-            ((ChannelExec) exec_channel).connect();
-            out.add(exec_in.readLine());
-
-            while ( exec_in.ready() ){
-                out.add( exec_in.readLine() );
+            while ( buff.ready() ) {
+                String t = buff.readLine();
+                out.add( t );
             }
 
-            exec_channel.disconnect();
         } catch ( IOException e ) {
-            e.printStackTrace();
-        } catch (JSchException e) {
             e.printStackTrace();
         }
         return out;
@@ -326,18 +336,17 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param job_XML_abs_path the absolute path to the XML job file on the remote server
      */
     public String runNaspJob(String job_XML_abs_path) {
-        String runpath = job_XML_abs_path.substring(0,job_XML_abs_path.lastIndexOf('/'));
+        String runpath = job_XML_abs_path.substring( 0, job_XML_abs_path.lastIndexOf('/') );
         String jobname = "";
-        System.out.println("&^&^"+runpath);
-        System.out.println("%%%&^"+job_XML_abs_path);
+        System.out.println( "Running nasp in:" +runpath );
+        System.out.println( "XML nasp in:" + job_XML_abs_path );
         ArrayList<String> out =
             execCommand(
                     "cd " + runpath,
                     "module load nasp",
                     "module load tnorth",
                     "nasp --config " + job_XML_abs_path);
-
-
+        execCommand("Y");
         //TODO: dreams
         for(String x : out)
             jobname += x;
@@ -367,9 +376,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public ArrayList<String> getAllFiles( String remote_abs_path){
 
-        System.out.println( "Rempath: "+ remote_abs_path);
+        System.out.println( "Rempath: "+ remote_abs_path );
         return execCommand( "cd "+ remote_abs_path, "find -L $PWD -type f" );
-
     }
 
     /**
@@ -378,21 +386,24 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param remote_file_abs_path the absolute path to the file on the remote server
      * @return true if the file exists on the remote system, false otherwise
      */
-    public boolean isRemoteFile(String remote_file_abs_path){
+    public boolean isRemoteFile( String remote_file_abs_path ){
 
-        InputStream exec_in;
-        int exec_status = -1;
-        assert exec_channel != null;
+        boolean success = false;
         try {
-            exec_in = exec_channel.getInputStream();
-            exec_status = exec_in.read();
-        } catch (IOException e) {
-            log.error(null, null, "RN: Could not determine if remote file exists. Failed due to:\n" +e.getMessage());
+            ArrayList<String> out = execCommand( "test -f " + remote_file_abs_path + " && echo \"true\" || echo \"false\"");
+            if( out.contains("true")){
+                log.info(null, null, "RNU: Checking if remote path is a file. Result: true. ");
+                return true;
+            }
+            else{
+                log.info(null, null, "RNU: Checking if remote path is a file. Result: true. ");
+                return false;
+            }
+
+        } catch ( Exception e ) {
+            log.error( null, null, "RN: Could not determine if remote file exists. Failed due to:\n" +e.getMessage() );
             return false;
         }
-        ((ChannelExec)exec_channel).setCommand("test -f " + remote_file_abs_path);
-
-        return exec_status != -1; //returns false only if the remote system returned -1
     }
 
     /**
@@ -402,15 +413,26 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return true if the directory exists on the remote system, false otherwise
      */
     public boolean isRemoteDir(String remote_dir_abs_path) {
-        int exec_status;
         log.info(null, null, "RNU: Checking for remote directory - " + remote_dir_abs_path);
-        if (exec_channel == null)
+        if (shell_channel == null)
             log.error(null, null, "RNU: Cannot check remote dir - Exec channel is null.");
         log.info(null, null, "RNU: Checking for remote directory - Running test -d (remote path)...");
-        ((ChannelExec)exec_channel).setCommand("test -d " + remote_dir_abs_path);
-        exec_status = exec_channel.getExitStatus();
-        log.info(null, null, "RNU: Checking for remote directory - Exec returned: "+exec_status);
-        return exec_status != -1;
+
+        try {
+            ArrayList<String> out = execCommand( "test -d " + remote_dir_abs_path + " && echo \"true\" || echo \"false\"");
+            for (String x: out) { System.out.println("** "+ x + " xx1");}
+            if( out.contains("true")){
+                log.info(null, null, "RNU: Checking if remote path is dir. Result: true. ");
+                return true;
+            }
+            else{
+                log.info(null, null, "RNU: Checking if remote path is dir. Result: false. ");
+                return false;
+            }
+        } catch ( Exception e ) {
+            log.error( null, null, "RN: Could not determine if remote file exists. Failed due to:\n" +e.getMessage() );
+            return false;
+        }
     }
 
     public String getUsername(){
