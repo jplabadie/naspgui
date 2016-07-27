@@ -316,7 +316,7 @@ public class JobTab extends Tab {
 
                             Alignment temp = new Alignment();
                             temp.setValue( x );
-                            x = x.substring( x.lastIndexOf('/')+1, x.lastIndexOf('.') );
+                            x = x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') );
                             temp.setSample( x );
 
                             af.getAlignment().add( temp );
