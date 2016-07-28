@@ -1,6 +1,5 @@
 package utils;
 
-
 import com.pastdev.jsch.DefaultSessionFactory;
 import com.pastdev.jsch.nio.file.UnixSshFileSystemProvider;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 /**
  *
  * Provides a Java FileSystem which is defined by calls through SSH to a remote service
- * Primarily intended as a source of Files/Paths for the custom file/directory browser
+ * Primarily intended as a source of Files/Paths for the custom file/directory tree
  *
  * @author Jean-Paul Labadie
  */

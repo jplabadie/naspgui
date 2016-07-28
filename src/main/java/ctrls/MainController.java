@@ -61,12 +61,10 @@ public class MainController implements Initializable{
         rfsm = RemoteFileSystemManager.getInstance();
         log = LogManager.getInstance();
 
+        initMenuItems();
         gracefulLogin();
-        initLogin();
         initLocalFileBrowserTree();
 
-        initMenuItemQuit();
-        initMenuItemLoad();
         initCreateNewJobHandler();
         //initUserSettingsPaneHandler();
 
@@ -83,50 +81,16 @@ public class MainController implements Initializable{
         AnchorPane.setLeftAnchor( jobTabPane, 5.0 );
     }
 
-    private void initLogin() {
+    private void initMenuItems() {
+        /** Login Button Init*/
         menuItemLogin.setOnAction(
                 event -> gracefulLogin());
-    }
 
-    private void gracefulLogin(){
-        LoginDialog ld = new LoginDialog();
-        userpass = ld.showAndWait();
+        /** Quit Button Init */
+        menuItemQuit.setOnAction(
+                event -> gracefulQuit());
 
-
-        if (userpass.isPresent() && rfsm.isConnected()) {
-            UserSettingsManager.setUsername(userpass.get().getKey());
-            UserSettingsManager.setCurrentPassword(userpass.get().getValue());
-            initRemotePathBrowserTree(rfsm);
-
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText("Login Failed");
-            alert.setContentText("You are not logged in.");
-            alert.showAndWait();
-            log.warn(null, null, "MainController: Login Failed");
-        }
-        nm = ld.getNet();
-        ld.close();
-    }
-
-    private void initMenuItemQuit() {
-            menuItemQuit.setOnAction(
-                    event -> gracefulQuit());
-    }
-
-    private void gracefulQuit(){
-        log.info(null, null, "Quiting: Application Closing By Request.");
-        rfsm.close();
-        Platform.exit();
-    }
-
-    /**
-     *
-     */
-    private void initMenuItemLoad(){
-
+        /** Load Button Init */
         loadJobBtn.setOnAction(
                 new EventHandler<ActionEvent>() {
                     //@Override
@@ -162,6 +126,36 @@ public class MainController implements Initializable{
                     }
                 });
     }
+
+    private void gracefulLogin(){
+        LoginDialog ld = new LoginDialog();
+        userpass = ld.showAndWait();
+
+
+        if (userpass.isPresent() && rfsm.isConnected()) {
+            UserSettingsManager.setUsername(userpass.get().getKey());
+            UserSettingsManager.setCurrentPassword(userpass.get().getValue());
+            initRemotePathBrowserTree(rfsm);
+
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText("Login Failed");
+            alert.setContentText("You are not logged in.");
+            alert.showAndWait();
+            log.warn(null, null, "MainController: Login Failed");
+        }
+        nm = ld.getNet();
+        ld.close();
+    }
+
+    private void gracefulQuit(){
+        log.info(null, null, "Quiting: Application Closing By Request.");
+        rfsm.close();
+        Platform.exit();
+    }
+
 
     /**
      *  On startup, creates a Handler which monitors the “Create New Job”
