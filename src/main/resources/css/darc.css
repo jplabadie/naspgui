@@ -1,9 +1,9 @@
 .root{
-    -fx-font-size: 10pt;
+    -fx-font-size: 12pt;
     -fx-font-family: "Helvetica";
-    -fx-text-fill: silver;
+    -fx-text-fill: whitesmoke;
     -fx-base: rgb(180,180,180);
-    -fx-background: rgb(120,120,120);
+    -fx-background: rgb(80,80,80);
 }
 
 #fancytext {
@@ -14,7 +14,7 @@
 }
 
 #header1{
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: lightsteelblue;
     -fx-font-family: "Helvetica";
     -fx-font-weight: bolder;
     -fx-font-size: 24pt;
@@ -49,19 +49,128 @@
 }
 
 #label1{
-    -fx-text-fill: whitesmoke;
+    -fx-text-fill: ghostwhite;
     -fx-font-family: "Helvetica";
     -fx-font-weight: bold;
     -fx-font-size: 12pt;
 }
 
-#textfield1{
-    -fx-text-fill: aqua;
-    -fx-highlight-fill: chocolate;
-    -fx-background-color: lightslategray;
+#label2{
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 11pt;
 }
 
-#folderpane1{
-    -fx-border-color: orange;
-    -fx-border-radius: 5em;
+#label3{
+    -fx-text-fill: snow;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: normal;
+    -fx-font-size: 10pt;
+}
+
+#label4{
+    -fx-text-fill: snow;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: lighter;
+    -fx-font-size: 8pt;
+}
+
+#textfield1{
+    -fx-text-fill: lightblue;
+    -fx-highlight-fill: darkorange;
+    -fx-background-color: black;
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica";
+}
+
+.folderpane1{
+}
+
+.folderpane1 .text-field{
+    -fx-text-fill: lightblue;
+    -fx-highlight-fill: darkorange;
+    -fx-background-color: black;
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Lucida Console";
+}
+
+.folderpane1 .label{
+    -fx-text-fill: ghostwhite;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
+}
+
+.tabpane1{
+    -fx-text-fill: royalblue;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
+}
+.tabpane1 .tab-pane{
+    -fx-text-fill: royalblue;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
+}
+
+.tabpane1 .label{
+    -fx-text-fill: ghostwhite;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: normal;
+    -fx-font-size: 12pt;
+}
+
+.tabpane1 .text-field{
+    -fx-text-fill: orange;
+    -fx-highlight-fill: indigo;
+    -fx-background-color: black;
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Lucida Console";
+}
+
+.tabpane2{
+    -fx-text-fill: palegreen;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+}
+
+.tabpane2 .label{
+    -fx-text-fill: ghostwhite;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: normal;
+    -fx-font-size: 10pt;
+}
+.tabpane2 .text-field{
+    -fx-text-fill: orange;
+    -fx-highlight-fill: indigo;
+    -fx-background-color: black;
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Lucida Console";
+}
+
+
+.folderpane2{
+}
+
+.folderpane2 .text-field{
+    -fx-text-fill: lightblue;
+    -fx-highlight-fill: darkorange;
+    -fx-background-color: black;
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Lucida Console";
+}
+
+.folderpane2 .label{
+    -fx-text-fill: ghostwhite;
+    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
 }
