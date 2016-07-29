@@ -56,6 +56,7 @@ class AlignmentFolderPane extends GridPane {
         ALIGNMENTS = ALIGNMENTFOLDER.getAlignment();
 
         alignmentFolderPath.setText( ALIGNMENTFOLDER.getPath() );
+        alignmentFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -65,7 +66,10 @@ class AlignmentFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        alignment_folder_label.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        /**
+         * Define the look and feel of static label elements
+         */
+        alignment_folder_label.setId( "header5" );
         alignment_folder_label.setPrefSize( 100, 20 );
         alignment_folder_label.setAlignment( Pos.CENTER );
         alignment_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
@@ -180,6 +184,8 @@ class AlignmentFolderPane extends GridPane {
                 }
             }
         });
+        if(ALIGNMENTS.isEmpty())
+            ALIGNMENTS.add( new Alignment() );
         for( Alignment alignment: ALIGNMENTS){
             AlignmentPane ap = new AlignmentPane( alignment );
             alignmentGridpanes.add( ap );

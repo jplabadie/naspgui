@@ -64,12 +64,14 @@ class VcfFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        vcf_folder_label.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        /**
+         * Define the look and feel of static label elements
+         */
+        vcf_folder_label.setId( "header5" );
         vcf_folder_label.setPrefSize( 100, 20 );
         vcf_folder_label.setAlignment( Pos.CENTER );
         vcf_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         vcf_folder_label.setAlignment( Pos.CENTER );
-
         /**
          * Add tooltips to the static label elements
          */
@@ -179,6 +181,10 @@ class VcfFolderPane extends GridPane {
                 }
             }
         });
+
+        if( VCFFILES.isEmpty() )
+            VCFFILES.add( new VCFFile() );
+
         for( VCFFile vcf: VCFFILES){
             VcfFilePane vcfp = new VcfFilePane( vcf );
             vcfFilePanes.add( vcfp );

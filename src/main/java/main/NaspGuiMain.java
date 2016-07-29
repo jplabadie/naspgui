@@ -1,6 +1,7 @@
 package main;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,8 @@ public class NaspGuiMain extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("NASPGuiMainLayout.fxml"));
         primaryStage.setTitle("NASP GUI Beta");
         Scene scene = new Scene(root, 1024, 800);
-        scene.getStylesheets().add("css/default.css");
+        scene.getStylesheets().add( "css/darc.css" );
+        //scene.getStylesheets().add("css/default.css");
 
         // Loading in this method seems to fail here
         //scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());
@@ -39,6 +41,12 @@ public class NaspGuiMain extends Application {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
                 System.out.println("Height: " + newSceneHeight);
             }
+        });
+
+        // TODO: WTF. Need to close the application completely, including daemons
+        primaryStage.onCloseRequestProperty().addListener( event -> {
+            System.exit( 0 );
+            Platform.exit();
         });
 
         primaryStage.setScene(scene);

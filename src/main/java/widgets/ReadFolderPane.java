@@ -15,8 +15,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.ReadFolder;
 import xmlbinds.ReadPair;
 
@@ -64,17 +62,20 @@ class ReadFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        read_folder_label.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 18 ) );
+        /**
+         * Define the look and feel of static label elements
+         */
+        read_folder_label.setId( "header5" );
         read_folder_label.setPrefSize( 100, 20 );
         read_folder_label.setAlignment( Pos.CENTER );
         read_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         read_folder_label.setAlignment( Pos.CENTER );
-        read_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
 
         /**
          * Add tooltips to the static label elements
          */
         read_folder_path_label.setTooltip(read_folder_path_tip);
+        read_folder_path_label.setId( "label1" );
 
         /**
          * Define the look and behavior of the GridPane
@@ -181,6 +182,9 @@ class ReadFolderPane extends GridPane {
                 }
             }
         });
+
+        if( READPAIRS.isEmpty() )
+            READPAIRS.add( new ReadPair() );
 
         for( ReadPair read : READPAIRS ){
             ReadPairPane new_pair_pane = new ReadPairPane ( read );

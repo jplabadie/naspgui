@@ -65,7 +65,6 @@ public class JobTab extends Tab {
      *  Creates a blank job and initializes new NASP data
      */
     void initialize() {
-
         borderPane.setPrefHeight( 900 );
         /**
          * Create new (blank) NaspInputData root and populate with Children

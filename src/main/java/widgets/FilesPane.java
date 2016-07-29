@@ -3,6 +3,7 @@ package widgets;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -88,12 +89,13 @@ class FilesPane extends GridPane {
         this.setHgap( 2 );
         this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
-        ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c1 = new ColumnConstraints( 30, 60, 600 );
+        ColumnConstraints c0 = new ColumnConstraints( 30, 40, 60 );
+        ColumnConstraints c1 = new ColumnConstraints( 30, 40, 500 );
         //Define column auto-resizing behavior
-        c1.setHgrow( Priority.ALWAYS );
+        c0.setHgrow( Priority.NEVER );
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1 );
+        this.setGridLinesVisible( true );
 
         /**
          * Define the look and behavior of the non-static TextField and Label elements
@@ -103,18 +105,27 @@ class FilesPane extends GridPane {
         // Add the button to the widget with an event handler
 
         this.add( assemblyFolderOuter, 1, 1, 3, 1 );
-        assemblyFolderOuter.add( assembly_box, 1, 1, 1, 1 );
+        assemblyFolderOuter.add( assembly_box, 1, 0 );
         ImageView a_add_img = new ImageView( add );
+
         a_add_img.setFitHeight( 25 );
         a_add_img.setFitWidth( 25 );
-        Button addAssemblyFolder = new Button( "", a_add_img );
-
-        Label af_label = new Label( "Assembly Folders" );
-        af_label.setId( "header4" );
-        assemblyFolderOuter.add( af_label, 0, 0, 2, 1 );
-        assemblyFolderOuter.add( addAssemblyFolder, 2, 0 );
+        Button addAssemblyFolder = new Button( "Add Assemblies", a_add_img );
+        assemblyFolderOuter.add( addAssemblyFolder, 1, 1 );
         addAssemblyFolder.setOnAction( event -> {
-            assemblyFolderPanes.add( new AssemblyFolderPane( new AssemblyFolder() ));
+            Image remove_folder = new Image( getClass().getResourceAsStream( "/icons/stop-1.png" ) );
+            ImageView remove_folder_view = new ImageView( remove_folder );
+            remove_folder_view.setFitHeight( 25 );
+            remove_folder_view.setFitWidth( 25 );
+
+            Button delAssemblyFolder = new Button( "Delete", remove_folder_view);
+            AssemblyFolderPane temp = new AssemblyFolderPane( new AssemblyFolder(), delAssemblyFolder );
+
+            delAssemblyFolder.setOnAction( (ActionEvent event2) -> {
+                assemblyFolderPanes.remove( temp );
+                System.out.println("Remove Assembly Folder");
+            });
+            assemblyFolderPanes.add( temp );
         });
 
         this.add( readFolderOuter, 1, 2, 3, 1 );
@@ -122,10 +133,8 @@ class FilesPane extends GridPane {
         ImageView r_add_img = new ImageView( add );
         r_add_img.setFitHeight( 25 );
         r_add_img.setFitWidth( 25 );
-        Button addReadFolder = new Button( "", r_add_img );
+        Button addReadFolder = new Button( "Add Reads", r_add_img );
         readFolderOuter.add( addReadFolder, 1, 1 );
-        Label rf_label = new Label( "Read Folders" );
-        readFolderOuter.add( rf_label, 0, 0 );
         addReadFolder.setOnAction( event -> {
             readFolderPanes.add( new ReadFolderPane( new ReadFolder() ));
         });
@@ -135,10 +144,8 @@ class FilesPane extends GridPane {
         ImageView v_add_img = new ImageView( add );
         v_add_img.setFitHeight( 25 );
         v_add_img.setFitWidth( 25 );
-        Button addVcfFolder = new Button( "", v_add_img );
+        Button addVcfFolder = new Button( "Add VCFs", v_add_img );
         vcfFolderOuter.add( addVcfFolder, 1, 1 );
-        Label vf_label = new Label( "VCF Folders" );
-        vcfFolderOuter.add( vf_label, 0, 0 );
         addVcfFolder.setOnAction( event -> {
             vcfFolderPanes.add( new VcfFolderPane( new VCFFolder() ));
         });
@@ -148,10 +155,8 @@ class FilesPane extends GridPane {
         ImageView al_add_img = new ImageView( add );
         al_add_img.setFitHeight( 25 );
         al_add_img.setFitWidth( 25 );
-        Button addAlignFolder = new Button( "", al_add_img );
+        Button addAlignFolder = new Button( "Add Alignments", al_add_img );
         alignFolderOuter.add( addAlignFolder, 1, 1 );
-        Label al_label = new Label( "Alignment Folders" );
-        alignFolderOuter.add( al_label, 0, 0 );
         addAlignFolder.setOnAction( event -> {
             alignmentFolderPanes.add( new AlignmentFolderPane( new AlignmentFolder() ));
         });
@@ -167,16 +172,20 @@ class FilesPane extends GridPane {
                         for ( AssemblyFolderPane gp : c.getAddedSubList() ) {
                             if( ! ASSEMBLYFOLDERS.contains( gp.getAssemblyFolder() ))
                                 ASSEMBLYFOLDERS.add( gp.getAssemblyFolder() );
-                            HBox assmblybox = new HBox();
-                            assmblybox.getChildren().addAll( gp );
-                            assmblybox.setAlignment( Pos.BOTTOM_CENTER );
-                            assembly_box.getChildren().addAll( assmblybox );
+                                HBox assmblybox = new HBox();
+                                assmblybox.getChildren().addAll( gp );
+                                assmblybox.setAlignment( Pos.BOTTOM_LEFT );
+                                assembly_box.getChildren().addAll( assmblybox );
+                                System.out.println("66");
                         }
                     }
                     if ( c.wasRemoved() ) {
                         for ( AssemblyFolderPane gp : c.getRemoved() ) {
-                            assembly_box.getChildren().remove( gp );
+                            HBox assmblybox = new HBox();
+                            assmblybox.getChildren().addAll( gp );
+                            assembly_box.getChildren().remove( assmblybox );
                             ASSEMBLYFOLDERS.remove( gp.getAssemblyFolder() );
+                            System.out.println("77");
                         }
                     }
                 }
@@ -194,7 +203,7 @@ class FilesPane extends GridPane {
 
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( gp );
-                            hbox.setAlignment( Pos.BOTTOM_CENTER );
+                            hbox.setAlignment( Pos.BOTTOM_LEFT );
                             read_box.getChildren().add( hbox );
                         }
                     }
@@ -222,7 +231,7 @@ class FilesPane extends GridPane {
 
                             HBox vcfBox = new HBox();
                             vcfBox.getChildren().addAll( gp );
-                            vcfBox.setAlignment( Pos.BOTTOM_CENTER );
+                            vcfBox.setAlignment( Pos.BOTTOM_LEFT );
                             vcfFolderBox.getChildren().addAll( vcfBox );
                         }
                     }
@@ -248,7 +257,7 @@ class FilesPane extends GridPane {
                                 ALIGNFOLDERS.add( gp.getAssemblyFolder() );
                             HBox alignBox = new HBox();
                             alignBox.getChildren().addAll( gp );
-                            alignBox.setAlignment( Pos.BOTTOM_CENTER );
+                            alignBox.setAlignment( Pos.BOTTOM_LEFT );
                             align_box.getChildren().addAll( alignBox );
                         }
                     }
@@ -262,7 +271,9 @@ class FilesPane extends GridPane {
             }
         });
 
-
+        /**
+         * Initialize ReadFolderPanes from XMLbinds
+         */
         ArrayList list = new ArrayList<ReadFolderPane>();
         for( ReadFolder rf : READFOLDERS ){
              ReadFolderPane rfp = new ReadFolderPane( rf );
@@ -270,13 +281,30 @@ class FilesPane extends GridPane {
          }
         readFolderPanes.addAll( list );
 
+        /**
+         * Initialize AssemblyFolderPanes from XMLbinds
+         */
         list = new ArrayList<AssemblyFolderPane>();
         for( AssemblyFolder af: ASSEMBLYFOLDERS ){
-            AssemblyFolderPane afp = new AssemblyFolderPane( af );
+            Image remove_folder = new Image( getClass().getResourceAsStream( "/icons/stop-1.png" ) );
+            ImageView remove_folder_view = new ImageView( remove_folder );
+            remove_folder_view.setFitHeight( 25 );
+            remove_folder_view.setFitWidth( 25 );
+
+            Button delAssemblyFolder = new Button( "Delete", remove_folder_view);
+            AssemblyFolderPane afp = new AssemblyFolderPane( af, delAssemblyFolder );
+            delAssemblyFolder.setOnAction( (ActionEvent event2) -> {
+                assemblyFolderPanes.remove( afp );
+                System.out.println("Remove Assembly Folder!");
+            });
+
             list.add( afp );
         }
         assemblyFolderPanes.addAll( list );
 
+        /**
+         * Initialize VcfFolderPanes from XMLbinds
+         */
         list = new ArrayList<VcfFolderPane>();
         for( VCFFolder vf: VCFFOLDERS ){
             VcfFolderPane vfp = new VcfFolderPane( vf );
@@ -284,13 +312,14 @@ class FilesPane extends GridPane {
         }
         vcfFolderPanes.addAll( list );
 
+        /**
+         * Initialize AlignmentFolderPanes from XMLbinds
+         */
         list = new ArrayList<AlignmentFolderPane>();
         for( AlignmentFolder alignf: ALIGNFOLDERS ){
             AlignmentFolderPane afp = new AlignmentFolderPane( alignf );
             list.add( afp );
         }
         alignmentFolderPanes.addAll( list );
-
-
     }
 }
