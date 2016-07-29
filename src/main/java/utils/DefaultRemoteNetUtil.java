@@ -16,6 +16,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     private ChannelSftp sftp_channel;
     private Channel shell_channel;
     private InputStream shell_in;
+    private InputStream shell_status;
     private PrintStream ps;
     private OutputStream ops;
     private BufferedReader buff;
@@ -141,6 +142,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         try {
 
             shell_in = shell_channel.getInputStream();
+
             buff = new BufferedReader( new InputStreamReader( shell_in ));
             ops = shell_channel.getOutputStream();
             ps = new PrintStream(ops, true);
@@ -150,6 +152,11 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
             log.info(null, null, "RNU: Open Session - I/O Streams connected successfully.");
             log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+ sftp_channel.pwd());
+            String welcome = "";
+            while( buff.ready() ){
+                welcome += buff.readLine() +"\n";
+            }
+            log.info( null, null, "RNU: Login message = " + "\n" + welcome);
 
         } catch (SftpException e) {
             log.error(null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage());
@@ -267,7 +274,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         System.out.println( "$$ " + cmdlist + " $$" );
 
         ArrayList<String> out = new ArrayList<>();
-
         try {
             while ( buff.ready() ) {
                 String t = buff.readLine();
