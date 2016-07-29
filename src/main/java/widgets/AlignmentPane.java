@@ -2,13 +2,12 @@ package widgets;
 
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.Alignment;
 
 /**
@@ -35,11 +34,10 @@ class AlignmentPane extends WidgetPane {
 
         ALIGNMENT = alignment;
         alignmentName.setText( ALIGNMENT.getSample() );
+        alignmentName.setPrefWidth(200);
         alignmentPath.setText( ALIGNMENT.getValue() );
-
-        alignment_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        alignment_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        alignment_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        alignmentPath.setPrefWidth(200);
+        this.getStyleClass().add("folderpane2");
 
         alignment_name_label.setTooltip(alignment_name_tip);
         alignment_path_label.setTooltip(alignment_path_tip);
@@ -51,8 +49,8 @@ class AlignmentPane extends WidgetPane {
         this.setVgap( 4 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 100, 150 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 50, 150 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 250, 350 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 50 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );
@@ -73,8 +71,10 @@ class AlignmentPane extends WidgetPane {
         this.add(alignment_name_label, 1, 1, 3, 1 );
         this.add(alignment_path_label, 1, 2, 3, 1 );
 
-        this.add(alignmentName, 2, 1, 3, 1 );
-        this.add(alignmentPath, 2, 2, 3, 1 );
+        alignmentName.setAlignment( Pos.CENTER_LEFT );
+        alignmentPath.setAlignment( Pos.CENTER_LEFT );
+        this.add( alignmentName, 2, 1, 3, 1 );
+        this.add( alignmentPath, 2, 2, 3, 1 );
 
         alignmentName.textProperty().addListener(
                 observable -> ALIGNMENT.setSample( alignmentName.getText() )

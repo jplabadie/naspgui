@@ -1,13 +1,12 @@
 package widgets;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.Assembly;
 
 /**
@@ -25,20 +24,20 @@ class AssemblyPane extends WidgetPane {
     private Tooltip ASSEMBLY_NAME_TIP = new Tooltip( "The name given to this ASSEMBLY" );
     private Tooltip ASSEMBLY_PATH_TIP = new Tooltip( "The path (file name) of this ASSEMBLY" );
 
-    private TextField assembly_name = new TextField();
-    private TextField assembly_path = new TextField();
+    private TextField assemblyName = new TextField();
+    private TextField assemblyPath = new TextField();
 
     private Assembly ASSEMBLY;
 
     AssemblyPane( Assembly assembly ){
 
         ASSEMBLY = assembly;
-        assembly_name.setText( ASSEMBLY.getSample() );
-        assembly_path.setText( ASSEMBLY.getValue() );
+        assemblyName.setText( ASSEMBLY.getSample() );
+        assemblyName.setAlignment(Pos.CENTER_LEFT);
+        assemblyPath.setText( ASSEMBLY.getValue() );
+        assemblyPath.setAlignment( Pos.CENTER_LEFT );
 
-        assembly_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        ASSEMBLY_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        ASSEMBLY_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        this.getStyleClass().add("folderpane2");
 
         ASSEMBLY_NAME.setTooltip(ASSEMBLY_NAME_TIP);
         ASSEMBLY_PATH.setTooltip(ASSEMBLY_PATH_TIP);
@@ -50,12 +49,13 @@ class AssemblyPane extends WidgetPane {
         this.setVgap( 4 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 100, 150 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 50, 100 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 250, 350 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 50 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );
         c2.setHgrow( Priority.ALWAYS );
+        c2.setHalignment( HPos.LEFT);
         c3.setHgrow( Priority.SOMETIMES );
         c3.setHalignment( HPos.RIGHT );
         // Add column behavior to the GridPane (order matters!)
@@ -72,15 +72,15 @@ class AssemblyPane extends WidgetPane {
         this.add(ASSEMBLY_NAME, 1, 1, 3, 1 );
         this.add(ASSEMBLY_PATH, 1, 2, 3, 1 );
 
-        this.add(assembly_name, 2, 1, 3, 1 );
-        this.add(assembly_path, 2, 2, 3, 1 );
+        this.add(assemblyName, 2, 1, 3, 1 );
+        this.add(assemblyPath, 2, 2, 3, 1 );
 
-        assembly_name.textProperty().addListener(
-                observable -> ASSEMBLY.setSample( assembly_name.getText() )
+        assemblyName.textProperty().addListener(
+                observable -> ASSEMBLY.setSample( assemblyName.getText() )
         );
 
-        assembly_path.textProperty().addListener(
-                observable -> ASSEMBLY.setValue( assembly_path.getText() )
+        assemblyPath.textProperty().addListener(
+                observable -> ASSEMBLY.setValue( assemblyPath.getText() )
         );
     }
 
@@ -97,8 +97,8 @@ class AssemblyPane extends WidgetPane {
     }
 
     void clear() {
-        assembly_name.setText( "" );
-        assembly_path.setText( "" );
+        assemblyName.setText( "" );
+        assemblyPath.setText( "" );
     }
 
 }

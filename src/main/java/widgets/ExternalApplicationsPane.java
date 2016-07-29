@@ -8,8 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.*;
 
 import java.util.ArrayList;
@@ -57,16 +55,20 @@ class ExternalApplicationsPane extends GridPane {
         initAlignerAppsPane();
         initSnpAppsPane();
 
+        coreAppsPane.getStyleClass().addAll("tabpane1");
+        alignerAppsPane.getStyleClass().addAll("tabpane1");
+        snpAppsPane.getStyleClass().addAll("tabpane1");
+
         accordion.getPanes().addAll( coreAppsPane, alignerAppsPane, snpAppsPane );
 
         /**
          * Define the look and feel of static label elements
+         *
+         *
          */
-        external_apps_label.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 24 ));
-        external_apps_label.setPrefSize( 100, 20 );
-        external_apps_label.setAlignment( Pos.CENTER );
-        external_apps_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        external_apps_label.setAlignment( Pos.CENTER );
+
+        this.getStyleClass().add("folderpane1");
+        external_apps_label.setId("header1");
 
         ColumnConstraints c0 = new ColumnConstraints( 50,50,50 );
         ColumnConstraints c1 = new ColumnConstraints( 150,400,900 );
@@ -92,7 +94,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN INDEX PANE INIT >>>   */
             HBox indexBox = new HBox();
-            indexBox.setAlignment(Pos.CENTER_RIGHT);
+            indexBox.setAlignment(Pos.CENTER_LEFT);
             indexBox.setSpacing(5);
             CheckBox indexCheck = new CheckBox();
             if (EXTERNALAPPS.getIndex() == null) {
@@ -120,7 +122,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN BAMINDEX PANE INIT >>>   */
             HBox bamIndexBox = new HBox();
-            bamIndexBox.setAlignment(Pos.CENTER_RIGHT);
+            bamIndexBox.setAlignment(Pos.CENTER_LEFT);
             bamIndexBox.setSpacing(5);
             CheckBox bamIndexCheck = new CheckBox();
             BamIndex bi;
@@ -159,7 +161,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN MATRIXGENERATOR PANE INIT >>>   */
             HBox matrixGenBox = new HBox();
-            matrixGenBox.setAlignment(Pos.CENTER_RIGHT);
+            matrixGenBox.setAlignment(Pos.CENTER_LEFT);
             matrixGenBox.setSpacing(5);
             CheckBox mgenCheck = new CheckBox();
             if (EXTERNALAPPS.getMatrixGenerator() == null) {
@@ -185,7 +187,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN PICARD PANE INIT >>> */
             HBox picardBox = new HBox();
-            picardBox.setAlignment( Pos.CENTER_RIGHT );
+            picardBox.setAlignment( Pos.CENTER_LEFT );
             picardBox.setSpacing( 5 );
             CheckBox picardCheck = new CheckBox();
             if ( EXTERNALAPPS.getPicard() == null ) {
@@ -211,7 +213,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN SAMTOOLS PANE INIT >>> */
             HBox samtoolsBox = new HBox();
-            samtoolsBox.setAlignment(Pos.CENTER_RIGHT);
+            samtoolsBox.setAlignment(Pos.CENTER_LEFT);
             samtoolsBox.setSpacing(5);
             CheckBox samCheck = new CheckBox();
             if (EXTERNALAPPS.getSamtools() == null) {
@@ -238,7 +240,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN DUPFINDER PANE INIT >>> */
             HBox dupFindBox = new HBox();
-            dupFindBox.setAlignment(Pos.CENTER_RIGHT);
+            dupFindBox.setAlignment(Pos.CENTER_LEFT);
             dupFindBox.setSpacing(5);
             CheckBox dupfindCheck = new CheckBox();
             if (EXTERNALAPPS.getDupFinder() == null) {
@@ -265,7 +267,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN ASSEMBLYIMPORTER PANE INIT >>> */
             HBox assemblyImporterBox = new HBox();
-            assemblyImporterBox.setAlignment( Pos.CENTER_RIGHT );
+            assemblyImporterBox.setAlignment( Pos.CENTER_LEFT );
             assemblyImporterBox.setSpacing( 5 );
             CheckBox assemblyImportCheck = new CheckBox();
             if (EXTERNALAPPS.getAssemblyImporter() == null) {
@@ -293,7 +295,7 @@ class ExternalApplicationsPane extends GridPane {
 
             /** <<< BEGIN READTRIMMER PANE INIT >>> */
             HBox readTrimmerBox = new HBox();
-            readTrimmerBox.setAlignment( Pos.CENTER_RIGHT );
+            readTrimmerBox.setAlignment( Pos.CENTER_LEFT );
             readTrimmerBox.setSpacing( 5 );
             CheckBox readTrimmerCheck = new CheckBox();
             if (EXTERNALAPPS.getReadTrimmer() == null) {
@@ -339,7 +341,7 @@ class ExternalApplicationsPane extends GridPane {
                             alignerCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
                             HBox new_ap_box = new HBox();
-                            new_ap_box.setAlignment( Pos.TOP_CENTER);
+                            new_ap_box.setAlignment( Pos.CENTER_LEFT);
                             new_ap_box.setSpacing( 10.0 );
                             new_ap_box.getChildren().addAll( alignerCheck, gp );
                             alignersBox.getChildren().add( new_ap_box );
@@ -390,7 +392,7 @@ class ExternalApplicationsPane extends GridPane {
                             snpCheck.setTooltip( new Tooltip( "enable/disable this application") );
 
                             HBox new_snp_box = new HBox();
-                            new_snp_box.setAlignment( Pos.TOP_CENTER );
+                            new_snp_box.setAlignment( Pos.CENTER_LEFT );
                             new_snp_box.setSpacing( 10.0 );
                             new_snp_box.getChildren().addAll( snpCheck, gp );
                             snpcallersBox.getChildren().add( new_snp_box );

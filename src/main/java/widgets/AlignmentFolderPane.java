@@ -15,8 +15,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.Alignment;
 import xmlbinds.AlignmentFolder;
 
@@ -50,8 +48,9 @@ class AlignmentFolderPane extends GridPane {
     private AlignmentFolder ALIGNMENTFOLDER;
     private List<Alignment> ALIGNMENTS;
 
-    AlignmentFolderPane( AlignmentFolder input_alignment_folder ){
+    AlignmentFolderPane( AlignmentFolder input_alignment_folder, Button removeButton ){
 
+        this.setId( "folderpane1" );
         ALIGNMENTFOLDER = input_alignment_folder;
         ALIGNMENTS = ALIGNMENTFOLDER.getAlignment();
 
@@ -66,20 +65,16 @@ class AlignmentFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        /**
-         * Define the look and feel of static label elements
-         */
         alignment_folder_label.setId( "header5" );
         alignment_folder_label.setPrefSize( 100, 20 );
         alignment_folder_label.setAlignment( Pos.CENTER );
         alignment_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         alignment_folder_label.setAlignment( Pos.CENTER );
-
         /**
          * Add tooltips to the static label elements
          */
         alignment_folder_path_label.setTooltip( alignment_folder_path_tip );
-        alignment_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14));
+        alignment_folder_path_label.setId( "label1" );
 
         /**
          * Define the look and behavior of the GridPane
@@ -90,18 +85,23 @@ class AlignmentFolderPane extends GridPane {
 
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c2 = new ColumnConstraints( 30, 60, 90 );
+        ColumnConstraints c1 = new ColumnConstraints( 30, 90, 100 );
+        ColumnConstraints c2 = new ColumnConstraints( 30, 300, 500 );
         ColumnConstraints c3 = new ColumnConstraints( 30, 60, 90 );
 
         //Define column auto-resizing behavior
-        c1.setHgrow( Priority.NEVER );
+        c1.setHgrow( Priority.SOMETIMES );
+        c1.setHalignment( HPos.LEFT);
         c2.setHgrow( Priority.ALWAYS );
+        c2.setHalignment( HPos.LEFT );
         c3.setHgrow( Priority.SOMETIMES );
-        c3.setHalignment( HPos.RIGHT );
+        c3.setHalignment( HPos.LEFT );
 
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
+        Button delAlignmentFolder = removeButton;
+        this.add( delAlignmentFolder, 2, 0, 3, 1 );
+        delAlignmentFolder.setAlignment( Pos.CENTER_LEFT);
 
         /**
          * Define the look and behavior of the non-static TextField and Label elements
@@ -112,7 +112,7 @@ class AlignmentFolderPane extends GridPane {
 
         // Add row headings for app-path and app-args to column 1
         this.add( alignment_folder_path_label, 1, 1, 3, 1 );
-        this.add( alignmentFolderPath, 3, 1, 4, 1 );
+        this.add( alignmentFolderPath, 2, 1, 4, 1 );
 
         alignmentFolderPath.textProperty().addListener(
                 observable -> {
@@ -171,7 +171,7 @@ class AlignmentFolderPane extends GridPane {
                                         }
                                     }
                             );
-                            AF.add( gp, 2, grid_row_position++, 3, 1 );
+                            AF.add( gp, 1, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {

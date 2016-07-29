@@ -6,8 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.ReadPair;
 
 /**
@@ -19,9 +17,9 @@ import xmlbinds.ReadPair;
 class ReadPairPane extends WidgetPane {
 
     private Label read_pair_label = new Label( "Read Pair" );
-    private Label sample_name_label = new Label( "Sample Name" );
-    private Label read_file_a_label = new Label( "Read File A" );
-    private Label read_file_b_label = new Label( "Read File B" );
+    private Label sample_name_label = new Label( "Sample" );
+    private Label read_file_a_label = new Label( "File A" );
+    private Label read_file_b_label = new Label( "File B" );
 
     private Tooltip sample_name_tip = new Tooltip( "The name given to this sample" );
     private Tooltip read_file_a_tip = new Tooltip( "The name of the file for read A for the read pair" );
@@ -44,10 +42,7 @@ class ReadPairPane extends WidgetPane {
             read_file_b.setText( READPAIR.getRead2Filename() );
         }
 
-        read_pair_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        sample_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        read_file_a_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        read_file_b_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        this.getStyleClass().add("folderpane2");
 
         sample_name_label.setTooltip(sample_name_tip);
         read_file_a_label.setTooltip(read_file_a_tip);
@@ -60,8 +55,8 @@ class ReadPairPane extends WidgetPane {
         this.setVgap( 4 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 100, 150 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 50, 150 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 250, 350 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 50 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );

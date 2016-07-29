@@ -25,8 +25,8 @@ import xmlbinds.JobParameters;
  */
 class ApplicationPane< V extends Application> extends GridPane {
 
-    private Label APPLICATION_PATH = new Label( "Application Path" );
-    private Label ADDITIONAL_ARGS = new Label( "Additional Arguments" );
+    private Label APPLICATION_PATH = new Label( "App Path" );
+    private Label ADDITIONAL_ARGS = new Label( "Arguments" );
 
     private Tooltip APP_PATH_TIP = new Tooltip("A path to the application on the remote service");
     private Tooltip ADD_ARGS_TIP = new Tooltip("Additional arguments or options to pass to the app");
@@ -43,7 +43,6 @@ class ApplicationPane< V extends Application> extends GridPane {
 
         APPLICATION = app;
 
-
         appTitle.setText( APPLICATION.getName() );
 
         JobParameters jobparams = APPLICATION.getJobParameters();
@@ -58,8 +57,8 @@ class ApplicationPane< V extends Application> extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        APPLICATION_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        ADDITIONAL_ARGS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        APPLICATION_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 12 ) );
+        ADDITIONAL_ARGS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 12 ) );
 
         /**
          * Add tooltips to the static label elements
@@ -75,12 +74,12 @@ class ApplicationPane< V extends Application> extends GridPane {
         this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 35 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 90, 125 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 300, 400 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 150 );
         //Define column auto-resizing behavior
         c0.setHgrow( Priority.SOMETIMES );
-        c1.setHgrow( Priority.NEVER );
+        c1.setHgrow( Priority.SOMETIMES );
         c2.setHgrow( Priority.ALWAYS );
         c3.setHgrow( Priority.SOMETIMES );
         c3.setHalignment( HPos.RIGHT );
@@ -94,7 +93,7 @@ class ApplicationPane< V extends Application> extends GridPane {
         appTitle.setPrefHeight( 20);
         appTitle.setAlignment( Pos.CENTER_LEFT );
         // Set up the look and feel of the title
-        appTitle.setFont( Font.font( "Helvetica", FontWeight.EXTRA_BOLD, 18 ));
+        appTitle.setId("header2");
 
         // Set default values
         //appTitle.setText( APPLICATION.getName() );
@@ -108,10 +107,10 @@ class ApplicationPane< V extends Application> extends GridPane {
         this.add( ADDITIONAL_ARGS,1,2,3,1 );
 
         // Add text fields to column 3 of the GridPane
-        this.add( appPath,3,1,4,1 );
-        this.add( appArgs,3,2,4,1 );
+        this.add( appPath,2,1,4,1 );
+        this.add( appArgs,2,2,4,1 );
 
-        this.add( jobParametersPane, 1, 3, 6, 4 );
+        this.add( jobParametersPane, 2, 3, 6, 4 );
 
         //TODO: ADD listeners to auto-update binds as input changes
 

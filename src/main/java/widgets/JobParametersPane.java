@@ -44,6 +44,7 @@ class JobParametersPane extends TitledPane {
 
         JOBPARAMETERS = jobparams;
 
+        this.getStyleClass().addAll( "tabpane2");
         this.setContent( gridPane );
         this.setText( "Job Parameters" );
         this.setExpanded( false );

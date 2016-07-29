@@ -48,8 +48,9 @@ class ReadFolderPane extends GridPane {
     ReadFolder READFOLDER;
     List<ReadPair> READPAIRS;
 
-    ReadFolderPane( ReadFolder readfolder ){
+    ReadFolderPane( ReadFolder readfolder, Button removeButton ){
 
+        this.setId( "folderpane1" );
         READFOLDER = readfolder;
         READPAIRS = READFOLDER.getReadPair();
 
@@ -62,15 +63,13 @@ class ReadFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        /**
-         * Define the look and feel of static label elements
-         */
         read_folder_label.setId( "header5" );
         read_folder_label.setPrefSize( 100, 20 );
         read_folder_label.setAlignment( Pos.CENTER );
         read_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         read_folder_label.setAlignment( Pos.CENTER );
 
+        read_folder_path.setId( "textfield1" );
         /**
          * Add tooltips to the static label elements
          */
@@ -85,14 +84,17 @@ class ReadFolderPane extends GridPane {
         this.setVgap( 2 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c2 = new ColumnConstraints( 30, 60, 90 );
+        ColumnConstraints c1 = new ColumnConstraints( 30, 90, 100 );
+        ColumnConstraints c2 = new ColumnConstraints( 30, 300, 500 );
         ColumnConstraints c3 = new ColumnConstraints( 30, 60, 90 );
         //Define column auto-resizing behavior
-        c1.setHgrow( Priority.NEVER );
+        c1.setHgrow( Priority.SOMETIMES );
+        c1.setHalignment( HPos.LEFT);
         c2.setHgrow( Priority.ALWAYS );
+        c2.setHalignment( HPos.LEFT );
         c3.setHgrow( Priority.SOMETIMES );
-        c3.setHalignment( HPos.RIGHT );
+        c3.setHalignment( HPos.LEFT );
+
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
 
@@ -102,10 +104,13 @@ class ReadFolderPane extends GridPane {
 
         // Add the title to row 0 column 0
         this.add(read_folder_label, 0, 0, 3, 1 );
+        Button delAssemblyFolder = removeButton;
+        this.add( delAssemblyFolder, 2, 0, 3, 1 );
+        delAssemblyFolder.setAlignment( Pos.CENTER_LEFT);
 
         // Add row headings for app-path and app-args to column 1
         this.add(read_folder_path_label, 1, 1, 3, 1 );
-        this.add( read_folder_path, 3, 1, 4, 1 );
+        this.add( read_folder_path, 2, 1, 4, 1 );
 
         read_folder_path.setText( READFOLDER.getPath() );
         read_folder_path.textProperty().addListener(
@@ -169,7 +174,7 @@ class ReadFolderPane extends GridPane {
                                         }
                                     }
                             );
-                            RF.add( rpp, 2, grid_row_position++, 3, 1 );
+                            RF.add( rpp, 1, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {

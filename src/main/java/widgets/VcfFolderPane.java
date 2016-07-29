@@ -15,8 +15,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.VCFFile;
 import xmlbinds.VCFFolder;
 
@@ -50,11 +48,14 @@ class VcfFolderPane extends GridPane {
     private VCFFolder VCFFOLDER;
     private List<VCFFile> VCFFILES;
 
-    VcfFolderPane( VCFFolder input_vcf_folder ){
+    VcfFolderPane( VCFFolder input_vcf_folder, Button removeButton ){
+
+        this.setId( "folderpane1" );
         VCFFOLDER = input_vcf_folder;
         VCFFILES = VCFFOLDER.getVCFFile();
 
         vcfFolderPath.setText( VCFFOLDER.getPath() );
+        vcfFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -76,7 +77,7 @@ class VcfFolderPane extends GridPane {
          * Add tooltips to the static label elements
          */
         vcf_folder_path_label.setTooltip(vcf_folder_path_tip);
-        vcf_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14));
+        vcf_folder_path_label.setId( "label1" );
 
         /**
          * Define the look and behavior of the GridPane
@@ -85,17 +86,18 @@ class VcfFolderPane extends GridPane {
         this.setHgap( 2 );
         this.setVgap( 2 );
 
-        //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c1 = new ColumnConstraints( 30, 60, 90 );
-        ColumnConstraints c2 = new ColumnConstraints( 30, 60, 90 );
+        ColumnConstraints c1 = new ColumnConstraints( 30, 90, 100 );
+        ColumnConstraints c2 = new ColumnConstraints( 30, 300, 500 );
         ColumnConstraints c3 = new ColumnConstraints( 30, 60, 90 );
 
         //Define column auto-resizing behavior
-        c1.setHgrow( Priority.NEVER );
+        c1.setHgrow( Priority.SOMETIMES );
+        c1.setHalignment( HPos.LEFT);
         c2.setHgrow( Priority.ALWAYS );
+        c2.setHalignment( HPos.LEFT );
         c3.setHgrow( Priority.SOMETIMES );
-        c3.setHalignment( HPos.RIGHT );
+        c3.setHalignment( HPos.LEFT );
 
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
@@ -106,10 +108,13 @@ class VcfFolderPane extends GridPane {
 
         // Add the title to row 0 column 0
         this.add(vcf_folder_label, 0, 0, 3, 1 );
+        Button delVcfFolder = removeButton;
+        this.add( delVcfFolder, 2, 0, 3, 1 );
+        delVcfFolder.setAlignment( Pos.CENTER_LEFT );
 
         // Add row headings for app-path and app-args to column 1
         this.add(vcf_folder_path_label, 1, 1, 3, 1 );
-        this.add(vcfFolderPath, 3, 1, 4, 1 );
+        this.add(vcfFolderPath, 2, 1, 4, 1 );
 
         vcfFolderPath.textProperty().addListener(
                 observable -> {
@@ -168,7 +173,7 @@ class VcfFolderPane extends GridPane {
                                         }
                                     }
                             );
-                            VCF.add( gp, 2, grid_row_position++, 3, 1 );
+                            VCF.add( gp, 1, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {

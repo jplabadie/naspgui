@@ -3,16 +3,16 @@ package widgets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.Options;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Project naspgui.
@@ -45,7 +45,7 @@ public class OptionsPane extends GridPane {
     private TextField runName = new TextField();
     private TextField outputPath = new TextField();
     private TextField refName = new TextField();
-    private TextField refPath = new TextField();
+    private TextArea refPath = new TextArea();
     private CheckBox findDups = new CheckBox();
     private TextField propFilter = new TextField();
     private TextField covFilter = new TextField();
@@ -82,7 +82,7 @@ public class OptionsPane extends GridPane {
         );
 
         refName.textProperty().addListener(
-                (observable -> OPTIONS.getReference().setName( runName.getText()))
+                (observable -> OPTIONS.getReference().setName( refName.getText()))
         );
 
         refPath.textProperty().addListener(
@@ -110,17 +110,20 @@ public class OptionsPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        core_settings.setFont( Font.font("Helvetica", FontWeight.EXTRA_BOLD, 24 ) );
-        core_settings.setPrefSize( 100,20 );
-        core_settings.setAlignment( Pos.CENTER );
-        core_settings.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        core_settings.setAlignment( Pos.CENTER );
-        RUN_NAME.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        OUTPUT_PATH.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        REFERENCE.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        FIND_DUPLICATES.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        FILTERS.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        JOB_SUBMITTER.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        core_settings.setId( "header1" );
+
+
+        RUN_NAME.setId( "label2" );
+        OUTPUT_PATH.setId( "label2" );
+        REFERENCE.setId( "label2" );
+        FIND_DUPLICATES.setId( "label2" );
+        FILTERS.setId( "label2" );
+        JOB_SUBMITTER.setId( "label2" );
+
+        REFERENCE_NAME.setId( "label3" );
+        REFERENCE_PATH.setId( "label3" );
+        PROPORTION_FILTER.setId( "label3" );
+        COVERAGE_FILTER.setId( "label3" );
 
         /**
          * Add tooltips to the static label elements
@@ -144,7 +147,7 @@ public class OptionsPane extends GridPane {
         ColumnConstraints c0 = new ColumnConstraints( 25, 60, 120 );
         ColumnConstraints c1 = new ColumnConstraints( 25, 60, 120 );
         ColumnConstraints c2 = new ColumnConstraints( 25, 60, 120 );
-        ColumnConstraints c3 = new ColumnConstraints( 25, 60, 120 );
+        ColumnConstraints c3 = new ColumnConstraints( 25, 200, 300 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );
         c2.setHgrow( Priority.ALWAYS );
@@ -188,7 +191,7 @@ public class OptionsPane extends GridPane {
         outputPath.setText( OPTIONS.getOutputFolder() );
         refName.setText( OPTIONS.getReference().getName() );
         refPath.setText( OPTIONS.getReference().getPath() );
-        if(OPTIONS.getReference().getFindDups().equalsIgnoreCase("true")){
+        if(OPTIONS.getReference().getFindDups().equalsIgnoreCase( "true" )){
             findDups.setSelected( true );
         }
         propFilter.setText( OPTIONS.getFilters().getProportionFilter() );
@@ -198,5 +201,18 @@ public class OptionsPane extends GridPane {
 
     TextField getRunName(){
         return runName;
+    }
+
+    void setReference( String path, String name){
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+        Calendar cal = Calendar.getInstance();
+        String date = dateFormat.format( cal.getTime() );
+        refName.setText( name );
+        refPath.setText( path );
+
+        String folder = path.substring( 0, path.lastIndexOf('/') );
+        runName.setText( name + "_" + date );
+        outputPath.setText( folder +"/NASP_Output/");
     }
 }

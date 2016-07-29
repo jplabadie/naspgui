@@ -7,8 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.VCFFile;
 
 /**
@@ -35,11 +33,11 @@ class VcfFilePane extends WidgetPane {
     VcfFilePane(VCFFile vcf ){
         VCFFILE = vcf;
         vcfName.setText( VCFFILE.getSample() );
+        vcfName.setPrefWidth( 200 );
         vcfPath.setText( VCFFILE.getValue() );
+        vcfPath.setPrefWidth( 200 );
 
-        vcf_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        vcf_name_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
-        vcf_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ) );
+        this.getStyleClass().add("folderpane2");
 
         vcf_name_label.setTooltip(vcf_name_tip);
         vcf_path_label.setTooltip(vcf_path_tip);
@@ -51,8 +49,8 @@ class VcfFilePane extends WidgetPane {
         this.setVgap( 4 );
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 25, 25, 50 );
-        ColumnConstraints c1 = new ColumnConstraints( 25, 100, 150 );
-        ColumnConstraints c2 = new ColumnConstraints( 25, 100, 150 );
+        ColumnConstraints c1 = new ColumnConstraints( 25, 50, 150 );
+        ColumnConstraints c2 = new ColumnConstraints( 25, 250, 350 );
         ColumnConstraints c3 = new ColumnConstraints( 25, 50, 50 );
         //Define column auto-resizing behavior
         c1.setHgrow( Priority.NEVER );

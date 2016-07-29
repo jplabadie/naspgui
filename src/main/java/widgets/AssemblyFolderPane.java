@@ -15,8 +15,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import xmlbinds.Assembly;
 import xmlbinds.AssemblyFolder;
 
@@ -52,12 +50,11 @@ class AssemblyFolderPane extends GridPane {
 
     AssemblyFolderPane( AssemblyFolder input_assembly_folder, Button removeButton ){
 
-        this.setId( "folderpane1" );
+        this.getStyleClass().add("folderpane1");
         ASSEMBLYFOLDER = input_assembly_folder;
         ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
 
         assemblyFolderPath.setText( ASSEMBLYFOLDER.getPath() );
-        assemblyFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
@@ -67,19 +64,15 @@ class AssemblyFolderPane extends GridPane {
         /**
          * Define the look and feel of static label elements
          */
-        assembly_folder_label.setId( "header5" );
         assembly_folder_label.setPrefSize( 100, 20 );
         assembly_folder_label.setAlignment( Pos.CENTER );
         assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
         assembly_folder_label.setAlignment( Pos.CENTER );
 
-
-
         /**
          * Add tooltips to the static label elements
          */
         assembly_folder_path_label.setTooltip( assembly_folder_path_tip );
-        assembly_folder_path_label.setFont( Font.font( "Helvetica", FontWeight.BOLD, 14 ));
 
         /**
          * Define the look and behavior of the GridPane
@@ -87,7 +80,6 @@ class AssemblyFolderPane extends GridPane {
         // Set Horizontal and Vertical gap size (spacing between column areas)
         this.setHgap( 2 );
         this.setVgap( 2 );
-        this.setGridLinesVisible( true );
 
         //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
