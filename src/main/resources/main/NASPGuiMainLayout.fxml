@@ -45,7 +45,7 @@
        </AnchorPane>
    </center>
    <left>
-      <VBox>
+      <VBox prefHeight="567.0" prefWidth="246.0">
          <BorderPane.margin>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </BorderPane.margin>
@@ -53,7 +53,7 @@
             <VBox>
                <children>
                   <ToolBar fx:id="remoteTreeToolbar" prefHeight="40.0" prefWidth="200.0" />
-                  <TreeView fx:id="remotePathBrowserTree" editable="true" prefWidth="200.0" />
+                  <TreeView fx:id="remotePathBrowserTree" editable="true" prefHeight="627.0" prefWidth="200.0" />
                </children>
             </VBox>
             <TreeView fx:id="localFileBrowserTree" editable="true" opacity="0.78" prefWidth="200.0">
