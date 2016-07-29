@@ -2,6 +2,7 @@ package widgets;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,7 +24,8 @@ public class ReadFolderGridPaneTest extends Application {
         primaryStage.setTitle( "ReadFolder GridPane Test!" );
 
         ReadFolder rf = new ReadFolder();
-        ReadFolderPane rfgp = new ReadFolderPane(rf);
+        Button button = new Button();
+        ReadFolderPane rfgp = new ReadFolderPane(rf, button);
 
         ScrollPane sp = new ScrollPane();
         sp.setVbarPolicy( ScrollPane.ScrollBarPolicy.ALWAYS );
