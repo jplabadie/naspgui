@@ -229,27 +229,36 @@ public class JobTab extends Tab {
                         System.out.println("folder:" +  x.getPath() );
                         ass_folders.add(x.getPath());
                     }
-
+                    boolean firstFastaAlreadyFound = false;
                     Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
                     for( String x : files ){
                         Matcher m = ass.matcher( x );
                         if ( m.find() ){
                             String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
-                            AssemblyFolder af;
-                            if( ass_folders.contains( folder )){
-                                af = assf.get( ass_folders.indexOf( folder ) );
+                            String name = x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') );
+
+                            System.out.println( "Stuff: " + folder + " : " + name + " : " + db.getString());
+                            if( ! firstFastaAlreadyFound )
+                            {
+                                firstFastaAlreadyFound = true;
+                                optspane.setReference(x, name);
                             }
-                            else{
-                                af = new AssemblyFolder();
-                                af.setPath( folder );
-                                ass_folders.add( folder );
-                                assf.add( af );
+                            else {
+                                AssemblyFolder af;
+                                if ( ass_folders.contains(folder) ) {
+                                    af = assf.get(ass_folders.indexOf(folder));
+                                } else {
+                                    af = new AssemblyFolder();
+                                    af.setPath(folder);
+                                    ass_folders.add(folder);
+                                    assf.add(af);
+                                }
+                                Assembly temp = new Assembly();
+                                temp.setValue(x);
+                                temp.setSample(x.substring(x.lastIndexOf('/') + 1, x.lastIndexOf('.')));
+                                af.getAssembly().add(temp);
+                                System.out.println("Assemblies: " + x);
                             }
-                            Assembly temp = new Assembly();
-                            temp.setValue( x );
-                            temp.setSample( x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') ));
-                            af.getAssembly().add( temp );
-                            System.out.println( "Assemblies: " + x );
                         }
                     }
 
@@ -302,7 +311,7 @@ public class JobTab extends Tab {
                         Matcher m2 = bam.matcher( x );
 
                         if ( m1.find() || m2.find() ){
-                            String folder = x.substring( 0, x.lastIndexOf("/" ) + 1 );
+                            String folder = x.substring( 0, x.lastIndexOf( "/" ) + 1 );
                             AlignmentFolder af;
                             if( algn_folders.contains( folder ))
                                 af = algn.get( algn_folders.indexOf( folder ) );
