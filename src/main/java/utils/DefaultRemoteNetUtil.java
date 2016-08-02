@@ -12,7 +12,6 @@ import java.util.Vector;
 public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
     private Session session;
-    private Session shell_session;
     private ChannelSftp sftp_channel;
     private Channel shell_channel;
     private InputStream shell_in;
@@ -72,35 +71,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         } catch (JSchException e1) {
             log.error(null, null, "Unable to initialize a new sftp session: \n" + e1.getMessage());
         }
-        try {
-            shell_session = jsch.getSession(username, url, port);
-            shell_session.setUserInfo(new UserInfo() {
-                public String getPassphrase() {
-                    return password;
-                }
-
-                public String getPassword() {
-                    return password;
-                }
-
-                public boolean promptPassword(String s) {
-                    return true;
-                }
-
-                public boolean promptPassphrase(String s) {
-                    return true;
-                }
-
-                public boolean promptYesNo(String s) {
-                    return true;
-                }
-
-                public void showMessage(String s) {}
-            });
-
-        } catch (JSchException e1) {
-            log.error(null, null, "Unable to initialize a new execution session: \n" + e1.getMessage());
-        }
     }
 
     /**
@@ -112,7 +82,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         log.info(null, null, "RNU: Attempting to Open Remote Session and related connections.");
 
         try {
-            shell_session.connect();
             session.connect();
             log.info(null, null, "RNU: Open Session - Session connected successfully.");
         } catch (JSchException e) {
@@ -124,7 +93,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             Channel sftpchannel=session.openChannel( "sftp" );
             sftp_channel=(ChannelSftp)sftpchannel;
 
-            shell_channel = shell_session.openChannel( "shell" );
+            shell_channel = session.openChannel( "shell" );
             shell_channel.setInputStream( null );
 
             log.info(null, null, "RNU: Open Session - SFTP/EXEC Channels connected successfully.");
@@ -132,7 +101,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         } catch (JSchException e) {
             log.error(null, null, "NM - Unable to Open and Connect to SFTP/EXEC Channels: \n" + e.getMessage());
             session.disconnect();
-            shell_session.disconnect();
             log.warn(null, null, "NM - Session failed : Closing Session.");
             return;
         }
@@ -216,12 +184,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
 
         //TODO:Add mkdir exec step
-        System.out.println( remote_dir + "!!!" );
         if( !isRemoteDir( remote_dir )){
             System.out.println( remote_dir + "!!!1" );
             log.info( null, null, "NM - Upload Step Info: Connection failed or remote path " +
                     "is not a valid path for SFTP Upload. Solving by mkdir." );
-            System.out.println( remote_dir + "!!!2" );
             ArrayList<String> t = execCommand( "mkdir " + remote_dir );
             System.out.println( remote_dir + "!!!3" );
         }
@@ -381,8 +347,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public ArrayList<String> getAllFiles( String remote_abs_path){
 
-        System.out.println( "Rempath: "+ remote_abs_path );
-        return execCommand( "cd "+ remote_abs_path, "find -L $PWD -type f" );
+        System.out.println( "Rempath: " + remote_abs_path );
+        return execCommand( "cd " + remote_abs_path, "find -L $PWD -type f" );
     }
 
     /**
