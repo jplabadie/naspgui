@@ -294,16 +294,16 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
             // Report files grabbed to log
             if (fileCount == 0) {
-                log.info(null, null, "Found no new files to grab.");
+                log.info( null, null, "Found no new files to grab." );
             } else {
-                log.info(null, null, "Retrieved " + fileCount + " new files.");
+                log.info( null, null, "Retrieved " + fileCount + " new files." );
             }
         } catch(SftpException e) {
-            log.warn(null, null, e.toString());
+            log.warn( null, null, e.toString() );
         } finally {
             // disconnect session.  If this is not done, the job will hang and leave log files locked
             session.disconnect();
-            log.info(null, null, "Session Closed");
+            log.info( null, null, "Session Closed" );
         }
     }
 
@@ -311,7 +311,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      *
      * @param job_XML_abs_path the absolute path to the XML job file on the remote server
      */
-    public String runNaspJob(String job_XML_abs_path) {
+    public String runNaspJob( String job_XML_abs_path ) {
         String runpath = job_XML_abs_path.substring( 0, job_XML_abs_path.lastIndexOf('/') );
         String jobname = "";
         System.out.println( "Running nasp in:" +runpath );
@@ -321,10 +321,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                     "cd " + runpath,
                     "module load nasp",
                     "module load tnorth",
-                    "nasp --config " + job_XML_abs_path);
-        execCommand("Y");
+                    "nasp --config " + job_XML_abs_path );
+        execCommand( "Y" );
         //TODO: dreams
-        for(String x : out)
+        for( String x : out )
             jobname += x;
         return jobname;
     }
@@ -345,7 +345,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param remote_abs_path the path of the directory on the remote machine you would like to search
      * @return an ArrayList of all files found by absolute-path
      */
-    public ArrayList<String> getAllFiles( String remote_abs_path){
+    public ArrayList<String> getAllFiles( String remote_abs_path ){
 
         System.out.println( "Rempath: " + remote_abs_path );
         return execCommand( "cd " + remote_abs_path, "find -L $PWD -type f" );
@@ -371,7 +371,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         boolean success = false;
         try {
-            ArrayList<String> out = execCommand( "test -f " + remote_file_abs_path + " && echo \"true\" || echo \"false\"");
+            ArrayList<String> out = execCommand( "test -f " + remote_file_abs_path + " && echo \"true\" || echo \"false\"" );
             if( out.contains("true")){
                 log.info(null, null, "RNU: Checking if remote path is a file. Result: true. ");
                 return true;
@@ -423,7 +423,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     public String getUsername(){
         if(isInitialized())
             return session.getUserName();
-        log.warn(null, null, "RNU: Cannot get username, session is not active.");
+        log.warn( null, null, "RNU: Cannot get username, session is not active." );
         return null;
     }
 
@@ -432,9 +432,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return port as an int
      */
     public int getPort(){
-        if(isInitialized())
+        if( isInitialized() )
             return session.getPort();
-        log.warn(null, null, "RN: Cannot get port, session is not active.");
+        log.warn( null, null, "RN: Cannot get port, session is not active." );
         return -1;
     }
 
@@ -443,9 +443,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return host as a String
      */
     public String getHost(){
-        if(isInitialized())
+        if( isInitialized() )
             return session.getHost();
-        log.warn(null, null, "RN: Cannot get hostname, session is not active.");
+        log.warn( null, null, "RN: Cannot get hostname, session is not active." );
         return null;
     }
 
@@ -455,7 +455,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public boolean isInitialized() {
         return session != null ;
-
     }
 
     /**

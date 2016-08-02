@@ -132,9 +132,9 @@ public class JobTab extends Tab {
 
             remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);
-            String jobid = net.runNaspJob( remotepath );
-            System.out.println( jobid );
-            System.out.println( remotepath );
+            ArrayList<String> before_run = net.getUserJobs();
+            net.runNaspJob( remotepath );
+            ArrayList<String> after_run = net.getUserJobs();
         });
 
         preview_job.setOnAction( event -> {
