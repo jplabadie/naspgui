@@ -50,9 +50,11 @@ public interface RemoteNetUtil {
      */
     String runNaspJob(String job_XML_remote_abs_path);
 
-    String getUserJobs();
+    ArrayList<String> getUserJobs();
 
     ArrayList<String> getAllFiles(String remote_abs_path);
+
+    void killJob( int lowerJobId, int upperJobId );
 
     /**
      *  Tests to see if a specified file exists and is a file on the remote server

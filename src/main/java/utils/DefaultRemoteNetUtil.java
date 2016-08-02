@@ -19,7 +19,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     private InputStream shell_status;
     private PrintStream ps;
     private OutputStream ops;
-    private BufferedReader buff;
+    private BufferedReader inBuff;
+    private BufferedReader extBuff;
 
     private static DefaultRemoteNetUtil instance = null;
     private LogManager log = LogManager.getInstance();
@@ -94,9 +95,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                     return true;
                 }
 
-                public void showMessage(String s) {
-
-                }
+                public void showMessage(String s) {}
             });
 
         } catch (JSchException e1) {
@@ -122,7 +121,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
 
         try {
-
             Channel sftpchannel=session.openChannel( "sftp" );
             sftp_channel=(ChannelSftp)sftpchannel;
 
@@ -140,10 +138,12 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
 
         try {
-
             shell_in = shell_channel.getInputStream();
+            shell_status = shell_channel.getExtInputStream();
 
-            buff = new BufferedReader( new InputStreamReader( shell_in ));
+            extBuff = new BufferedReader( new InputStreamReader( shell_status ));
+
+            inBuff = new BufferedReader( new InputStreamReader( shell_in ));
             ops = shell_channel.getOutputStream();
             ps = new PrintStream(ops, true);
 
@@ -153,8 +153,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.info(null, null, "RNU: Open Session - I/O Streams connected successfully.");
             log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+ sftp_channel.pwd());
             String welcome = "";
-            while( buff.ready() ){
-                welcome += buff.readLine() +"\n";
+            while( inBuff.ready() ){
+                welcome += inBuff.readLine() +"\n";
             }
             log.info( null, null, "RNU: Login message = " + "\n" + welcome);
 
@@ -275,8 +275,12 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         ArrayList<String> out = new ArrayList<>();
         try {
-            while ( buff.ready() ) {
-                String t = buff.readLine();
+            while (extBuff.ready()){
+                System.out.println("extBuffer:");
+                System.out.println( "EB: "+ extBuff.readLine() );
+            }
+            while ( inBuff.ready() ) {
+                String t = inBuff.readLine();
                 out.add( t );
             }
 
@@ -364,19 +368,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return
      */
     @Override
-    public String getUserJobs() {
+    public ArrayList<String> getUserJobs() {
 
-        ArrayList<String> jobs = execCommand( "qstat -au " + getUsername() );
-        String out = "";
-
-        for ( String line : jobs ) {
-            out += line +"\n";
-        }
-        return out;
+        return execCommand( "qstat -au " + getUsername() );
     }
 
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings
+     *
      * @param remote_abs_path the path of the directory on the remote machine you would like to search
      * @return an ArrayList of all files found by absolute-path
      */
@@ -387,7 +386,17 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     }
 
     /**
-     *  Tests to see if a specified file exists and is a file on the remote server
+     *
+     * @param lowerJobId
+     * @param upperJobId
+     */
+    @Override
+    public void killJob( int lowerJobId, int upperJobId ) {
+        //TODO: implement manually qstat del
+    }
+
+    /**
+     * Tests to see if a specified file exists and is a file on the remote server
      *
      * @param remote_file_abs_path the absolute path to the file on the remote server
      * @return true if the file exists on the remote system, false otherwise
@@ -441,6 +450,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
     }
 
+    /**
+     * Return the username being used for the current session
+     * @return username as a String
+     */
     public String getUsername(){
         if(isInitialized())
             return session.getUserName();
@@ -448,6 +461,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return null;
     }
 
+    /**
+     * Return port being used for the current session
+     * @return port as an int
+     */
     public int getPort(){
         if(isInitialized())
             return session.getPort();
@@ -455,6 +472,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return -1;
     }
 
+    /**
+     * Return the host being used for the current session
+     * @return host as a String
+     */
     public String getHost(){
         if(isInitialized())
             return session.getHost();
@@ -462,11 +483,19 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return null;
     }
 
+    /**
+     * Return true if the session has been defined
+     * @return boolean true if initialized with settings, false otherwise
+     */
     public boolean isInitialized() {
         return session != null ;
 
     }
 
+    /**
+     * Return true if the session has been opened
+     * @return boolean true if the session is open, false if otherwise
+     */
     public boolean isConnected() {
         return session.isConnected();
     }
