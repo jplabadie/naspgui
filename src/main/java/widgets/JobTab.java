@@ -183,7 +183,7 @@ public class JobTab extends Tab {
                     ArrayList<String> files = net.getAllFiles( db.getString() );
 
                     for( String x : files)
-                            System.out.println( "File: " + x);
+                            System.out.println( "File: " + x );
                     //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
                     /**
                      * Find and pair read files from Drag-and-Drop remote path

@@ -236,20 +236,20 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         {
             cmdlist += "\n" + cmd;
         }
-        ps.println( cmdlist );
         System.out.println( "$$ " + cmdlist + " $$" );
+        ps.println( cmdlist );
 
         ArrayList<String> out = new ArrayList<>();
         try {
             while (extBuff.ready()){
-                System.out.println("extBuffer:");
+                System.out.println( "extBuffer:" );
                 System.out.println( "EB: "+ extBuff.readLine() );
             }
-            while ( inBuff.ready() ) {
-                String t = inBuff.readLine();
-                out.add( t );
-            }
 
+            while (inBuff.ready()) {
+                String t = inBuff.readLine();
+                out.add(t);
+            }
         } catch ( IOException e ) {
             e.printStackTrace();
         }
@@ -269,21 +269,21 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.info(null, null, "lcd " + sftp_channel.lpwd());
 
             // Get a listing of the remote directory
-            @SuppressWarnings("unchecked")
-            Vector<ChannelSftp.LsEntry> list = sftp_channel.ls(".");
+            @SuppressWarnings( "unchecked" )
+            Vector<ChannelSftp.LsEntry> list = sftp_channel.ls( "." );
             log.info(null, null, "ls .");
 
             // iterate through objects in list, identifying specific file names
-            for (ChannelSftp.LsEntry oListItem : list) {
+            for ( ChannelSftp.LsEntry oListItem : list ) {
                 // output each item from directory listing for logs
                 log.info(null, null, oListItem.toString());
 
                 // If it is a file (not a directory)
-                if (!oListItem.getAttrs().isDir()) {
+                if ( !oListItem.getAttrs().isDir() ) {
 
                     // Grab the remote file ([remote filename], [local path/filename to write file to])
-                    log.info(null, null, "get " + oListItem.getFilename());
-                    sftp_channel.get(oListItem.getFilename(), oListItem.getFilename());  // while testing, disable this or all of your test files will be grabbed
+                    log.info(null, null, "get " + oListItem.getFilename() );
+                    sftp_channel.get( oListItem.getFilename(), oListItem.getFilename() );  // while testing, disable this or all of your test files will be grabbed
 
                     fileCount++;
 
@@ -293,7 +293,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             }
 
             // Report files grabbed to log
-            if (fileCount == 0) {
+            if ( fileCount == 0 ) {
                 log.info( null, null, "Found no new files to grab." );
             } else {
                 log.info( null, null, "Retrieved " + fileCount + " new files." );
@@ -339,6 +339,12 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return execCommand( "qstat -au " + getUsername() );
     }
 
+    public ArrayList<String> getUserJobs( String username) {
+
+        return execCommand( "qstat -au " + username );
+    }
+
+
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings
      *
@@ -348,7 +354,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     public ArrayList<String> getAllFiles( String remote_abs_path ){
 
         System.out.println( "Rempath: " + remote_abs_path );
-        return execCommand( "cd " + remote_abs_path, "find -L $PWD -type f" );
+        execCommand( "cd " + remote_abs_path);
+        return( execCommand("find -L $PWD -type f") );
     }
 
     /**
