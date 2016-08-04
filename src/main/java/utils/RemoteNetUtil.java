@@ -48,7 +48,7 @@ public interface RemoteNetUtil {
      * @param job_XML_remote_abs_path
      * @return
      */
-    String runNaspJob(String job_XML_remote_abs_path);
+    boolean runNaspJob(String job_XML_remote_abs_path);
 
     ArrayList<String> getUserJobs();
 

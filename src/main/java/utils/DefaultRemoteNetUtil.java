@@ -13,9 +13,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
     private Session session;
     private ChannelSftp sftp_channel;
+    private ChannelExec execChannel;
     private Channel shell_channel;
-    private InputStream shell_in;
-    private InputStream shell_status;
+
     private PrintStream ps;
     private OutputStream ops;
     private BufferedReader inBuff;
@@ -40,6 +40,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param port the port of the remote server (typically 22 for ssh)
      */
     public void initSession(String username, String password, String url, int port) {
+
         try {
             session = jsch.getSession(username, url, port);
             session.setUserInfo(new UserInfo() {
@@ -106,14 +107,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
 
         try {
-            shell_in = shell_channel.getInputStream();
-            shell_status = shell_channel.getExtInputStream();
+            InputStream shellIn = shell_channel.getInputStream();
+            InputStream shellExtIn = shell_channel.getExtInputStream();
 
-            extBuff = new BufferedReader( new InputStreamReader( shell_status ));
+            extBuff = new BufferedReader( new InputStreamReader( shellExtIn ));
+            inBuff = new BufferedReader( new InputStreamReader( shellIn ));
 
-            inBuff = new BufferedReader( new InputStreamReader( shell_in ));
             ops = shell_channel.getOutputStream();
-            ps = new PrintStream(ops, true);
+            ps = new PrintStream( ops, true );
 
             shell_channel.connect();
             sftp_channel.connect();
@@ -121,13 +122,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.info(null, null, "RNU: Open Session - I/O Streams connected successfully.");
             log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+ sftp_channel.pwd());
             String welcome = "";
+
             while( inBuff.ready() ){
                 welcome += inBuff.readLine() +"\n";
             }
-            log.info( null, null, "RNU: Login message = " + "\n" + welcome);
+            log.info( null, null, "RNU: Login message = " + "\n" + welcome );
 
         } catch (SftpException e) {
-            log.error(null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage());
+            log.error( null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage() );
         } catch (JSchException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -185,19 +187,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         //TODO:Add mkdir exec step
         if( !isRemoteDir( remote_dir )){
-            System.out.println( remote_dir + "!!!1" );
             log.info( null, null, "NM - Upload Step Info: Connection failed or remote path " +
                     "is not a valid path for SFTP Upload. Solving by mkdir." );
             ArrayList<String> t = execCommand( "mkdir " + remote_dir );
-            System.out.println( remote_dir + "!!!3" );
         }
 
         try {
-            System.out.println( remote_dir + "!!!4" );
             log.info( null, null, "RNU: Upload - Attempting: cd " + remote_dir );
-            System.out.println( remote_dir + "!!!5" );
             sftp_channel.cd( remote_dir ); //cd to the absolute directory
-            System.out.println( remote_dir + "!!!6" );
         }
         catch (SftpException e){
             //the directory cannot be visited
@@ -221,39 +218,67 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
     }
 
+
     /**
      * Accepts one or more Strings which represent linux commands. Commands are run in order on the remote system.
      * Output from stdout is stored in order in an ArrayList of Strings
-     * @param cmd0 required first command
-     * @param arguments optional varargs commands
+     * @param cmd required first command
      * @return an ArrayList containing Strings from the stdout result
      */
-    private ArrayList<String> execCommand( String cmd0, String... arguments ){
-        assert shell_channel != null;
+    public ArrayList<String> execCommand( String cmd ){
+        assert session.isConnected();
 
-        String cmdlist = cmd0;
-        for( String cmd : arguments )
-        {
-            cmdlist += "\n" + cmd;
-        }
-        System.out.println( "$$ " + cmdlist + " $$" );
-        ps.println( cmdlist );
+        String out = "";
 
-        ArrayList<String> out = new ArrayList<>();
         try {
-            while (extBuff.ready()){
-                System.out.println( "extBuffer:" );
-                System.out.println( "EB: "+ extBuff.readLine() );
+            execChannel = (ChannelExec) session.openChannel( "exec" );
+            execChannel.setInputStream( null );
+            InputStream execIn = execChannel.getInputStream();
+            execChannel.setErrStream( System.err );
+
+            execChannel.setCommand( cmd );
+            execChannel.connect();
+
+            byte[] tmp = new byte[1024];
+            while( true ){
+                while( execIn.available() > 0 ){
+                    int i = execIn.read( tmp, 0, 1024 );
+                    if( i < 0 )
+                        break;
+                    out += new String( tmp, 0, i ) ;
+                }
+                if( execChannel.isClosed() ){
+                    if( execIn.available() > 0 )
+                        continue;
+                    break;
+                }
+                try{
+                    Thread.sleep(1000);
+                }
+                catch( Exception ee ){}
             }
 
-            while (inBuff.ready()) {
-                String t = inBuff.readLine();
-                out.add(t);
-            }
-        } catch ( IOException e ) {
+            execChannel.disconnect();
+
+        } catch (JSchException | IOException e) {
             e.printStackTrace();
         }
-        return out;
+
+        ArrayList<String> result = new ArrayList<>();
+        String line = "";
+        for( int i = 0 ; i < out.length() ; i++ ){
+
+            if( out.charAt( i ) == '\n' ){
+                result.add( line );
+                line = "";
+            }
+            else{
+                line += out.charAt( i );
+            }
+        }
+
+
+        return result;
     }
 
     /**
@@ -309,24 +334,24 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
     /**
      *
-     * @param job_XML_abs_path the absolute path to the XML job file on the remote server
+     * @param job_XML_abs_path
+     * @return true if the job started successfully, false otherwise
      */
-    public String runNaspJob( String job_XML_abs_path ) {
+    public boolean runNaspJob( String job_XML_abs_path ) {
+
         String runpath = job_XML_abs_path.substring( 0, job_XML_abs_path.lastIndexOf('/') );
         String jobname = "";
         System.out.println( "Running nasp in:" +runpath );
         System.out.println( "XML nasp in:" + job_XML_abs_path );
-        ArrayList<String> out =
-            execCommand(
-                    "cd " + runpath,
-                    "module load nasp",
-                    "module load tnorth",
-                    "nasp --config " + job_XML_abs_path );
+
+        execCommand( "cd " + runpath );
+        execCommand( "module load nasp" );
+        execCommand( "module load tnorth" );
+        execCommand( "nasp --config " + job_XML_abs_path );
         execCommand( "Y" );
         //TODO: dreams
-        for( String x : out )
-            jobname += x;
-        return jobname;
+
+        return true;
     }
 
     /**
@@ -343,7 +368,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         return execCommand( "qstat -au " + username );
     }
-
 
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings
@@ -365,7 +389,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     @Override
     public void killJob( int lowerJobId, int upperJobId ) {
-        //TODO: implement manually qstat del
+        //TODO: implement manual qstat del
     }
 
     /**

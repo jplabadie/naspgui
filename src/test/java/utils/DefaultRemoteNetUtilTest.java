@@ -1,13 +1,14 @@
 package utils;
 
 import com.jcraft.jsch.Session;
-import org.junit.*;
-
-import java.util.ArrayList;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  * @author Jean-Paul Labadie
- * @date 8/11/2015
+ *
  */
 public class DefaultRemoteNetUtilTest {
 
@@ -25,10 +26,9 @@ public class DefaultRemoteNetUtilTest {
         try {
             nm.openSession();
         }
-        catch (Exception e){
+        catch ( Exception e ){
             Assert.fail();
         }
-
     }
 
     @AfterClass
@@ -41,9 +41,8 @@ public class DefaultRemoteNetUtilTest {
     public void testGetSession() throws Exception {
         Session sess = nm.getSession();
 
-        if(sess == null)
+        if( sess == null )
             Assert.fail();
-
     }
 
     @Test
@@ -59,27 +58,19 @@ public class DefaultRemoteNetUtilTest {
 
     @Test
     public void testGetJobs() throws Exception {
-        ArrayList<String> result =  nm.getUserJobs("mvalentine");
-        for(String x : result){
-            System.out.println( "Jobs: " + x);
-        }
-        ArrayList<String> result2 =  nm.getUserJobs("mvalentine");
-        for(String x : result2){
-            System.out.println( "Jobs: " + x);
-        }
+
     }
     @Test
     public void testGetAllFiles() throws Exception {
-        ArrayList<String> result =  nm.getAllFiles("/home/jlabadie");
-        for(String x : result){
-            System.out.println( "Files: " + x);
-        }
+//        ArrayList<String> result =  nm.getAllFiles("/home/jlabadie");
+//        for(String x : result){
+//            System.out.println( "Files: " + x);
+//        }
     }
 
     @Test
-    public void testRunNaspJob() throws Exception {
+    public void testExecChan() throws Exception {
+
 
     }
-
-
 }
