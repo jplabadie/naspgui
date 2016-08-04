@@ -10,9 +10,7 @@ public class JobRecord {
     private String server;
     private Integer port;
     private String remote_xml_path;
-
     private String local_xml_path;
-
     private String start_timestamp;
     private String end_timestamp;
     private boolean completed;
@@ -23,7 +21,6 @@ public class JobRecord {
         this.port = port;
         this.remote_xml_path = remote_xml_path;
         this.local_xml_path = local_xml_path;
-
     }
 
     public String getUsername() {

@@ -1,5 +1,6 @@
 package widgets;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -9,18 +10,18 @@ import javafx.beans.property.StringProperty;
  * @author jlabadie
  */
 public class Job {
-    private StringProperty jobId;
-    private StringProperty runName;
-    private StringProperty userName;
-    private StringProperty queue;
-    private StringProperty jobName;
-    private StringProperty sessionId;
-    private StringProperty nds;
-    private StringProperty reqTask;
-    private StringProperty reqMem;
-    private StringProperty elapsedTime;
-    private StringProperty time;
-    private StringProperty status;
+    private StringProperty jobId = new SimpleStringProperty();
+    private StringProperty runName = new SimpleStringProperty();
+    private StringProperty userName = new SimpleStringProperty();
+    private StringProperty queue = new SimpleStringProperty();
+    private StringProperty jobName = new SimpleStringProperty();
+    private StringProperty sessionId = new SimpleStringProperty();
+    private StringProperty nds = new SimpleStringProperty();
+    private StringProperty reqTask = new SimpleStringProperty();
+    private StringProperty reqMem = new SimpleStringProperty();
+    private StringProperty elapsedTime = new SimpleStringProperty();
+    private StringProperty time = new SimpleStringProperty();
+    private StringProperty status = new SimpleStringProperty();
 
     public Job(){
         runName.set("");
@@ -35,6 +36,24 @@ public class Job {
         elapsedTime.setValue("");
         time.setValue("");
         status.setValue("");
+    }
+
+    public Job( String runName, String jobId, String userName, String queue, String jobName, String sessionId,
+                String nds, String reqTask, String reqMem, String elapsedTime, String time,
+                String status){
+
+        this.runName.setValue( runName );
+        this.jobId.setValue( jobId );
+        this.userName.setValue( userName );
+        this.queue.setValue( queue );
+        this.jobName.setValue( jobName );
+        this.sessionId.setValue( sessionId );
+        this.nds.setValue( nds );
+        this.reqTask.setValue( reqTask );
+        this.reqMem.setValue( reqMem );
+        this.elapsedTime.setValue( elapsedTime );
+        this.time.setValue( time );
+        this.status.setValue( status );
     }
 
     public String getJobId() {return jobId.get();}

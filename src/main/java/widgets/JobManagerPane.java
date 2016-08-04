@@ -28,25 +28,29 @@ public class JobManagerPane extends BorderPane{
     private TableFilter<Job> filter;
     ObservableList<Job> jobs ;
 
-    public JobManagerPane(){
+    public JobManagerPane( ArrayList<Job> input ){
+        jobs = FXCollections.observableArrayList( input);
         initialize();
     }
 
     @SuppressWarnings( "unchecked" )
     void initialize(){
-        this.setPrefWidth( 800 );
+        this.setPrefWidth( 1000 );
         this.setCenter( scrollPane ); // set a ScrollPane as the center container for this BorderPane
-        scrollPane.setContent( table ); // add a VBox to the scroll pane ( the VBox will hold our GridPanes )
 
-        jobs = FXCollections.observableArrayList( new ArrayList<Job>() );
+        scrollPane.setContent( table ); // add a VBox to the scroll pane ( the VBox will hold our GridPanes )
+        scrollPane.setPrefWidth( 800 );
+        //jobs = FXCollections.observableArrayList( new ArrayList<Job>() );
         table.setItems( jobs );
+        table.setPrefWidth( 800 );
         filter = new TableFilter( table );
+        mdp.setPrefWidth( 1000 );
         mdp.setMasterNode( table );
         mdp.setDetailNode( new PropertySheet() );
         mdp.setDetailSide( Side.RIGHT );
         mdp.setShowDetailNode( true );
 
-        TableColumn<Job,String> runNameCol = new TableColumn<>("Run Name");
+        TableColumn<Job,String> runNameCol = new TableColumn<>("Run");
         runNameCol.setCellValueFactory(new PropertyValueFactory("runName"));
 
         TableColumn<Job,String> jobIdCol = new TableColumn<>("Job ID");
@@ -61,22 +65,22 @@ public class JobManagerPane extends BorderPane{
         TableColumn<Job,String> queueCol = new TableColumn<>("Queue");
         queueCol.setCellValueFactory(new PropertyValueFactory("queue"));
 
-        TableColumn<Job,String> sessionIdCol = new TableColumn<>("Session ID");
+        TableColumn<Job,String> sessionIdCol = new TableColumn<>("Session");
         sessionIdCol.setCellValueFactory(new PropertyValueFactory("sessionId"));
 
         TableColumn<Job,String> ndsCol = new TableColumn<>("Nodes");
         ndsCol.setCellValueFactory(new PropertyValueFactory("nds"));
 
-        TableColumn<Job,String> reqTaskCol = new TableColumn<>("Req Task");
+        TableColumn<Job,String> reqTaskCol = new TableColumn<>("CPUs");
         reqTaskCol.setCellValueFactory(new PropertyValueFactory("reqTask"));
 
-        TableColumn<Job,String> reqMemCol = new TableColumn<>("Req Mem");
+        TableColumn<Job,String> reqMemCol = new TableColumn<>("RAM");
         reqMemCol.setCellValueFactory(new PropertyValueFactory("reqMem"));
 
         TableColumn<Job,String> elapsedTimeCol = new TableColumn<>("Elapsed Time");
         elapsedTimeCol.setCellValueFactory(new PropertyValueFactory("elapsedTime"));
 
-        TableColumn<Job,String> timeCol = new TableColumn<>("Time");
+        TableColumn<Job,String> timeCol = new TableColumn<>("Wall Time");
         timeCol.setCellValueFactory(new PropertyValueFactory("time"));
 
         TableColumn<Job,String> statusCol = new TableColumn<>("Status");
