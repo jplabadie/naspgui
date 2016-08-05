@@ -1,0 +1,1051 @@
+Jul 22, 2016 9:24:52 AM null
+INFO: 22-07-2016-09_24_52 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 9:24:52 AM null
+INFO: 22-07-2016-09_24_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:24:52 AM null
+INFO: 22-07-2016-09_24_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:24:53 AM null
+INFO: 22-07-2016-09_24_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:24:53 AM null
+INFO: 22-07-2016-09_24_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:24:53 AM null
+INFO: 22-07-2016-09_24_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:24:58 AM null
+INFO: 22-07-2016-09_24_58 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 9:24:59 AM null
+INFO: 22-07-2016-09_24_59 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 9:24:59 AM null
+INFO: 22-07-2016-09_24_59 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 9:24:59 AM null
+INFO: 22-07-2016-09_24_59 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 9:24:59 AM null
+INFO: 22-07-2016-09_24_59 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 9:24:59 AM null
+INFO: 22-07-2016-09_24_59 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:25:00 AM null
+INFO: 22-07-2016-09_25_00 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:25:00 AM null
+INFO: 22-07-2016-09_25_00 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 9:25:00 AM null
+INFO: 22-07-2016-09_25_00 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 9:25:02 AM null
+INFO: 22-07-2016-09_25_02 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 9:32:56 AM null
+INFO: 22-07-2016-09_32_56 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 9:32:56 AM null
+INFO: 22-07-2016-09_32_56 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:32:56 AM null
+INFO: 22-07-2016-09_32_56 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:32:57 AM null
+INFO: 22-07-2016-09_32_57 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:32:57 AM null
+INFO: 22-07-2016-09_32_57 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:32:57 AM null
+INFO: 22-07-2016-09_32_57 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 9:33:02 AM null
+INFO: 22-07-2016-09_33_02 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 9:33:05 AM null
+INFO: 22-07-2016-09_33_05 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 9:33:14 AM null
+INFO: 22-07-2016-09_33_14 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 9:46:54 AM null
+INFO: 22-07-2016-09_46_54 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 9:46:54 AM null
+INFO: 22-07-2016-09_46_54 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:46:54 AM null
+INFO: 22-07-2016-09_46_54 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:46:55 AM null
+INFO: 22-07-2016-09_46_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:46:55 AM null
+INFO: 22-07-2016-09_46_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:46:55 AM null
+INFO: 22-07-2016-09_46_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:47:00 AM null
+INFO: 22-07-2016-09_47_00 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 9:47:01 AM null
+INFO: 22-07-2016-09_47_01 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 9:47:04 AM null
+INFO: 22-07-2016-09_47_04 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 9:47:31 AM null
+INFO: 22-07-2016-09_47_31 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 9:50:39 AM null
+INFO: 22-07-2016-09_50_39 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 9:50:39 AM null
+INFO: 22-07-2016-09_50_39 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:50:39 AM null
+INFO: 22-07-2016-09_50_39 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 9:50:40 AM null
+INFO: 22-07-2016-09_50_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:50:40 AM null
+INFO: 22-07-2016-09_50_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:50:40 AM null
+INFO: 22-07-2016-09_50_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 9:50:45 AM null
+INFO: 22-07-2016-09_50_45 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 9:51:16 AM null
+INFO: 22-07-2016-09_51_16 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 9:51:45 AM null
+INFO: 22-07-2016-09_51_45 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 10:29:54 AM null
+INFO: 22-07-2016-10_29_54 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:29:54 AM null
+INFO: 22-07-2016-10_29_54 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:29:54 AM null
+INFO: 22-07-2016-10_29_54 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:29:55 AM null
+INFO: 22-07-2016-10_29_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:29:55 AM null
+INFO: 22-07-2016-10_29_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:29:55 AM null
+INFO: 22-07-2016-10_29_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:30:02 AM null
+INFO: 22-07-2016-10_30_02 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:30:03 AM null
+INFO: 22-07-2016-10_30_03 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:30:03 AM null
+INFO: 22-07-2016-10_30_03 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:30:04 AM null
+INFO: 22-07-2016-10_30_04 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:30:07 AM null
+INFO: 22-07-2016-10_30_07 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:31:29 AM null
+INFO: 22-07-2016-10_31_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:31:35 AM null
+INFO: 22-07-2016-10_31_35 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:31:36 AM null
+INFO: 22-07-2016-10_31_36 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:31:39 AM null
+INFO: 22-07-2016-10_31_39 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:41:29 AM null
+INFO: 22-07-2016-10_41_29 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:41:36 AM null
+INFO: 22-07-2016-10_41_36 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:41:38 AM null
+INFO: 22-07-2016-10_41_38 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:42:39 AM null
+INFO: 22-07-2016-10_42_39 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:46:42 AM null
+INFO: 22-07-2016-10_46_42 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:46:42 AM null
+INFO: 22-07-2016-10_46_42 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:46:42 AM null
+INFO: 22-07-2016-10_46_42 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:46:43 AM null
+INFO: 22-07-2016-10_46_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:46:43 AM null
+INFO: 22-07-2016-10_46_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:46:43 AM null
+INFO: 22-07-2016-10_46_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:46:48 AM null
+INFO: 22-07-2016-10_46_48 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:46:49 AM null
+INFO: 22-07-2016-10_46_49 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:46:56 AM null
+INFO: 22-07-2016-10_46_56 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:25 AM null
+INFO: 22-07-2016-10_50_25 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:31 AM null
+INFO: 22-07-2016-10_50_31 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:50:43 AM null
+SEVERE: 22-07-2016-10_50_43 :- NM - Unable to Open the Session: 
+SSH_MSG_DISCONNECT: 2 Too many authentication failures for jlabadie Class: null, Method: null
+Jul 22, 2016 10:50:44 AM null
+INFO: 22-07-2016-10_50_44 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:44 AM null
+INFO: 22-07-2016-10_50_44 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:44 AM null
+INFO: 22-07-2016-10_50_44 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:50:44 AM null
+INFO: 22-07-2016-10_50_44 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:50:49 AM null
+INFO: 22-07-2016-10_50_49 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:50:49 AM null
+INFO: 22-07-2016-10_50_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:50:49 AM null
+INFO: 22-07-2016-10_50_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:50:50 AM null
+INFO: 22-07-2016-10_50_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:50 AM null
+INFO: 22-07-2016-10_50_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:50 AM null
+INFO: 22-07-2016-10_50_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:55 AM null
+INFO: 22-07-2016-10_50_55 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:50:56 AM null
+INFO: 22-07-2016-10_50_56 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:50:58 AM null
+INFO: 22-07-2016-10_50_58 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:53:48 AM null
+INFO: 22-07-2016-10_53_48 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:53:48 AM null
+INFO: 22-07-2016-10_53_48 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:53:48 AM null
+INFO: 22-07-2016-10_53_48 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:53:49 AM null
+INFO: 22-07-2016-10_53_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:53:49 AM null
+INFO: 22-07-2016-10_53_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:53:49 AM null
+INFO: 22-07-2016-10_53_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:53:55 AM null
+INFO: 22-07-2016-10_53_55 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:53:59 AM null
+INFO: 22-07-2016-10_53_59 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:57:47 AM null
+INFO: 22-07-2016-10_57_47 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:57:52 AM null
+INFO: 22-07-2016-10_57_52 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:57:53 AM null
+INFO: 22-07-2016-10_57_53 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:58:24 AM null
+INFO: 22-07-2016-10_58_24 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:59:32 AM null
+INFO: 22-07-2016-10_59_32 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:59:39 AM null
+INFO: 22-07-2016-10_59_39 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 10:59:40 AM null
+INFO: 22-07-2016-10_59_40 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 10:59:42 AM null
+INFO: 22-07-2016-10_59_42 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:01:57 AM null
+INFO: 22-07-2016-11_01_57 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:01:57 AM null
+INFO: 22-07-2016-11_01_57 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:01:57 AM null
+INFO: 22-07-2016-11_01_57 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:01:58 AM null
+INFO: 22-07-2016-11_01_58 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:01:58 AM null
+INFO: 22-07-2016-11_01_58 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:01:58 AM null
+INFO: 22-07-2016-11_01_58 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:02:05 AM null
+INFO: 22-07-2016-11_02_05 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:02:06 AM null
+INFO: 22-07-2016-11_02_06 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:02:18 AM null
+INFO: 22-07-2016-11_02_18 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:04:18 AM null
+INFO: 22-07-2016-11_04_18 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:05:48 AM null
+INFO: 22-07-2016-11_05_48 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:05:49 AM null
+INFO: 22-07-2016-11_05_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:05:49 AM null
+INFO: 22-07-2016-11_05_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:05:49 AM null
+INFO: 22-07-2016-11_05_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:05:49 AM null
+INFO: 22-07-2016-11_05_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:05:49 AM null
+INFO: 22-07-2016-11_05_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:05:55 AM null
+INFO: 22-07-2016-11_05_55 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:05:55 AM null
+INFO: 22-07-2016-11_05_55 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:05:56 AM null
+INFO: 22-07-2016-11_05_56 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:05:59 AM null
+INFO: 22-07-2016-11_05_59 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:07:18 AM null
+INFO: 22-07-2016-11_07_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:07:25 AM null
+INFO: 22-07-2016-11_07_25 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:07:25 AM null
+INFO: 22-07-2016-11_07_25 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:07:26 AM null
+INFO: 22-07-2016-11_07_26 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:07:28 AM null
+INFO: 22-07-2016-11_07_28 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:09:08 AM null
+INFO: 22-07-2016-11_09_08 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:09:14 AM null
+INFO: 22-07-2016-11_09_14 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:09:17 AM null
+INFO: 22-07-2016-11_09_17 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:14:41 AM null
+INFO: 22-07-2016-11_14_41 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:14:41 AM null
+INFO: 22-07-2016-11_14_41 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:14:41 AM null
+INFO: 22-07-2016-11_14_41 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:14:42 AM null
+INFO: 22-07-2016-11_14_42 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:14:42 AM null
+INFO: 22-07-2016-11_14_42 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:14:42 AM null
+INFO: 22-07-2016-11_14_42 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:14:47 AM null
+INFO: 22-07-2016-11_14_47 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:14:48 AM null
+INFO: 22-07-2016-11_14_48 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:14:51 AM null
+INFO: 22-07-2016-11_14_51 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:16:29 AM null
+INFO: 22-07-2016-11_16_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:16:29 AM null
+INFO: 22-07-2016-11_16_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:16:29 AM null
+INFO: 22-07-2016-11_16_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:16:30 AM null
+INFO: 22-07-2016-11_16_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:16:30 AM null
+INFO: 22-07-2016-11_16_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:16:30 AM null
+INFO: 22-07-2016-11_16_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:16:35 AM null
+INFO: 22-07-2016-11_16_35 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:16:37 AM null
+INFO: 22-07-2016-11_16_37 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:18:49 AM null
+INFO: 22-07-2016-11_18_49 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:18:49 AM null
+INFO: 22-07-2016-11_18_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:18:49 AM null
+INFO: 22-07-2016-11_18_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:18:50 AM null
+INFO: 22-07-2016-11_18_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:18:50 AM null
+INFO: 22-07-2016-11_18_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:18:50 AM null
+INFO: 22-07-2016-11_18_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:19:07 AM null
+INFO: 22-07-2016-11_19_07 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:19:10 AM null
+INFO: 22-07-2016-11_19_10 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 11:20:26 AM null
+INFO: 22-07-2016-11_20_26 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 11:22:19 AM null
+INFO: 22-07-2016-11_22_19 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:22:19 AM null
+INFO: 22-07-2016-11_22_19 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:22:19 AM null
+INFO: 22-07-2016-11_22_19 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:22:20 AM null
+INFO: 22-07-2016-11_22_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:20 AM null
+INFO: 22-07-2016-11_22_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:20 AM null
+INFO: 22-07-2016-11_22_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:24 AM null
+INFO: 22-07-2016-11_22_24 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:22:33 AM null
+INFO: 22-07-2016-11_22_33 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:22:33 AM null
+INFO: 22-07-2016-11_22_33 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:22:33 AM null
+INFO: 22-07-2016-11_22_33 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:22:34 AM null
+INFO: 22-07-2016-11_22_34 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:34 AM null
+INFO: 22-07-2016-11_22_34 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:34 AM null
+INFO: 22-07-2016-11_22_34 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:39 AM null
+INFO: 22-07-2016-11_22_39 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:22:40 AM null
+INFO: 22-07-2016-11_22_40 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:22:42 AM null
+INFO: 22-07-2016-11_22_42 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 11:23:41 AM null
+INFO: 22-07-2016-11_23_41 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 11:25:53 AM null
+INFO: 22-07-2016-11_25_53 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:25:53 AM null
+INFO: 22-07-2016-11_25_53 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:25:53 AM null
+INFO: 22-07-2016-11_25_53 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:25:54 AM null
+INFO: 22-07-2016-11_25_54 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:25:54 AM null
+INFO: 22-07-2016-11_25_54 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:25:54 AM null
+INFO: 22-07-2016-11_25_54 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:25:59 AM null
+INFO: 22-07-2016-11_25_59 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:25:59 AM null
+INFO: 22-07-2016-11_25_59 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:25:59 AM null
+INFO: 22-07-2016-11_25_59 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:26:00 AM null
+INFO: 22-07-2016-11_26_00 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:26:12 AM null
+INFO: 22-07-2016-11_26_12 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 11:27:52 AM null
+INFO: 22-07-2016-11_27_52 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:32:46 AM null
+INFO: 22-07-2016-11_32_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:32:52 AM null
+INFO: 22-07-2016-11_32_52 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:32:56 AM null
+INFO: 22-07-2016-11_32_56 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:35:52 AM null
+INFO: 22-07-2016-11_35_52 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:35:52 AM null
+INFO: 22-07-2016-11_35_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:35:52 AM null
+INFO: 22-07-2016-11_35_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:35:53 AM null
+INFO: 22-07-2016-11_35_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:35:53 AM null
+INFO: 22-07-2016-11_35_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:35:53 AM null
+INFO: 22-07-2016-11_35_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:36:00 AM null
+INFO: 22-07-2016-11_36_00 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:36:00 AM null
+INFO: 22-07-2016-11_36_00 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:36:00 AM null
+INFO: 22-07-2016-11_36_00 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:36:01 AM null
+INFO: 22-07-2016-11_36_01 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:36:03 AM null
+INFO: 22-07-2016-11_36_03 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:36:08 AM null
+INFO: 22-07-2016-11_36_08 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:47:30 AM null
+INFO: 22-07-2016-11_47_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:47:35 AM null
+INFO: 22-07-2016-11_47_35 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:47:36 AM null
+INFO: 22-07-2016-11_47_36 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:47:38 AM null
+INFO: 22-07-2016-11_47_38 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- RNU: Attempting upload: nasp_results3.xml at /home/jlabadie/nasp_results3/nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- RNU: Checking for remote directory - /home/jlabadie/nasp_results3Class: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- RNU: Checking for remote directory - Running test -d (remote path)...Class: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- RNU: Checking for remote directory - Exec returned: -1Class: null, Method: null
+Jul 22, 2016 11:47:46 AM null
+INFO: 22-07-2016-11_47_46 :- NM - Upload Step Info: Connection failed or remote path is not a valid path for SFTP Upload. Solving by mkdir.Class: null, Method: null
+Jul 22, 2016 11:49:47 AM null
+INFO: 22-07-2016-11_49_47 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:49:47 AM null
+INFO: 22-07-2016-11_49_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:49:47 AM null
+INFO: 22-07-2016-11_49_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:49:48 AM null
+INFO: 22-07-2016-11_49_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:49:48 AM null
+INFO: 22-07-2016-11_49_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:49:48 AM null
+INFO: 22-07-2016-11_49_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:49:53 AM null
+INFO: 22-07-2016-11_49_53 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:50:10 AM null
+INFO: 22-07-2016-11_50_10 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:50:10 AM null
+INFO: 22-07-2016-11_50_10 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:50:10 AM null
+INFO: 22-07-2016-11_50_10 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:50:11 AM null
+INFO: 22-07-2016-11_50_11 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:11 AM null
+INFO: 22-07-2016-11_50_11 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:11 AM null
+INFO: 22-07-2016-11_50_11 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:16 AM null
+INFO: 22-07-2016-11_50_16 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:50:29 AM null
+INFO: 22-07-2016-11_50_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:50:29 AM null
+INFO: 22-07-2016-11_50_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:50:29 AM null
+INFO: 22-07-2016-11_50_29 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:50:30 AM null
+INFO: 22-07-2016-11_50_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:30 AM null
+INFO: 22-07-2016-11_50_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:30 AM null
+INFO: 22-07-2016-11_50_30 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:50:36 AM null
+INFO: 22-07-2016-11_50_36 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:50:39 AM null
+INFO: 22-07-2016-11_50_39 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:52:46 AM null
+INFO: 22-07-2016-11_52_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:52:53 AM null
+INFO: 22-07-2016-11_52_53 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:52:55 AM null
+INFO: 22-07-2016-11_52_55 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:53:06 AM null
+INFO: 22-07-2016-11_53_06 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:53:06 AM null
+INFO: 22-07-2016-11_53_06 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:56:18 AM null
+INFO: 22-07-2016-11_56_18 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 11:56:18 AM null
+INFO: 22-07-2016-11_56_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:56:18 AM null
+INFO: 22-07-2016-11_56_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 22, 2016 11:56:19 AM null
+INFO: 22-07-2016-11_56_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:56:19 AM null
+INFO: 22-07-2016-11_56_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:56:19 AM null
+INFO: 22-07-2016-11_56_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:56:23 AM null
+INFO: 22-07-2016-11_56_23 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 22, 2016 11:56:24 AM null
+INFO: 22-07-2016-11_56_24 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 22, 2016 11:56:26 AM null
+INFO: 22-07-2016-11_56_26 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 22, 2016 11:56:42 AM null
+INFO: 22-07-2016-11_56_42 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:56:42 AM null
+INFO: 22-07-2016-11_56_42 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:57:14 AM null
+INFO: 22-07-2016-11_57_14 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 11:57:14 AM null
+INFO: 22-07-2016-11_57_14 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 22, 2016 1:32:59 PM null
+INFO: 22-07-2016-13_32_59 :- LM: Logger initialized.Class: null, Method: null
+Jul 22, 2016 1:32:59 PM null
+INFO: 22-07-2016-13_32_59 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null

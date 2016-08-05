@@ -1,0 +1,4 @@
+Aug 02, 2016 11:44:57 AM null
+INFO: 02-08-2016-11_44_57 :- LM: Logger initialized.Class: null, Method: null
+Aug 02, 2016 11:44:57 AM null
+INFO: 02-08-2016-11_44_57 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null

@@ -1,0 +1,607 @@
+Jul 28, 2016 12:33:42 PM null
+INFO: 28-07-2016-12_33_42 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 12:33:42 PM null
+INFO: 28-07-2016-12_33_42 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 12:33:42 PM null
+INFO: 28-07-2016-12_33_42 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 12:33:43 PM null
+INFO: 28-07-2016-12_33_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 12:33:43 PM null
+INFO: 28-07-2016-12_33_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 12:33:43 PM null
+INFO: 28-07-2016-12_33_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 12:33:48 PM null
+INFO: 28-07-2016-12_33_48 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 28, 2016 12:33:49 PM null
+INFO: 28-07-2016-12_33_49 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 28, 2016 12:33:53 PM null
+INFO: 28-07-2016-12_33_53 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:10:46 PM null
+INFO: 28-07-2016-14_10_46 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:10:46 PM null
+INFO: 28-07-2016-14_10_46 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:12:10 PM null
+INFO: 28-07-2016-14_12_10 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:12:10 PM null
+INFO: 28-07-2016-14_12_10 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:14:10 PM null
+INFO: 28-07-2016-14_14_10 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:14:10 PM null
+INFO: 28-07-2016-14_14_10 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:15:55 PM null
+INFO: 28-07-2016-14_15_55 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:15:55 PM null
+INFO: 28-07-2016-14_15_55 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:17:22 PM null
+INFO: 28-07-2016-14_17_22 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:17:22 PM null
+INFO: 28-07-2016-14_17_22 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:17:43 PM null
+INFO: 28-07-2016-14_17_43 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:17:44 PM null
+INFO: 28-07-2016-14_17_44 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:18:03 PM null
+INFO: 28-07-2016-14_18_03 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:18:03 PM null
+INFO: 28-07-2016-14_18_03 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:20:42 PM null
+INFO: 28-07-2016-14_20_42 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:20:42 PM null
+INFO: 28-07-2016-14_20_42 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:21:56 PM null
+INFO: 28-07-2016-14_21_56 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:21:57 PM null
+INFO: 28-07-2016-14_21_57 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:41:55 PM null
+INFO: 28-07-2016-14_41_55 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:41:55 PM null
+INFO: 28-07-2016-14_41_55 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:42:17 PM null
+INFO: 28-07-2016-14_42_17 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 2:42:17 PM null
+INFO: 28-07-2016-14_42_17 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 2:45:43 PM null
+INFO: 28-07-2016-14_45_43 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:45:43 PM null
+INFO: 28-07-2016-14_45_43 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:48:26 PM null
+INFO: 28-07-2016-14_48_26 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:48:26 PM null
+INFO: 28-07-2016-14_48_26 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:51:19 PM null
+INFO: 28-07-2016-14_51_19 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:51:19 PM null
+INFO: 28-07-2016-14_51_19 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:52:07 PM null
+INFO: 28-07-2016-14_52_07 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:52:07 PM null
+INFO: 28-07-2016-14_52_07 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:57:55 PM null
+INFO: 28-07-2016-14_57_55 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:57:55 PM null
+INFO: 28-07-2016-14_57_55 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 2:58:45 PM null
+INFO: 28-07-2016-14_58_45 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 2:58:45 PM null
+INFO: 28-07-2016-14_58_45 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:10:25 PM null
+INFO: 28-07-2016-15_10_25 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:10:26 PM null
+INFO: 28-07-2016-15_10_26 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:12:04 PM null
+INFO: 28-07-2016-15_12_04 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:12:04 PM null
+INFO: 28-07-2016-15_12_04 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:15:16 PM null
+INFO: 28-07-2016-15_15_16 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:15:17 PM null
+INFO: 28-07-2016-15_15_17 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:16:40 PM null
+INFO: 28-07-2016-15_16_40 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:16:40 PM null
+INFO: 28-07-2016-15_16_40 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:17:41 PM null
+INFO: 28-07-2016-15_17_41 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:17:42 PM null
+INFO: 28-07-2016-15_17_42 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:18:03 PM null
+INFO: 28-07-2016-15_18_03 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:18:04 PM null
+INFO: 28-07-2016-15_18_04 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:19:13 PM null
+INFO: 28-07-2016-15_19_13 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:19:13 PM null
+INFO: 28-07-2016-15_19_13 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:19:47 PM null
+INFO: 28-07-2016-15_19_47 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:19:48 PM null
+INFO: 28-07-2016-15_19_48 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:20:40 PM null
+INFO: 28-07-2016-15_20_40 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:20:40 PM null
+INFO: 28-07-2016-15_20_40 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:22:50 PM null
+INFO: 28-07-2016-15_22_50 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:22:50 PM null
+INFO: 28-07-2016-15_22_50 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:26:49 PM null
+INFO: 28-07-2016-15_26_49 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:26:50 PM null
+INFO: 28-07-2016-15_26_50 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:28:01 PM null
+INFO: 28-07-2016-15_28_01 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:28:01 PM null
+INFO: 28-07-2016-15_28_01 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:28:33 PM null
+INFO: 28-07-2016-15_28_33 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:28:33 PM null
+INFO: 28-07-2016-15_28_33 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:28:50 PM null
+INFO: 28-07-2016-15_28_50 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:28:50 PM null
+INFO: 28-07-2016-15_28_50 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:29:39 PM null
+INFO: 28-07-2016-15_29_39 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:29:40 PM null
+INFO: 28-07-2016-15_29_40 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:29:56 PM null
+INFO: 28-07-2016-15_29_56 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:29:56 PM null
+INFO: 28-07-2016-15_29_56 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:30:27 PM null
+INFO: 28-07-2016-15_30_27 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:30:27 PM null
+INFO: 28-07-2016-15_30_27 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:33:41 PM null
+INFO: 28-07-2016-15_33_41 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:33:42 PM null
+INFO: 28-07-2016-15_33_42 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:34:32 PM null
+INFO: 28-07-2016-15_34_32 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:34:32 PM null
+INFO: 28-07-2016-15_34_32 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:36:53 PM null
+INFO: 28-07-2016-15_36_53 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:36:53 PM null
+INFO: 28-07-2016-15_36_53 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:37:40 PM null
+INFO: 28-07-2016-15_37_40 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:37:40 PM null
+INFO: 28-07-2016-15_37_40 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:38:43 PM null
+INFO: 28-07-2016-15_38_43 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:38:43 PM null
+INFO: 28-07-2016-15_38_43 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:39:22 PM null
+INFO: 28-07-2016-15_39_22 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:39:22 PM null
+INFO: 28-07-2016-15_39_22 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:41:53 PM null
+INFO: 28-07-2016-15_41_53 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:41:53 PM null
+INFO: 28-07-2016-15_41_53 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:42:29 PM null
+INFO: 28-07-2016-15_42_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:42:29 PM null
+INFO: 28-07-2016-15_42_29 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:43:24 PM null
+INFO: 28-07-2016-15_43_24 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:43:24 PM null
+INFO: 28-07-2016-15_43_24 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:43:39 PM null
+INFO: 28-07-2016-15_43_39 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:43:39 PM null
+INFO: 28-07-2016-15_43_39 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:44:04 PM null
+INFO: 28-07-2016-15_44_04 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:44:04 PM null
+INFO: 28-07-2016-15_44_04 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:44:52 PM null
+INFO: 28-07-2016-15_44_52 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:44:52 PM null
+INFO: 28-07-2016-15_44_52 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:45:22 PM null
+INFO: 28-07-2016-15_45_22 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:45:23 PM null
+INFO: 28-07-2016-15_45_23 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:45:48 PM null
+INFO: 28-07-2016-15_45_48 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:45:48 PM null
+INFO: 28-07-2016-15_45_48 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:46:02 PM null
+INFO: 28-07-2016-15_46_02 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:46:03 PM null
+INFO: 28-07-2016-15_46_03 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:46:50 PM null
+INFO: 28-07-2016-15_46_50 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:46:51 PM null
+INFO: 28-07-2016-15_46_51 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:47:10 PM null
+INFO: 28-07-2016-15_47_10 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:47:11 PM null
+INFO: 28-07-2016-15_47_11 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:48:20 PM null
+INFO: 28-07-2016-15_48_20 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:48:20 PM null
+INFO: 28-07-2016-15_48_20 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:48:47 PM null
+INFO: 28-07-2016-15_48_47 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:48:47 PM null
+INFO: 28-07-2016-15_48_47 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:54:58 PM null
+INFO: 28-07-2016-15_54_58 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:54:58 PM null
+INFO: 28-07-2016-15_54_58 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 3:58:02 PM null
+INFO: 28-07-2016-15_58_02 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 3:58:03 PM null
+INFO: 28-07-2016-15_58_03 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:01:07 PM null
+INFO: 28-07-2016-16_01_07 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:01:07 PM null
+INFO: 28-07-2016-16_01_07 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:01:28 PM null
+INFO: 28-07-2016-16_01_28 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:01:28 PM null
+INFO: 28-07-2016-16_01_28 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:01:54 PM null
+INFO: 28-07-2016-16_01_54 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3x.xmlClass: null, Method: null
+Jul 28, 2016 4:01:54 PM null
+INFO: 28-07-2016-16_01_54 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3x.xmlClass: null, Method: null
+Jul 28, 2016 4:03:43 PM null
+INFO: 28-07-2016-16_03_43 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:03:44 PM null
+INFO: 28-07-2016-16_03_44 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:03:52 PM null
+INFO: 28-07-2016-16_03_52 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:03:52 PM null
+INFO: 28-07-2016-16_03_52 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:12:01 PM null
+INFO: 28-07-2016-16_12_01 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:12:02 PM null
+INFO: 28-07-2016-16_12_02 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:13:32 PM null
+INFO: 28-07-2016-16_13_32 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:13:32 PM null
+INFO: 28-07-2016-16_13_32 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:13:46 PM null
+INFO: 28-07-2016-16_13_46 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:13:46 PM null
+INFO: 28-07-2016-16_13_46 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:14:12 PM null
+INFO: 28-07-2016-16_14_12 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:14:12 PM null
+INFO: 28-07-2016-16_14_12 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:19:35 PM null
+INFO: 28-07-2016-16_19_35 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:19:35 PM null
+INFO: 28-07-2016-16_19_35 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:20:27 PM null
+INFO: 28-07-2016-16_20_27 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:20:27 PM null
+INFO: 28-07-2016-16_20_27 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:21:34 PM null
+INFO: 28-07-2016-16_21_34 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:21:34 PM null
+INFO: 28-07-2016-16_21_34 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:22:05 PM null
+INFO: 28-07-2016-16_22_05 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:22:05 PM null
+INFO: 28-07-2016-16_22_05 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:22:13 PM null
+INFO: 28-07-2016-16_22_13 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:22:13 PM null
+INFO: 28-07-2016-16_22_13 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:24:29 PM null
+INFO: 28-07-2016-16_24_29 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:24:30 PM null
+INFO: 28-07-2016-16_24_30 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:26:36 PM null
+INFO: 28-07-2016-16_26_36 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:26:36 PM null
+INFO: 28-07-2016-16_26_36 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:26:46 PM null
+INFO: 28-07-2016-16_26_46 :- JSLM: .xml tag missing, was automatically added to Job XML save name: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:26:46 PM null
+INFO: 28-07-2016-16_26_46 :- JSLM: Job XML converted from objects and saved to XML at: nasp_results3.xmlClass: null, Method: null
+Jul 28, 2016 4:34:39 PM null
+INFO: 28-07-2016-16_34_39 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:34:40 PM null
+INFO: 28-07-2016-16_34_40 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:02 PM null
+INFO: 28-07-2016-16_36_02 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:07 PM null
+INFO: 28-07-2016-16_36_07 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:36:19 PM null
+INFO: 28-07-2016-16_36_19 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:36:19 PM null
+INFO: 28-07-2016-16_36_19 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:36:19 PM null
+INFO: 28-07-2016-16_36_19 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:36:20 PM null
+INFO: 28-07-2016-16_36_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:20 PM null
+INFO: 28-07-2016-16_36_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:20 PM null
+INFO: 28-07-2016-16_36_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 28, 2016 4:36:25 PM null
+INFO: 28-07-2016-16_36_25 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 28, 2016 4:36:28 PM null
+INFO: 28-07-2016-16_36_28 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:26 PM null
+INFO: 28-07-2016-16_38_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:31 PM null
+INFO: 28-07-2016-16_38_31 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:38:43 PM null
+SEVERE: 28-07-2016-16_38_43 :- NM - Unable to Open the Session: 
+SSH_MSG_DISCONNECT: 2 Too many authentication failures for jlabadie Class: null, Method: null
+Jul 28, 2016 4:38:43 PM null
+INFO: 28-07-2016-16_38_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:43 PM null
+INFO: 28-07-2016-16_38_43 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:43 PM null
+INFO: 28-07-2016-16_38_43 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 28, 2016 4:38:43 PM null
+INFO: 28-07-2016-16_38_43 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 28, 2016 4:38:49 PM null
+INFO: 28-07-2016-16_38_49 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:38:49 PM null
+INFO: 28-07-2016-16_38_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:38:49 PM null
+INFO: 28-07-2016-16_38_49 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:38:50 PM null
+INFO: 28-07-2016-16_38_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:50 PM null
+INFO: 28-07-2016-16_38_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:50 PM null
+INFO: 28-07-2016-16_38_50 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:55 PM null
+INFO: 28-07-2016-16_38_55 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 28, 2016 4:38:56 PM null
+INFO: 28-07-2016-16_38_56 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 28, 2016 4:38:59 PM null
+INFO: 28-07-2016-16_38_59 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Jul 28, 2016 4:44:52 PM null
+INFO: 28-07-2016-16_44_52 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:44:52 PM null
+INFO: 28-07-2016-16_44_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:44:52 PM null
+INFO: 28-07-2016-16_44_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:44:53 PM null
+INFO: 28-07-2016-16_44_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:44:53 PM null
+INFO: 28-07-2016-16_44_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:44:53 PM null
+INFO: 28-07-2016-16_44_53 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RPBT: Init at root: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618/Class: null, Method: null
+Jul 28, 2016 4:44:58 PM null
+INFO: 28-07-2016-16_44_58 :- RFSM: Remote path found: /scratch/croe/Alignments/Crypto/VGIII_analysis/all_types_041618Class: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:45:18 PM null
+INFO: 28-07-2016-16_45_18 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:45:23 PM null
+INFO: 28-07-2016-16_45_23 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Jul 28, 2016 4:45:24 PM null
+INFO: 28-07-2016-16_45_24 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Jul 28, 2016 4:49:26 PM null
+INFO: 28-07-2016-16_49_26 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:49:26 PM null
+INFO: 28-07-2016-16_49_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:49:26 PM null
+INFO: 28-07-2016-16_49_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:49:27 PM null
+INFO: 28-07-2016-16_49_27 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:49:27 PM null
+INFO: 28-07-2016-16_49_27 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:49:27 PM null
+INFO: 28-07-2016-16_49_27 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:49:32 PM null
+INFO: 28-07-2016-16_49_32 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Jul 28, 2016 4:49:33 PM null
+INFO: 28-07-2016-16_49_33 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Jul 28, 2016 4:53:26 PM null
+INFO: 28-07-2016-16_53_26 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:53:26 PM null
+INFO: 28-07-2016-16_53_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:53:26 PM null
+INFO: 28-07-2016-16_53_26 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:53:26 PM null
+INFO: 28-07-2016-16_53_26 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:53:27 PM null
+INFO: 28-07-2016-16_53_27 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:53:27 PM null
+INFO: 28-07-2016-16_53_27 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:53:31 PM null
+INFO: 28-07-2016-16_53_31 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Jul 28, 2016 4:53:32 PM null
+INFO: 28-07-2016-16_53_32 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Jul 28, 2016 4:55:14 PM null
+INFO: 28-07-2016-16_55_14 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 4:55:14 PM null
+INFO: 28-07-2016-16_55_14 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:55:14 PM null
+INFO: 28-07-2016-16_55_14 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 4:55:15 PM null
+INFO: 28-07-2016-16_55_15 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:55:15 PM null
+INFO: 28-07-2016-16_55_15 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:55:15 PM null
+INFO: 28-07-2016-16_55_15 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:55:19 PM null
+INFO: 28-07-2016-16_55_19 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Jul 28, 2016 4:55:20 PM null
+INFO: 28-07-2016-16_55_20 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Jul 28, 2016 5:02:18 PM null
+INFO: 28-07-2016-17_02_18 :- LM: Logger initialized.Class: null, Method: null
+Jul 28, 2016 5:02:18 PM null
+INFO: 28-07-2016-17_02_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Jul 28, 2016 5:02:18 PM null
+INFO: 28-07-2016-17_02_18 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Jul 28, 2016 5:02:19 PM null
+INFO: 28-07-2016-17_02_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 5:02:19 PM null
+INFO: 28-07-2016-17_02_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 5:02:19 PM null
+INFO: 28-07-2016-17_02_19 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 5:02:23 PM null
+INFO: 28-07-2016-17_02_23 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- Current Remote Settings successfully returned.Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Jul 28, 2016 5:02:24 PM null
+INFO: 28-07-2016-17_02_24 :- RFSM: Remote path found: /scratchClass: null, Method: null

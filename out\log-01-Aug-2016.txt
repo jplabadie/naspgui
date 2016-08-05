@@ -1,0 +1,341 @@
+Aug 01, 2016 9:42:11 AM null
+INFO: 01-08-2016-09_42_11 :- LM: Logger initialized.Class: null, Method: null
+Aug 01, 2016 9:42:11 AM null
+INFO: 01-08-2016-09_42_11 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Aug 01, 2016 9:42:11 AM null
+INFO: 01-08-2016-09_42_11 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Aug 01, 2016 9:42:12 AM null
+INFO: 01-08-2016-09_42_12 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:42:12 AM null
+INFO: 01-08-2016-09_42_12 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:42:12 AM null
+INFO: 01-08-2016-09_42_12 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:33 AM null
+INFO: 01-08-2016-09_43_33 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- LM: Logger initialized.Class: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:46 AM null
+INFO: 01-08-2016-09_43_46 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:56 AM null
+INFO: 01-08-2016-09_43_56 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RNU: Login message = 
+Last login: Sun Jul 31 23:11:17 2016 from 10.57.5.231
+
+Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Aug 01, 2016 9:43:57 AM null
+INFO: 01-08-2016-09_43_57 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Aug 01, 2016 9:44:15 AM null
+INFO: 01-08-2016-09_44_15 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Connecting to aspen.tgen.org port 22
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Connection established
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Remote version string: SSH-2.0-OpenSSH_5.3
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Local version string: SSH-2.0-JSCH-0.1.53
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- CheckCiphers: aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc,3des-ctr,arcfour,arcfour128,arcfour256
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- aes256-ctr is not available.
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- aes192-ctr is not available.
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- aes256-cbc is not available.
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- aes192-cbc is not available.
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- CheckKexes: diffie-hellman-group14-sha1,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- CheckSignatures: ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_KEXINIT sent
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_KEXINIT received
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: ssh-rsa,ssh-dss
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: none,zlib@openssh.com
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: none,zlib@openssh.com
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: 
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server: 
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: ssh-rsa,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: aes128-ctr,aes128-cbc,3des-ctr,3des-cbc,blowfish-cbc
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: aes128-ctr,aes128-cbc,3des-ctr,3des-cbc,blowfish-cbc
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: hmac-md5,hmac-sha1,hmac-sha2-256,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: hmac-md5,hmac-sha1,hmac-sha2-256,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: none
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: none
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: 
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client: 
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: server->client aes128-ctr hmac-md5 none
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- kex: client->server aes128-ctr hmac-md5 none
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_KEXDH_INIT sent
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- expecting SSH_MSG_KEXDH_REPLY
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- ssh_rsa_verify: signature true
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Host 'aspen.tgen.org' is known and matches the RSA host key
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_NEWKEYS sent
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_NEWKEYS received
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_SERVICE_REQUEST sent
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- SSH_MSG_SERVICE_ACCEPT received
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Authentications that can continue: gssapi-with-mic,publickey,keyboard-interactive,password
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Next authentication method: gssapi-with-mic
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Authentications that can continue: publickey,keyboard-interactive,password
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Next authentication method: publickey
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Authentications that can continue: password
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Next authentication method: password
+Aug 01, 2016 9:44:24 AM null
+INFO: 01-08-2016-09_44_24 :- Authentication succeeded (password).
+Aug 01, 2016 10:05:47 AM null
+INFO: 01-08-2016-10_05_47 :- LM: Logger initialized.Class: null, Method: null
+Aug 01, 2016 10:05:47 AM null
+INFO: 01-08-2016-10_05_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Aug 01, 2016 10:05:47 AM null
+INFO: 01-08-2016-10_05_47 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Aug 01, 2016 10:05:48 AM null
+INFO: 01-08-2016-10_05_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:05:48 AM null
+INFO: 01-08-2016-10_05_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:05:48 AM null
+INFO: 01-08-2016-10_05_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:06:10 AM null
+INFO: 01-08-2016-10_06_10 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RNU: Login message = 
+Last login: Mon Aug  1 09:43:57 2016 from 10.56.2.30
+
+Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Aug 01, 2016 10:06:11 AM null
+INFO: 01-08-2016-10_06_11 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Aug 01, 2016 10:06:23 AM null
+INFO: 01-08-2016-10_06_23 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Aug 01, 2016 10:09:51 AM null
+INFO: 01-08-2016-10_09_51 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- LM: Logger initialized.Class: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:49:52 AM null
+INFO: 01-08-2016-10_49_52 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:49:58 AM null
+INFO: 01-08-2016-10_49_58 :- RNU: Attempting to Open Remote Session and related connections.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RNU: Open Session - Session connected successfully.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RNU: Open Session - SFTP/EXEC Channels connected successfully.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RNU: Open Session - I/O Streams connected successfully.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RNU: Open Session - SFTP channel at directory: /home/jlabadieClass: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RNU: Login message = 
+Last login: Mon Aug  1 10:07:17 2016 from 10.56.2.30
+
+Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RPBT: Init at root: /scratch/Class: null, Method: null
+Aug 01, 2016 10:49:59 AM null
+INFO: 01-08-2016-10_49_59 :- RFSM: Remote path found: /scratchClass: null, Method: null
+Aug 01, 2016 10:50:02 AM null
+INFO: 01-08-2016-10_50_02 :- JSLM: Job XML loaded and converted to objects from: /Users/jlabadie/Workspace/naspgui/target/classes/xml/defaultjob.xmlClass: null, Method: null
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Connecting to aspen.tgen.org port 22
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Connection established
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Remote version string: SSH-2.0-OpenSSH_5.3
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Local version string: SSH-2.0-JSCH-0.1.53
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- CheckCiphers: aes256-ctr,aes192-ctr,aes128-ctr,aes256-cbc,aes192-cbc,aes128-cbc,3des-ctr,arcfour,arcfour128,arcfour256
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- aes256-ctr is not available.
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- aes192-ctr is not available.
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- aes256-cbc is not available.
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- aes192-cbc is not available.
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- CheckKexes: diffie-hellman-group14-sha1,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- CheckSignatures: ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_KEXINIT sent
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_KEXINIT received
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: ssh-rsa,ssh-dss
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160,hmac-ripemd160@openssh.com,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: none,zlib@openssh.com
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: none,zlib@openssh.com
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: 
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server: 
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: ssh-rsa,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: aes128-ctr,aes128-cbc,3des-ctr,3des-cbc,blowfish-cbc
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: aes128-ctr,aes128-cbc,3des-ctr,3des-cbc,blowfish-cbc
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: hmac-md5,hmac-sha1,hmac-sha2-256,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: hmac-md5,hmac-sha1,hmac-sha2-256,hmac-sha1-96,hmac-md5-96
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: none
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: none
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: 
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client: 
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: server->client aes128-ctr hmac-md5 none
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- kex: client->server aes128-ctr hmac-md5 none
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_KEXDH_INIT sent
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- expecting SSH_MSG_KEXDH_REPLY
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- ssh_rsa_verify: signature true
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Host 'aspen.tgen.org' is known and matches the RSA host key
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_NEWKEYS sent
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_NEWKEYS received
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_SERVICE_REQUEST sent
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- SSH_MSG_SERVICE_ACCEPT received
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Authentications that can continue: gssapi-with-mic,publickey,keyboard-interactive,password
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Next authentication method: gssapi-with-mic
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Authentications that can continue: publickey,keyboard-interactive,password
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Next authentication method: publickey
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Authentications that can continue: password
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Next authentication method: password
+Aug 01, 2016 10:50:03 AM null
+INFO: 01-08-2016-10_50_03 :- Authentication succeeded (password).
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- LM: Logger initialized.Class: null, Method: null
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/general_settings.jsonClass: null, Method: null
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- USM: Settings successfully loaded from local file: /Users/jlabadie/Workspace/naspgui/target/classes/configs/remote_settings.jsonClass: null, Method: null
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 11:42:48 AM null
+INFO: 01-08-2016-11_42_48 :- Current Remote Settings successfully returned.Class: null, Method: null
+Aug 01, 2016 11:43:03 AM null
+WARNING: 01-08-2016-11_43_03 :- MainController: Login FailedClass: null, Method: null
