@@ -142,7 +142,7 @@ class Browser extends Region {
         );
 
         // load the home page
-        webEngine.load( this.getClass().getResource("examples/circulardemo.html").toExternalForm() );
+        webEngine.load( this.getClass().getResource("/web/examples/multiline.html").toExternalForm() );
 
         //add components
         getChildren().add(toolBar);
