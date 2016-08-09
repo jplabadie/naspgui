@@ -18,54 +18,67 @@ public class ReformatCSV {
     public File reformat( File input ) {
 
         Reader read_in;
-        Iterable<CSVRecord> records = null;
+        Iterable< CSVRecord > records = null;
         String output_name = "reform_" + input.getName() ;
         try {
             read_in = new FileReader( input );
             records = CSVFormat.DEFAULT.parse( read_in );
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
 
-        ArrayList<String> lines = new ArrayList<>();
-        int sample_index = 2; // samples start in the 2 index (aggdist, then true samples)
+        ArrayList<CSVRecord> recs = new ArrayList<>();
+        ArrayList<String[]> lines = new ArrayList<>();
+
+        for(CSVRecord r : records){
+            recs.add( r );
+        }
+
         int size = 10;
         boolean firstline = true;
-        CSVRecord header = null;
-        while( sample_index < size ){
+        String[] samples = null;
+        String sample = "";
+        for( int sample_index = 0; sample_index < size; sample_index++ ){
 
-            for ( CSVRecord record : records ) {
+            for ( int i = 0; i < recs.size(); i++ ) {
+                CSVRecord record = recs.get( i );
                 if( firstline ) {
-                    header = record;
-                    System.out.println( header.toString() );
+                    CSVRecord header = record;
+                    samples = new String[ header.size() ];
+                    for( int ii = 3; ii < header.size(); ii++ ){
+                        samples[ ii-3 ] = header.get( ii );
+                        System.out.println( samples[ ii-3 ] );
+                    }
                     firstline = false;
-                    size = record.size();
+
+                    System.out.println( "s1:" + size + "r:" + record.size() + ":" + record.toString() );
                     continue;
                 }
+                sample = samples[ sample_index ];
+                size = record.size();
+                String contig = record.get( 0 );
 
-                String from = record.get( 0 );
-                String to = record.get( 1 );
+                String from = record.get( 1 );
+                String to = record.get( 2 );
                 String value = record.get( sample_index );
-                String line = header.get( sample_index )+","+from + "," + to + ","  + value;
+                String[] line = { contig, sample, from , to , value };
                 lines.add( line );
             }
 
-            sample_index ++ ;
-            System.out.println("index: " + sample_index);
+            System.out.println( "index: " + samples[sample_index] );
         }
 
         FileWriter fileWriter = null;
         CSVPrinter printer = null;
 
-        final String[] HEADER = { "sample","start","end","value" };
+        final String[] HEADER = { "contig", "sample", "start", "end", "value" };
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader( HEADER );
 
         final Appendable out = new StringBuilder();
         try {
             fileWriter = new FileWriter( output_name );
             printer = new CSVPrinter( fileWriter, csvFileFormat );
-            printer.printRecord( HEADER );
-            printer.printRecord( lines );
+            printer.printRecords( lines );
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,13 +88,10 @@ public class ReformatCSV {
                 fileWriter.flush();
                 fileWriter.close();
                 printer.close();
-            } catch (IOException | NullPointerException e) {
+            } catch ( IOException | NullPointerException e ) {
                 e.printStackTrace();
             }
         }
-
         return new File( output_name );
     }
-
-
 }
