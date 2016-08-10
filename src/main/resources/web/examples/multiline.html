@@ -1,134 +1,165 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style> /* set the CSS */
-
-body { font: 12px Arial;}
-
-path {
-    stroke: steelblue;
-    stroke-width: 2;
-    fill: none;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: grey;
-    stroke-width: 1;
-    shape-rendering: crispEdges;
-}
-
-.legend {
-    font-size: 16px;
-    font-weight: bold;
-    text-anchor: middle;
-}
-
-</style>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            font: 9px sans-serif;
+            color: #121401;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #121401;
+            stroke-width: 2px;
+            shape-rendering: crispEdges;
+        }
+    </style>
+</head>
 <body>
-
-<!-- load the d3.js library -->
-<script src="http://d3js.org/d3.v3.min.js"></script>
-
+<h2 style="padding-left:60px;">Total Funding Rounds in CrunchBase by Quarter</h2>
+<script src="../lib/d3.min.js"></script>
+<script src="../lib/jquery-3.1.0.js"></script>
+<script src="../lib/bootstrap.js"></script>
 <script>
+    var margin = {top: 20, right: 55, bottom: 30, left: 40},
+            width  = 1000 - margin.left - margin.right,
+            height = 500  - margin.top  - margin.bottom;
 
-    // Set the dimensions of the canvas / graph
-    var margin = {top: 30, right: 20, bottom: 70, left: 50},
-            width = 800 - margin.left - margin.right,
-            height = 600 - margin.top - margin.bottom;
+    var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], .1);
 
-    // Parse the date / time
-    var parseDate = d3.time.format("%b %Y").parse;
+    var y = d3.scale.linear()
+            .rangeRound([height, 0]);
 
-    // Set the ranges
-    var x = d3.scale.linear().range( [0, width]  );
-    var y = d3.scale.linear().range( [height, 0] );
+    var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
 
-    // Define the axes
-    var xAxis = d3.svg.axis().scale( x )
-            .orient( "bottom" ).ticks( 100 );
+    var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
 
-    var yAxis = d3.svg.axis().scale(y)
-            .orient( "left" ).ticks( 50 );
+    var line = d3.svg.line()
 
-    // Define the line
-    var snpline = d3.svg.line()
-            .x(function(d) { return x( d.start ); })
-            .y(function(d) { return y( d.value ); });
+            .x(function (d) { return x(d.label) + x.rangeBand() / 2; })
+            .y(function (d) { return y(d.value); });
 
-    // Adds the svg canvas
-    var svg = d3.select("body")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+    var color = d3.scale.ordinal()
+            .range(["#001c9c","#101b4d","#475003","#9c8305","#d3c47c"]);
+
+    var svg = d3.select("body").append("svg")
+            .attr("width",  width  + margin.left + margin.right)
+            .attr("height", height + margin.top  + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // Get the data
-    d3.csv("reform_big_results.csv", function( error, data ) {
-        data.forEach(function(d) {
-            d.start = d.start;
-            d.end = d.end;
-            d.sample = d.sample;
-            d.value = d.value;
+    d3.csv("big_results.csv", function (error, data) {
+
+        var labelVar = 'quarter';
+        var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar;});
+        color.domain(varNames);
+
+        var seriesData = varNames.map(function (name) {
+            return {
+                name: name,
+                values: data.map(function (d) {
+                    return {name: name, label: d[labelVar], value: +d[name]};
+                })
+            };
         });
 
-        // Scale the domain of the data
-        x.domain( d3.extent( data, function(d) { return d.start; } ));
-        y.domain( [0, d3.max( data, function(d) { return 300; })] );
+        x.domain(data.map(function (d) { return d.quarter; }));
+        y.domain([
+            d3.min(seriesData, function (c) {
+                return d3.min(c.values, function (d) { return d.value; });
+            }),
+            d3.max(seriesData, function (c) {
+                return d3.max(c.values, function (d) { return d.value; });
+            })
+        ]);
 
-        // Nest the entries by symbol
-        var dataNest = d3.nest()
-                .key(function(d) { return d.sample; })
-                .entries(data);
-
-        var color = d3.scale.category10();   // set the colour scale
-
-        legendSpace = width/dataNest.length; // spacing for the legend
-
-        // Loop through each symbol / key
-        dataNest.forEach( function(d,i) {
-
-            svg.append("path")
-                    .attr("class", "line")
-                    .style("stroke", function() { // Add the colours dynamically
-                        return d.color = color(d.key); })
-                    .attr("id", 'tag'+d.key.replace(/\s+/g, '')) // assign ID
-                    .attr("d", snpline(d.values));
-
-            // Add the Legend
-            svg.append("text")
-                    .attr("x", ( legendSpace/2 ) + i * legendSpace )  // space legend
-                    .attr("y", height + (margin.bottom/2)+ 5)
-                    .attr("class", "legend")    // style the legend
-                    .style("fill", function() { // Add the colours dynamically
-                        return d.color = color( d.key ); })
-                    .on("click", function(){
-                        // Determine if current line is visible
-                        var active   = d.active ? false : true,
-                                newOpacity = active ? 0 : 1;
-                        // Hide or show the elements based on the ID
-                        d3.select( "#tag" + d.key.replace(/\s+/g, '') )
-                                .transition().duration( 100 )
-                                .style( "opacity", newOpacity );
-                        // Update whether or not the elements are active
-                        d.active = active;
-                    })
-                    .text( d.key );
-        });
-
-        // Add the X Axis
         svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis);
 
-        // Add the Y Axis
         svg.append("g")
                 .attr("class", "y axis")
-                .call(yAxis);
-    });
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Number of Rounds");
 
+        var series = svg.selectAll(".series")
+                .data(seriesData)
+                .enter().append("g")
+                .attr("class", "series");
+
+        series.append("path")
+                .attr("class", "line")
+                .attr("d", function (d) { return line(d.values); })
+                .style("stroke", function (d) { return color(d.name); })
+                .style("stroke-width", "4px")
+                .style("fill", "none")
+
+        series.selectAll(".point")
+                .data(function (d) { return d.values; })
+                .enter().append("circle")
+                .attr("class", "point")
+                .attr("cx", function (d) { return x(d.label) + x.rangeBand()/2; })
+                .attr("cy", function (d) { return y(d.value); })
+                .attr("r", "5px")
+                .style("fill", function (d) { return color(d.name); })
+                .style("stroke", "grey")
+                .style("stroke-width", "2px")
+                .on("mouseover", function (d) { showPopover.call(this, d); })
+                .on("mouseout",  function (d) { removePopovers(); })
+
+        var legend = svg.selectAll(".legend")
+                .data(varNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(55," + i * 20 + ")"; });
+
+        legend.append("rect")
+                .attr("x", width - 10)
+                .attr("width", 10)
+                .attr("height", 10)
+                .style("fill", color)
+                .style("stroke", "grey");
+
+        legend.append("text")
+                .attr("x", width - 12)
+                .attr("y", 6)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+        function removePopovers () {
+            $('.popover').each(function() {
+                $(this).remove();
+            });
+        }
+
+        function showPopover (d) {
+            $(this).popover({
+                title: d.name,
+                placement: 'auto top',
+                container: 'body',
+                trigger: 'manual',
+                html : true,
+                content: function() {
+                    return "Quarter: " + d.label +
+                            "<br/>Rounds: " + d3.format(",")(d.value ? d.value: d.y1 - d.y0); }
+            });
+            $(this).popover('show')
+        }
+    });
 </script>
 </body>
-
+</html>
