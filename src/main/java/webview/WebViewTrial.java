@@ -31,7 +31,7 @@ import netscape.javascript.JSObject;
  * Project naspgui.
  * Created by jlabadie on 8/4/16.
  *
- * @Author jlabadie
+ * @author jlabadie
  */
 public class WebViewTrial extends Application {
     @Override
@@ -124,25 +124,25 @@ class Browser extends Region {
 
         // process page loading
         webEngine.getLoadWorker().stateProperty().addListener(
-                new ChangeListener<Worker.State>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Worker.State> ov,
-                                        Worker.State oldState, Worker.State newState) {
-                        toolBar.getChildren().remove(showPrevDoc);
-                        if (newState == Worker.State.SUCCEEDED) {
-                            JSObject win;
-                            win = (JSObject) webEngine.executeScript("window");
-                            win.setMember("app", new JavaApp());
-                            if (needDocumentationButton) {
-                                toolBar.getChildren().add(showPrevDoc);
-                            }
+            new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> ov,
+                                    Worker.State oldState, Worker.State newState) {
+                    toolBar.getChildren().remove(showPrevDoc);
+                    if (newState == Worker.State.SUCCEEDED) {
+                        JSObject win;
+                        win = (JSObject) webEngine.executeScript("window");
+                        win.setMember("app", new JavaApp());
+                        if (needDocumentationButton) {
+                            toolBar.getChildren().add(showPrevDoc);
                         }
                     }
                 }
+            }
         );
 
         // load the home page
-        webEngine.load( this.getClass().getResource("/web/examples/multiline.html").toExternalForm() );
+        webEngine.load( this.getClass().getResource("/web/examples/01-line_chart/multi-series_line_chart.html").toExternalForm() );
 
         //add components
         getChildren().add(toolBar);
