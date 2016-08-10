@@ -142,7 +142,7 @@ class Browser extends Region {
         );
 
         // load the home page
-        webEngine.load( this.getClass().getResource("/web/examples/01-line_chart/multi-series_line_chart.html").toExternalForm() );
+        webEngine.load( this.getClass().getResource("/web/multiple-line.html").toExternalForm() );
 
         //add components
         getChildren().add(toolBar);
