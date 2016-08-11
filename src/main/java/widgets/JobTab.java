@@ -139,7 +139,6 @@ public class JobTab extends Tab {
 
         preview_job.setOnAction( event -> {
 
-
         });
 
         /**
