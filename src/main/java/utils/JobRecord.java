@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 /**
  * Simple object for holding details regarding a job submission
  *
@@ -14,13 +16,24 @@ public class JobRecord {
     private String start_timestamp;
     private String end_timestamp;
     private boolean completed;
+    private List<String> jobIds;
 
-    public JobRecord(String username, String server, Integer port, String remote_xml_path, String local_xml_path) {
+    public JobRecord(String username, String server, Integer port, String remote_xml_path,
+                     String local_xml_path, List<String> jobids) {
         this.username = username;
         this.server = server;
         this.port = port;
         this.remote_xml_path = remote_xml_path;
         this.local_xml_path = local_xml_path;
+        this.jobIds = jobids;
+    }
+
+    public List getJobIds(){
+        return jobIds;
+    }
+
+    public void setJobIds( List<String> jobids ){
+        jobIds = jobids;
     }
 
     public String getUsername() {

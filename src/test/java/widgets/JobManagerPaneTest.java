@@ -40,6 +40,7 @@ public class JobManagerPaneTest extends Application {
             Assert.fail();
         }
 
+        //Todo: This entire process is very touchy and potentitally unreliable, needs to be formalized and strengthened
         ArrayList<String> result = nm.execCommand( "qstat -a" );
         ArrayList<Job> jobs  = new ArrayList<>();
 

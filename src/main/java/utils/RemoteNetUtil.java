@@ -72,4 +72,10 @@ public interface RemoteNetUtil {
     boolean isRemoteDir(String remote_dir_abs_path);
 
     boolean isInitialized();
+
+    String getUsername();
+
+    String getHost();
+
+    Integer getPort();
 }

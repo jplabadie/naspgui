@@ -462,7 +462,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * Return port being used for the current session
      * @return port as an int
      */
-    public int getPort(){
+    public Integer getPort(){
         if( isInitialized() )
             return session.getPort();
         log.warn( null, null, "RN: Cannot get port, session is not active." );
