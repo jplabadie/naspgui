@@ -67,7 +67,6 @@ public class JobTrackingManager {
     }
 
     public void updateRemoteJobRecord( File job_records_json, String directory ){
-
         try{
             log.info( null, null, "JM: Update job records for " + rnm.getUsername() + " at "
                     + rnm.getHost() + ":" + rnm.getPort() + " with json saved to: " + directory );
@@ -77,9 +76,6 @@ public class JobTrackingManager {
         catch ( Exception e ){
             log.error( getClass().toString(), "updateRemoteJobRecord" , " Update job record failed." );
         }
-
-
-
     }
 
     /**
@@ -114,8 +110,8 @@ public class JobTrackingManager {
         String path = "out\\jobs\\jobrecords.json";
         try (FileWriter file = new FileWriter( path )) {
             file.write( jobrecords.toJSONString() );
-
             log.info(null, null, "JM: Job Dispatch Configuration logged to file: " + path);
+
         } catch (IOException e) {
             e.printStackTrace();
             log.error(null, null, "JM: Failed to log Job Dispatch Configuration to file: " + path + "\nReason:\n" + e.getMessage());
