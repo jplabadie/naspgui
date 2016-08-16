@@ -108,13 +108,13 @@ public class JobTrackingManager {
 
         // try-with-resources statement based on post comment below :)
         String path = "out\\jobs\\jobrecords.json";
-        try (FileWriter file = new FileWriter( path )) {
+        try ( FileWriter file = new FileWriter( path ) ) {
             file.write( jobrecords.toJSONString() );
-            log.info(null, null, "JM: Job Dispatch Configuration logged to file: " + path);
+            log.info( null, null, "JM: Job Dispatch Configuration logged to file: " + path );
 
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
-            log.error(null, null, "JM: Failed to log Job Dispatch Configuration to file: " + path + "\nReason:\n" + e.getMessage());
+            log.error( null, null, "JM: Failed to log Job Dispatch Configuration to file: " + path + "\nReason:\n" + e.getMessage());
         }
     }
 
