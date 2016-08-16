@@ -15,7 +15,7 @@ public class ReformatCSVTest {
     public void reformat() throws Exception {
 
         ReformatCSV rf = new ReformatCSV();
-        File file = new File( getClass().getResource("/web/examples/big_results.csv").getPath() );
+        File file = new File( getClass().getResource( "/web/examples/big_results.csv" ).getPath() );
 
         System.out.println( file.toString() );
         rf.reformat( file );

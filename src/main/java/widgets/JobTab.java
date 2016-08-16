@@ -63,6 +63,7 @@ public class JobTab extends Tab {
 
     /**
      *  Creates a blank job and initializes new NASP data
+     *
      */
     void initialize() {
         borderPane.setPrefHeight( 900 );
@@ -90,7 +91,7 @@ public class JobTab extends Tab {
         borderPane.setCenter( scrollPane ); // add the scroll pane to the Center region of the BorderPane
 
         vBox.getChildren().addAll( optspane, filespane, xappspane ); // add our GridPanes to the VBox ( order matters )
-        vBox.setPadding( new Insets(50,20,20,50) );
+        vBox.setPadding( new Insets( 50,20,20,50 ) );
 
         /**
          * Define 3 buttons for Start/Save/Load, and add them to a ToolBar at the bottom of the view
@@ -130,8 +131,8 @@ public class JobTab extends Tab {
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
 
-            remotepath = remotepath +"/"+ outfile.getName();
-            net.upload( outfile, remotepath);
+            remotepath = remotepath + "/" + outfile.getName();
+            net.upload( outfile, remotepath );
             ArrayList<String> before_run = net.getUserJobs();
             net.runNaspJob( remotepath );
             ArrayList<String> after_run = net.getUserJobs();
@@ -146,7 +147,7 @@ public class JobTab extends Tab {
          */
         this.getContent().setOnDragOver( new EventHandler<DragEvent>() {
             @Override
-            public void handle(DragEvent event) {
+            public void handle( DragEvent event ) {
                 if( event.getDragboard().hasString() ){
                     event.acceptTransferModes( TransferMode.ANY );
                 }
@@ -161,7 +162,7 @@ public class JobTab extends Tab {
             public void handle(DragEvent event) {
                 if ( event.getDragboard().hasString() ) {
                     borderPane.setBackground(
-                            new Background( new BackgroundFill( Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY))
+                            new Background( new BackgroundFill( Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY ))
                     );
                 }
                 event.consume();
@@ -172,12 +173,12 @@ public class JobTab extends Tab {
          * Enable Drag-and-Drop Drop event handling
          */
         this.getContent().setOnDragDropped( new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
+            public void handle( DragEvent event ) {
 
                 Dragboard db = event.getDragboard();
-                System.out.println(db.getString());
+                System.out.println( db.getString() );
                 boolean success = false;
-                if (db.hasString()) {
+                if ( db.hasString() ) {
 
                     ArrayList<String> files = net.getAllFiles( db.getString() );
 

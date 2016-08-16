@@ -21,34 +21,33 @@ import java.util.logging.SimpleFormatter;
 public class LogManager implements Logger{
 
     private static FileHandler fh;
-    private static Hashtable<Integer, String> name = new Hashtable<>();
-
+    private static Hashtable< Integer, String > name = new Hashtable<>();
     private static LogManager instance = null;
 
     /**
      * Define log types
      */
     static{
-        name.put(DEBUG, "DEBUG");
-        name.put(INFO, "INFO");
-        name.put(WARN, "WARNING");
-        name.put(ERROR, "SEVERE");
+        name.put( DEBUG, "DEBUG" );
+        name.put( INFO, "INFO" );
+        name.put( WARN, "WARNING" );
+        name.put( ERROR, "SEVERE" );
     }
 
     protected LogManager(){
 
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("out\\"+"log-"+ getDate()+".txt",true);
+            fh = new FileHandler( "out\\" + "log-" + getDate() + ".txt" , true );
 
 
             SimpleFormatter formatter = new SimpleFormatter();
-            fh.setFormatter(formatter);
+            fh.setFormatter( formatter );
 
             // the following statement is used to log any messages
-            this.info(null, null, "LM: Logger initialized.");
+            this.info( null, null, "LM: Logger initialized." );
 
-        } catch (SecurityException | IOException e) {
+        } catch ( SecurityException | IOException e ) {
             e.printStackTrace();
         }
     }
@@ -59,7 +58,7 @@ public class LogManager implements Logger{
      * @param level level of logging to check if enabled
      * @return true if logging at that level is enabled, false otherwise
      */
-    public boolean isEnabled(int level){
+    public boolean isEnabled( int level ){
         return true;
     }
 
@@ -68,14 +67,14 @@ public class LogManager implements Logger{
      * @param level the log level (type) {DEBUG,INFO,WARN,ERROR,FATAL}
      * @param message the log message for the action being logged
      */
-    public void log(int level, String message){
+    public void log( int level, String message ){
 
         message = getTimestamp() + " :- " + message;
 
-        LogRecord record = new LogRecord(Level.parse(name.get(level)),message);
-        fh.publish(record);
-        System.err.print( name.get( level )+": " ); //echo the message to System.err
-        System.err.println(message);
+        LogRecord record = new LogRecord( Level.parse( name.get( level )),message );
+        fh.publish( record );
+        System.err.print( name.get( level ) + ": " ); //echo the message to System.err
+        System.err.println( message );
     }
 
     /**
@@ -86,8 +85,8 @@ public class LogManager implements Logger{
      */
     public void info(String sourceClass, String sourceMethod, String message){
 
-        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
-        log(INFO,message + origin);
+        String origin = "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        log( INFO, message + origin );
     }
 
     /**
@@ -96,10 +95,10 @@ public class LogManager implements Logger{
      * @param sourceMethod the method in the class in which the log was called
      * @param message log message for WARN events
      */
-    public void warn(String sourceClass, String sourceMethod, String message){
+    public void warn( String sourceClass, String sourceMethod, String message ){
 
-        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
-        log(WARN,message + origin);
+        String origin= "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        log( WARN, message + origin );
     }
 
     /**
@@ -108,10 +107,10 @@ public class LogManager implements Logger{
      * @param sourceMethod the method in the class in which the log was called
      * @param message log messages for ERROR events
      */
-    public void error(String sourceClass, String sourceMethod, String message){
+    public void error( String sourceClass, String sourceMethod, String message ){
 
-        String origin= "Class: " + sourceClass + "," +" Method: " + sourceMethod;
-        log(ERROR,message + origin);
+        String origin= "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        log( ERROR, message + origin );
     }
 
     /**
@@ -120,22 +119,22 @@ public class LogManager implements Logger{
      */
     static String getTimestamp(){
 
-        Date date = new Date(System.currentTimeMillis());
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy-HH_mm_ss");
+        Date date = new Date( System.currentTimeMillis() );
+        DateFormat formatter = new SimpleDateFormat( "dd-MM-yyyy-HH_mm_ss" );
 
-        return formatter.format(date);
+        return formatter.format( date );
     }
 
     protected static String getDate(){
 
-        Date date = new Date(System.currentTimeMillis());
-        DateFormat formatter = new SimpleDateFormat("dd-MMM-YYYY");
+        Date date = new Date( System.currentTimeMillis() );
+        DateFormat formatter = new SimpleDateFormat( "dd-MMM-YYYY" );
 
-        return formatter.format(date);
+        return formatter.format( date );
     }
 
     public static LogManager getInstance() {
-        if(instance == null) {
+        if( instance == null ) {
             instance = new LogManager();
         }
         return instance;

@@ -65,7 +65,7 @@ public class ReformatCSV {
                 lines.add( line );
             }
 
-            System.out.println( "index: " + samples[sample_index] );
+            System.out.println( "index: " + samples[ sample_index ] );
         }
 
         FileWriter fileWriter = null;
@@ -80,7 +80,7 @@ public class ReformatCSV {
             printer = new CSVPrinter( fileWriter, csvFileFormat );
             printer.printRecords( lines );
 
-        } catch (IOException e) {
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
         finally{
