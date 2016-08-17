@@ -219,7 +219,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
     }
 
-
     /**
      * Accepts one or more Strings which represent linux commands. Commands are run in order on the remote system.
      * Output from stdout is stored in order in an ArrayList of Strings
@@ -277,7 +276,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                 line += out.charAt( i );
             }
         }
-
         return result;
     }
 
@@ -333,7 +331,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     }
 
     /**
-     *
      * @param job_XML_abs_path
      * @return true if the job started successfully, false otherwise
      */
@@ -347,7 +344,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         execCommand( "cd " + runpath );
         execCommand( "module load tnorth" );
         execCommand( "module load nasp" );
-        execCommand( "module load tnorth; module load nasp; nasp --config " + job_XML_abs_path );
+        execCommand( "nasp --config " + job_XML_abs_path );
         execCommand( "y" );
         //TODO: dreams
 

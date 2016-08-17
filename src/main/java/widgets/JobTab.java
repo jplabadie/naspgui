@@ -129,11 +129,12 @@ public class JobTab extends Tab {
         start_job.setOnAction( event -> {
             String xml_name = NASP_DATA.getOptions().getRunName();
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
+            remotepath = remotepath.substring(0, remotepath.lastIndexOf("/")) + "/";
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
-
+            System.out.println( "Uploaded: " + remotepath );
             remotepath = remotepath + outfile.getName();
             net.upload( outfile, remotepath );
-            System.out.println("Uploaded: "+ remotepath);
+            System.out.println( "Uploaded: " + remotepath );
             ArrayList<String> before_run = net.getUserJobs();
             net.runNaspJob( remotepath );
             ArrayList<String> after_run = net.getUserJobs();
