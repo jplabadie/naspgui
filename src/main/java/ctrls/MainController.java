@@ -92,10 +92,9 @@ public class MainController implements Initializable{
 
         /** Load Button Init */
         loadJobBtn.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    //@Override
-                    public void handle(final ActionEvent e) {
-
+            new EventHandler<ActionEvent>() {
+                //@Override
+                public void handle( final ActionEvent e ) {
 //                        final Stage dialogStage = new Stage();
 //                        FileChooser fileChooser = new FileChooser();
 //                        fileChooser.setTitle("Load Template");
@@ -104,58 +103,54 @@ public class MainController implements Initializable{
 //                        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("xml files (*.xml)", "*.xml");
 //                        fileChooser.getExtensionFilters().add(extFilter);
 //                        File file = fileChooser.showOpenDialog(dialogStage);
-//
-                        try {
+                    try {
 
-                            FXMLLoader loader = new FXMLLoader(getClass().
-                                    getResource("/job/NASPDefaultJobPane.fxml"));
-                            AnchorPane job_tab = loader.load();
-                          /*  JobTabMainController ctlr = loader.<JobTabMainController>getController();
+                        FXMLLoader loader = new FXMLLoader( getClass().
+                                getResource( "/job/NASPDefaultJobPane.fxml" ));
+                        AnchorPane job_tab = loader.load();
+                      /*  JobTabMainController ctlr = loader.<JobTabMainController>getController();
 
-                            ctlr.initialize(loader.getLocation(),loader.getResources());
+                        ctlr.initialize(loader.getLocation(),loader.getResources());
 
-                            Tab new_tab = new Tab("New Tab");
+                        Tab new_tab = new Tab("New Tab");
 
-                            new_tab.setContent(job_tab);
-                            jobTabPane.getTabs().add(new_tab);
-                            ctlr.showLoadNaspDialog();*/
+                        new_tab.setContent(job_tab);
+                        jobTabPane.getTabs().add(new_tab);
+                        ctlr.showLoadNaspDialog();*/
 
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
-                });
+                }
+            });
     }
 
     private void gracefulLogin(){
         LoginDialog ld = new LoginDialog();
         userpass = ld.showAndWait();
 
-
-        if (userpass.isPresent() && rfsm.isConnected()) {
-            UserSettingsManager.setUsername(userpass.get().getKey());
-            UserSettingsManager.setCurrentPassword(userpass.get().getValue());
-            initRemotePathBrowserTree(rfsm);
-
+        if ( userpass.isPresent() && rfsm.isConnected() ) {
+            UserSettingsManager.setUsername( userpass.get().getKey() );
+            UserSettingsManager.setCurrentPassword( userpass.get().getValue() );
+            initRemotePathBrowserTree( rfsm );
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText("Login Failed");
-            alert.setContentText("You are not logged in.");
+            Alert alert = new Alert( Alert.AlertType.WARNING );
+            alert.setTitle( "Login Failed" );
+            alert.setHeaderText( "Login Failed" );
+            alert.setContentText( "You are not logged in." );
             alert.showAndWait();
-            log.warn(null, null, "MainController: Login Failed");
+            log.warn( null, null, "MainController: Login Failed" );
         }
         nm = ld.getNet();
         ld.close();
     }
 
     private void gracefulQuit(){
-        log.info(null, null, "Quiting: Application Closing By Request.");
+        log.info( null, null, "Quiting: Application Closing By Request." );
         rfsm.close();
         Platform.exit();
     }
-
 
     /**
      *  On startup, creates a Handler which monitors the “Create New Job”
@@ -165,18 +160,18 @@ public class MainController implements Initializable{
      */
     private void initCreateNewJobHandler() {
         newJobBtn.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    //@Override
-                    public void handle(final ActionEvent e) {
-                        File input = new File(getClass().getResource("/xml/defaultjob.xml").getFile());
-                        NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
+            new EventHandler<ActionEvent>() {
+                //@Override
+                public void handle( final ActionEvent e) {
+                    File input = new File( getClass().getResource("/xml/defaultNaspNew.xml").getFile() );
+                    NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
 
-                        JobTab new_tab = new JobTab( nid );
-                        new_tab.setRemoteNet(nm);
-                        jobTabPane.getTabs().add(new_tab);
-
-                    }
-                });
+                    JobTab new_tab = new JobTab( nid );
+                    new_tab.setRemoteNet( nm );
+                    jobTabPane.getTabs().add( new_tab );
+                }
+            }
+        );
     }
 
     /**
@@ -184,20 +179,20 @@ public class MainController implements Initializable{
      */
     private void initUserSettingsPaneHandler() {
         settingsBtn.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    //@Override
-                    public void handle(final ActionEvent e) {
-                        try {
-                            jobTabPane.setVisible(false);
-                            AnchorPane user_settings = FXMLLoader.load( getClass()
-                                    .getResource("/main/UserSettingsPane.fxml") );
-                            centerPane = user_settings;
+            new EventHandler<ActionEvent>() {
+                //@Override
+                public void handle( final ActionEvent e ) {
+                    try {
+                        jobTabPane.setVisible(false);
+                        AnchorPane user_settings = FXMLLoader.load( getClass()
+                                .getResource( "/main/UserSettingsPane.fxml" ));
+                        centerPane = user_settings;
 
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
+                    } catch ( IOException e1 ) {
+                        e1.printStackTrace();
                     }
-                });
+                }
+            });
     }
 
     /**
@@ -210,19 +205,19 @@ public class MainController implements Initializable{
         File[] roots = File.listRoots();    // Get a list of all drives attached
 
         TreeItem<File> dummyRoot = new TreeItem<File>();    // This dummy node is used to that we have multiple drives as roots
-        dummyRoot.setValue(new File("local"));
+        dummyRoot.setValue( new File("local") );
         // Iterate over the list of drives and add them and their children as children to the dummy node
         for (File root : roots) {
             dummyRoot.getChildren().addAll( createNode(root) );
         }
 
-        localFileBrowserTree.setEditable(true);
+        localFileBrowserTree.setEditable( true );
         //TreeItem<File> root = createNode(new File("/"));
         //root.setExpanded(true);
 
         localFileBrowserTree.setCellFactory(new Callback<TreeView<File>, TreeCell<File>>() {
             @Override
-            public TreeCell<File> call(TreeView<File> param) {
+            public TreeCell<File> call( TreeView<File> param ) {
 
                 return new DraggableTreeCell<>();
             }
@@ -239,7 +234,6 @@ public class MainController implements Initializable{
      * directories into containers in a JobTabPane.
      */
     private void initRemotePathBrowserTree( RemoteFileSystemManager rfsm ) {
-
         Task<RemoteTreeItem> buildThread = new Task<RemoteTreeItem>() {
             @Override
             protected RemoteTreeItem call() throws Exception {
@@ -270,8 +264,8 @@ public class MainController implements Initializable{
                             return new DraggableTreeCell<>();
                         }
                     });
-                    remotePathBrowserTree.setRoot(finalRti);     // Set dummy node as root of the TreeView
-                    remotePathBrowserTree.setShowRoot(true);     // Hide the root so the drives appear as roots
+                    remotePathBrowserTree.setRoot( finalRti );     // Set dummy node as root of the TreeView
+                    remotePathBrowserTree.setShowRoot( true );     // Hide the root so the drives appear as roots
                 });
                 return rti;
             }
@@ -315,13 +309,13 @@ public class MainController implements Initializable{
 
                     // First getChildren() call, so we actually go off and
                     // determine the children of the File contained in this TreeItem.
-                    super.getChildren().setAll( buildChildren( this ) );
+                    super.getChildren().setAll( buildChildren( this ));
                 }
                 return super.getChildren();
             }
 
             @Override public boolean isLeaf() {
-                if (isFirstTimeLeaf) {
+                if ( isFirstTimeLeaf ) {
                     isFirstTimeLeaf = false;
                     File f = getValue();
                     isLeaf = f.isFile();
@@ -329,7 +323,7 @@ public class MainController implements Initializable{
                 return isLeaf;
             }
 
-            private ObservableList<TreeItem<File>> buildChildren(TreeItem<File> tree_item) {
+            private ObservableList<TreeItem<File>> buildChildren( TreeItem<File> tree_item ) {
                 File f = tree_item.getValue();
 
                 if ( f != null && f.isDirectory() ) {
@@ -341,11 +335,9 @@ public class MainController implements Initializable{
                         for ( File child_file : files ) {
                             children.add( createNode( child_file ));
                         }
-
                         return children;
                     }
                 }
-
                 return FXCollections.emptyObservableList();
             }
         };
@@ -382,7 +374,7 @@ public class MainController implements Initializable{
 
                 // First getChildren() call, so we actually go off and
                 // determine the children of the File contained in this TreeItem.
-                super.getChildren().setAll( buildChildren(this) );
+                super.getChildren().setAll( buildChildren( this ) );
             }
             return super.getChildren();
         }
