@@ -131,8 +131,9 @@ public class JobTab extends Tab {
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
 
-            remotepath = remotepath + "/" + outfile.getName();
+            remotepath = remotepath + outfile.getName();
             net.upload( outfile, remotepath );
+            System.out.println("Uploaded: "+ remotepath);
             ArrayList<String> before_run = net.getUserJobs();
             net.runNaspJob( remotepath );
             ArrayList<String> after_run = net.getUserJobs();
@@ -180,9 +181,10 @@ public class JobTab extends Tab {
                 boolean success = false;
                 if ( db.hasString() ) {
 
+                    System.out.println( "Test" + db.getString() );
                     ArrayList<String> files = net.getAllFiles( db.getString() );
 
-                    for( String x : files)
+                    for( String x : files )
                             System.out.println( "File: " + x );
                     //TODO: Use the files in 'files' to build and populate the FilesPane UI and NASP xml
                     /**
@@ -199,6 +201,7 @@ public class JobTab extends Tab {
                     }
                     ArrayList<Pair<String, String>> rps = new ArrayList<>();
 
+                    //TODO: Unpaired reads should be supported too
                     for( String x : reads ){
                         Pattern pair1 = Pattern.compile( "(.*)(_[R]?)([1])(.*)$" );
                         Matcher m1 = pair1.matcher( x );
@@ -227,7 +230,7 @@ public class JobTab extends Tab {
                     ArrayList<String> ass_folders = new ArrayList<>();
                     for( AssemblyFolder x : assf ) {
                         System.out.println("folder:" +  x.getPath() );
-                        ass_folders.add(x.getPath());
+                        ass_folders.add( x.getPath() );
                     }
                     boolean firstFastaAlreadyFound = false;
                     Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
@@ -241,23 +244,23 @@ public class JobTab extends Tab {
                             if( ! firstFastaAlreadyFound )
                             {
                                 firstFastaAlreadyFound = true;
-                                optspane.setReference(x, name);
+                                optspane.setReference( x, name );
                             }
                             else {
                                 AssemblyFolder af;
                                 if ( ass_folders.contains(folder) ) {
-                                    af = assf.get(ass_folders.indexOf(folder));
+                                    af = assf.get( ass_folders.indexOf(folder) );
                                 } else {
                                     af = new AssemblyFolder();
-                                    af.setPath(folder);
-                                    ass_folders.add(folder);
-                                    assf.add(af);
+                                    af.setPath( folder );
+                                    ass_folders.add( folder );
+                                    assf.add( af );
                                 }
                                 Assembly temp = new Assembly();
-                                temp.setValue(x);
-                                temp.setSample(x.substring(x.lastIndexOf('/') + 1, x.lastIndexOf('.')));
-                                af.getAssembly().add(temp);
-                                System.out.println("Assemblies: " + x);
+                                temp.setValue( x );
+                                temp.setSample( x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') ));
+                                af.getAssembly().add( temp );
+                                System.out.println( "Assemblies: " + x );
                             }
                         }
                     }
