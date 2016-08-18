@@ -201,6 +201,7 @@ public class JobTab extends Tab {
                         }
                     }
                     ArrayList<Pair<String, String>> rps = new ArrayList<>();
+                    ArrayList<String> single_reads = new ArrayList<>();
 
                     //TODO: Unpaired reads should be supported too
                     for( String x : reads ){
@@ -217,13 +218,23 @@ public class JobTab extends Tab {
                                         Pair<String, String> pair = new Pair<>( x, y );
                                         System.out.println( "Pairs: " + x + " \n\t " + y );
                                         rps.add( pair );
+                                        reads.remove( x ); //remove both pairs from our reads list
+                                        reads.remove( y );
                                         break;
                                     }
                                 }
                             }
                         }
                     }
+                    /**
+                     * If we correctly removed all pairs, only unpaired reads should remain in the reads list
+                     * Here we
+                     */
+                    for( String unpaired : reads )
+                    {
 
+                    }
+                    
                     /**
                      * Handle Assemblies in Drag-and-Drop
                      */
@@ -385,7 +396,7 @@ public class JobTab extends Tab {
                             Matcher mm = pp.matcher( file1 );
                             mm.find();
                             System.out.println( mm.toString() );
-                            System.out.println( "$$$"+mm.group(1) );
+                            System.out.println( "$$$" + mm.group(1) );
                             new_pair.setSample( mm.group(1) );
 
                             readpairings.add( new_pair );
