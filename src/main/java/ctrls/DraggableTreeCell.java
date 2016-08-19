@@ -2,6 +2,8 @@ package ctrls;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.TreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -38,9 +40,10 @@ class DraggableTreeCell<T> extends TreeCell<T> {
 
     /**
      * Updates the visible values for this node in the TreeView
+     * This operates as part of the observable interface for TreeNodes, leading to immediately visible changes
      *
-     * @param item
-     * @param empty
+     * @param item the object contained inside the TreeCell (paths in our case)
+     * @param empty true if the cell is empty, false otherwise
      */
     @Override
     public void updateItem( T item, boolean empty ) {
@@ -54,10 +57,24 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             else {
                 String file = this.getTreeItem().getValue().toString();
                 full_path = file;
-                file = file.substring( file.lastIndexOf('/'), file.length() );
+                file = file.substring( file.lastIndexOf('/') + 1 , file.length() );
                 this.setText( file );
                 text = this.getText();
                 super.setText( text );
+
+                ImageView icon = new ImageView();
+                if( this.getTreeItem().isLeaf() ) {
+                    icon.setImage( new Image(getClass().getResourceAsStream("/icons/file-1.png")));
+                    icon.setFitWidth(12);
+                    icon.setFitHeight(12);
+                }
+                else{
+                    icon.setImage(new Image(getClass().getResourceAsStream("/icons/folder-7.png")));
+                    icon.setFitWidth(12);
+                    icon.setFitHeight(12);
+                }
+
+                setGraphic( icon );
             }
         }
         catch (NullPointerException e){
