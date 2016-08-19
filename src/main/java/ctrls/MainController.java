@@ -23,9 +23,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.*;
 
 public class MainController implements Initializable{
 
@@ -346,18 +348,13 @@ public class MainController implements Initializable{
     /**
      *
      */
-    private class RemoteTreeItem extends TreeItem<Path>{
-
-        RemoteTreeItem( Path path ){
-            super.setValue( path );
-        }
-        RemoteTreeItem(){        }
+    private class RemoteTreeItem extends TreeItem<Path> {
 
         // We cache whether the File is a leaf or not. A File is a leaf if
         // it is not a directory and does not have any files contained within
         // it. We cache this as isLeaf() is called often, and doing the
         // actual check on File is expensive.
-        private boolean isLeaf ;
+        private boolean isLeaf;
 
         // We do the children and leaf testing only once, and then set these
         // booleans to false so that we do not check again during this
@@ -368,55 +365,92 @@ public class MainController implements Initializable{
         private boolean isFirstTimeChildren = true;
         private boolean isFirstTimeLeaf = true;
 
-        @Override public ObservableList<TreeItem<Path>> getChildren() {
-            if ( isFirstTimeChildren ) {
+        RemoteTreeItem(Path path) {
+            super.setValue(path);
+        }
+
+        RemoteTreeItem() {
+        }
+
+        @Override
+        public ObservableList<TreeItem<Path>> getChildren() {
+            if (isFirstTimeChildren) {
                 isFirstTimeChildren = false;
 
                 // First getChildren() call, so we actually go off and
                 // determine the children of the File contained in this TreeItem.
-                super.getChildren().setAll( buildChildren( this ) );
+                ExecutorService executor = Executors.newFixedThreadPool(1);
+
+                Future<ObservableList<TreeItem<Path>>> children = executor.submit( this.buildChildren(this) );
+
+                try {
+                    super.getChildren().setAll( children.get() );
+                } catch (InterruptedException | ExecutionException e) {
+                    throw new IllegalStateException("task interrupted", e);
+                }
+                finally {
+                    if (!executor.isTerminated()) {
+                        System.err.println("cancel non-finished tasks");
+                    }
+                    executor.shutdownNow();
+                    System.out.println("shutdown finished");
+                }
             }
             return super.getChildren();
         }
 
-        @Override public boolean isLeaf() {
+        @Override
+        public boolean isLeaf() {
             return isLeaf;
         }
 
-        public void setLeaf( Boolean leaf ){
+        public void setLeaf(Boolean leaf) {
             isLeaf = leaf;
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return this.getValue().toString();
         }
 
-        private ObservableList<TreeItem<Path>> buildChildren( RemoteTreeItem tree_item ) {
-            Path this_path = tree_item.getValue();
-            if ( true ) {
+        private Boolean updateIsDirectory(){
+            Boolean b = !Files.isDirectory( super.getValue() );
+            setLeaf( b );
+            remotePathBrowserTree.refresh();
+            return b;
+        }
+
+        private Callable<ObservableList<TreeItem<Path>>> buildChildren(RemoteTreeItem tree_item) {
+
+            return () -> {
+
+                Path this_path = tree_item.getValue();
+
                 try {
-                    DirectoryStream<Path> ds = rfsm.getDirectory( this_path.toString() );
+                    DirectoryStream<Path> ds = rfsm.getDirectory(this_path.toString());
                     ObservableList<TreeItem<Path>> children = FXCollections.observableArrayList();
-                    for ( Path path : ds ) {
-                        if ( path != this_path ) {
-                            RemoteTreeItem new_item = new RemoteTreeItem( path );
-                            if( !path.equals( super.getValue() )) {
+                    for (Path path : ds) {
+                        if (path != this_path) {
+                            RemoteTreeItem new_item = new RemoteTreeItem(path);
+                            if (!path.equals(super.getValue())) {
                                 new_item.setLeaf( false );
-                                children.add( new_item );
-                            }
-                            else
-                                this.setLeaf( true );
+
+                                CompletableFuture<Boolean> leaf = CompletableFuture.supplyAsync( new_item :: updateIsDirectory);
+
+                                children.add(new_item);
+                            } else
+                                this.setLeaf(true);
                         }
-                        System.out.println( path.toString() );
+                        System.out.println(path.toString());
                     }
                     return children;
 
-                } catch ( IOException e ) {
-                    log.error( null, null, "RTB: Error while building remote directory tree: " + e );
+                } catch (IOException e) {
+                    log.error(null, null, "RTB: Error while building remote directory tree: " + e);
                 }
-            }
-            return FXCollections.emptyObservableList();
+
+                return FXCollections.emptyObservableList();
+            };
         }
     }
 }
