@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Data" type="DataType"/>
+  <xs:complexType name="QstatJobType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Job_Id"/>
+      <xs:element type="xs:string" name="Job_Name"/>
+      <xs:element type="xs:string" name="Job_Owner"/>
+      <xs:element type="resources_usedType" name="resources_used" minOccurs="0"/>
+      <xs:element name="job_state">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="E"/>
+            <xs:enumeration value="H"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="queue"/>
+      <xs:element type="xs:string" name="server"/>
+      <xs:element type="xs:string" name="Checkpoint"/>
+      <xs:element type="xs:string" name="ctime"/>
+      <xs:element name="depend">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="beforeok:1125598.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster"/>
+            <xs:enumeration value="afterok:1125046.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster,beforeany:1125826.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster"/>
+            <xs:enumeration value="beforeany:1125826.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster"/>
+            <xs:enumeration value=",beforeany:1125826.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster"/>
+            <xs:enumeration value="afterany:1125598.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125623.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125625.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125643.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125661.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125677.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125680.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125685.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125698.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125702.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125707.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125710.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125729.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125730.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125738.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125741.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125748.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125752.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125757.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125763.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125767.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125769.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125772.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125773.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125774.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125779.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125780.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125805.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125807.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster:1125818.tnorth-mgt.cm.cluster@tnorth-mgt.cm.cluster"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="Error_Path"/>
+      <xs:element type="xs:string" name="exec_host" minOccurs="0"/>
+      <xs:element type="xs:string" name="exec_port" minOccurs="0"/>
+      <xs:element name="Hold_Types">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="n"/>
+            <xs:enumeration value="s"/>
+            <xs:enumeration value="u"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="Join_Path"/>
+      <xs:element type="xs:string" name="Keep_Files"/>
+      <xs:element name="Mail_Points">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="a"/>
+            <xs:enumeration value="e"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="mtime"/>
+      <xs:element type="xs:string" name="Output_Path"/>
+      <xs:element type="xs:string" name="Priority"/>
+      <xs:element type="xs:string" name="qtime"/>
+      <xs:element type="xs:string" name="Rerunable"/>
+      <xs:element type="Resource_ListType" name="Resource_List"/>
+      <xs:element type="xs:string" name="session_id" minOccurs="0"/>
+      <xs:element type="xs:string" name="etime" minOccurs="0"/>
+      <xs:element type="xs:string" name="exit_status" minOccurs="0"/>
+      <xs:element type="xs:string" name="submit_args"/>
+      <xs:element name="start_time" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="1471996414"/>
+            <xs:enumeration value="1471995848"/>
+            <xs:enumeration value="1471995849"/>
+            <xs:enumeration value="1471996336"/>
+            <xs:enumeration value="1471996462"/>
+            <xs:enumeration value="1471996449"/>
+            <xs:enumeration value="1471996557"/>
+            <xs:enumeration value="1471996558"/>
+            <xs:enumeration value="1471996543"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element type="xs:string" name="start_count" minOccurs="0"/>
+      <xs:element type="xs:string" name="fault_tolerant"/>
+      <xs:element type="xs:string" name="submit_host"/>
+      <xs:element name="init_work_dir">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="/scratch/callender/DrShin_TB_overall_TBpools_24_25_26_27_28_29/ASAP_SMOR_Mtb6_json_0_001_d_1000/novo"/>
+            <xs:enumeration value="/scratch/callender/DrShin_TB_overall_TBpools_24_25_26_27_28_29/ASAP_SMOR_Mtb6_json_0_001_d_1000/xml"/>
+            <xs:enumeration value="/scratch/callender/DrShin_TB_overall_TBpools_24_25_26_27_28_29/ASAP_SMOR_Mtb6_json_0_001_d_1000"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Resource_ListType">
+    <xs:sequence>
+      <xs:element name="mem">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="4gb"/>
+            <xs:enumeration value="2gb"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ncpus">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="walltime">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="08:00:00"/>
+            <xs:enumeration value="04:00:00"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resources_usedType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="cput"/>
+      <xs:element type="xs:string" name="mem"/>
+      <xs:element type="xs:string" name="vmem"/>
+      <xs:element type="xs:string" name="walltime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DataType">
+    <xs:sequence>
+      <xs:element type="JobType" name="Job" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
