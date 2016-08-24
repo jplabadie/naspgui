@@ -1,6 +1,7 @@
 package utils;
 
 import com.jcraft.jsch.*;
+import qstat_xmlbinds.QstatDataType;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -361,10 +362,24 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return execCommand( "qstat -au " + getUsername() );
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public QstatDataType getJobsXml() {
+        ArrayList<String> out = execCommand( "qstat -f -x" );
+        String xml = out.get(0);
+        return JobSaveLoadManager.QstatJaxbXmlToObject( xml );
+
+    }
+
     public ArrayList<String> getUserJobs( String username) {
 
         return execCommand( "qstat -au " + username );
     }
+
+
 
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings

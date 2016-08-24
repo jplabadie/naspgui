@@ -1,5 +1,7 @@
 package utils;
 
+import qstat_xmlbinds.QstatDataType;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -51,6 +53,8 @@ public interface RemoteNetUtil {
     boolean runNaspJob(String job_XML_remote_abs_path);
 
     ArrayList<String> getUserJobs();
+
+    QstatDataType getJobsXml( );
 
     ArrayList<String> getAllFiles(String remote_abs_path);
 
