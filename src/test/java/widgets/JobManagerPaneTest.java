@@ -51,7 +51,7 @@ public class JobManagerPaneTest extends Application {
         result.remove(0);
 
         for(String x : result){
-            System.out.println( x + " : " + result.indexOf(x));
+            System.out.println( x + " : " + result.indexOf(x) );
         }
 
         Pattern ptrn = Pattern.compile( "(\\S+)" );
