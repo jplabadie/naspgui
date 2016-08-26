@@ -33,7 +33,7 @@ import javafx.scene.layout.Region;
         /**
          * Constructor that creates and instantiates a region that can be clicked and dragged for resizing.
          *
-         * @param aRegion
+         * @param aRegion the region we will apply resizing to
          */
         private DragResizerController(Region aRegion) {
             region = aRegion;
