@@ -11,18 +11,22 @@ import javafx.scene.input.TransferMode;
 import utils.LogManager;
 
 /**
- * Used in place of the default TreeCell to represent files and directories on a remote machine
- * in a better fashion. Also allows us to support drag-and-drop actions from the file tree to the
- * job pane.
+ * Overrides default TreeCell so that we can customize it to represent files and directories on a remote system, rather
+ * than a local system. Also allows us to support drag-and-drop actions from the file tree to the
+ * job pane by integrating event handlers.
  */
 class DraggableTreeCell<T> extends TreeCell<T> {
     private String text = super.getText();
     private String full_path = "";
 
     /**
-     * Constructor, also initializes drag-and-drop handling
+     * Constructor with drag-and-drop initialization event handler.
+     * In particular, the handler captures a drag-start event (left mouse click and hold + drag) which starts on an
+     * item in the TreeView. The handler creates and populates a dragboard with the file path related to the tree view
+     * item. This dragboard content is read as a message by any node which receives the drag with an "onDragDropped"
+     * event handler.
      */
-    public DraggableTreeCell() {
+    DraggableTreeCell() {
         setOnDragDetected( new EventHandler<MouseEvent>() {
             @Override
             public void handle( MouseEvent event ) {
@@ -30,7 +34,7 @@ class DraggableTreeCell<T> extends TreeCell<T> {
                 Dragboard db = startDragAndDrop( TransferMode.ANY );
                 ClipboardContent content = new ClipboardContent();
 
-                // Store node ID in order to know what is dragged.
+                // place the path contained in the TreeItem into the dragboard via ClipboardContent
                 content.putString( full_path );
                 db.setContent( content );
                 event.consume();
@@ -62,6 +66,8 @@ class DraggableTreeCell<T> extends TreeCell<T> {
                 text = this.getText();
                 super.setText( text );
 
+                // Define the look and feel of items in the tree
+                // TODO: Move to a config file instead of hardcoding here
                 ImageView icon = new ImageView();
                 if( this.getTreeItem().isLeaf() ) {
                     icon.setImage( new Image(getClass().getResourceAsStream("/icons/file-1.png")));
