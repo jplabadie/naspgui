@@ -1,8 +1,8 @@
 <NaspInputData>
     <Options>
-        <RunName>080916</RunName>
-        <OutputFolder>/scratch/jlabadie/bioin_wksp/Alignments/MRSA/080916</OutputFolder>
-        <Reference name="ASM29659v1" path="/scratch/jlabadie/bioin_wksp/Alignments/MRSA/ASM29659v1.fasta">
+        <RunName></RunName>
+        <OutputFolder></OutputFolder>
+        <Reference name="" path="">
             <FindDups>True</FindDups>
         </Reference>
         <Filters>
@@ -13,96 +13,6 @@
         <TrimReads>True</TrimReads>
     </Options>
     <Files>
-        <ReadFolder path="/scratch/jlabadie/bioin_wksp/Alignments/MRSA">
-            <ReadPair sample="Saureus-FMC20_L006">
-                <Read1Filename>Saureus-FMC20_L006_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC20_L006_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC14_L005">
-                <Read1Filename>Saureus-FMC14_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC14_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC13_L005">
-                <Read1Filename>Saureus-FMC13_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC13_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC7_L005">
-                <Read1Filename>Saureus-FMC7_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC7_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC23_L005">
-                <Read1Filename>Saureus-FMC23_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC23_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC9_L005">
-                <Read1Filename>Saureus-FMC9_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC9_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC21_L006">
-                <Read1Filename>Saureus-FMC21_L006_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC21_L006_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC4_L005">
-                <Read1Filename>Saureus-FMC4_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC4_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC10_L005">
-                <Read1Filename>Saureus-FMC10_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC10_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC19_L006">
-                <Read1Filename>Saureus-FMC19_L006_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC19_L006_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC5_L005">
-                <Read1Filename>Saureus-FMC5_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC5_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC16_L005">
-                <Read1Filename>Saureus-FMC16_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC16_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC18_L005">
-                <Read1Filename>Saureus-FMC18_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC18_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC22_L006">
-                <Read1Filename>Saureus-FMC22_L006_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC22_L006_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC3_L005">
-                <Read1Filename>Saureus-FMC3_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC3_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC8_L005">
-                <Read1Filename>Saureus-FMC8_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC8_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC15_L005">
-                <Read1Filename>Saureus-FMC15_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC15_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC24_L005">
-                <Read1Filename>Saureus-FMC24_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC24_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC6_L005">
-                <Read1Filename>Saureus-FMC6_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC6_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC2_L005">
-                <Read1Filename>Saureus-FMC2_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC2_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC17_L005">
-                <Read1Filename>Saureus-FMC17_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC17_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-            <ReadPair sample="Saureus-FMC1_L005">
-                <Read1Filename>Saureus-FMC1_L005_R1_001.fastq.gz</Read1Filename>
-                <Read2Filename>Saureus-FMC1_L005_R2_001.fastq.gz</Read2Filename>
-            </ReadPair>
-        </ReadFolder>
     </Files>
     <ExternalApplications>
         <Index name="Index" path="/packages/nasp/1.0">
