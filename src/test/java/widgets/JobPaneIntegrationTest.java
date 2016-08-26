@@ -29,7 +29,7 @@ public class JobPaneIntegrationTest extends Application {
         primaryStage.setTitle( "JobTab Integration Test" );
 
         File input = new File(getClass().getResource( "/xml/defaultjob.xml" ).getFile() );
-        NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
+        NaspInputData nid = JobSaveLoadManager.NaspJaxbXmlToObject( input ) ;
         JobTab tab = new JobTab( nid );
         TabPane root = new TabPane();
 

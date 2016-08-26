@@ -29,8 +29,8 @@ public class JobManagerPaneTest extends Application {
         DefaultRemoteNetUtil nm = new DefaultRemoteNetUtil();
         String usr;
         String pwd;
-        usr = "jlabadie";
-        pwd = "C00kiemnstr!";
+        usr = "";
+        pwd = "";
 
         nm.initSession( usr, pwd, "aspen.tgen.org", 22 );
         try {
