@@ -166,7 +166,7 @@ public class MainController implements Initializable{
                 //@Override
                 public void handle( final ActionEvent e) {
                     File input = new File( getClass().getResource("/xml/defaultNaspNew.xml").getFile() );
-                    NaspInputData nid = JobSaveLoadManager.jaxbXMLToObject( input ) ;
+                    NaspInputData nid = JobSaveLoadManager.NaspJaxbXmlToObject( input ) ;
 
                     JobTab new_tab = new JobTab( nid );
                     new_tab.setRemoteNet( nm );
