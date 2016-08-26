@@ -31,7 +31,7 @@ public class JobRecordSaveLoadManagerTest {
                     .getResource("/Users/jlabadie/Workspace/naspgui/src/test/java/utils/NaspInputExample.xml");
             File nfile = new File(nip.getFile());
 
-            naspInputData = JobSaveLoadManager.jaxbXMLToObject(nfile);
+            naspInputData = JobSaveLoadManager.NaspJaxbXmlToObject(nfile);
 
             JobSaveLoadManager.jaxbObjectToXML(naspInputData, "test_out");
 
