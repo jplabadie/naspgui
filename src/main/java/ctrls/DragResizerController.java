@@ -1,13 +1,8 @@
 package ctrls;
 
-/**
- * @author Jean-Paul Labadie
- */
-
-    import javafx.event.EventHandler;
-    import javafx.scene.Cursor;
-    import javafx.scene.input.MouseEvent;
-    import javafx.scene.layout.Region;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 
     /**
      * {@link DragResizerController} can be used to add mouse listeners to a {@link Region}
@@ -19,7 +14,7 @@ package ctrls;
      * @author atill
      *
      */
-    public class DragResizerController {
+    class DragResizerController {
 
         /**
          * The margin around the control that a user can click in to main resizing
@@ -35,55 +30,48 @@ package ctrls;
 
         private boolean dragging;
 
-        /*Constructor that creates and instantiates 
-        the region that we will be clicked and dragged for resizing.*/
+        /**
+         * Constructor that creates and instantiates a region that can be clicked and dragged for resizing.
+         *
+         * @param aRegion
+         */
         private DragResizerController(Region aRegion) {
             region = aRegion;
         }
 
-        /*
-        Invoked after we validate that a zone is draggable and 
-        then creates an instance listening to the mouse drags 
-        to make the new size of the region.
-        */
-        public static void makeResizable(Region region) {
+        /**
+         * Create listeners which observe the mouse motion to determine the new size of the region.
+         *
+         * @param region the region which will be changed by subsequent resize events
+         */
+        static void makeResizable(Region region) {
             final DragResizerController resizer = new DragResizerController(region);
 
-            region.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    resizer.mousePressed(event);
-                }});
-            region.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    resizer.mouseDragged(event);
-                }});
-            region.setOnMouseMoved(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    resizer.mouseOver(event);
-                }});
-            region.setOnMouseReleased(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    resizer.mouseReleased(event);
-                }});
+            region.setOnMousePressed(resizer::mousePressed);
+
+            region.setOnMouseDragged(resizer::mouseDragged);
+
+            region.setOnMouseMoved(resizer::mouseOver);
+
+            region.setOnMouseReleased(resizer::mouseReleased);
         }
 
-        /*
-        Resets the cursor to the default state when released. 
-        */
-        protected void mouseReleased(MouseEvent event) {
+        /**
+         * Reset the cursor to the default state when released.
+         *
+         * @param event the specific change event which fired
+         */
+        private void mouseReleased(MouseEvent event) {
             dragging = false;
             region.setCursor(Cursor.DEFAULT);
         }
 
-        /*
-        Checks to see if we are dragging in a draggable zone and 
-        then sets the cursor to the new resize value.
-        */
-        protected void mouseOver(MouseEvent event) {
+        /**
+         *  Checks to see if we are dragging in a draggable zone and
+         *  then sets the cursor to the new resize value.
+         * @param event the specific event fired by the mouse
+         */
+        private void mouseOver(MouseEvent event) {
             if(isInDraggableZone(event) || dragging) {
                 region.setCursor(Cursor.S_RESIZE);
             }
@@ -92,20 +80,21 @@ package ctrls;
             }
         }
 
-        /*
-        Called on a mouse event, and then checks to see if that mouse click is 
-        inside a valid zone. It essentially checks to see if the thing that 
-        is trying to be dragged is in fact draggable. 
-        */
-        protected boolean isInDraggableZone(MouseEvent event) {
+        /**
+         * Call after a mouse event, verify that the mouse click is inside a valid/draggable zone.
+         * @param event the specific event fired by the mouse
+         * @return true if the zone is draggable, false otherwise
+         */
+        private boolean isInDraggableZone(MouseEvent event) {
             return event.getX() > (region.getWidth() - RESIZE_MARGIN);
         }
 
-        /*
-        Listens for a mouse event and returns a x_axis variable 
-        to which the new window size will be adjusted to.
-        */
-        protected void mouseDragged(MouseEvent event) {
+        /**
+         * Listens for a mouse event and returns a x_axis variable for the new window size
+         *
+         * @param event the specific event fired by the mouse
+         */
+        private void mouseDragged(MouseEvent event) {
             if(!dragging) {
                 return;
             }
@@ -119,23 +108,22 @@ package ctrls;
             x_axis = mouse_x_delta;
         }
 
-        /*
-        Responsible for ignoring clicks outside of a draggable event.
-        */
-        protected void mousePressed(MouseEvent event) {
+        /**
+         * Capture and ignore clicks outside of a draggable event.
+         * @param event the specific event fired by the mouse
+         */
+        private void mousePressed(MouseEvent event) {
 
             // ignore clicks outside of the draggable margin
-            if(!isInDraggableZone(event)) {
+            if( !isInDraggableZone(event) ) {
                 return;
             }
 
             dragging = true;
 
-            // make sure that the minimum height is set to the current height once,
-            // setting a min height that is smaller than the current height will
-            // have no effect
-            if (!initMinWidth) {
-                region.setMinWidth(region.getWidth());
+            // only resize if above the minimum, otherwise set to minimum
+            if ( !initMinWidth ) {
+                region.setMinWidth( region.getWidth() );
                 initMinWidth = true;
             }
 
