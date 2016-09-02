@@ -39,7 +39,7 @@ public class LogManager implements Logger{
 
         try {
             // This block configure the logger with handler and formatter
-            fh = new FileHandler("out\\"+"log-"+ getDate()+".txt",true);
+            fh = new FileHandler("log-"+ getDate()+".txt",true);
 
 
             SimpleFormatter formatter = new SimpleFormatter();

@@ -132,9 +132,9 @@ public class JobTab extends Tab {
 
             remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);
-            ArrayList<String> before_run = net.getUserJobs();
+            List<String> before_run = net.getUserJobs();
             net.runNaspJob( remotepath );
-            ArrayList<String> after_run = net.getUserJobs();
+            List<String> after_run = net.getUserJobs();
         });
 
         preview_job.setOnAction( event -> {
@@ -180,7 +180,7 @@ public class JobTab extends Tab {
                 boolean success = false;
                 if (db.hasString()) {
 
-                    ArrayList<String> files = net.getAllFiles( db.getString() );
+                    List<String> files = net.getAllFiles( db.getString() );
 
                     for( String x : files)
                             System.out.println( "File: " + x );

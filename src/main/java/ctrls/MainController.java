@@ -130,21 +130,26 @@ public class MainController implements Initializable{
     private void gracefulLogin(){
         LoginDialog ld = new LoginDialog();
         userpass = ld.showAndWait();
-
-
-        if (userpass.isPresent() && rfsm.isConnected()) {
+        while( true )
+        if (userpass.isPresent()  && rfsm.isConnected()) {
             UserSettingsManager.setUsername(userpass.get().getKey());
             UserSettingsManager.setCurrentPassword(userpass.get().getValue());
             initRemotePathBrowserTree(rfsm);
-
+            break;
         }
         else {
+
+            if( ld.getUserQuit() == true){
+                Platform.exit();
+                System.exit(0);
+            }
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Login Failed");
             alert.setHeaderText("Login Failed");
             alert.setContentText("You are not logged in.");
             alert.showAndWait();
             log.warn(null, null, "MainController: Login Failed");
+            userpass = ld.showAndWait();
         }
         nm = ld.getNet();
         ld.close();

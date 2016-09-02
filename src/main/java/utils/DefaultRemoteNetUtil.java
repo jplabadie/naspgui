@@ -185,7 +185,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             return;
         }
 
-        //TODO:Add mkdir exec step
+        //TODO:Add mkdir exec step?
         if( !isRemoteDir( remote_dir )){
             log.info( null, null, "NM - Upload Step Info: Connection failed or remote path " +
                     "is not a valid path for SFTP Upload. Solving by mkdir." );
@@ -220,12 +220,13 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
 
     /**
-     * Accepts one or more Strings which represent linux commands. Commands are run in order on the remote system.
-     * Output from stdout is stored in order in an ArrayList of Strings
+     * Accepts a string representing a linux command. These commands are then executed on the remote system.
+     * Output from stdout is returned in order as an ArrayList of Strings
+     *
      * @param cmd required first command
      * @return an ArrayList containing Strings from the stdout result
      */
-    public ArrayList<String> execCommand( String cmd ){
+    private ArrayList<String> execCommand( String cmd ){
         assert session.isConnected();
 
         String out = "";
@@ -276,8 +277,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                 line += out.charAt( i );
             }
         }
-
-
         return result;
     }
 

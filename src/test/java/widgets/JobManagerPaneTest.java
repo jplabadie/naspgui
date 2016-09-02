@@ -40,7 +40,7 @@ public class JobManagerPaneTest extends Application {
             Assert.fail();
         }
 
-        ArrayList<String> result = nm.execCommand( "qstat -a" );
+        ArrayList<String> result = null;// nm.execCommand( "qstat -a" );
         ArrayList<Job> jobs  = new ArrayList<>();
 
         result.remove("tnorth-mgt.cm.cluster: ");

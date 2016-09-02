@@ -8,16 +8,23 @@ import javafx.util.Pair;
 import utils.*;
 
 /**
+ * The dialog pop-up displayed to users upon program launch.
+ *
  * @author Jean-Paul Labadie
  */
 public class LoginDialog extends Dialog<Pair<String,String>>{
 
+    // get a singleton of the remote file system for initializing the remote file browsing tree
     private RemoteFileSystemManager rfsm = RemoteFileSystemManager.getInstance();
+    // get an instance of the remote net utility for upload/download and command execution
     private RemoteNetUtil nm = RemoteNetUtilFactoryMaker.getFactory().createRemoteNetUtil();
+    // get a singleton of the logger
     LogManager log = LogManager.getInstance();
 
+    private boolean userQuit = false;
+
     /**
-     * Creates a custom JavaFX Dialog for capturing a login
+     * constructor for a custom JavaFX Dialog for capturing a login
      */
     public LoginDialog(){
 
@@ -67,18 +74,27 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
         grid.add(new Label("Port:"), 0, 3);
         grid.add(port, 1, 3);
 
+        Label error = new Label( "Login Failed!" );
+        error.setVisible( false );
+        grid.add( error, 0, 4, 4, 1 );
+
         this.getDialogPane().setContent(grid);
 
         // Request focus on the username field by default.
-        Platform.runLater(username::requestFocus);
+        Platform.runLater( username::requestFocus );
 
         /**
          * Convert the result to an Optional username-password-pair when the login button is clicked
          */
         this.setResultConverter((ButtonType dialogButton) -> {
-
-            if (dialogButton == loginButtonType) {
-
+            if(dialogButton == ButtonType.CANCEL){
+                userQuit = true;
+                LogManager.getInstance().info("LoginDialog","none", "User initiated quit");
+                return null;
+            }
+            else if (dialogButton == loginButtonType
+                    && ! username.getText().isEmpty()
+                    && ! password.getText().isEmpty()) {
                 //make sure we aren't already connected, then try to connect with given credentials
                 try {
                     rfsm.init(username.getText(), password.getText(),
@@ -87,22 +103,33 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
                             host.getText(), Integer.valueOf(port.getText()));
                     nm.openSession();
                 }
-                catch(RuntimeException re){
+                catch(Exception re){
                     log.error(null, null, "Login Failed - Unable to connect or authenticate: \n"+ re.getMessage());
                     return null;
                 }
 
                 if(!rfsm.isConnected() || !nm.isInitialized()){
                     log.error(null, null, "Login Failed: RFSM and/or NM failed to initialize.");
+                    error.setVisible( true );
                     return null;
                 }
                 return new Pair<>(username.getText(), password.getText());
+            }
+            else{
+                error.setText( "All fields must be completed" );
+                error.setVisible( true );
             }
             return null;
         });
     }
 
+    /**
+     *
+     * @return
+     */
     RemoteNetUtil getNet(){
         return nm;
     }
+
+    boolean getUserQuit() {return userQuit;}
 }

@@ -7,8 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Runs a finalized Job XML on NASP.
- * Jobs may be run locally or on remote environments.
+ * Manages
  *
  * @author Jean-Paul Labadie
  */

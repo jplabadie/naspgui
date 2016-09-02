@@ -149,20 +149,28 @@ class Browser extends Region {
         getChildren().add(browser);
     }
 
-    // JavaScript interface object
+    /**
+     * JavaScript interface object
+     */
     public class JavaApp {
-
         public void exit() {
             Platform.exit();
         }
     }
 
+    /**
+     *
+     * @return
+     */
     private Node createSpacer() {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         return spacer;
     }
 
+    /**
+     *
+     */
     @Override
     protected void layoutChildren() {
         double w = getWidth();
@@ -172,11 +180,21 @@ class Browser extends Region {
         layoutInArea(toolBar,0,h-tbHeight,w,tbHeight,0, HPos.CENTER, VPos.CENTER);
     }
 
+    /**
+     *
+     * @param height
+     * @return
+     */
     @Override
     protected double computePrefWidth(double height) {
         return 750;
     }
 
+    /**
+     *
+     * @param width
+     * @return
+     */
     @Override
     protected double computePrefHeight(double width) {
         return 600;
