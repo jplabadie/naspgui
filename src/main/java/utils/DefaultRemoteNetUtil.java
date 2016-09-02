@@ -133,9 +133,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         } catch (SftpException e) {
             log.error( null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage() );
-        } catch (JSchException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JSchException | IOException e) {
             e.printStackTrace();
         }
     }

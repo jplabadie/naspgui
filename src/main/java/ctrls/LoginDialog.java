@@ -80,7 +80,7 @@ public class LoginDialog extends Dialog<Pair<String,String>>{
 
         this.getDialogPane().setContent(grid);
 
-        // Request focus on the username field by default.
+        // Request focus on the username field by default
         Platform.runLater( username::requestFocus );
 
         /**

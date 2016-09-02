@@ -131,18 +131,11 @@ public class JobTab extends Tab {
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
             remotepath = remotepath.substring(0, remotepath.lastIndexOf("/")) + "/";
             File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
-<<<<<<< HEAD
 
             remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);
             List<String> before_run = net.getUserJobs();
-=======
-            System.out.println( "Uploaded: " + remotepath );
-            remotepath = remotepath + outfile.getName();
-            net.upload( outfile, remotepath );
-            System.out.println( "Uploaded: " + remotepath );
-            ArrayList<String> before_run = net.getUserJobs();
->>>>>>> d4adfc80eb3353a4ddea3827a5d44c02c7d6f162
+
             net.runNaspJob( remotepath );
             List<String> after_run = net.getUserJobs();
         });
@@ -190,12 +183,7 @@ public class JobTab extends Tab {
                 boolean success = false;
                 if ( db.hasString() ) {
 
-<<<<<<< HEAD
                     List<String> files = net.getAllFiles( db.getString() );
-=======
-                    System.out.println( "Test" + db.getString() );
-                    ArrayList<String> files = net.getAllFiles( db.getString() );
->>>>>>> d4adfc80eb3353a4ddea3827a5d44c02c7d6f162
 
                     for( String x : files )
                             System.out.println( "File: " + x );

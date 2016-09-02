@@ -15,13 +15,14 @@ import utils.UserSettingsManager;
  * Main method which defines the root of the JavaFX application
  */
 public class NaspGuiMain extends Application {
+
     /**
      *
      * @param primaryStage the root stage of the GUI
      * @throws Exception multitude of exceptions due to resource loading issues
      */
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start( Stage primaryStage ) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("NASPGuiMainLayout.fxml"));
         primaryStage.setTitle("NASP GUI Beta");
@@ -32,6 +33,7 @@ public class NaspGuiMain extends Application {
         // Loading in this method seems to fail here
         //scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());
 
+        // add height and width listeners to allow resizing
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 System.out.println("Width: " + newSceneWidth);
@@ -43,14 +45,21 @@ public class NaspGuiMain extends Application {
             }
         });
 
-        // TODO: WTF. Need to close the application completely, including daemons
-        primaryStage.onCloseRequestProperty().addListener( event -> {
-            System.exit( 0 );
-            Platform.exit();
-        });
-
-        primaryStage.setScene(scene);
+        primaryStage.setScene( scene );
         primaryStage.show();
+    }
+
+    /**
+     * This method will be called whenever the application receives a stop or other kill request from the user
+     * Here I'm using it to get the program to close (daemon processes are keeping the program alive otherwise)
+     * It can/should be used to save state/write logs/etc before the application exits
+     */
+    @Override
+    public void stop(){
+        System.out.println("Closing");
+        Platform.exit();
+        System.exit( 0 );
+
     }
 
     public static void main(String[] args) {

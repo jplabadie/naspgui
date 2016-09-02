@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import utils.*;
 import widgets.JobTab;
 import xmlbinds.NaspInputData;
 
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +31,14 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.*;
 
+/**
+ * Defines the look and feel and some logic of the primary containers of the NASP GUI
+ *
+ * Includes:
+ *  Main menu buttons and drop-downs
+ *  Local and Remote file browser elements
+ *  Interactions with the Login dialog and remote utilities
+ */
 public class MainController implements Initializable{
 
     @FXML    private BorderPane mainStage;
@@ -81,18 +91,28 @@ public class MainController implements Initializable{
         AnchorPane.setRightAnchor( jobTabPane, 5.0 );
         AnchorPane.setTopAnchor( jobTabPane, 1.0 );
         AnchorPane.setLeftAnchor( jobTabPane, 5.0 );
+        EventHandler e = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                if( event.getEventType().equals( WindowEvent.WINDOW_CLOSING )){
+
+                }
+            }
+        };
+
     }
 
+
     private void initMenuItems() {
-        /** Login Button Init*/
+        /* Login Button Init*/
         menuItemLogin.setOnAction(
                 event -> gracefulLogin());
 
-        /** Quit Button Init */
+        /* Quit Button Init */
         menuItemQuit.setOnAction(
                 event -> gracefulQuit());
 
-        /** Load Button Init */
+        /* Load Button Init */
         loadJobBtn.setOnAction(
             new EventHandler<ActionEvent>() {
                 //@Override
@@ -248,10 +268,10 @@ public class MainController implements Initializable{
             protected RemoteTreeItem call() throws Exception {
                 RemoteTreeItem rti = new RemoteTreeItem();
 
-                Button toParent = new Button(" < ");
-                Button toRoot = new Button(" ^ ");
-
-                remoteTreeToolbar.getItems().addAll( toParent, toRoot );
+//              TODO: add navigation/refresh items to tree pane
+//                Button toParent = new Button(" < ");
+//                Button toRoot = new Button(" ^ ");
+//                remoteTreeToolbar.getItems().addAll( toParent, toRoot );
 
                 if( rfsm != null && rfsm.isConnected() ) {
                     try {
@@ -280,7 +300,7 @@ public class MainController implements Initializable{
         };
 
         Thread thread = new Thread( buildThread );
-        thread.setDaemon( true );
+        thread.setDaemon( false );
         thread.start();
     }
 
@@ -352,7 +372,9 @@ public class MainController implements Initializable{
     }
 
     /**
-     *
+     *  Overrides the default TreeItem so that it can represent a remote filesystem
+     *  It is created as a private inner class because it makes calls to its
+     *  container TreeView called remotePathBrowserTree
      */
     private class RemoteTreeItem extends TreeItem<Path> {
 
@@ -371,90 +393,155 @@ public class MainController implements Initializable{
         private boolean isFirstTimeChildren = true;
         private boolean isFirstTimeLeaf = true;
 
-        RemoteTreeItem(Path path) {
+        /**
+         * Constructor which initializes the TreeItem using a Path
+         * @param path Path object representing this TreeItem's remote location
+         */
+        RemoteTreeItem( Path path ) {
             super.setValue(path);
         }
 
+        /**
+         * Null constructor, requires that this TreeItem's path be set by some other method if it will be used
+         */
         RemoteTreeItem() {
         }
 
+        /**
+         * Override for the method getChildren which allows this TreeItem to work with a remote file service
+         * @return an ObservableList of child TreeItems containing their representative Path's and children
+         */
         @Override
-        public ObservableList<TreeItem<Path>> getChildren() {
+        public ObservableList< TreeItem<Path> > getChildren() {
+            // Only build the children for this node if they haven't been initialized already
             if (isFirstTimeChildren) {
                 isFirstTimeChildren = false;
 
-                // First getChildren() call, so we actually go off and
-                // determine the children of the File contained in this TreeItem.
+                // spawn a single new thread for any call to this TreeItem's getChildren
                 ExecutorService executor = Executors.newFixedThreadPool(1);
-
+                // create an asynchronous call to buildChildren so that resolving remote items does not block the ui
                 Future<ObservableList<TreeItem<Path>>> children = executor.submit( this.buildChildren(this) );
 
                 try {
+                    // when the future returns, initialize our child nodes
                     super.getChildren().setAll( children.get() );
                 } catch (InterruptedException | ExecutionException e) {
                     throw new IllegalStateException("task interrupted", e);
                 }
                 finally {
+                    //throw an error if the thread is killed before we can shut it down
                     if (!executor.isTerminated()) {
                         System.err.println("cancel non-finished tasks");
                     }
+                    // kill the thread when we are done
                     executor.shutdownNow();
-                    System.out.println("shutdown finished");
+                    log.info("MainController-RemoteTreeItem", "getChildren", "thread executor completed");
                 }
             }
             return super.getChildren();
         }
 
+        /**
+         * @return true if this TreeItem is a leaf node, false if it has subdirectories or contains files
+         */
         @Override
         public boolean isLeaf() {
             return isLeaf;
         }
 
-        public void setLeaf(Boolean leaf) {
+        /**
+         * @param leaf if set true, this TreeItem will be shown as a file or empty directory,
+         *             if set false it will represent a directory with children
+         */
+        void setLeaf( Boolean leaf ) {
             isLeaf = leaf;
         }
 
+        /**
+         * @return return the Path for this TreeItem as a String value
+         */
         @Override
         public String toString() {
             return this.getValue().toString();
         }
 
+        /**
+         * reset the var isFirstTimeChildren to true, so that the child sub-tree will be examined again
+         */
+        public void refresh(){
+            isFirstTimeChildren = true;
+        }
+
+        /**
+         * Makes a call to Files.isDirectory (which is overloaded to make a request to the server)
+         * This is a slow, blocking operation, but we only use it through an asynchronous call, thus avoiding blocking
+         * while still allowing us to display directory contents correctly to the user
+         *
+         * @return true if this TreeItem represents a directory, false if it represents a file or link etc
+         */
         private Boolean updateIsDirectory(){
+
+            // Call to the nio Files system which is essentially linked to the remote server
             Boolean b = !Files.isDirectory( super.getValue() );
             setLeaf( b );
+            // Call to the parent/container of this tree (otherwise changes will not propagate and become visible
             remotePathBrowserTree.refresh();
+
             return b;
         }
 
+        /**
+         * A callable (and thus threadable) method for building the children associated with each TreeItem
+         *
+         * @param tree_item the parent TreeItem
+         * @return a callable which returns an ObservableList of TreeItems
+         */
         private Callable<ObservableList<TreeItem<Path>>> buildChildren(RemoteTreeItem tree_item) {
 
+            // lambda return
             return () -> {
 
+                // get a reference to this TreeItem's path
                 Path this_path = tree_item.getValue();
 
                 try {
-                    DirectoryStream<Path> ds = rfsm.getDirectory(this_path.toString());
+                    // Query the remote service about this path
+                    DirectoryStream<Path> ds = rfsm.getDirectory( this_path.toString() );
+                    // Create an ObservableList from FXCollections (required for UI elements to be notified)
                     ObservableList<TreeItem<Path>> children = FXCollections.observableArrayList();
+
+                    // For each child found in this directory
                     for (Path path : ds) {
-                        if (path != this_path) {
-                            RemoteTreeItem new_item = new RemoteTreeItem(path);
-                            if (!path.equals(super.getValue())) {
+                        // by convention, the parent (the root) will be included in the list of children, so ignore it
+                        if ( path != this_path ) {
+                            // create a new RemoteTreeItem to represent each child of this TreeItem
+                            RemoteTreeItem new_item = new RemoteTreeItem( path );
+                            // if the path of this new child is different from the parent
+                            if ( ! path.equals( super.getValue() )) {
+                                // by default, assume and assert that this child is not a leaf
                                 new_item.setLeaf( false );
 
-                                CompletableFuture<Boolean> leaf = CompletableFuture.supplyAsync( new_item :: updateIsDirectory);
+                                // magical one line of code that makes the remoteFileBrowser possible
+                                // This is an asynchronous boolean which will make a non-blocking call to the server
+                                // and update the leaf status of this child when the opportunity arises
+                                CompletableFuture<Boolean> leaf =
+                                        CompletableFuture.supplyAsync( new_item :: updateIsDirectory);
 
+                                // add this new TreeItem to the observable list of children
                                 children.add(new_item);
-                            } else
-                                this.setLeaf(true);
+                            }
+                            else
+                                this.setLeaf(true); //else, if this child is the parent, it must be a leaf (file/link)
                         }
-                        System.out.println(path.toString());
                     }
                     return children;
 
-                } catch (IOException e) {
+                } catch ( IOException e ) {
+                    // if creating the tree fails for any reason, log the event
                     log.error(null, null, "RTB: Error while building remote directory tree: " + e);
                 }
 
+                // return an empty list so that an error with building the tree doesn't cause our program to crash/hang
                 return FXCollections.emptyObservableList();
             };
         }
