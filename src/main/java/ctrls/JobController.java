@@ -25,9 +25,6 @@ public class JobController implements Initializable{
     public TitledPane requiredApplicationsPane;
     public TitledPane dupFinderPane;
 
-    private NaspInputData NASP_DATA;
-    private RemoteNetUtil REM_NETWORK;
-
     /**
      *
      * @param location  The location used to resolve relative paths for the root object, or null.
@@ -36,12 +33,19 @@ public class JobController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        AbstractRemoteNetUtilFactory arnuf = RemoteNetUtilFactoryMaker.getFactory();
-        REM_NETWORK = arnuf.createRemoteNetUtil();
+        try {
+            AbstractRemoteNetUtilFactory arnuf = RemoteNetUtilFactoryMaker.getFactory();
+            RemoteNetUtil REM_NETWORK = arnuf.createRemoteNetUtil();
 
-        REM_NETWORK.initSession(UserSettingsManager.getUsername(),UserSettingsManager.getCurrentPassword(),
-                UserSettingsManager.getCurrentServerUrl(),UserSettingsManager.getCurrentServerPort());
-        REM_NETWORK.openSession();
+            Integer port = UserSettingsManager.getCurrentServerPort();
+
+            REM_NETWORK.initSession(UserSettingsManager.getUsername(), UserSettingsManager.getCurrentPassword(),
+                    UserSettingsManager.getCurrentServerUrl(), port);
+            REM_NETWORK.openSession();
+        }
+        catch ( Exception e ){
+            e.printStackTrace(); //TODO: Log failure
+        }
 
     }
 
@@ -62,6 +66,7 @@ public class JobController implements Initializable{
     }
 
     private void loadJobView(File jobXML){
+        NaspInputData NASP_DATA;
         if( jobXML == null ) {
             /**
              * Create the form using a default job template
