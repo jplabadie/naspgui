@@ -17,6 +17,7 @@
       <xs:element name="OutputFolder" type="xs:string"/>
       <xs:element name="Reference" type="Reference"/>
       <xs:element name="Filters" type="Filters"/>
+      <xs:element name="TrimReads" type="xs:string"/>
       <xs:element name="JobSubmitter" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>

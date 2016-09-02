@@ -27,8 +27,8 @@
             width  = 1000 - margin.left - margin.right,
             height = 500  - margin.top  - margin.bottom;
 
-    var x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], .1);
+    var x = d3.scale.linear()
+            .rangeRoundBands([0, width]);
 
     var y = d3.scale.linear()
             .rangeRound([height, 0]);
@@ -46,7 +46,7 @@
             .x(function (d) { return x(d.label) + x.rangeBand() / 2; })
             .y(function (d) { return y(d.value); });
 
-    var color = d3.scale.ordinal()
+    var color = d3.scale.linear()
             .range(["#001c9c","#101b4d","#475003","#9c8305","#d3c47c"]);
 
     var svg = d3.select("body").append("svg")
@@ -55,22 +55,27 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("big_results.csv", function (error, data) {
+    d3.csv("results.csv", function (error, data) {
 
-        var labelVar = 'quarter';
-        var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar;});
+        var labelVar = 'fromPos';
+        var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar; });
+
         color.domain(varNames);
 
         var seriesData = varNames.map(function (name) {
             return {
                 name: name,
                 values: data.map(function (d) {
-                    return {name: name, label: d[labelVar], value: +d[name]};
+                    return {
+                        name: name,
+                        label: d[labelVar],
+                        value: +d[name]};
                 })
             };
         });
 
-        x.domain(data.map(function (d) { return d.quarter; }));
+        //x.domain(d3.extent(seriesData, function(d) { return d.label; }));
+
         y.domain([
             d3.min(seriesData, function (c) {
                 return d3.min(c.values, function (d) { return d.value; });

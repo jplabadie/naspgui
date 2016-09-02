@@ -1,5 +1,6 @@
 package utils;
 
+import qstat_xmlbinds.QstatDataType;
 import xmlbinds.NaspInputData;
 
 import javax.xml.bind.JAXBContext;
@@ -7,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.StringReader;
 
 
 /**
@@ -29,7 +31,7 @@ public class JobSaveLoadManager {
      * @return a populated NaspInputData object with references to related classes
      */
     @SuppressWarnings(" unchecked ")
-    public static NaspInputData jaxbXMLToObject( File xml_path ) {
+    public static NaspInputData NaspJaxbXmlToObject(File xml_path ) {
 
         try {
             JAXBContext context = JAXBContext.newInstance( NaspInputData.class );
@@ -40,6 +42,30 @@ public class JobSaveLoadManager {
 
         } catch ( JAXBException e ) {
             lm.error( null, null, "JSLM: Job XML failed to load from: " + xml_path.getPath() +
+                    "\nError occured:\n" + e.getMessage() );
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param xml the xml as a string, used to create Java objects via bindings
+     * @return a populated NaspInputData object with references to related classes
+     */
+    @SuppressWarnings(" unchecked ")
+    public static QstatDataType QstatJaxbXmlToObject( String xml ) {
+
+        try {
+            JAXBContext context = JAXBContext.newInstance( QstatDataType.class );
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            StringReader st = new StringReader( xml );
+            QstatDataType qstatData = ( (QstatDataType) unmarshaller.unmarshal( st ) );
+            lm.info( null, null, "JSLM: QStat XML loaded and converted to objects from XML string." );
+            return qstatData;
+
+        } catch ( JAXBException e ) {
+            lm.error( null, null, "JSLM: QStat XML failed to load from XML string" +
                     "\nError occured:\n" + e.getMessage() );
             e.printStackTrace();
         }

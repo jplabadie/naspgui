@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlType;
     "outputFolder",
     "reference",
     "filters",
+    "trimReads",
     "jobSubmitter"
 })
 @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
@@ -61,6 +62,9 @@ public class Options {
     @XmlElement(name = "Filters", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected Filters filters;
+    @XmlElement(name = "TrimReads", required = true)
+    @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
+    protected String trimReads = "";
     @XmlElement(name = "JobSubmitter", required = true)
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     protected String jobSubmitter = "";
@@ -167,6 +171,32 @@ public class Options {
     @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
     public void setFilters(Filters value) {
         this.filters = value;
+    }
+
+    /**
+     * Gets the value of the trimReads property.
+     *
+     * @return
+     *     possible object is
+     *     {@link String }
+     *
+     */
+    @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
+    public String getTrimReads() {
+        return trimReads;
+    }
+
+    /**
+     * Sets the value of the trimReads property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *
+     */
+    @Generated(value = "com.sun.tools.internal.xjc.Driver", date = "2016-07-01T12:40:32-07:00", comments = "JAXB RI v2.2.8-b130911.1802")
+    public void setTrimReads(String value) {
+        this.trimReads = value;
     }
 
     /**

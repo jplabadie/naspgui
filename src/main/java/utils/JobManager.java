@@ -33,8 +33,8 @@ public class JobManager {
     public void startNewRemoteJob(File nasp_xml, String usrname, String password, String url, Integer port, String remote_path){
 
         log.info(null, null, "JM: Remote Job Requested by "+ usrname +" at " +url+":"+port+" using "+remote_path);
-        JobRecord dc = new JobRecord(usrname,url, port,remote_path,remote_path );
-        saveJobRecord(dc);
+        //JobRecord dc = new JobRecord(usrname,url, port,remote_path,remote_path );
+        //saveJobRecord(dc);
 
         rnm.initSession(usrname,password,url,port);
         rnm.openSession();

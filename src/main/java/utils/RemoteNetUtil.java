@@ -1,5 +1,7 @@
 package utils;
 
+import qstat_xmlbinds.QstatDataType;
+
 import java.io.File;
 import java.util.List;
 
@@ -62,10 +64,13 @@ public interface RemoteNetUtil {
      */
     List<String> getUserJobs();
 
+
     /**
      * @return a list of jobs currently being managed by the job manager for a specific username
      */
     List<String> getUserJobs( String username );
+
+    QstatDataType getJobsXml( );
 
     /**
      * Returns a list representing all files and symbolic links found in the specified directory
@@ -105,4 +110,10 @@ public interface RemoteNetUtil {
      * @return true if required variables have been initialized with initSession
      */
     boolean isInitialized();
+
+    String getUsername();
+
+    String getHost();
+
+    Integer getPort();
 }

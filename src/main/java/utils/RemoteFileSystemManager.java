@@ -93,7 +93,7 @@ public class RemoteFileSystemManager {
 
         Path path = sshfs.getPath( requested_path ); // refers to an absolute remote path
         try (DirectoryStream<Path> ds = Files.newDirectoryStream(path)) {
-           return ds;
+            return ds;
         }
     }
 

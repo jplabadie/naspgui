@@ -1,6 +1,7 @@
 package utils;
 
 import com.jcraft.jsch.*;
+import qstat_xmlbinds.QstatDataType;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -126,7 +127,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             while( inBuff.ready() ){
                 welcome += inBuff.readLine() +"\n";
             }
-            log.info( null, null, "RNU: Login message = " + "\n" + welcome );
+            log.info( null, null, "RNU: Login message = " + welcome );
+            execCommand( "module load tnorth" );
+            execCommand( "module load nasp" );
 
         } catch (SftpException e) {
             log.error( null, null, "RNU: Unable to Get SFTP PWD \n" + e.getMessage() );
@@ -173,8 +176,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param abs_remote_path the absolute path to the file on the remote machine
      */
     public void upload(File file, String abs_remote_path){
-        log.info(null, null, "RNU: Attempting upload: "+ file.getName()+ " at "+ abs_remote_path);
-        String remote_dir = abs_remote_path.substring(0, abs_remote_path.lastIndexOf('/'));
+        log.info(null, null, "RNU: Attempting upload: " + file.getName() + " at " + abs_remote_path);
+        String remote_dir = abs_remote_path.substring( 0, abs_remote_path.lastIndexOf( '/' ) );
 
         if ( sftp_channel == null ){
             log.error(null, null, "NM - Upload Step Fail: SFTP Channel is null. Cannot upload.");
@@ -217,7 +220,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                     "Insufficient Permissions? \n" + e.getMessage());
         }
     }
-
 
     /**
      * Accepts a string representing a linux command. These commands are then executed on the remote system.
@@ -332,7 +334,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     }
 
     /**
-     *
      * @param job_XML_abs_path
      * @return true if the job started successfully, false otherwise
      */
@@ -340,14 +341,14 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
 
         String runpath = job_XML_abs_path.substring( 0, job_XML_abs_path.lastIndexOf('/') );
         String jobname = "";
-        System.out.println( "Running nasp in:" +runpath );
-        System.out.println( "XML nasp in:" + job_XML_abs_path );
+        System.out.println( "Running nasp in: " +runpath );
+        System.out.println( "NASP input XML at: " + job_XML_abs_path );
 
         execCommand( "cd " + runpath );
-        execCommand( "module load nasp" );
         execCommand( "module load tnorth" );
+        execCommand( "module load nasp" );
         execCommand( "nasp --config " + job_XML_abs_path );
-        execCommand( "Y" );
+        execCommand( "y" );
         //TODO: dreams
 
         return true;
@@ -363,10 +364,24 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         return execCommand( "qstat -au " + getUsername() );
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public QstatDataType getJobsXml() {
+        ArrayList<String> out = execCommand( "qstat -f -x" );
+        String xml = out.get(0);
+        return JobSaveLoadManager.QstatJaxbXmlToObject( xml );
+
+    }
+
     public ArrayList<String> getUserJobs( String username) {
 
         return execCommand( "qstat -au " + username );
     }
+
+
 
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings
@@ -377,8 +392,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     public ArrayList<String> getAllFiles( String remote_abs_path ){
 
         System.out.println( "Rempath: " + remote_abs_path );
-        execCommand( "cd " + remote_abs_path);
-        return( execCommand("find -L $PWD -type f") );
+        return( execCommand("find -L " + remote_abs_path + " -type f") );
     }
 
     /**
@@ -425,8 +439,8 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      */
     public boolean isRemoteDir(String remote_dir_abs_path) {
         log.info(null, null, "RNU: Checking for remote directory - " + remote_dir_abs_path);
-        if (shell_channel == null)
-            log.error(null, null, "RNU: Cannot check remote dir - Exec channel is null.");
+        //if (shell_channel == null)
+           // log.error(null, null, "RNU: Cannot check remote dir - Exec channel is null.");
         log.info(null, null, "RNU: Checking for remote directory - Running test -d (remote path)...");
 
         try {
@@ -461,7 +475,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * Return port being used for the current session
      * @return port as an int
      */
-    public int getPort(){
+    public Integer getPort(){
         if( isInitialized() )
             return session.getPort();
         log.warn( null, null, "RN: Cannot get port, session is not active." );

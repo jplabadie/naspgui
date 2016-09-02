@@ -6,6 +6,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import org.controlsfx.control.MasterDetailPane;
@@ -26,7 +27,8 @@ public class JobManagerPane extends BorderPane{
     private MasterDetailPane mdp = new MasterDetailPane();
     private TableView<Job> table = new TableView<>();
     private TableFilter<Job> filter;
-    ObservableList<Job> jobs ;
+    private ObservableList<Job> jobs ;
+    private ToolBar toolBar = new ToolBar();
 
     public JobManagerPane( ArrayList<Job> input ){
         jobs = FXCollections.observableArrayList( input);
