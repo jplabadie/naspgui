@@ -52,7 +52,6 @@ public class NaspGuiMain extends Application {
 
         primaryStage.setScene( scene );
         primaryStage.show();
-        this.
     }
 
     /**
