@@ -1,5 +1,6 @@
 package main;
 
+import ctrls.MainController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -17,7 +18,6 @@ import utils.UserSettingsManager;
 public class NaspGuiMain extends Application {
 
     /**
-     *
      * @param primaryStage the root stage of the GUI
      * @throws Exception multitude of exceptions due to resource loading issues
      */
@@ -25,6 +25,11 @@ public class NaspGuiMain extends Application {
     public void start( Stage primaryStage ) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("NASPGuiMainLayout.fxml"));
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setRoot(root);
+        MainController controller = loader.getController(); //TODO: Modify MainController and pass in utilities and settings
+
         primaryStage.setTitle("NASP GUI Beta");
         Scene scene = new Scene(root, 1024, 800);
         //scene.getStylesheets().add( "css/darc.css" );
@@ -47,6 +52,7 @@ public class NaspGuiMain extends Application {
 
         primaryStage.setScene( scene );
         primaryStage.show();
+        this.
     }
 
     /**
@@ -56,16 +62,14 @@ public class NaspGuiMain extends Application {
      */
     @Override
     public void stop(){
-        System.out.println("Closing");
+        System.out.println( "Closing" );
         Platform.exit();
-        System.exit( 0 );
-
+        System.exit( 1 ); //hacky. This line shouldn't execute, but if it does, force the program/children into closing
     }
 
     public static void main(String[] args) {
         LogManager lm = LogManager.getInstance();
         UserSettingsManager usm = UserSettingsManager.getInstance();
-
         Application.launch(args);
     }
 }

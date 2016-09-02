@@ -70,6 +70,8 @@ public class MainController implements Initializable{
     @Override
     public void initialize(final URL fxmlFileLocation, ResourceBundle resources){
 
+
+
         rfsm = RemoteFileSystemManager.getInstance();
         log = LogManager.getInstance();
 
