@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>Capstone</artifactId>
+    <artifactId>NaspGui</artifactId>
     <version>0.5.0</version>
+    <description>A JavaFX GUI for interacting with the NASP service on a remote cluster</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

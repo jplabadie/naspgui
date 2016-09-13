@@ -1,6 +1,7 @@
-package widgets;
+package components.job;
 
 
+import components.WidgetPane;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

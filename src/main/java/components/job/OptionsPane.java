@@ -1,4 +1,4 @@
-package widgets;
+package components.job;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

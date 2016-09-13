@@ -1,5 +1,8 @@
-package widgets;
+package components.job;
 
+import components.job.ExternalApplicationsPane;
+import components.job.FilesPane;
+import components.job.OptionsPane;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -14,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
-import utils.JobSaveLoadManager;
+import utils.XMLSaveLoad;
 import utils.RemoteNetUtil;
 import xmlbinds.*;
 
@@ -117,7 +120,7 @@ public class JobTab extends Tab {
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
             if ( output == null )
                 output = "/temp";
-            File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, output );
+            File outfile = XMLSaveLoad.jaxbObjectToXML(NASP_DATA, output);
             //TODO: upload saved job?
             //remotepath = remotepath + "/" + outfile.getName();
             //net.upload( outfile, remotepath );
@@ -130,7 +133,7 @@ public class JobTab extends Tab {
             String xml_name = NASP_DATA.getOptions().getRunName();
             String remotepath = NASP_DATA.getOptions().getOutputFolder();
             remotepath = remotepath.substring(0, remotepath.lastIndexOf("/")) + "/";
-            File outfile = JobSaveLoadManager.jaxbObjectToXML( NASP_DATA, xml_name );
+            File outfile = XMLSaveLoad.jaxbObjectToXML(NASP_DATA, xml_name);
 
             remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);

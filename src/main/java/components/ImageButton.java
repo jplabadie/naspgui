@@ -1,4 +1,4 @@
-package widgets;
+package components;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

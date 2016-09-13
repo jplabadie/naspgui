@@ -16,12 +16,12 @@ import java.io.StringReader;
  *
  * @author Jean-Paul Labadie
  */
-public class JobSaveLoadManager {
+public class XMLSaveLoad {
 
-    private static JobSaveLoadManager instance;
+    private static XMLSaveLoad instance;
     private static LogManager lm = LogManager.getInstance();
 
-    private JobSaveLoadManager(){
+    private XMLSaveLoad(){
         lm.info( null, null, "JSLM: JSLM Singleton Initialized" );
     }
 
@@ -167,9 +167,9 @@ public class JobSaveLoadManager {
      *
      * @return a Singleton object instance of this class
      */
-    public static JobSaveLoadManager getInstance() {
+    public static XMLSaveLoad getInstance() {
         if( instance == null )
-            instance = new JobSaveLoadManager();
+            instance = new XMLSaveLoad();
         return instance;
     }
 }

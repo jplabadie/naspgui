@@ -1,4 +1,4 @@
-package widgets;
+package components.job;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -15,8 +15,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import xmlbinds.Assembly;
-import xmlbinds.AssemblyFolder;
+import xmlbinds.Alignment;
+import xmlbinds.AlignmentFolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,52 +27,54 @@ import java.util.List;
  *
  * @author jlabadie
  */
-class AssemblyFolderPane extends GridPane {
+class AlignmentFolderPane extends GridPane {
 
     private GridPane AF = this;
-    private Label assembly_folder_label = new Label( "Assembly Folder" );
-    private Label assembly_folder_path_label = new Label( "Folder Path" );
+    private Label alignment_folder_label = new Label( "Alignment Folder" );
+    private Label alignment_folder_path_label = new Label( "Folder Path" );
 
-    private TextField assemblyFolderPath = new TextField();
+    private TextField alignmentFolderPath = new TextField();
 
-    private Tooltip assembly_folder_path_tip
-            = new Tooltip( "The remote path containing the assemblies you are interested in" );
+    private Tooltip alignment_folder_path_tip
+            = new Tooltip( "The remote path containing the alignments you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<AssemblyPane> assemblyGridpanes;
+    private ObservableList<AlignmentPane> alignmentGridpanes;
 
     private int grid_row_position = 2;
 
-    private AssemblyFolder ASSEMBLYFOLDER;
-    private List<Assembly> ASSEMBLIES;
+    private AlignmentFolder ALIGNMENTFOLDER;
+    private List<Alignment> ALIGNMENTS;
 
-    AssemblyFolderPane( AssemblyFolder input_assembly_folder, Button removeButton ){
+    AlignmentFolderPane( AlignmentFolder input_alignment_folder, Button removeButton ){
 
-        this.getStyleClass().add("folderpane1");
-        ASSEMBLYFOLDER = input_assembly_folder;
-        ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
+        this.setId( "folderpane1" );
+        ALIGNMENTFOLDER = input_alignment_folder;
+        ALIGNMENTS = ALIGNMENTFOLDER.getAlignment();
 
-        assemblyFolderPath.setText( ASSEMBLYFOLDER.getPath() );
+        alignmentFolderPath.setText( ALIGNMENTFOLDER.getPath() );
+        alignmentFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<AssemblyPane> ass_pairings =  new ArrayList<>();
-        assemblyGridpanes = FXCollections.observableList( ass_pairings );
+        ArrayList<AlignmentPane> al_pairings =  new ArrayList<>();
+        alignmentGridpanes = FXCollections.observableList( al_pairings );
 
         /**
          * Define the look and feel of static label elements
          */
-        assembly_folder_label.setPrefSize( 100, 20 );
-        assembly_folder_label.setAlignment( Pos.CENTER );
-        assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        assembly_folder_label.setAlignment( Pos.CENTER );
-
+        alignment_folder_label.setId( "header5" );
+        alignment_folder_label.setPrefSize( 100, 20 );
+        alignment_folder_label.setAlignment( Pos.CENTER );
+        alignment_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        alignment_folder_label.setAlignment( Pos.CENTER );
         /**
          * Add tooltips to the static label elements
          */
-        assembly_folder_path_label.setTooltip( assembly_folder_path_tip );
+        alignment_folder_path_label.setTooltip( alignment_folder_path_tip );
+        alignment_folder_path_label.setId( "label1" );
 
         /**
          * Define the look and behavior of the GridPane
@@ -97,24 +99,24 @@ class AssemblyFolderPane extends GridPane {
 
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
+        Button delAlignmentFolder = removeButton;
+        this.add( delAlignmentFolder, 2, 0, 3, 1 );
+        delAlignmentFolder.setAlignment( Pos.CENTER_LEFT);
 
         /**
          * Define the look and behavior of the non-static TextField and Label elements
          */
 
         // Add the title to row 0 column 0
-        this.add( assembly_folder_label, 0, 0, 3, 1 );
-        Button delAssemblyFolder = removeButton;
-        this.add( delAssemblyFolder, 2, 0, 3, 1 );
-        delAssemblyFolder.setAlignment( Pos.CENTER_LEFT);
+        this.add( alignment_folder_label, 0, 0, 3, 1 );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( assembly_folder_path_label, 1, 1, 3, 1 );
-        this.add( assemblyFolderPath, 2, 1, 4, 1 );
+        this.add( alignment_folder_path_label, 1, 1, 3, 1 );
+        this.add( alignmentFolderPath, 2, 1, 4, 1 );
 
-        assemblyFolderPath.textProperty().addListener(
+        alignmentFolderPath.textProperty().addListener(
                 observable -> {
-                    ASSEMBLYFOLDER.setPath( assemblyFolderPath.getText() );
+                    ALIGNMENTFOLDER.setPath( alignmentFolderPath.getText() );
                 }
         );
 
@@ -123,12 +125,12 @@ class AssemblyFolderPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        assemblyGridpanes.addListener( new ListChangeListener<AssemblyPane>() {
+        alignmentGridpanes.addListener( new ListChangeListener<AlignmentPane>() {
             @Override
-            public void onChanged( Change<? extends AssemblyPane> c ) {
+            public void onChanged( Change<? extends AlignmentPane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
-                        for ( AssemblyPane gp : c.getAddedSubList() ) {
+                        for ( AlignmentPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_assembly = new Button();
 
@@ -141,10 +143,10 @@ class AssemblyFolderPane extends GridPane {
                             add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
 
                             add_assembly.setOnAction( event -> {
-                                Assembly assembly = new Assembly();
-                                AssemblyPane ap = new AssemblyPane( assembly );
-                                ASSEMBLIES.add( assembly );
-                                assemblyGridpanes.add ( ap );
+                                Alignment alignment = new Alignment();
+                                AlignmentPane ap = new AlignmentPane( alignment );
+                                ALIGNMENTS.add( alignment );
+                                alignmentGridpanes.add ( ap );
                             } );
 
                             ImageView image_view2 = new ImageView( remove );
@@ -159,12 +161,12 @@ class AssemblyFolderPane extends GridPane {
 
                             remove_assembly.setOnAction(
                                     event -> {
-                                        if( assemblyGridpanes.size() > 1 ) {
-                                            assemblyGridpanes.remove( gp );
+                                        if( alignmentGridpanes.size() > 1 ) {
+                                            alignmentGridpanes.remove( gp );
                                             AF.getChildren().remove( hbox );
                                         }
-                                        else if( assemblyGridpanes.size() == 1 ){
-                                            AssemblyPane ap = assemblyGridpanes.get( 0 );
+                                        else if( alignmentGridpanes.size() == 1 ){
+                                            AlignmentPane ap = alignmentGridpanes.get( 0 );
                                             ap.clear();
                                         }
                                     }
@@ -173,35 +175,52 @@ class AssemblyFolderPane extends GridPane {
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( AssemblyPane gp : c.getRemoved() ) {
+                        for ( AlignmentPane gp : c.getRemoved() ) {
                             AF.getChildren().remove( gp );
-                            ASSEMBLIES.remove( gp.getAssembly() );
+                            ALIGNMENTS.remove( gp.getAlign() );
                             grid_row_position--;
                         }
                     }
                 }
             }
         });
-
-        if( ASSEMBLIES.isEmpty() ){
-            ASSEMBLIES.add( new Assembly() );
-        }
-        for( Assembly assmbly: ASSEMBLIES){
-           AssemblyPane ap = new AssemblyPane( assmbly );
-            assemblyGridpanes.add( ap );
+        if(ALIGNMENTS.isEmpty())
+            ALIGNMENTS.add( new Alignment() );
+        for( Alignment alignment: ALIGNMENTS){
+            AlignmentPane ap = new AlignmentPane( alignment );
+            alignmentGridpanes.add( ap );
         }
     }
 
     void clear(){
-        assemblyGridpanes.clear();
+        alignmentFolderPath.setText("");
+        for( int i= alignmentGridpanes.size() -1 ; i >=0 ; i--) {
+            if (i > 1){
+                alignmentGridpanes.remove( i);
+            }
+            else
+                alignmentGridpanes.get(i).clear();
+        }
     }
 
+    /**
+     * Accepts buttons from the parent Node (FilesPane)
+     * These buttons are controlled  by the parent, but visually fit in the child's pane
+     * @param add_assembly
+     * @param remove_assembly
+     */
+    void setButtons( Button add_assembly, Button remove_assembly ) {
 
-    AssemblyFolder getAssemblyFolder() {
-        return ASSEMBLYFOLDER;
+        HBox button_box = new HBox();
+        button_box.getChildren().addAll(add_assembly, remove_assembly);
+        this.add( button_box, 3, 0, 3, 1);
     }
 
-    public void setAssemblyFolder(AssemblyFolder input){
-    ASSEMBLYFOLDER = input;
+    AlignmentFolder getAssemblyFolder() {
+        return ALIGNMENTFOLDER;
+    }
+
+    public void setAssemblyFolder(AlignmentFolder input){
+        ALIGNMENTFOLDER = input;
     }
 }

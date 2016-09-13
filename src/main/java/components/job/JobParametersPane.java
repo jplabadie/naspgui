@@ -1,4 +1,4 @@
-package widgets;
+package components.job;
 
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;

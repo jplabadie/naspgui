@@ -1,4 +1,4 @@
-package widgets;
+package components;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -41,7 +41,7 @@ public class JobManagerPaneTest extends Application {
             Assert.fail();
         }
 
-        QstatDataType result = nm.getJobsXml( "target/qstat_out.xml" ); // nm.execCommand( "qstat -a" );
+        QstatDataType result = nm.getJobsXml( "~qstat_temp.xml" ); // nm.execCommand( "qstat -a" );
 
         ArrayList<Job> jobs  = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class JobManagerPaneTest extends Application {
 
         for( QstatJobType x : joblist ){
 
-            if( x.getJobOwner().equalsIgnoreCase( usr )) {
+            //if( x.getJobOwner().equalsIgnoreCase( usr )) {
 
                 Job j = new Job();
                 j.setJobId( x.getJobId());
@@ -62,14 +62,15 @@ public class JobManagerPaneTest extends Application {
                 j.setSessionId( x.getSessionId() );
                 j.setStatus( x.getJobState() );
                 j.setTime( x.getCtime() );
+            j.setUserName( x.getJobOwner() );
 
                 jobs.add(j);
-            }
+           // }
         }
 
         JobManagerPane jmp = new JobManagerPane( jobs );
         Scene scene = new Scene( jmp, 800, 600 );
-        //scene.getStylesheets().add( "css/darc.css" );
+        //scene.getStylesheets().add( "styles/darc.styles" );
         primaryStage.setScene( scene );
         primaryStage.show();
     }

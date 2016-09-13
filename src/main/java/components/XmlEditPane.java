@@ -1,4 +1,4 @@
-package widgets;
+package components;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;

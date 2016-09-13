@@ -1,4 +1,4 @@
-package widgets;
+package components.job;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -15,8 +15,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import xmlbinds.VCFFile;
-import xmlbinds.VCFFolder;
+import xmlbinds.Assembly;
+import xmlbinds.AssemblyFolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,57 +27,52 @@ import java.util.List;
  *
  * @author jlabadie
  */
-class VcfFolderPane extends GridPane {
+class AssemblyFolderPane extends GridPane {
 
-    private GridPane VCF = this;
-    private Label vcf_folder_label = new Label( "VCF Folder" );
-    private Label vcf_folder_path_label = new Label( "Folder Path" );
+    private GridPane AF = this;
+    private Label assembly_folder_label = new Label( "Assembly Folder" );
+    private Label assembly_folder_path_label = new Label( "Folder Path" );
 
-    private TextField vcfFolderPath = new TextField();
+    private TextField assemblyFolderPath = new TextField();
 
-    private Tooltip vcf_folder_path_tip
-            = new Tooltip( "The remote path containing the VCFs you are interested in" );
+    private Tooltip assembly_folder_path_tip
+            = new Tooltip( "The remote path containing the assemblies you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList <VcfFilePane> vcfFilePanes;
+    private ObservableList<AssemblyPane> assemblyGridpanes;
 
     private int grid_row_position = 2;
 
-    private VCFFolder VCFFOLDER;
-    private List<VCFFile> VCFFILES;
+    private AssemblyFolder ASSEMBLYFOLDER;
+    private List<Assembly> ASSEMBLIES;
 
-    VcfFolderPane( VCFFolder input_vcf_folder, Button removeButton ){
+    AssemblyFolderPane( AssemblyFolder input_assembly_folder, Button removeButton ){
 
-        this.setId( "folderpane1" );
-        VCFFOLDER = input_vcf_folder;
-        VCFFILES = VCFFOLDER.getVCFFile();
+        this.getStyleClass().add("folderpane1");
+        ASSEMBLYFOLDER = input_assembly_folder;
+        ASSEMBLIES = ASSEMBLYFOLDER.getAssembly();
 
-        vcfFolderPath.setText( VCFFOLDER.getPath() );
-        vcfFolderPath.setId( "textfield1" );
+        assemblyFolderPath.setText( ASSEMBLYFOLDER.getPath() );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<VcfFilePane> vcfs =  new ArrayList<>();
-        vcfFilePanes = FXCollections.observableList( vcfs );
+        ArrayList<AssemblyPane> ass_pairings =  new ArrayList<>();
+        assemblyGridpanes = FXCollections.observableList( ass_pairings );
 
         /**
          * Define the look and feel of static label elements
          */
-        /**
-         * Define the look and feel of static label elements
-         */
-        vcf_folder_label.setId( "header5" );
-        vcf_folder_label.setPrefSize( 100, 20 );
-        vcf_folder_label.setAlignment( Pos.CENTER );
-        vcf_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        vcf_folder_label.setAlignment( Pos.CENTER );
+        assembly_folder_label.setPrefSize( 100, 20 );
+        assembly_folder_label.setAlignment( Pos.CENTER );
+        assembly_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        assembly_folder_label.setAlignment( Pos.CENTER );
+
         /**
          * Add tooltips to the static label elements
          */
-        vcf_folder_path_label.setTooltip(vcf_folder_path_tip);
-        vcf_folder_path_label.setId( "label1" );
+        assembly_folder_path_label.setTooltip( assembly_folder_path_tip );
 
         /**
          * Define the look and behavior of the GridPane
@@ -86,6 +81,7 @@ class VcfFolderPane extends GridPane {
         this.setHgap( 2 );
         this.setVgap( 2 );
 
+        //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 90, 100 );
         ColumnConstraints c2 = new ColumnConstraints( 30, 300, 500 );
@@ -107,18 +103,18 @@ class VcfFolderPane extends GridPane {
          */
 
         // Add the title to row 0 column 0
-        this.add(vcf_folder_label, 0, 0, 3, 1 );
-        Button delVcfFolder = removeButton;
-        this.add( delVcfFolder, 2, 0, 3, 1 );
-        delVcfFolder.setAlignment( Pos.CENTER_LEFT );
+        this.add( assembly_folder_label, 0, 0, 3, 1 );
+        Button delAssemblyFolder = removeButton;
+        this.add( delAssemblyFolder, 2, 0, 3, 1 );
+        delAssemblyFolder.setAlignment( Pos.CENTER_LEFT);
 
         // Add row headings for app-path and app-args to column 1
-        this.add(vcf_folder_path_label, 1, 1, 3, 1 );
-        this.add(vcfFolderPath, 2, 1, 4, 1 );
+        this.add( assembly_folder_path_label, 1, 1, 3, 1 );
+        this.add( assemblyFolderPath, 2, 1, 4, 1 );
 
-        vcfFolderPath.textProperty().addListener(
+        assemblyFolderPath.textProperty().addListener(
                 observable -> {
-                    VCFFOLDER.setPath( vcfFolderPath.getText() );
+                    ASSEMBLYFOLDER.setPath( assemblyFolderPath.getText() );
                 }
         );
 
@@ -127,12 +123,12 @@ class VcfFolderPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        vcfFilePanes.addListener( new ListChangeListener<VcfFilePane>() {
+        assemblyGridpanes.addListener( new ListChangeListener<AssemblyPane>() {
             @Override
-            public void onChanged( Change<? extends VcfFilePane> c ) {
+            public void onChanged( Change<? extends AssemblyPane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
-                        for ( VcfFilePane gp : c.getAddedSubList() ) {
+                        for ( AssemblyPane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_assembly = new Button();
 
@@ -145,10 +141,10 @@ class VcfFolderPane extends GridPane {
                             add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
 
                             add_assembly.setOnAction( event -> {
-                                VCFFile new_vcf = new VCFFile();
-                                VcfFilePane vcfp = new VcfFilePane( new_vcf );
-                                VCFFILES.add( new_vcf );
-                                vcfFilePanes.add ( vcfp );
+                                Assembly assembly = new Assembly();
+                                AssemblyPane ap = new AssemblyPane( assembly );
+                                ASSEMBLIES.add( assembly );
+                                assemblyGridpanes.add ( ap );
                             } );
 
                             ImageView image_view2 = new ImageView( remove );
@@ -159,27 +155,27 @@ class VcfFolderPane extends GridPane {
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( remove_assembly, add_assembly );
                             hbox.setAlignment( Pos.BOTTOM_CENTER );
-                            VCF.add( hbox, 5, grid_row_position, 3, 1 );
+                            AF.add( hbox, 5, grid_row_position, 3, 1 );
 
                             remove_assembly.setOnAction(
                                     event -> {
-                                        if( vcfFilePanes.size() > 1 ) {
-                                            vcfFilePanes.remove( gp );
-                                            VCF.getChildren().remove( hbox );
+                                        if( assemblyGridpanes.size() > 1 ) {
+                                            assemblyGridpanes.remove( gp );
+                                            AF.getChildren().remove( hbox );
                                         }
-                                        else if( vcfFilePanes.size() == 1 ){
-                                            VcfFilePane ap = vcfFilePanes.get( 0 );
+                                        else if( assemblyGridpanes.size() == 1 ){
+                                            AssemblyPane ap = assemblyGridpanes.get( 0 );
                                             ap.clear();
                                         }
                                     }
                             );
-                            VCF.add( gp, 1, grid_row_position++, 3, 1 );
+                            AF.add( gp, 1, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( VcfFilePane gp : c.getRemoved() ) {
-                            VCF.getChildren().remove( gp );
-                            VCFFILES.remove( gp.getVcfFile() );
+                        for ( AssemblyPane gp : c.getRemoved() ) {
+                            AF.getChildren().remove( gp );
+                            ASSEMBLIES.remove( gp.getAssembly() );
                             grid_row_position--;
                         }
                     }
@@ -187,37 +183,25 @@ class VcfFolderPane extends GridPane {
             }
         });
 
-        if( VCFFILES.isEmpty() )
-            VCFFILES.add( new VCFFile() );
-
-        for( VCFFile vcf: VCFFILES){
-            VcfFilePane vcfp = new VcfFilePane( vcf );
-            vcfFilePanes.add( vcfp );
+        if( ASSEMBLIES.isEmpty() ){
+            ASSEMBLIES.add( new Assembly() );
+        }
+        for( Assembly assmbly: ASSEMBLIES){
+           AssemblyPane ap = new AssemblyPane( assmbly );
+            assemblyGridpanes.add( ap );
         }
     }
 
     void clear(){
-        vcfFilePanes.clear();
+        assemblyGridpanes.clear();
     }
 
-    /**
-     * Accepts buttons from the parent Node (FilesPane)
-     * These buttons are controlled  by the parent, but visually fit in the child's pane
-     * @param add_assembly
-     * @param remove_assembly
-     */
-    void setButtons( Button add_assembly, Button remove_assembly ) {
 
-        HBox button_box = new HBox();
-        button_box.getChildren().addAll(add_assembly, remove_assembly);
-        this.add( button_box, 3, 0, 3, 1);
+    AssemblyFolder getAssemblyFolder() {
+        return ASSEMBLYFOLDER;
     }
 
-    VCFFolder getVcfFolder() {
-        return VCFFOLDER;
-    }
-
-    public void setVcfFolder(VCFFolder input){
-        VCFFOLDER = input;
+    public void setAssemblyFolder(AssemblyFolder input){
+    ASSEMBLYFOLDER = input;
     }
 }

@@ -1,4 +1,4 @@
-package widgets;
+package components.job;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -15,8 +15,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import xmlbinds.Alignment;
-import xmlbinds.AlignmentFolder;
+import xmlbinds.VCFFile;
+import xmlbinds.VCFFolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,54 +27,57 @@ import java.util.List;
  *
  * @author jlabadie
  */
-class AlignmentFolderPane extends GridPane {
+class VcfFolderPane extends GridPane {
 
-    private GridPane AF = this;
-    private Label alignment_folder_label = new Label( "Alignment Folder" );
-    private Label alignment_folder_path_label = new Label( "Folder Path" );
+    private GridPane VCF = this;
+    private Label vcf_folder_label = new Label( "VCF Folder" );
+    private Label vcf_folder_path_label = new Label( "Folder Path" );
 
-    private TextField alignmentFolderPath = new TextField();
+    private TextField vcfFolderPath = new TextField();
 
-    private Tooltip alignment_folder_path_tip
-            = new Tooltip( "The remote path containing the alignments you are interested in" );
+    private Tooltip vcf_folder_path_tip
+            = new Tooltip( "The remote path containing the VCFs you are interested in" );
 
     private Image add = new Image( getClass().getResourceAsStream( "/icons/add-3.png" ) );
     private Image remove = new Image( getClass().getResourceAsStream( "/icons/stop.png" ) );
 
-    private ObservableList<AlignmentPane> alignmentGridpanes;
+    private ObservableList <VcfFilePane> vcfFilePanes;
 
     private int grid_row_position = 2;
 
-    private AlignmentFolder ALIGNMENTFOLDER;
-    private List<Alignment> ALIGNMENTS;
+    private VCFFolder VCFFOLDER;
+    private List<VCFFile> VCFFILES;
 
-    AlignmentFolderPane( AlignmentFolder input_alignment_folder, Button removeButton ){
+    VcfFolderPane( VCFFolder input_vcf_folder, Button removeButton ){
 
         this.setId( "folderpane1" );
-        ALIGNMENTFOLDER = input_alignment_folder;
-        ALIGNMENTS = ALIGNMENTFOLDER.getAlignment();
+        VCFFOLDER = input_vcf_folder;
+        VCFFILES = VCFFOLDER.getVCFFile();
 
-        alignmentFolderPath.setText( ALIGNMENTFOLDER.getPath() );
-        alignmentFolderPath.setId( "textfield1" );
+        vcfFolderPath.setText( VCFFOLDER.getPath() );
+        vcfFolderPath.setId( "textfield1" );
         /**
          * Initialize the observable list which will hold the read pairs for this widget
          */
-        ArrayList<AlignmentPane> al_pairings =  new ArrayList<>();
-        alignmentGridpanes = FXCollections.observableList( al_pairings );
+        ArrayList<VcfFilePane> vcfs =  new ArrayList<>();
+        vcfFilePanes = FXCollections.observableList( vcfs );
 
         /**
          * Define the look and feel of static label elements
          */
-        alignment_folder_label.setId( "header5" );
-        alignment_folder_label.setPrefSize( 100, 20 );
-        alignment_folder_label.setAlignment( Pos.CENTER );
-        alignment_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
-        alignment_folder_label.setAlignment( Pos.CENTER );
+        /**
+         * Define the look and feel of static label elements
+         */
+        vcf_folder_label.setId( "header5" );
+        vcf_folder_label.setPrefSize( 100, 20 );
+        vcf_folder_label.setAlignment( Pos.CENTER );
+        vcf_folder_label.setPrefSize( USE_COMPUTED_SIZE, USE_COMPUTED_SIZE );
+        vcf_folder_label.setAlignment( Pos.CENTER );
         /**
          * Add tooltips to the static label elements
          */
-        alignment_folder_path_label.setTooltip( alignment_folder_path_tip );
-        alignment_folder_path_label.setId( "label1" );
+        vcf_folder_path_label.setTooltip(vcf_folder_path_tip);
+        vcf_folder_path_label.setId( "label1" );
 
         /**
          * Define the look and behavior of the GridPane
@@ -83,7 +86,6 @@ class AlignmentFolderPane extends GridPane {
         this.setHgap( 2 );
         this.setVgap( 2 );
 
-        //Define column behavior (min_size, preferred_size, max_size)
         ColumnConstraints c0 = new ColumnConstraints( 30, 60, 90 );
         ColumnConstraints c1 = new ColumnConstraints( 30, 90, 100 );
         ColumnConstraints c2 = new ColumnConstraints( 30, 300, 500 );
@@ -99,24 +101,24 @@ class AlignmentFolderPane extends GridPane {
 
         // Add column behavior to the GridPane (order matters!)
         this.getColumnConstraints().addAll( c0, c1, c2, c3  );
-        Button delAlignmentFolder = removeButton;
-        this.add( delAlignmentFolder, 2, 0, 3, 1 );
-        delAlignmentFolder.setAlignment( Pos.CENTER_LEFT);
 
         /**
          * Define the look and behavior of the non-static TextField and Label elements
          */
 
         // Add the title to row 0 column 0
-        this.add( alignment_folder_label, 0, 0, 3, 1 );
+        this.add(vcf_folder_label, 0, 0, 3, 1 );
+        Button delVcfFolder = removeButton;
+        this.add( delVcfFolder, 2, 0, 3, 1 );
+        delVcfFolder.setAlignment( Pos.CENTER_LEFT );
 
         // Add row headings for app-path and app-args to column 1
-        this.add( alignment_folder_path_label, 1, 1, 3, 1 );
-        this.add( alignmentFolderPath, 2, 1, 4, 1 );
+        this.add(vcf_folder_path_label, 1, 1, 3, 1 );
+        this.add(vcfFolderPath, 2, 1, 4, 1 );
 
-        alignmentFolderPath.textProperty().addListener(
+        vcfFolderPath.textProperty().addListener(
                 observable -> {
-                    ALIGNMENTFOLDER.setPath( alignmentFolderPath.getText() );
+                    VCFFOLDER.setPath( vcfFolderPath.getText() );
                 }
         );
 
@@ -125,12 +127,12 @@ class AlignmentFolderPane extends GridPane {
         image_view.setFitHeight( 20 );
         image_view.setFitWidth( 20 );
 
-        alignmentGridpanes.addListener( new ListChangeListener<AlignmentPane>() {
+        vcfFilePanes.addListener( new ListChangeListener<VcfFilePane>() {
             @Override
-            public void onChanged( Change<? extends AlignmentPane> c ) {
+            public void onChanged( Change<? extends VcfFilePane> c ) {
                 while ( c.next() ) {
                     if ( c.wasAdded() ) {
-                        for ( AlignmentPane gp : c.getAddedSubList() ) {
+                        for ( VcfFilePane gp : c.getAddedSubList() ) {
                             // Add the remove button to the widget
                             Button remove_assembly = new Button();
 
@@ -143,10 +145,10 @@ class AlignmentFolderPane extends GridPane {
                             add_assembly.setAlignment( Pos.BOTTOM_RIGHT );
 
                             add_assembly.setOnAction( event -> {
-                                Alignment alignment = new Alignment();
-                                AlignmentPane ap = new AlignmentPane( alignment );
-                                ALIGNMENTS.add( alignment );
-                                alignmentGridpanes.add ( ap );
+                                VCFFile new_vcf = new VCFFile();
+                                VcfFilePane vcfp = new VcfFilePane( new_vcf );
+                                VCFFILES.add( new_vcf );
+                                vcfFilePanes.add ( vcfp );
                             } );
 
                             ImageView image_view2 = new ImageView( remove );
@@ -157,50 +159,45 @@ class AlignmentFolderPane extends GridPane {
                             HBox hbox = new HBox();
                             hbox.getChildren().addAll( remove_assembly, add_assembly );
                             hbox.setAlignment( Pos.BOTTOM_CENTER );
-                            AF.add( hbox, 5, grid_row_position, 3, 1 );
+                            VCF.add( hbox, 5, grid_row_position, 3, 1 );
 
                             remove_assembly.setOnAction(
                                     event -> {
-                                        if( alignmentGridpanes.size() > 1 ) {
-                                            alignmentGridpanes.remove( gp );
-                                            AF.getChildren().remove( hbox );
+                                        if( vcfFilePanes.size() > 1 ) {
+                                            vcfFilePanes.remove( gp );
+                                            VCF.getChildren().remove( hbox );
                                         }
-                                        else if( alignmentGridpanes.size() == 1 ){
-                                            AlignmentPane ap = alignmentGridpanes.get( 0 );
+                                        else if( vcfFilePanes.size() == 1 ){
+                                            VcfFilePane ap = vcfFilePanes.get( 0 );
                                             ap.clear();
                                         }
                                     }
                             );
-                            AF.add( gp, 1, grid_row_position++, 3, 1 );
+                            VCF.add( gp, 1, grid_row_position++, 3, 1 );
                         }
                     }
                     if ( c.wasRemoved() ) {
-                        for ( AlignmentPane gp : c.getRemoved() ) {
-                            AF.getChildren().remove( gp );
-                            ALIGNMENTS.remove( gp.getAlign() );
+                        for ( VcfFilePane gp : c.getRemoved() ) {
+                            VCF.getChildren().remove( gp );
+                            VCFFILES.remove( gp.getVcfFile() );
                             grid_row_position--;
                         }
                     }
                 }
             }
         });
-        if(ALIGNMENTS.isEmpty())
-            ALIGNMENTS.add( new Alignment() );
-        for( Alignment alignment: ALIGNMENTS){
-            AlignmentPane ap = new AlignmentPane( alignment );
-            alignmentGridpanes.add( ap );
+
+        if( VCFFILES.isEmpty() )
+            VCFFILES.add( new VCFFile() );
+
+        for( VCFFile vcf: VCFFILES){
+            VcfFilePane vcfp = new VcfFilePane( vcf );
+            vcfFilePanes.add( vcfp );
         }
     }
 
     void clear(){
-        alignmentFolderPath.setText("");
-        for( int i= alignmentGridpanes.size() -1 ; i >=0 ; i--) {
-            if (i > 1){
-                alignmentGridpanes.remove( i);
-            }
-            else
-                alignmentGridpanes.get(i).clear();
-        }
+        vcfFilePanes.clear();
     }
 
     /**
@@ -216,11 +213,11 @@ class AlignmentFolderPane extends GridPane {
         this.add( button_box, 3, 0, 3, 1);
     }
 
-    AlignmentFolder getAssemblyFolder() {
-        return ALIGNMENTFOLDER;
+    VCFFolder getVcfFolder() {
+        return VCFFOLDER;
     }
 
-    public void setAssemblyFolder(AlignmentFolder input){
-        ALIGNMENTFOLDER = input;
+    public void setVcfFolder(VCFFolder input){
+        VCFFOLDER = input;
     }
 }

@@ -1,10 +1,10 @@
-package widgets;
+package components;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import utils.JobSaveLoadManager;
+import utils.XMLSaveLoad;
 import xmlbinds.Aligner;
 import xmlbinds.NaspInputData;
 
@@ -29,13 +29,13 @@ public class JobPaneIntegrationTest extends Application {
         primaryStage.setTitle( "JobTab Integration Test" );
 
         File input = new File(getClass().getResource( "/xml/defaultjob.xml" ).getFile() );
-        NaspInputData nid = JobSaveLoadManager.NaspJaxbXmlToObject( input ) ;
+        NaspInputData nid = XMLSaveLoad.NaspJaxbXmlToObject(input) ;
         JobTab tab = new JobTab( nid );
         TabPane root = new TabPane();
 
         root.getTabs().add( tab );
         Scene scene = new Scene( root, 800, 600 );
-        scene.getStylesheets().add( "css/darc.css" );
+        scene.getStylesheets().add("styles/darc.css");
         primaryStage.setScene( scene );
         primaryStage.show();
 
