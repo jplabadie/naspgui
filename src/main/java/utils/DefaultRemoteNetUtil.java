@@ -282,13 +282,33 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     }
 
     /**
-     * Downloads a file over SFTP from the remote directory to the local directory
+     * Downloads a single file over SFTP from the remote path to the local path
+     *
+     * @param abs_remote_path the remote path with file name
+     * @param local_path the local path with file name
+     * @return true if successful, false otherwise
+     */
+    public boolean downloadSingleFile ( String abs_remote_path, String local_path ){
+        log.info( null, null, "Attempting new single-download from " + abs_remote_path + " to " + local_path );
+
+        try{
+            sftp_channel.get( abs_remote_path, local_path);
+            return true;
+
+        } catch (SftpException e) {
+           log.error( "DefaultRemoteNetUtil", "downloadSingleFile", " An SFTP error occured:\n" + e.toString() );
+            return false;
+        }
+
+    }
+    /**
+     * Downloads a directory over SFTP from the path on the remote service to the local path
      *
      * @param abs_remote_path the absolute path to the file/dir on the remote machine
      * @param abs_local_path the absolute path to the local directory
      */
     public void download( String abs_remote_path, String abs_local_path ) {
-        log.info( null, null, "Attempting new download" );
+        log.info( null, null, "Attempting new multi-download from " + abs_remote_path + " to " + abs_local_path );
         try {
             int fileCount = 0;
             //sftp_channel.lcd( abs_local_path );
@@ -333,17 +353,24 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         }
     }
 
+    /**
+     * Generate qstat data as XML on the remote service, download it to the local machine, and convert it to objects
+     *
+     * @param abslocalpath the local path where the xml should be stored
+     * @return a ref to the converted QstatDataType (from xml)
+     */
     @Override
     public QstatDataType getJobsXml( String abslocalpath ) {
         log.info( null, null, "Create qstat job data as xml on remote host..." );
-        execCommand("qstat -fx > /home/" + getUsername() + "/qstat_temp.xml"); // create qstat xml on remote
+        execCommand("qstat -fx > /home/" + getUsername() + "/~qstat_temp.xml"); // create qstat xml on remote
         log.info( null, null, "Download qstat job data from remote host..." );
-        download( "/home/"+getUsername() + "/qstat_temp.xml", abslocalpath); // download qstat xml from remote
+        downloadSingleFile( "/home/"+getUsername() + "/~qstat_temp.xml", abslocalpath); // download qstat xml from remote
         log.info( null, null, "Remove qstat job output data from remote host" );
-        execCommand( "rm /home/" + getUsername() + "/qstat_temp.xml" ); // remove qstat xml from remote
+        execCommand( "rm /home/" + getUsername() + "/~qstat_temp.xml" ); // remove qstat xml from remote
 
         try{
-            return JobSaveLoadManager.QstatJaxbXmlToObject( abslocalpath );
+            File xml = new File( abslocalpath );
+            return XMLSaveLoad.QstatJaxbXmlToObject( xml );
         }
         catch ( Exception e){
             log.error(null, null, "Failed to load qstat xml output. Check to ensure qstat success, file downloaded, etc");

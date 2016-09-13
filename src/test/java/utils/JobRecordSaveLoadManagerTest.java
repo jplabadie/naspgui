@@ -31,9 +31,9 @@ public class JobRecordSaveLoadManagerTest {
                     .getResource("/Users/jlabadie/Workspace/naspgui/src/test/java/utils/NaspInputExample.xml");
             File nfile = new File(nip.getFile());
 
-            naspInputData = JobSaveLoadManager.NaspJaxbXmlToObject(nfile);
+            naspInputData = XMLSaveLoad.NaspJaxbXmlToObject(nfile);
 
-            JobSaveLoadManager.jaxbObjectToXML(naspInputData, "test_out");
+            XMLSaveLoad.jaxbObjectToXML(naspInputData, "test_out");
 
         }
         catch (NullPointerException e){

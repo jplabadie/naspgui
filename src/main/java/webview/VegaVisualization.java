@@ -25,7 +25,7 @@ public class VegaVisualization extends Application {
         stage.setTitle("Web View");
         scene = new Scene(new RSView(), 750, 500, Color.web("#666970"));
         stage.setScene(scene);
-        //scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
+        //scene.getStylesheets().add("webviewsample/BrowserToolbar.styles");
 
         stage.show();
     }

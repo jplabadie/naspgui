@@ -1,12 +1,10 @@
 package ctrls;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.TreeCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import utils.LogManager;
 
@@ -27,18 +25,15 @@ class DraggableTreeCell<T> extends TreeCell<T> {
      * event handler.
      */
     DraggableTreeCell() {
-        setOnDragDetected( new EventHandler<MouseEvent>() {
-            @Override
-            public void handle( MouseEvent event ) {
+        setOnDragDetected(event -> {
 
-                Dragboard db = startDragAndDrop( TransferMode.ANY );
-                ClipboardContent content = new ClipboardContent();
+            Dragboard db = startDragAndDrop( TransferMode.ANY );
+            ClipboardContent content = new ClipboardContent();
 
-                // place the path contained in the TreeItem into the dragboard via ClipboardContent
-                content.putString( full_path );
-                db.setContent( content );
-                event.consume();
-            }
+            // place the path contained in the TreeItem into the dragboard via ClipboardContent
+            content.putString( full_path );
+            db.setContent( content );
+            event.consume();
         });
     }
 
@@ -60,13 +55,14 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             }
             else {
                 String file = this.getTreeItem().getValue().toString();
+                full_path = file;
                 if( file != null && !file.isEmpty() && file.contains("/")) {
                     file = file.substring(file.lastIndexOf('/'), file.length());
                 }
                 else {
                     file = "";
                 }
-                full_path = file;
+
 
                 file = file.substring( file.lastIndexOf('/') + 1 , file.length() );
                 this.setText( file );

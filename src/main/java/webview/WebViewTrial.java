@@ -40,8 +40,8 @@ public class WebViewTrial extends Application {
         Scene scene = new Scene(new Browser(), 750, 500, Color.web("#666970"));
         stage.setScene(scene);
         // apply CSS style
-        //scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
-        scene.getStylesheets().add("tracks.css");
+        //scene.getStylesheets().add("webviewsample/BrowserToolbar.styles");
+        scene.getStylesheets().add("tracks.styles");
         // show stage
         stage.show();
     }

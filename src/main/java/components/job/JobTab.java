@@ -2,15 +2,14 @@ package components.job;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.ToolBar;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
@@ -19,8 +18,10 @@ import utils.XMLSaveLoad;
 import xmlbinds.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -140,8 +141,22 @@ public class JobTab extends Tab {
             List<String> after_run = net.getJobs();
         });
 
+        // Define NASP XML preview action
         preview_job.setOnAction( event -> {
+            TextArea ta = new TextArea();
+            try {
+                File f = XMLSaveLoad.jaxbObjectToXML( NASP_DATA, "~temp_job.xml");
+                String content = new Scanner(f).useDelimiter("\\Z").next();
+                ta.setText( content );
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
+            Stage xml_preview = new Stage();
+            xml_preview.setTitle("NASP XML Preview");
+            xml_preview.setScene(new Scene(ta, 800, 800));
+
+            xml_preview.show();
         });
 
         /*
@@ -179,7 +194,7 @@ public class JobTab extends Tab {
             public void handle( DragEvent event ) {
 
                 Dragboard db = event.getDragboard();
-                System.out.println( db.getString() );
+                System.out.println( "dragboard: "+db.getString() );
                 boolean success = false;
                 if ( db.hasString() ) {
 

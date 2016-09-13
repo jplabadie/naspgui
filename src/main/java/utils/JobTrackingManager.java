@@ -21,7 +21,7 @@ import java.util.List;
 public class JobTrackingManager {
 
     private static LogManager log = LogManager.getInstance();
-    private static JobSaveLoadManager jslm = JobSaveLoadManager.getInstance();
+    private static XMLSaveLoad jslm = XMLSaveLoad.getInstance();
     private RemoteNetUtil rnm;
     private JSONParser parser = new JSONParser();
     private ArrayList<JobRecord> jobList = new ArrayList<>();

@@ -38,7 +38,7 @@ public class SaveLoadTest {
 
         nip.setFiles( f );
 
-        JobSaveLoadManager.jaxbObjectToXML( nip, "testout");
+        XMLSaveLoad.jaxbObjectToXML(nip, "testout");
 
     }
 

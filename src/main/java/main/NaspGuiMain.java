@@ -32,11 +32,11 @@ public class NaspGuiMain extends Application {
 
         primaryStage.setTitle("NASP GUI Beta");
         Scene scene = new Scene(root, 1024, 800);
-        //scene.getStylesheets().add( "css/darc.css" );
-        //scene.getStylesheets().add("css/default.css");
+        //scene.getStylesheets().add( "styles/darc.styles" );
+        //scene.getStylesheets().add("styles/default.styles");
 
         // Loading in this method seems to fail here
-        //scene.getStylesheets().add(getClass().getResource("css/default.css").toExternalForm());
+        //scene.getStylesheets().add(getClass().getResource("styles/default.styles").toExternalForm());
 
         // add height and width listeners to allow resizing
         scene.widthProperty().addListener(new ChangeListener<Number>() {

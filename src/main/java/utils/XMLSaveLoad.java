@@ -8,7 +8,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.StringReader;
 
 
 /**
@@ -50,23 +49,23 @@ public class XMLSaveLoad {
 
     /**
      *
-     * @param xml the xml as a string, used to create Java objects via bindings
+     * @param xml_path the xml file, used to create Java objects via bindings
      * @return a populated QstatDataType object with references to related classes
      */
     @SuppressWarnings(" unchecked ")
-    public static QstatDataType QstatJaxbXmlToObject( String xml ) {
+    public static QstatDataType QstatJaxbXmlToObject( File xml_path ) {
 
         try {
+            lm.info( null, null, "Attempt to load QStat XML and convert to objects from file at: "+ xml_path.getPath() );
             JAXBContext context = JAXBContext.newInstance( QstatDataType.class );
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            StringReader st = new StringReader( xml );
-            QstatDataType qstatData = ( (QstatDataType) unmarshaller.unmarshal( st ) );
-            lm.info( null, null, "JSLM: QStat XML loaded and converted to objects from XML string." );
+            QstatDataType qstatData = ( (QstatDataType) unmarshaller.unmarshal( xml_path ) );
+            lm.info( null, null, "JSLM: QStat XML loaded and converted to objects from from: "+ xml_path.getPath() );
             return qstatData;
 
         } catch ( JAXBException e ) {
             lm.error( null, null, "JSLM: QStat XML failed to load from XML string" +
-                    "\nError occured:\n" + e.getMessage() );
+                    "\nError occured:\n" + e.toString() );
             e.printStackTrace();
         }
         return null;

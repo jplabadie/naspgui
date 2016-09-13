@@ -17,7 +17,8 @@ import javafx.scene.layout.Region;
 import javafx.util.Callback;
 import javafx.util.Pair;
 import utils.*;
-import widgets.JobTab;
+import components.CurrentJobsPane;
+import components.job.JobTab;
 import xmlbinds.NaspInputData;
 
 import java.awt.event.WindowEvent;
@@ -106,6 +107,11 @@ public class MainController implements Initializable{
 
 
     private void initMenuItems() {
+
+        activeJobsBtn.setOnAction(
+                event1 -> showJobsPane()
+        );
+
         /* Login Button Init*/
         menuItemLogin.setOnAction(
                 event -> gracefulLogin());
@@ -147,6 +153,13 @@ public class MainController implements Initializable{
                     }
                 }
             });
+    }
+
+    private void showJobsPane() {
+
+        CurrentJobsPane cjp = new CurrentJobsPane( nm );
+        cjp.show();
+
     }
 
     private void gracefulLogin(){
@@ -195,7 +208,7 @@ public class MainController implements Initializable{
                 //@Override
                 public void handle( final ActionEvent e) {
                     File input = new File( getClass().getResource("/xml/defaultNaspNew.xml").getFile() );
-                    NaspInputData nid = JobSaveLoadManager.NaspJaxbXmlToObject( input ) ;
+                    NaspInputData nid = XMLSaveLoad.NaspJaxbXmlToObject(input) ;
 
                     JobTab new_tab = new JobTab( nid );
                     new_tab.setRemoteNet( nm );

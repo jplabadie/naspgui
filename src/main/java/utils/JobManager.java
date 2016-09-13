@@ -15,7 +15,7 @@ import java.io.IOException;
 public class JobManager {
 
     private static LogManager log = LogManager.getInstance();
-    private static JobSaveLoadManager jslm = JobSaveLoadManager.getInstance();
+    private static XMLSaveLoad jslm = XMLSaveLoad.getInstance();
     private RemoteNetUtil rnm;
 
     private JobManager( RemoteNetUtil net_mgr ){

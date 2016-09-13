@@ -72,10 +72,10 @@ public class JobController implements Initializable{
              * Create the form using a default job template
              */
             File default_job = new File(getClass().getResource("defaultJob.xml").getPath());
-            NASP_DATA = JobSaveLoadManager.NaspJaxbXmlToObject(default_job);
+            NASP_DATA = XMLSaveLoad.NaspJaxbXmlToObject(default_job);
         }
         else {
-            NASP_DATA = JobSaveLoadManager.NaspJaxbXmlToObject(jobXML);
+            NASP_DATA = XMLSaveLoad.NaspJaxbXmlToObject(jobXML);
         }
 
 
