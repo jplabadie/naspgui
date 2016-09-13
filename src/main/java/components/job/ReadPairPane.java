@@ -1,6 +1,5 @@
 package components.job;
 
-import components.WidgetPane;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,7 +14,7 @@ import xmlbinds.ReadPair;
  *
  * @author jlabadie
  */
-class ReadPairPane extends WidgetPane {
+public class ReadPairPane extends WidgetPane {
 
     private Label read_pair_label = new Label( "Read Pair" );
     private Label sample_name_label = new Label( "Sample" );
@@ -33,7 +32,7 @@ class ReadPairPane extends WidgetPane {
 
     private ReadPair READPAIR;
 
-    ReadPairPane( ReadPair read_in){
+    public ReadPairPane(ReadPair read_in){
         READPAIR = read_in;
         if(READPAIR == null)
             READPAIR = new ReadPair();

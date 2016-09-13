@@ -1,8 +1,5 @@
 package components.job;
 
-import components.job.ExternalApplicationsPane;
-import components.job.FilesPane;
-import components.job.OptionsPane;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -17,8 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import utils.DefaultRemoteNetUtil;
 import utils.JobRecord;
-import utils.XMLSaveLoad;
 import utils.RemoteNetUtil;
+import utils.XMLSaveLoad;
 import xmlbinds.*;
 
 import java.io.File;

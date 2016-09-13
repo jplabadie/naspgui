@@ -56,7 +56,7 @@ public class OptionsPane extends GridPane {
 
     private Options OPTIONS;
 
-    OptionsPane( Options input_options ){
+    public OptionsPane(Options input_options){
         /**
          * Initialize links to binding objects
          */

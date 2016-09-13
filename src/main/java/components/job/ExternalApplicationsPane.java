@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author jlabadie
  */
-class ExternalApplicationsPane extends GridPane {
+public class ExternalApplicationsPane extends GridPane {
 
     private Label external_apps_label = new Label("External Applications");
 
@@ -37,7 +37,7 @@ class ExternalApplicationsPane extends GridPane {
 
     private ExternalApplications EXTERNALAPPS;
 
-    ExternalApplicationsPane( ExternalApplications binding ) {
+    public ExternalApplicationsPane(ExternalApplications binding) {
         EXTERNALAPPS = binding;
 
         /**

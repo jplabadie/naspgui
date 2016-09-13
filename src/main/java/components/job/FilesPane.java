@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author jlabadie
  */
-class FilesPane extends GridPane {
+public class FilesPane extends GridPane {
 
     private Label files_label = new Label( "Files" );
 
@@ -55,7 +55,7 @@ class FilesPane extends GridPane {
      *
      * @param input_files a Files Object from the root NaspInputData Object
      */
-    FilesPane( Files input_files ){
+    public FilesPane(Files input_files){
         FILES = input_files; // initialize File object ( an XML bind object )
         ASSEMBLYFOLDERS = FILES.getAssemblyFolder();
         READFOLDERS = FILES.getReadFolder();

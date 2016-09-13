@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author jlabadie
  */
-class ReadFolderPane extends GridPane {
+public class ReadFolderPane extends GridPane {
 
     private GridPane RF = this;
     private Label read_folder_label = new Label( "Read Folder" );
@@ -48,7 +48,7 @@ class ReadFolderPane extends GridPane {
     ReadFolder READFOLDER;
     List<ReadPair> READPAIRS;
 
-    ReadFolderPane( ReadFolder readfolder, Button removeButton ){
+    public ReadFolderPane(ReadFolder readfolder, Button removeButton){
 
         this.setId( "folderpane1" );
         READFOLDER = readfolder;
