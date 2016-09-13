@@ -5743,7 +5743,7 @@ Dygraph.addAnnotationRule = function() {
              "text-align: center;";
 
   var styleSheetElement = document.createElement("style");
-  styleSheetElement.type = "text/css";
+  styleSheetElement.type = "text/styles";
   document.getElementsByTagName("head")[0].appendChild(styleSheetElement);
 
   // Find the first style sheet that we can access.

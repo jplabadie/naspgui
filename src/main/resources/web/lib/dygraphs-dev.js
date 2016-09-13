@@ -5743,7 +5743,7 @@ var Dygraph = (function() {
             "text-align: center;";
 
         var styleSheetElement = document.createElement("style");
-        styleSheetElement.type = "text/css";
+        styleSheetElement.type = "text/styles";
         document.getElementsByTagName("head")[0].appendChild(styleSheetElement);
 
         // Find the first style sheet that we can access.
@@ -9237,7 +9237,7 @@ Dygraph.Plugins.Legend = (function() {
                 try {
                     div.style[name] = messagestyle[name];
                 } catch (e) {
-                    console.warn("You are using unsupported css properties for your " +
+                    console.warn("You are using unsupported styles properties for your " +
                         "browser in labelsDivStyles");
                 }
             }
