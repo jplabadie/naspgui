@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 /**
+ * The default implementation of the RemoteNetUtil interface. Provides FTP and remote command execution services.
+ *
  * @author Jean-Paul Labadie
  */
 public class DefaultRemoteNetUtil implements RemoteNetUtil {
@@ -22,7 +24,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
     private BufferedReader inBuff;
     private BufferedReader extBuff;
 
-    private static DefaultRemoteNetUtil instance = null;
     private LogManager log = LogManager.getInstance();
     private JSch jsch = new JSch();
 
@@ -124,9 +125,9 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
             log.info(null, null, "RNU: Open Session - SFTP channel at directory: "+ sftp_channel.pwd());
             String welcome = "";
 
-            while( inBuff.ready() ){
-                welcome += inBuff.readLine() +"\n";
-            }
+//            while( inBuff.ready() ){
+//                welcome += inBuff.readLine() +"\n";
+//            }
             log.info( null, null, "RNU: Login message = " + welcome );
             execCommand( "module load tnorth" );
             execCommand( "module load nasp" );
@@ -284,26 +285,27 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * Downloads a file over SFTP from the remote directory to the local directory
      *
      * @param abs_remote_path the absolute path to the file/dir on the remote machine
-     * @param abs_local_path the absoulte path to the local directory
+     * @param abs_local_path the absolute path to the local directory
      */
-    public void download(String abs_remote_path, String abs_local_path) {
+    public void download( String abs_remote_path, String abs_local_path ) {
+        log.info( null, null, "Attempting new download" );
         try {
             int fileCount = 0;
-            sftp_channel.lcd(abs_local_path);
-            log.info(null, null, "lcd " + sftp_channel.lpwd());
+            //sftp_channel.lcd( abs_local_path );
+            log.info( null, null, "lcd " + sftp_channel.lpwd() );
 
             // Get a listing of the remote directory
             @SuppressWarnings( "unchecked" )
             Vector<ChannelSftp.LsEntry> list = sftp_channel.ls( "." );
-            log.info(null, null, "ls .");
+            log.info( null, null, "ls ." );
 
             // iterate through objects in list, identifying specific file names
             for ( ChannelSftp.LsEntry oListItem : list ) {
                 // output each item from directory listing for logs
-                log.info(null, null, oListItem.toString());
+                log.info( null, null, oListItem.toString() );
 
                 // If it is a file (not a directory)
-                if ( !oListItem.getAttrs().isDir() ) {
+                if ( ! oListItem.getAttrs().isDir() ) {
 
                     // Grab the remote file ([remote filename], [local path/filename to write file to])
                     log.info(null, null, "get " + oListItem.getFilename() );
@@ -323,11 +325,29 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
                 log.info( null, null, "Retrieved " + fileCount + " new files." );
             }
         } catch(SftpException e) {
-            log.warn( null, null, e.toString() );
+            log.warn( null, null, "Download failed. Reason: " + e.toString() );
         } finally {
             // disconnect session.  If this is not done, the job will hang and leave log files locked
             session.disconnect();
             log.info( null, null, "Session Closed" );
+        }
+    }
+
+    @Override
+    public QstatDataType getJobsXml( String abslocalpath ) {
+        log.info( null, null, "Create qstat job data as xml on remote host..." );
+        execCommand("qstat -fx > /home/" + getUsername() + "/qstat_temp.xml"); // create qstat xml on remote
+        log.info( null, null, "Download qstat job data from remote host..." );
+        download( "/home/"+getUsername() + "/qstat_temp.xml", abslocalpath); // download qstat xml from remote
+        log.info( null, null, "Remove qstat job output data from remote host" );
+        execCommand( "rm /home/" + getUsername() + "/qstat_temp.xml" ); // remove qstat xml from remote
+
+        try{
+            return JobSaveLoadManager.QstatJaxbXmlToObject( abslocalpath );
+        }
+        catch ( Exception e){
+            log.error(null, null, "Failed to load qstat xml output. Check to ensure qstat success, file downloaded, etc");
+            return null;
         }
     }
 
@@ -347,7 +367,6 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
         execCommand( "module load nasp" );
         execCommand( "nasp --config " + job_XML_abs_path );
         execCommand( "y" );
-        //TODO: dreams
 
         return true;
     }
@@ -357,29 +376,10 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @return
      */
     @Override
-    public ArrayList<String> getUserJobs() {
+    public ArrayList<String> getJobs() {
 
         return execCommand( "qstat -au " + getUsername() );
     }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public QstatDataType getJobsXml() {
-        ArrayList<String> out = execCommand( "qstat -f -x" );
-        String xml = out.get(0);
-        return JobSaveLoadManager.QstatJaxbXmlToObject( xml );
-
-    }
-
-    public ArrayList<String> getUserJobs( String username) {
-
-        return execCommand( "qstat -au " + username );
-    }
-
-
 
     /**
      * Returns all files found in the given remote directory and all sub-directories as absolute path strings

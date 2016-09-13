@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Manages
+ * Manages/records jobs started by the user
+ * Used to populate the Job Manager Pane with accurate state information
  *
  * @author Jean-Paul Labadie
  */
@@ -17,20 +18,22 @@ public class JobManager {
     private static JobSaveLoadManager jslm = JobSaveLoadManager.getInstance();
     private RemoteNetUtil rnm;
 
-    private JobManager(RemoteNetUtil net_mgr){
+    private JobManager( RemoteNetUtil net_mgr ){
         rnm = net_mgr;
     }
 
-    public JobManager (){};
     /**
-     *  @param nasp_xml the prepared NASP XML
+     *
+     *
+     * @param nasp_xml the prepared NASP XML
      * @param usrname the username for the remote server
      * @param password the password for the remote server with given username
      * @param url the url of the remote server as a String
      * @param port the port of the remote server
      * @param remote_path the directory in which to save the uploaded xml on the remote server
      */
-    public void startNewRemoteJob(File nasp_xml, String usrname, String password, String url, Integer port, String remote_path){
+    public void startNewRemoteJob( File nasp_xml, String usrname, String password,
+                                  String url, Integer port, String remote_path ){
 
         log.info(null, null, "JM: Remote Job Requested by "+ usrname +" at " +url+":"+port+" using "+remote_path);
         //JobRecord dc = new JobRecord(usrname,url, port,remote_path,remote_path );

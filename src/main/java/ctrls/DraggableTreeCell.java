@@ -61,9 +61,7 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             else {
                 String file = this.getTreeItem().getValue().toString();
                 if( file != null && !file.isEmpty() && file.contains("/")) {
-
                     file = file.substring(file.lastIndexOf('/'), file.length());
-
                 }
                 else {
                     file = "";

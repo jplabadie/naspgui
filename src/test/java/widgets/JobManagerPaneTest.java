@@ -4,11 +4,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Assert;
+import qstat_xmlbinds.QstatDataType;
+import qstat_xmlbinds.QstatJobType;
 import utils.DefaultRemoteNetUtil;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 /**
  * Project naspgui.
@@ -40,41 +41,30 @@ public class JobManagerPaneTest extends Application {
             Assert.fail();
         }
 
-        ArrayList<String> result = null;// nm.execCommand( "qstat -a" );
+        QstatDataType result = nm.getJobsXml( "target/qstat_out.xml" ); // nm.execCommand( "qstat -a" );
+
         ArrayList<Job> jobs  = new ArrayList<>();
 
-        result.remove("tnorth-mgt.cm.cluster: ");
-        result.remove("                                                                         Req'd  Req'd   Elap");
-        result.remove("-------------------- ----------- -------- ---------------- ------ ----- ------ ------ ----- - -----");
-        result.remove("Job ID               Username    Queue    Jobname          SessID NDS   TSK    Memory Time  S Time");
-        result.remove(0);
+        List <QstatJobType> joblist = result.getJob();
 
-        for(String x : result){
-            System.out.println( x + " : " + result.indexOf(x));
-        }
+        for( QstatJobType x : joblist ){
 
-        Pattern ptrn = Pattern.compile( "(\\S+)" );
-        for( String x : result ){
-            ArrayList<String> out = new ArrayList<>();
-            Matcher m = ptrn.matcher( x );
+            if( x.getJobOwner().equalsIgnoreCase( usr )) {
 
-                System.out.println("!");
-                while (m.find()) {
-                    out.add( x.substring( m.start(), m.end() ));
-                }
-                String[] temp = new String[out.size()];
-                System.out.println( out );
-                for(int i = 0; i < out.size(); i ++){
-                    temp[i] = out.get(i);
-                    System.out.println("%" + out.get(i));
-                }
-
-                System.out.println(temp.length);
-                Job j = new Job( "test", temp[0], temp[1],temp[2],temp[3],temp[4],temp[5],
-                        temp[6],temp[7],temp[8],temp[10], temp[9]);
+                Job j = new Job();
+                j.setJobId( x.getJobId());
+                j.setElapsedTime( x.getEtime() );
+                j.setJobName( x.getJobName() );
+                j.setNds( x.getStartCount() );
+                j.setQueue( x.getQueue() );
+                j.setReqMem( x.getResourceList().getMem() );
+                j.setReqTask( x.getResourceList().getNcpus() );
+                j.setSessionId( x.getSessionId() );
+                j.setStatus( x.getJobState() );
+                j.setTime( x.getCtime() );
 
                 jobs.add(j);
-                out.clear();
+            }
         }
 
         JobManagerPane jmp = new JobManagerPane( jobs );

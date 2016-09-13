@@ -134,10 +134,10 @@ public class JobTab extends Tab {
 
             remotepath = remotepath +"/"+ outfile.getName();
             net.upload( outfile, remotepath);
-            List<String> before_run = net.getUserJobs();
+            List<String> before_run = net.getJobs();
 
             net.runNaspJob( remotepath );
-            List<String> after_run = net.getUserJobs();
+            List<String> after_run = net.getJobs();
         });
 
         preview_job.setOnAction( event -> {

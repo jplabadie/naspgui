@@ -85,7 +85,7 @@ public class LogManager implements Logger{
      */
     public void info(String sourceClass, String sourceMethod, String message){
 
-        String origin = "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        String origin = " (Class: " + sourceClass + "," + " Method: " + sourceMethod +")";
         log( INFO, message + origin );
     }
 
@@ -97,7 +97,7 @@ public class LogManager implements Logger{
      */
     public void warn( String sourceClass, String sourceMethod, String message ){
 
-        String origin= "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        String origin= " (Class: " + sourceClass + "," + " Method: " + sourceMethod +")";
         log( WARN, message + origin );
     }
 
@@ -109,7 +109,7 @@ public class LogManager implements Logger{
      */
     public void error( String sourceClass, String sourceMethod, String message ){
 
-        String origin= "Class: " + sourceClass + "," + " Method: " + sourceMethod;
+        String origin= " (Class: " + sourceClass + "," + " Method: " + sourceMethod +")";
         log( ERROR, message + origin );
     }
 

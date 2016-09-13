@@ -8,7 +8,8 @@ import javafx.util.Pair;
 import utils.*;
 
 /**
- * The dialog pop-up displayed to users upon program launch.
+ * The dialog pop-up displayed to users upon program launch. Attempts to initialize the two remote channels using
+ * the parameters given by the user.
  *
  * @author Jean-Paul Labadie
  */

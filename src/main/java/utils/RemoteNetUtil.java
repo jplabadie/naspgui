@@ -62,22 +62,22 @@ public interface RemoteNetUtil {
     /**
      * @return a list of all jobs currently being managed by the job manager
      */
-    List<String> getUserJobs();
-
+    List<String> getJobs();
 
     /**
-     * @return a list of jobs currently being managed by the job manager for a specific username
+     * Returns the results of qstat -fx on the remote service by using xml output to populate a bound object
+     *
+     * @param local_abs_path the absolute local path for the qstat xml output to be downloaded to
+     * @return an initialized QstatDataType representing the xml data
      */
-    List<String> getUserJobs( String username );
-
-    QstatDataType getJobsXml( );
+    QstatDataType getJobsXml( String local_abs_path);
 
     /**
      * Returns a list representing all files and symbolic links found in the specified directory
      * and all sub-directories
      *
      * @param remote_abs_path the directory to begin searching for files in
-     * @return
+     * @return a list of strings representing only files and symlinks found in the given directory recursively
      */
     List<String> getAllFiles(String remote_abs_path);
 

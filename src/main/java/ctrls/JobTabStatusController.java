@@ -52,7 +52,7 @@ public class JobTabStatusController implements Initializable {
     public void setRemoteNetUtil(RemoteNetUtil rem_network) {
         rem_net_util = rem_network;
         String output = "";
-        output += rem_net_util.getUserJobs();
+        output += rem_net_util.getJobs();
         jobDetailTextArea.setText(output);
     }
 }

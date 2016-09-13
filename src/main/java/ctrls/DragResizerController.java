@@ -21,13 +21,9 @@ import javafx.scene.layout.Region;
          * the region.
          */
         private static final int RESIZE_MARGIN = 5;
-
         private final Region region;
-
         private double x_axis;
-
         private boolean initMinWidth;
-
         private boolean dragging;
 
         /**
@@ -130,4 +126,3 @@ import javafx.scene.layout.Region;
             x_axis = event.getX();
         }
     }
-
