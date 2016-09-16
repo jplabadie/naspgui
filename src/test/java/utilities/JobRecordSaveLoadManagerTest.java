@@ -1,6 +1,6 @@
 package utilities;
 
-import nasp_xmlbinds.NaspInputData;
+import xmlbinds.nasp_xmlbinds.NaspInputData;
 
 import java.io.File;
 import java.net.URL;

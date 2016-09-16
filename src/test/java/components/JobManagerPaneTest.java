@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Assert;
-import qstat_xmlbinds.QstatDataType;
-import qstat_xmlbinds.QstatJobType;
+import xmlbinds.qstat_xmlbinds.QstatDataType;
+import xmlbinds.qstat_xmlbinds.QstatJobType;
 import utilities.DefaultRemoteNetUtil;
 
 import java.util.ArrayList;

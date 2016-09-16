@@ -10,8 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import nasp_xmlbinds.Application;
-import nasp_xmlbinds.JobParameters;
+import xmlbinds.nasp_xmlbinds.Application;
+import xmlbinds.nasp_xmlbinds.JobParameters;
 
 /**
  * A GridPane wrapper which is pre-configured to represent optional application input fields.

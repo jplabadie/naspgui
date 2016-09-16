@@ -8,7 +8,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import nasp_xmlbinds.JobParameters;
+import xmlbinds.nasp_xmlbinds.JobParameters;
 
 /**
  * Project naspgui.

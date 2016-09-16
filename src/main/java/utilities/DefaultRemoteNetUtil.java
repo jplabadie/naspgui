@@ -1,7 +1,7 @@
 package utilities;
 
 import com.jcraft.jsch.*;
-import qstat_xmlbinds.QstatDataType;
+import xmlbinds.qstat_xmlbinds.QstatDataType;
 
 import java.io.*;
 import java.util.ArrayList;

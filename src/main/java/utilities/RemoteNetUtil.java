@@ -1,6 +1,6 @@
 package utilities;
 
-import qstat_xmlbinds.QstatDataType;
+import xmlbinds.qstat_xmlbinds.QstatDataType;
 
 import java.io.File;
 import java.util.List;

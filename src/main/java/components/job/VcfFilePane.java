@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import nasp_xmlbinds.VCFFile;
+import xmlbinds.nasp_xmlbinds.VCFFile;
 
 /**
  * Project naspgui.

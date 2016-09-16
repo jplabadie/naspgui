@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import nasp_xmlbinds.*;
+import xmlbinds.nasp_xmlbinds.*;
 
 import java.util.ArrayList;
 

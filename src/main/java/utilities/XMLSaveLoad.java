@@ -1,7 +1,7 @@
 package utilities;
 
-import qstat_xmlbinds.QstatDataType;
-import nasp_xmlbinds.NaspInputData;
+import xmlbinds.qstat_xmlbinds.QstatDataType;
+import xmlbinds.nasp_xmlbinds.NaspInputData;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

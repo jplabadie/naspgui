@@ -2,8 +2,8 @@ package components;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import qstat_xmlbinds.QstatDataType;
-import qstat_xmlbinds.QstatJobType;
+import xmlbinds.qstat_xmlbinds.QstatDataType;
+import xmlbinds.qstat_xmlbinds.QstatJobType;
 import utilities.LogManager;
 import utilities.RemoteNetUtil;
 

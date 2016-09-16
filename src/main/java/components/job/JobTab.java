@@ -15,7 +15,7 @@ import utilities.DefaultRemoteNetUtil;
 import utilities.JobRecord;
 import utilities.RemoteNetUtil;
 import utilities.XMLSaveLoad;
-import nasp_xmlbinds.*;
+import xmlbinds.nasp_xmlbinds.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

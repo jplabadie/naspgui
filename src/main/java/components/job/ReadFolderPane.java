@@ -15,8 +15,8 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import nasp_xmlbinds.ReadFolder;
-import nasp_xmlbinds.ReadPair;
+import xmlbinds.nasp_xmlbinds.ReadFolder;
+import xmlbinds.nasp_xmlbinds.ReadPair;
 
 import java.util.ArrayList;
 import java.util.List;

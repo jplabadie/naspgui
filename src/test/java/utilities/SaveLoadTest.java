@@ -1,7 +1,7 @@
 package utilities;
 
 import org.junit.Test;
-import nasp_xmlbinds.*;
+import xmlbinds.nasp_xmlbinds.*;
 
 import java.util.List;
 

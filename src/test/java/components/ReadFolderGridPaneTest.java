@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import nasp_xmlbinds.ReadFolder;
+import xmlbinds.nasp_xmlbinds.ReadFolder;
 
 /**
  * Project naspgui.

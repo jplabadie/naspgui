@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import nasp_xmlbinds.Alignment;
+import xmlbinds.nasp_xmlbinds.Alignment;
 
 /**
  * GUI component which binds the Alignment Object to its graphical presentation

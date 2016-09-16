@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import nasp_xmlbinds.Options;
+import xmlbinds.nasp_xmlbinds.Options;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
