@@ -5,9 +5,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import utils.XMLSaveLoad;
-import xmlbinds.Aligner;
-import xmlbinds.NaspInputData;
+import utilities.XMLSaveLoad;
+import nasp_xmlbinds.Aligner;
+import nasp_xmlbinds.NaspInputData;
 
 import java.io.File;
 import java.lang.reflect.Method;

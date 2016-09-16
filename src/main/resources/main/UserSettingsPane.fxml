@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="UserSettingsPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.UserSettingsController">
+<AnchorPane fx:id="UserSettingsPane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserSettingsController">
    <children>
       <ScrollPane>
         <content>

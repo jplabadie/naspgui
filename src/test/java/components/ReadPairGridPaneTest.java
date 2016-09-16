@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import xmlbinds.ReadPair;
+import nasp_xmlbinds.ReadPair;
 
 /**
  * Project naspgui.

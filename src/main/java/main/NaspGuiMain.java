@@ -1,6 +1,6 @@
 package main;
 
-import ctrls.MainController;
+import controllers.MainController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -9,8 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import utils.LogManager;
-import utils.UserSettingsManager;
+import utilities.LogManager;
+import utilities.UserSettingsManager;
 
 /**
  * Main method which defines the root of the JavaFX application

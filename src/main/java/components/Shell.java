@@ -1,6 +1,10 @@
 package components;
 /* -*-mode:java; c-basic-offset:2; indent-tabs-mode:nil -*- */
 /**
+ * Note: Stole this as an example from the internet, from which to come up with ideas. I think it might be nice to
+ * provide a terminal view to the user, but its certainly not implemented.
+ *
+ *
  * This program enables you to connect to sshd server and get the shell prompt.
  *   $ CLASSPATH=.:../build javac Shell.java 
  *   $ CLASSPATH=.:../build java Shell

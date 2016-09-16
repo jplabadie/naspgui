@@ -4,8 +4,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import qstat_xmlbinds.QstatDataType;
 import qstat_xmlbinds.QstatJobType;
-import utils.LogManager;
-import utils.RemoteNetUtil;
+import utilities.LogManager;
+import utilities.RemoteNetUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,13 +15,15 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import xmlbinds.Alignment;
-import xmlbinds.AlignmentFolder;
+import nasp_xmlbinds.Alignment;
+import nasp_xmlbinds.AlignmentFolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * GUI component which binds the AlignmentFolder Object to its graphical presentation
+ *
  * Project naspgui.
  * Created by jlabadie on 6/15/16.
  *
@@ -49,7 +51,6 @@ class AlignmentFolderPane extends GridPane {
     private List<Alignment> ALIGNMENTS;
 
     AlignmentFolderPane( AlignmentFolder input_alignment_folder, Button removeButton ){
-
         this.setId( "folderpane1" );
         ALIGNMENTFOLDER = input_alignment_folder;
         ALIGNMENTS = ALIGNMENTFOLDER.getAlignment();
@@ -192,6 +193,9 @@ class AlignmentFolderPane extends GridPane {
         }
     }
 
+    /**
+     * Empties the contents of the AlignmentFolder object and the graphical pane
+     */
     void clear(){
         alignmentFolderPath.setText("");
         for( int i= alignmentGridpanes.size() -1 ; i >=0 ; i--) {
@@ -206,8 +210,8 @@ class AlignmentFolderPane extends GridPane {
     /**
      * Accepts buttons from the parent Node (FilesPane)
      * These buttons are controlled  by the parent, but visually fit in the child's pane
-     * @param add_assembly
-     * @param remove_assembly
+     * @param add_assembly a button which will add a new Assembly object and graphical pane to this AssemblyFolder
+     * @param remove_assembly a button which will remove an Assembly object/graphical pane from this AssemblyFolder
      */
     void setButtons( Button add_assembly, Button remove_assembly ) {
 

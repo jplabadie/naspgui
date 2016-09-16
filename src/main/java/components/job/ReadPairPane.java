@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import xmlbinds.ReadPair;
+import nasp_xmlbinds.ReadPair;
 
 /**
  * Project naspgui.

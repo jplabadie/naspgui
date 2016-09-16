@@ -16,8 +16,15 @@ import org.controlsfx.control.table.TableFilter;
 import java.util.ArrayList;
 
 /**
- * Project naspgui.
- * Created by jlabadie on 8/2/16.
+ * Provides a view of the Job Manager status on the remote cluster, with filtering and control options.
+ * For instance, Users should be able to view all jobs, only NASP jobs, only their own jobs, as well as the ability
+ * to cancel their own jobs (only).
+ *
+ * Future support could be included for tracking finished jobs and running visualizations, if those features are not
+ * built into a separate view.
+ *
+ * project naspgui.
+ * created by jlabadie on 8/2/16.
  *
  * @author jlabadie
  */

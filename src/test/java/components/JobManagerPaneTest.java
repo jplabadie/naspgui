@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import org.junit.Assert;
 import qstat_xmlbinds.QstatDataType;
 import qstat_xmlbinds.QstatJobType;
-import utils.DefaultRemoteNetUtil;
+import utilities.DefaultRemoteNetUtil;
 
 import java.util.ArrayList;
 import java.util.List;

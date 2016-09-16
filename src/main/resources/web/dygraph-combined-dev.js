@@ -3435,7 +3435,7 @@ Dygraph.prototype.createDragInterface_ = function() {
     boundedValues: null, // [[minValue, maxValue] ...]
 
     // We cover iframes during mouse interactions. See comments in
-    // dygraph-utils.js for more info on why this is a good idea.
+    // dygraph-utilities.js for more info on why this is a good idea.
     tarp: new Dygraph.IFrameTarp(),
 
     // contextB is the same thing as this context object but renamed.
@@ -8857,7 +8857,7 @@ chart_labels.prototype.activate = function(g) {
   };
 };
 
-// QUESTION: should there be a plugin-utils.js?
+// QUESTION: should there be a plugin-utilities.js?
 var createDivInRect = function(r) {
   var div = document.createElement('div');
   div.style.position = 'absolute';
@@ -9803,7 +9803,7 @@ rangeSelector.prototype.initInteraction_ = function() {
   var dynamic = !this.isMobileDevice_ && !this.isUsingExcanvas_;
 
   // We cover iframes during mouse interactions. See comments in
-  // dygraph-utils.js for more info on why this is a good idea.
+  // dygraph-utilities.js for more info on why this is a good idea.
   var tarp = new Dygraph.IFrameTarp();
 
   // functions, defined below.  Defining them this way (rather than with

@@ -1,6 +1,5 @@
 package components.job;
 
-
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -8,9 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
-import xmlbinds.Alignment;
+import nasp_xmlbinds.Alignment;
 
 /**
+ * GUI component which binds the Alignment Object to its graphical presentation
+ *
  * Project naspgui.
  * Created by jlabadie on 6/16/16.
  *
@@ -92,14 +93,16 @@ class AlignmentPane extends WidgetPane {
         ALIGNMENT = alignment;
     }
 
-    @Override
-    void setTitle(String title) {
-
-    }
-
+    /**
+     * clears the contents of the graphical pane (which should propogate to its bindings)
+     */
     void clear() {
         alignmentName.setText( "" );
         alignmentPath.setText( "" );
     }
 
+    @Override
+    void setTitle(String title) {
+
+    }
 }

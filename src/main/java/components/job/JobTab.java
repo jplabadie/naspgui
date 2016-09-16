@@ -11,11 +11,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import utils.DefaultRemoteNetUtil;
-import utils.JobRecord;
-import utils.RemoteNetUtil;
-import utils.XMLSaveLoad;
-import xmlbinds.*;
+import utilities.DefaultRemoteNetUtil;
+import utilities.JobRecord;
+import utilities.RemoteNetUtil;
+import utilities.XMLSaveLoad;
+import nasp_xmlbinds.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Project naspgui.
+ * Contains the form and associated xmlbinding objects for creating a new NASP run
  * Created by jlabadie on 6/29/16.
  *
  * @author jlabadie

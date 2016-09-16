@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="jobTabMonitorPane" prefHeight="200.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ctrls.JobTabStatusController">
+<AnchorPane fx:id="jobTabMonitorPane" prefHeight="200.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.JobTabStatusController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
