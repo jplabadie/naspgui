@@ -35,7 +35,6 @@ public class UserSettingsController  implements Initializable {
     @Override
     public void initialize(final URL fxmlFileLocation, ResourceBundle resources){
 
-
         JSONObject json = usm.getCurrentRemoteSettings();
         usrnamefield.setText(usm.getUsername());
         defaultserverurlfield.setText(UserSettingsManager.getCurrentServerUrl());

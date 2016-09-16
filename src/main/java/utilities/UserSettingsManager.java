@@ -42,8 +42,8 @@ public class UserSettingsManager {
 
         log = LogManager.getInstance();
 
-        general_config_dir = new File(getClass().getResource("/configs/general_settings.json").getPath()).toString();
-        remote_config_dir = new File(getClass().getResource("/configs/remote_settings.json").getPath()).toString();
+        general_config_dir = new File(this.getClass().getResource("/configs/general_settings.json").getPath()).toString();
+        remote_config_dir = new File(this.getClass().getResource("/configs/remote_settings.json").getPath()).toString();
         System.out.println(general_config_dir);
 
         general_settings = readSettings(general_config_dir);
