@@ -1,7 +1,10 @@
 package components.job;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
@@ -9,6 +12,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import utilities.DefaultRemoteNetUtil;
@@ -37,6 +41,7 @@ public class JobTab extends Tab {
     private ScrollPane scrollPane = new ScrollPane();
     private VBox vBox = new VBox();
     private ToolBar bottom_toolbar = new ToolBar();
+
 
     private JobRecord job_rec; //TODO: Integrate jobRecord/logging
 
@@ -198,7 +203,65 @@ public class JobTab extends Tab {
                 boolean success = false;
                 if ( db.hasString() ) {
 
-                    List<String> files = net.getAllFiles( db.getString() );
+                List<String> files = new ArrayList<>(); //create underlying list (ArrayList generic for Strings)
+                files.addAll( net.getAllFiles( db.getString() )); // populate list with all files at given destination
+
+                List<Pair<String,String>> fasta_list = new ArrayList<>();// create underlying list for only fasta files
+                ObservableList<Pair<String,String>> fastas = FXCollections.observableList( fasta_list ); // create observable list
+
+                Pattern fasta = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
+                for( String x : files ) {
+                    Matcher m = fasta.matcher( x );
+                    if ( m.find() ) {
+                        String fasta_path = x ;
+                        String fasta_name = x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') );
+                        fastas.add( new Pair<String,String>(fasta_name, fasta_path) );
+                    }
+                }
+                VBox refsPane = new VBox();
+                    refsPane.setAlignment(Pos.CENTER_LEFT);
+                    refsPane.setSpacing(10.0);
+                    refsPane.getChildren().add(
+                            new Text("Select your reference FASTA\nNote: Mouse-over a selection to see its acutal path")
+                    );
+
+                final ToggleGroup tgroup = new ToggleGroup();
+
+
+                   for( Pair<String,String> item : fastas ){
+                       RadioButton rb = new RadioButton();
+                       rb.setText( item.getKey() );
+                       rb.setUserData( item );
+                       rb.setTooltip( new Tooltip( item.getValue() ));
+                       rb.setToggleGroup( tgroup );
+                       refsPane.getChildren().add( rb );
+                   }
+
+                    Dialog<String> selectRef = new Dialog<>();
+                    selectRef.getDialogPane().setContent( refsPane );
+                    ButtonType confirmButton = new ButtonType( "Confirm", ButtonBar.ButtonData.OK_DONE );
+                    ButtonType cancelButton = new ButtonType( "Cancel", ButtonBar.ButtonData.CANCEL_CLOSE );
+                    selectRef.getDialogPane().getButtonTypes().addAll( confirmButton, cancelButton );
+
+                    selectRef.showAndWait();
+
+                    @SuppressWarnings("unchecked")
+                    Pair<String,String> reference = (Pair<String, String>) tgroup.getSelectedToggle().getUserData();
+
+                    if( reference == null ){
+
+                        Alert alert = new Alert( Alert.AlertType.ERROR );
+                        alert.setHeaderText( "Error" );
+                        alert.setContentText( "You must select a reference FASTA for the operation to continue." );
+                        alert.showAndWait();
+                        return;
+                    }
+
+                    fastas.remove( reference );
+                    System.out.println( "reference: " + reference );
+                    String ref_name = reference.getKey();
+                    String ref_folder = reference.getValue();
+                    optspane.setReference( ref_folder, ref_name );
 
                     for( String x : files )
                             System.out.println( "File: " + x );
@@ -255,38 +318,32 @@ public class JobTab extends Tab {
                         System.out.println("folder:" +  x.getPath() );
                         ass_folders.add( x.getPath() );
                     }
-                    boolean firstFastaAlreadyFound = false;
-                    Pattern ass = Pattern.compile( "(?:fa|fna|fas|fasta)(?=[?.|.qz]*$)" );
-                    for( String x : files ){
-                        Matcher m = ass.matcher( x );
-                        if ( m.find() ){
-                            String folder = x.substring( 0, x.lastIndexOf("/") + 1 );
-                            String name = x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') );
 
-                            System.out.println( "Stuff: " + folder + " : " + name + " : " + db.getString());
-                            if( ! firstFastaAlreadyFound )
-                            {
-                                firstFastaAlreadyFound = true;
-                                optspane.setReference( x, name );
-                            }
-                            else {
-                                AssemblyFolder af;
-                                if ( ass_folders.contains( folder )) {
-                                    af = assf.get( ass_folders.indexOf( folder ));
+                    for( Pair<String,String> x : fastas ){
 
-                                } else {
-                                    af = new AssemblyFolder();
-                                    af.setPath( folder );
-                                    ass_folders.add( folder );
-                                    assf.add( af );
-                                }
-                                Assembly temp = new Assembly();
-                                temp.setValue( x );
-                                temp.setSample( x.substring( x.lastIndexOf('/') + 1, x.lastIndexOf('.') ));
-                                af.getAssembly().add( temp );
-                                System.out.println( "Assemblies: " + x );
-                            }
+                        String path = x.getValue();
+                        String folder = path.substring( 0, path.lastIndexOf("/") + 1);
+                        String name = x.getKey();
+
+                        System.out.println( "Stuff: " + folder + " : " + name + " : " + db.getString());
+
+
+                        AssemblyFolder af;
+                        if ( ass_folders.contains( folder )) {
+                            af = assf.get( ass_folders.indexOf( folder ));
+
+                        } else {
+                            af = new AssemblyFolder();
+                            af.setPath( folder );
+                            ass_folders.add( folder );
+                            assf.add( af );
                         }
+                        Assembly temp = new Assembly();
+                        temp.setValue( path );
+                        temp.setSample( name );
+                        af.getAssembly().add( temp );
+                        System.out.println( "Assemblies: " + x );
+
                     }
 
                     /*
