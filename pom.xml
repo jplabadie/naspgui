@@ -69,12 +69,14 @@
                     <include>**/*.txt</include>
                     <include>**/*.fxml</include>
                     <include>**/*.json</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.xsd</include>
+                    <include>**/*.png</include>
                 </includes>
             </resource>
 
         </resources>
-
-
+        
     </build>
 
     <dependencies>
