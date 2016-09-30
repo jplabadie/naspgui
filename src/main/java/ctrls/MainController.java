@@ -263,7 +263,7 @@ public class MainController implements Initializable{
             @Override
             public TreeCell<File> call( TreeView<File> param ) {
 
-                return new DraggableTreeCell<>();
+                return new DraggableLocalTreeCell<>( nm );
             }
         });
         localFileBrowserTree.setRoot( dummyRoot );     // Set dummy node as root of the TreeView
@@ -304,7 +304,7 @@ public class MainController implements Initializable{
                         @Override
                         public TreeCell<Path> call( TreeView<Path> param ) {
 
-                            return new DraggableTreeCell<>();
+                            return new DraggableRemoteTreeCell<>( nm );
                         }
                     });
                     remotePathBrowserTree.setRoot( finalRti );     // Set dummy node as root of the TreeView

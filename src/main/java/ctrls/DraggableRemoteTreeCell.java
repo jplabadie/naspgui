@@ -10,7 +10,6 @@ import utilities.LogManager;
 import utilities.RemoteNetUtil;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ import java.util.List;
  * than a local system. Also allows us to support drag-and-drop actions from the file tree to the
  * job pane by integrating event handlers.
  */
-class DraggableTreeCell<T> extends TreeCell<T> {
+class DraggableRemoteTreeCell<T> extends TreeCell<T> {
     private String text = super.getText();
     private String full_path = "";
 
@@ -29,7 +28,7 @@ class DraggableTreeCell<T> extends TreeCell<T> {
      * item. This dragboard content is read as a message by any node which receives the drag with an "onDragDropped"
      * event handler.
      */
-    DraggableTreeCell( RemoteNetUtil netutil ) {
+    DraggableRemoteTreeCell(RemoteNetUtil netutil ) {
 
         //handle dragging a tree item out of this tree
         setOnDragDetected( event -> {
@@ -49,18 +48,18 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             boolean success = false;
             if ( db.hasFiles() ) {
                 // Todo: should prompt the user and allow cancellation
-                List<String> files = new ArrayList<>(); //create underlying list (ArrayList generic for Strings)
 
-                File dir = new File( full_path );
+                File targRemDir = new File( full_path );
+
+                if( netutil.isRemoteFile( full_path )){
+                    targRemDir = targRemDir.getParentFile();
+                }
 
                 List<File> allFiles = db.getFiles();
                 for( File f : allFiles ){
-                    netutil.upload( f , dir.);
+                    // Todo: this should preserve/recreate tree structure
+                    netutil.upload( f , targRemDir.getAbsolutePath()+"/"+f.getName() );
                 }
-
-
-                String targetdir = full_path;
-                files.addAll( net.getAllFiles( db.getString() )); // populate list with all files at given destination
 
             }
         });
