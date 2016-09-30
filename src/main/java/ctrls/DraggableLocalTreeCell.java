@@ -10,6 +10,9 @@ import utilities.LogManager;
 import utilities.RemoteNetUtil;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -39,13 +42,21 @@ class DraggableLocalTreeCell<T> extends TreeCell<T> {
             ClipboardContent content = new ClipboardContent();
 
             // place the path contained in the TreeItem into the dragboard via ClipboardContent
-            content.putString( full_path );
+            File f = new File( full_path );
+            File[] outFiles = f.listFiles();
+
+            List<File> fileList = new ArrayList<File>(Arrays.asList(outFiles));
+            content.putFiles( fileList );
             db.setContent( content );
             event.consume();
         });
 
         //handle dragging a tree item into this tree
         setOnDragDropped( event -> {
+            /*
+            Fixme: setOnDragOver event likely needs to be handled, as the TreeCells do not seem aware that a drag
+            event is occuring (the tree view is the parent of the tree-cells and is likely intercepting the event)
+            */
             Dragboard db = event.getDragboard();
             boolean success = false;
             if ( db.hasString() ) {
@@ -66,6 +77,7 @@ class DraggableLocalTreeCell<T> extends TreeCell<T> {
                     netutil.downloadSingleFile( path, targLocDir.getPath() );
                 }
             }
+            event.consume();
         });
     }
 

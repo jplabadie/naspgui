@@ -44,6 +44,10 @@ class DraggableRemoteTreeCell<T> extends TreeCell<T> {
 
         //handle dragging a tree item into this tree
         setOnDragDropped( event -> {
+            /*
+                Fixme: setOnDragOver event likely needs to be handled, as the TreeCells do not seem aware that a drag
+                event is occuring (the tree view is the parent of the tree-cells and is likely intercepting the event)
+            */
             Dragboard db = event.getDragboard();
             boolean success = false;
             if ( db.hasFiles() ) {
@@ -55,14 +59,23 @@ class DraggableRemoteTreeCell<T> extends TreeCell<T> {
                     targRemDir = targRemDir.getParentFile();
                 }
 
-                List<File> allFiles = db.getFiles();
-                for( File f : allFiles ){
-                    // Todo: this should preserve/recreate tree structure
-                    netutil.upload( f , targRemDir.getAbsolutePath()+"/"+f.getName() );
-                }
+                List<File> inFiles = db.getFiles();
 
+                if( inFiles.size() == 1 )
+                    netutil.upload( inFiles.get(0) , targRemDir.getAbsolutePath() + "/" + inFiles.get(0).getName() );
+                else {
+                    for (File f : inFiles) {
+                        // Todo: this should preserve/recreate tree structure
+                        netutil.upload(f, targRemDir.getAbsolutePath() + "/" + f.getName());
+                    }
+                }
             }
+            event.consume();
         });
+
+        //setOnDragOver( event -> {
+        //    Dragboard db = event.getDragboard();
+        //})
     }
 
     /**
