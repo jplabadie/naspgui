@@ -33,7 +33,7 @@ import netscape.javascript.JSObject;
  *
  * @author jlabadie
  */
-public class WebViewTrial extends Application {
+public class WebViewMain extends Application {
     @Override
     public void start( Stage stage){
         stage.setTitle("Vizualize the Shit out of the Place");
