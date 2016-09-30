@@ -288,7 +288,7 @@ public class DefaultRemoteNetUtil implements RemoteNetUtil {
      * @param local_path the local path with file name
      * @return true if successful, false otherwise
      */
-    public boolean downloadSingleFile ( String abs_remote_path, String local_path ){
+    public boolean downloadSingleFile( String abs_remote_path, String local_path ){
         log.info( null, null, "Attempting new single-download from " + abs_remote_path + " to " + local_path );
 
         try{

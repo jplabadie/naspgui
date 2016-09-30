@@ -7,6 +7,11 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import utilities.LogManager;
+import utilities.RemoteNetUtil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Overrides default TreeCell so that we can customize it to represent files and directories on a remote system, rather
@@ -24,8 +29,10 @@ class DraggableTreeCell<T> extends TreeCell<T> {
      * item. This dragboard content is read as a message by any node which receives the drag with an "onDragDropped"
      * event handler.
      */
-    DraggableTreeCell() {
-        setOnDragDetected(event -> {
+    DraggableTreeCell( RemoteNetUtil netutil ) {
+
+        //handle dragging a tree item out of this tree
+        setOnDragDetected( event -> {
 
             Dragboard db = startDragAndDrop( TransferMode.ANY );
             ClipboardContent content = new ClipboardContent();
@@ -34,6 +41,28 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             content.putString( full_path );
             db.setContent( content );
             event.consume();
+        });
+
+        //handle dragging a tree item into this tree
+        setOnDragDropped( event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if ( db.hasFiles() ) {
+                // Todo: should prompt the user and allow cancellation
+                List<String> files = new ArrayList<>(); //create underlying list (ArrayList generic for Strings)
+
+                File dir = new File( full_path );
+
+                List<File> allFiles = db.getFiles();
+                for( File f : allFiles ){
+                    netutil.upload( f , dir.);
+                }
+
+
+                String targetdir = full_path;
+                files.addAll( net.getAllFiles( db.getString() )); // populate list with all files at given destination
+
+            }
         });
     }
 
@@ -56,8 +85,8 @@ class DraggableTreeCell<T> extends TreeCell<T> {
             else {
                 String file = this.getTreeItem().getValue().toString();
                 full_path = file;
-                if( file != null && !file.isEmpty() && file.contains("/")) {
-                    file = file.substring(file.lastIndexOf('/'), file.length());
+                if( file != null && !file.isEmpty() && file.contains("/") ) {
+                    file = file.substring( file.lastIndexOf('/'), file.length() );
                 }
                 else {
                     file = "";

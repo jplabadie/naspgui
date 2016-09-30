@@ -51,6 +51,16 @@ public interface RemoteNetUtil {
      */
     void download(String abs_remote_path, String abs_local_path);
 
+
+    /**
+     * Downloads a single file over SFTP from the remote path to the local path
+     *
+     * @param abs_remote_path the remote path with file name
+     * @param local_path the local path with file name
+     * @return true if successful, false otherwise
+     */
+     boolean downloadSingleFile( String abs_remote_path, String local_path );
+
     /**
      * Attempts to start the NASP job on the remote machine using the xml specified at the remote location
      *
