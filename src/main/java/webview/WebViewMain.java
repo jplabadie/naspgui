@@ -36,7 +36,7 @@ import netscape.javascript.JSObject;
 public class WebViewMain extends Application {
     @Override
     public void start( Stage stage){
-        stage.setTitle("Vizualize the Shit out of the Place");
+        stage.setTitle("SNP Distribution Multi-Graph");
         Scene scene = new Scene(new Browser(), 750, 500, Color.web("#666970"));
         stage.setScene(scene);
         // apply CSS style
