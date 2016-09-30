@@ -141,7 +141,7 @@ class Browser extends Region {
         );
 
         // load the home page
-        webEngine.load( this.getClass().getResource("/web/examples/multi-line-zoom.html").toExternalForm() );
+        webEngine.load( this.getClass().getResource("/web/examples/mline.html").toExternalForm() );
 
         //add components
         getChildren().add(toolBar);
