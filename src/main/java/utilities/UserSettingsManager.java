@@ -4,8 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collections;
 
 /**
@@ -195,10 +197,11 @@ public class UserSettingsManager {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(path);
+            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream( path )));
             log.info(null, null, "USM: Settings successfully loaded from local file: " + path);
-            return (JSONObject) obj;
-        } catch (Exception e) {
+            return jsonObject;
+        }
+        catch (Exception e) {
             e.printStackTrace();
             log.error(null, null, "USM: Failed to load Settings from local file: " + path + "\nReason:\n" + e.getMessage());
         }
