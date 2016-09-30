@@ -1,5 +1,6 @@
 package ctrls;
 
+import components.VisualizationMainPane;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,16 +47,17 @@ public class MainController implements Initializable{
     @FXML    private MenuBar menu_bar;
     @FXML    private MenuItem newJobBtn;
     @FXML    private MenuItem loadJobBtn;
-    @FXML    private MenuItem settingsBtn;
+    //@FXML    private MenuItem settingsBtn;
     @FXML    private MenuItem menuItemLogin;
     @FXML    private MenuItem menuItemQuit;
     @FXML    private MenuItem activeJobsBtn;
+    @FXML   private MenuItem viz;
     @FXML    private AnchorPane centerPane;
     @FXML    private TabPane jobTabPane;
     @FXML    private TreeView<File> localFileBrowserTree;
 
     @FXML    private TreeView<Path> remotePathBrowserTree;
-    @FXML   private ToolBar remoteTreeToolbar;
+    //@FXML   private ToolBar remoteTreeToolbar;
 
     private static RemoteFileSystemManager rfsm;
     private static LogManager log;
@@ -70,8 +72,6 @@ public class MainController implements Initializable{
      */
     @Override
     public void initialize(final URL fxmlFileLocation, ResourceBundle resources){
-
-
 
         rfsm = RemoteFileSystemManager.getInstance();
         log = LogManager.getInstance();
@@ -153,6 +153,16 @@ public class MainController implements Initializable{
                     }
                 }
             });
+
+        viz.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        VisualizationMainPane vmp = new VisualizationMainPane();
+                    }
+                }
+        );
+
     }
 
     private void showJobsPane() {
@@ -218,26 +228,23 @@ public class MainController implements Initializable{
         );
     }
 
-    /**
-     *
-     */
-    private void initUserSettingsPaneHandler() {
-        settingsBtn.setOnAction(
-            new EventHandler<ActionEvent>() {
-                //@Override
-                public void handle( final ActionEvent e ) {
-                    try {
-                        jobTabPane.setVisible(false);
-                        AnchorPane user_settings = FXMLLoader.load( getClass()
-                                .getResource( "/main/UserSettingsPane.fxml" ));
-                        centerPane = user_settings;
-
-                    } catch ( IOException e1 ) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-    }
+//    private void initUserSettingsPaneHandler() {
+//        settingsBtn.setOnAction(
+//            new EventHandler<ActionEvent>() {
+//                //@Override
+//                public void handle( final ActionEvent e ) {
+//                    try {
+//                        jobTabPane.setVisible(false);
+//                        AnchorPane user_settings = FXMLLoader.load( getClass()
+//                                .getResource( "/main/UserSettingsPane.fxml" ));
+//                        centerPane = user_settings;
+//
+//                    } catch ( IOException e1 ) {
+//                        e1.printStackTrace();
+//                    }
+//                }
+//            });
+//    }
 
     /**
      * On startup, creates a Tree which visualizes the user’s file
