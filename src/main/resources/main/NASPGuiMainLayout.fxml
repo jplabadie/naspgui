@@ -22,6 +22,7 @@
           <Menu mnemonicParsing="false" text="View">
             <items>
               <MenuItem fx:id="activeJobsBtn" mnemonicParsing="false" text="Active Jobs" />
+                <MenuItem fx:id="viz" mnemonicParsing="false" text="Visualizations" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
