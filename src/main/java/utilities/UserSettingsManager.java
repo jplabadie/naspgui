@@ -4,8 +4,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
@@ -42,8 +40,8 @@ public class UserSettingsManager {
 
         log = LogManager.getInstance();
 
-        general_config_dir = new File(this.getClass().getResource("/configs/general_settings.json").getPath()).toString();
-        remote_config_dir = new File(this.getClass().getResource("/configs/remote_settings.json").getPath()).toString();
+        general_config_dir = getClass().getResource("/configs/general_settings.json").getPath();
+        remote_config_dir = getClass().getResource("/configs/remote_settings.json").getPath();
         System.out.println(general_config_dir);
 
         general_settings = readSettings(general_config_dir);
@@ -197,7 +195,7 @@ public class UserSettingsManager {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader(path));
+            Object obj = parser.parse(path);
             log.info(null, null, "USM: Settings successfully loaded from local file: " + path);
             return (JSONObject) obj;
         } catch (Exception e) {
