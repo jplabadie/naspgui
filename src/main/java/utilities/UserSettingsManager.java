@@ -4,10 +4,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Collections;
 
 /**
@@ -42,18 +39,18 @@ public class UserSettingsManager {
 
         log = LogManager.getInstance();
 
-        general_config_dir = getClass().getResource("/configs/general_settings.json").getPath();
-        remote_config_dir = getClass().getResource("/configs/remote_settings.json").getPath();
+        general_config_dir = "/configs/general_settings.json";
+        remote_config_dir = "/configs/remote_settings.json";
         System.out.println(general_config_dir);
 
-        general_settings = readSettings(general_config_dir);
+        general_settings = readSettings(getClass().getResourceAsStream(general_config_dir));
 
         if (general_settings != null) {
             usr_config_dir = (String)general_settings.get("usrsettingsdir");
             local_save_dir = (String)general_settings.get("localsavedir");
         }
 
-        remote_settings = readSettings(remote_config_dir);
+        remote_settings = readSettings(getClass().getResourceAsStream(remote_config_dir));
         if( remote_settings != null){
 
         }
@@ -188,7 +185,7 @@ public class UserSettingsManager {
      * Loads saved settings JSONObjects from the local disk
      * @return the loaded settings as a JSONObject, or null
      */
-    private static JSONObject readSettings(String path){
+    private static JSONObject readSettings(InputStream path){
 
         if(path == null){
             log.error(null, null, "USM: Failed to load Settings from local file: given path was null");
@@ -197,7 +194,7 @@ public class UserSettingsManager {
         JSONParser parser = new JSONParser();
 
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(new FileInputStream( path )));
+            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader( path ));
             log.info(null, null, "USM: Settings successfully loaded from local file: " + path);
             return jsonObject;
         }
